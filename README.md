@@ -1,6 +1,4 @@
-# Vacxtrax-Backend
-
-Node js express app for serving REST api's for vactraxx-frontend.
+# Vacxtrax
 
 This is a Vaccination Tracking application for course "COMP 231-003". This project has been developed under the guidance of professor Jake Nesovic with the motive of having a collaborative tracking system for vaccines at province or country level. The team members contributing towards this project are Benjamin Weymouth, Mohammd Bakir, Alvin Yap, Anmoldeep Singh Gill, Jarod Lavine, Asad Mahmood, Kharak Singh Kular, Shankar Sidgel and Jhase Campbell.
 
@@ -8,16 +6,45 @@ This is a Vaccination Tracking application for course "COMP 231-003". This proje
 
 ## Installation
 
+### Express App
+
 ```sh
 $ npm install
+```
+
+### Angular Client
+
+```sh
+$ cd angular-client
+$ cd npm install
 ```
 
 ## Running the project
 
 ### Development Server
+
+### Express App
+
 Run `npm run dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
 
-### Build
+### Angular Client
 
+```sh
+$ cd angular-client
+```
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Building the project
+
+### Express App
+
+```sh
 $ npm build
+```
+
+### Angular Client
+
+```sh
+$ cd angular-client
+$ cd ng build
 ```
