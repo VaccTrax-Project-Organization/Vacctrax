@@ -16,7 +16,7 @@ $ npm install
 
 ```sh
 $ cd angular-client
-$ cd npm install
+$ npm install
 ```
 
 ## Running the project
@@ -46,5 +46,5 @@ $ npm build
 
 ```sh
 $ cd angular-client
-$ cd ng build
+$ ng build
 ```
