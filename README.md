@@ -48,3 +48,14 @@ $ npm build
 $ cd angular-client
 $ ng build
 ```
+
+## Deploying the project
+
+### Express App
+
+### Angular Client
+
+```sh
+$ cd angular-client
+$ ng deploy --base-href=https://vacctrax-project-organization.github.io/Vacctrax/
+```
