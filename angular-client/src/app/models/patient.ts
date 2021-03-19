@@ -16,6 +16,6 @@ export class Patient extends Account {
 
   constructor() {
     super();
-
+    this.appointments = [];
   }
 }
