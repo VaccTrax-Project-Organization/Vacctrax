@@ -11,7 +11,7 @@ This is a Vaccination Tracking application for course "COMP 231-003". This proje
 ```sh
 $ npm install
 ```
-
+  
 ### Angular Client
 
 ```sh
