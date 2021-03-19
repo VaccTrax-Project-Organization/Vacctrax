@@ -19,6 +19,6 @@ module.exports = function () {
     // Load the db models
     // Load the 'clinic' model
     require("../app/models/clinic.server.model");
-    // Return the Mongoose connection instance
-    return db;
+  // Return the Mongoose connection instance
+  return db;
 };
