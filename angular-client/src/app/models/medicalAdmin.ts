@@ -1,12 +1,9 @@
-import {IAccount} from './account';
+import {IAccount} from './interfaces/account';
 import {Appointment} from './appointment';
 import {Address} from './address';
+import {Account} from './account.class';
 
-export interface IMedicalAdmin extends IAccount {
-  appointments: Appointment[];
-}
-
-export class MedicalAdmin implements IMedicalAdmin {
+export class MedicalAdmin extends Account {
   accountId: string;
   address: Address;
   appointments: Appointment[];

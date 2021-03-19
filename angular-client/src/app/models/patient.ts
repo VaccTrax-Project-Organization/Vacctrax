@@ -1,14 +1,8 @@
 import {Appointment} from './appointment';
-import {IAccount} from "./account";
-import {Address} from "./address";
+import {Address} from './address';
+import {Account} from './account.class';
 
-export interface IPatient extends IAccount {
-  patientId: string;
-  healthCard: string;
-  appointments: Appointment[];
-}
-
-export class Patient implements IPatient {
+export class Patient extends Account {
   appointments: Appointment[];
   healthCard: string;
   patientId: string;
@@ -19,4 +13,9 @@ export class Patient implements IPatient {
   lastName: string;
   password: string;
   phone: string;
+
+  constructor() {
+    super();
+
+  }
 }
