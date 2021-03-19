@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './angular.material';
 import { HomepageComponent } from './pages/homepage/homepage.component';
-import { AppointmentComponent } from './pages/patient/appointment/appointment.component';
+import { AppointmentComponent } from './pages/shared/appointment/appointment.component';
 
 @NgModule({
   declarations: [
