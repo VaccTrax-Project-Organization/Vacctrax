@@ -11,6 +11,12 @@ export abstract class Account implements IAccount {
   phone: string;
 
   constructor() {
-
+    this.accountId = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+    this.password = '';
+    this.address = new Address();
+    this.phone = '';
   }
 }
