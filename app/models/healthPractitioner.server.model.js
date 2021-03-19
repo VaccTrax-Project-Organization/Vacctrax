@@ -7,11 +7,11 @@ const HealthPractitionerSchema = new Schema({
         ref: "Appointments",
     }
 });
-// Configure the 'UserSchema' to use getters and virtuals when transforming to JSON
+// Configure the 'HealthPractionerSchema' to use getters and virtuals when transforming to JSON
 HealthPractitionerSchema.set("toJSON", {
     getters: true,
     virtuals: true,
 });
 
-// Create the 'Student' model out of the 'StudentSchema'
+// Create the 'HeatlhPractitioner' model out of the 'HeatlhPractitionerSchema'
 mongoose.model("HealthPractitioner", HealthPractitionerSchema);
