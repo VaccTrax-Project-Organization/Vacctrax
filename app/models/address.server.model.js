@@ -30,4 +30,11 @@ const AddressSchema = new Schema({
     }
 });
 
+// Configure the 'AddressSchema' to use getters and virtuals when transforming to JSON
+AddressSchema.set("toJSON", {
+    getters: true,
+    virtuals: true,
+});
+
+
 mongoose.model('Address', AddressSchema);

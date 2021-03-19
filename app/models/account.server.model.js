@@ -42,4 +42,10 @@ const AccountSchema = new Schema({
     }
 });
 
+// Configure the 'AccountSchema' to use getters and virtuals when transforming to JSON
+AccountSchema.set("toJSON", {
+    getters: true,
+    virtuals: true,
+});
+
 mongoose.model('Account', AccountSchema);
