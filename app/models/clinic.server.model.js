@@ -17,7 +17,7 @@ const ClinicSchema = new Schema({
         ref: "MedicalAdmins"
     },
 });
-// Configure the 'Clinicchema' to use getters and virtuals when transforming to JSON
+// Configure the 'CliniSchema' to use getters and virtuals when transforming to JSON
 ClinicSchema.set("toJSON", {
     getters: true,
     virtuals: true,
