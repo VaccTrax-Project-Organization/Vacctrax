@@ -6,7 +6,12 @@ import {HomepageComponent} from './pages/homepage/homepage.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
+  {
+    path: 'patient',
+    loadChildren: () => import('./pages/patient-container/patient-container.module').then(m => m.PatientContainerModule)
+  },
   { path: '**', redirectTo: '', pathMatch: 'full' },
+
 ];
 
 @NgModule({
