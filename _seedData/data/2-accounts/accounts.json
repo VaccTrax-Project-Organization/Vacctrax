@@ -1,0 +1,47 @@
+[
+    {
+        "_id": "60563d36a0f416c9a4e7ec6f",
+        "firstName": "Test",
+        "lastName": "Patient",
+        "email": "test@gmail.com",
+        "password": "password",
+        "phone": "6475987896",
+        "address": "60563d36a0f416c9a4e7ec6d"
+    },
+    {
+        "_id": "60563d36a0f416c9a4e7ec6g",
+        "firstName": "Jake",
+        "lastName": "Test",
+        "email": "jake@gmail.com",
+        "password": "Tester123!",
+        "phone": "6475987896",
+        "address": "60563d36a0f416c9a4e7ec6e"
+    },
+    {
+        "_id": "60563d36a0f416c9a4e7ec6h",
+        "firstName": "Medical",
+        "lastName": "Admin",
+        "email": "admin@gmail.com",
+        "password": "Admin123!",
+        "phone": "7895624523",
+        "address": "60563d36a0f416c9a4e7ec6a"
+    },
+    {
+        "_id": "60563d36a0f416c9a4e7ec6i",
+        "firstName": "Health Practitioner",
+        "lastName": "last",
+        "email": "jake@gmail.com",
+        "password": "Tester123!",
+        "phone": "6475987896",
+        "address": "60563d36a0f416c9a4e7ec6b"
+    },
+    {
+        "_id": "60563d36a0f416c9a4e7ec6j",
+        "firstName": "Marcus",
+        "lastName": "Welby",
+        "email": "marcus@gmail.com",
+        "password": "Dev@123",
+        "phone": "7855415456",
+        "address": "60563d36a0f416c9a4e7ec6a"
+    }
+]

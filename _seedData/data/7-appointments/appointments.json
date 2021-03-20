@@ -1,0 +1,26 @@
+[
+    {
+        "_id": "60563d36a0f416c9a4e7ec6r",
+        "reason": "Cough",
+        "prefferedDate": "2021-03-20T13:00:00.068Z",
+        "prefferedTime": "2021-03-20T13:00:00.068Z",
+        "startTime": "2021-03-20T13:00:00.068Z",
+        "endTime": "2021-03-20T14:00:00.068Z",
+        "type": "REQUESTED",
+        "clinic": "60563d36a0f416c9a4e7ec6k",
+        "patient": "60563d36a0f416c9a4e7ec6n",
+        "healthPractitioner": "60563d36a0f416c9a4e7ec6p"
+    },
+    {
+        "_id": "60563d36a0f416c9a4e7ec6s",
+        "reason": "Fever",
+        "prefferedDate": "2021-03-22T10:00:00.068Z",
+        "prefferedTime": "2021-03-22T10:00:00.068Z",
+        "startTime": "2021-03-22T10:00:00.068Z",
+        "endTime": "2021-03-20T10:00:00.068Z",
+        "type": "REQUESTED",
+        "clinic": "60563d36a0f416c9a4e7ec6l",
+        "patient": "60563d36a0f416c9a4e7ec6o",
+        "healthPractitioner": "60563d36a0f416c9a4e7ec6y"
+    }
+]
