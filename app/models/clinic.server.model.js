@@ -2,20 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ClinicSchema = new Schema({
-    clinicId: Number,
     name: String,
-    appointments: {
+    address: {
         type: Schema.Types.ObjectId,
-        ref: "Appointments",
-    },
-    healthPractitioners: {
-        type: Schema.Types.ObjectId,
-        ref: "HealthPractitioners",
-    },
-    medicalAdmins: {
-        type: Schema.Types.ObjectId,
-        ref: "MedicalAdmins"
-    },
+        ref: 'Address'
+    }
 });
 // Configure the 'CliniSchema' to use getters and virtuals when transforming to JSON
 ClinicSchema.set("toJSON", {

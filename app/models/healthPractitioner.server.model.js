@@ -3,8 +3,12 @@ const Schema = mongoose.Schema;
 
 const HealthPractitionerSchema = new Schema({
     account: {
-    type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Account'
+    },
+    clinic: {
+        type: Schema.Types.ObjectId,
+        ref: 'Clinic'
     }
 });
 // Configure the 'HealthPractionerSchema' to use getters and virtuals when transforming to JSON

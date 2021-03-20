@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const VaccineSchema = new Schema({
-    vaccineId: Number,
     name: String,
     isRationed: Boolean,
-    manufactuer: String,
+    manufacturer: String,
     shelfLife: Number,
     province: {
         type: String,
