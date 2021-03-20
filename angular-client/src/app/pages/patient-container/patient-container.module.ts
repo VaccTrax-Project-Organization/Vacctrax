@@ -4,7 +4,9 @@ import {CommonModule} from '@angular/common';
 import {PatientContainerRoutingModule} from './patient-container-routing.module';
 import {RequestAppointmentComponent} from './request-appointment/request-appointment.component';
 import {PatientContainerComponent} from './patient-container.component';
-import { MaterialAngularModule } from 'src/app/material-angular.module';
+import {MaterialAngularModule} from 'src/app/material-angular.module';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +16,8 @@ import { MaterialAngularModule } from 'src/app/material-angular.module';
     CommonModule,
     PatientContainerRoutingModule,
     MaterialAngularModule,
+    NgxMaterialTimepickerModule,
+    ReactiveFormsModule
   ]
 })
 
