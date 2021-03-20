@@ -59,3 +59,14 @@ $ ng build
 $ cd angular-client
 $ ng deploy --base-href=https://vacctrax-project-organization.github.io/Vacctrax/
 ```
+
+## Seeding Database
+
+Navigate to _seedData
+
+```sh
+$ cd _seedData
+$ set NODE_ENV=development&&node index.js
+```
+
+This seeds the database defined in the db string defined in "config/env/development.js"
