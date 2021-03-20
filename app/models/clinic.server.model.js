@@ -17,11 +17,11 @@ const ClinicSchema = new Schema({
         ref: "MedicalAdmins"
     },
 });
-// Configure the 'UserSchema' to use getters and virtuals when transforming to JSON
+// Configure the 'Clinicchema' to use getters and virtuals when transforming to JSON
 ClinicSchema.set("toJSON", {
     getters: true,
     virtuals: true,
 });
 
-// Create the 'Student' model out of the 'StudentSchema'
+// Create the 'Clinic' model out of the 'ClinicSchema'
 mongoose.model("Clinic", ClinicSchema);
