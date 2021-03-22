@@ -35,7 +35,21 @@ const AppointmentSchema = new Schema({
     clinic: {
         type: Schema.Types.ObjectId,
         ref: 'Clinic'
+    },
+    patient: {
+        type: Schema.Types.ObjectId,
+        ref: 'Patient'
+    },
+    healthPractitioner: {
+        type: Schema.Types.ObjectId,
+        ref: 'HealthPractitioner'
     }
+});
+
+// Configure the 'AppointmentSchema' to use getters and virtuals when transforming to JSON
+AppointmentSchema.set("toJSON", {
+    getters: true,
+    virtuals: true,
 });
 
 mongoose.model('Appointment', AppointmentSchema);

@@ -2,26 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ClinicSchema = new Schema({
-    clinicId: Number,
     name: String,
-    appointments: {
+    address: {
         type: Schema.Types.ObjectId,
-        ref: "Appointments",
-    },
-    healthPractitioners: {
-        type: Schema.Types.ObjectId,
-        ref: "HealthPractitioners",
-    },
-    medicalAdmins: {
-        type: Schema.Types.ObjectId,
-        ref: "MedicalAdmins"
-    },
+        ref: 'Address'
+    }
 });
-// Configure the 'UserSchema' to use getters and virtuals when transforming to JSON
+// Configure the 'CliniSchema' to use getters and virtuals when transforming to JSON
 ClinicSchema.set("toJSON", {
     getters: true,
     virtuals: true,
 });
 
-// Create the 'Student' model out of the 'StudentSchema'
+// Create the 'Clinic' model out of the 'ClinicSchema'
 mongoose.model("Clinic", ClinicSchema);
