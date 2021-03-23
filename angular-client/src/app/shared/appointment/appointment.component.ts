@@ -24,8 +24,8 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {patientName: 'Hydrogen', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
-  {patientName: 'Hydrogen', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
-  {patientName: 'Hydrogen', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
-  {patientName: 'Hydrogen', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
+  {patientName: 'June Elder', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
+  {patientName: 'Bob Barker', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
+  {patientName: 'Jonathan Joestar', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
+  {patientName: 'John Henry', appointmentDateTime: 'January 1 2021 at 4:30 pm', practitionerName: 'Dr.Drake', status: 'Requested', vaccine: 'Pfizer'},
 ];
