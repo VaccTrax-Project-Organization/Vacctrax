@@ -1,0 +1,51 @@
+:host {
+  display: block;
+
+  .navbar-back {
+    background-color: #F8E4E4;
+  }
+
+  #content {
+    background-color: #F8E4E4;
+    height: 100%;
+    width: 100%;
+    margin-top: 55px;
+  }
+
+  a {
+    color: #494744;
+    text-decoration: none;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #85203B;
+    color: #FFFFFF;
+
+    .row {
+      background-color: #85203B;
+    }
+  }
+
+  #doctor-image {
+    margin-left: 25%;
+  }
+
+  #sign-up-button {
+    color: #E9D07C;
+    background-color: #8F190A;
+  }
+
+  #sign-up-container {
+    width: 60px;
+  }
+
+  .center-block {
+    position: relative;
+    margin-left: 50%;
+  }
+}
