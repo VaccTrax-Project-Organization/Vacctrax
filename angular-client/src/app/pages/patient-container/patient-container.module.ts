@@ -11,7 +11,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     PatientContainerComponent,
-    RequestAppointmentComponent],
+    RequestAppointmentComponent
+  ],
   imports: [
     CommonModule,
     PatientContainerRoutingModule,
