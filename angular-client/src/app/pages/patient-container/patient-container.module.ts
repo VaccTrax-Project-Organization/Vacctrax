@@ -8,11 +8,13 @@ import {MaterialAngularModule} from 'src/app/material-angular.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
+import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
 
 @NgModule({
   declarations: [
     PatientContainerComponent,
     RequestAppointmentComponent,
+    FailedEligibilityCheckComponent,
   ],
   imports: [
     CommonModule,
