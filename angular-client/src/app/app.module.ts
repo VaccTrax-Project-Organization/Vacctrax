@@ -8,13 +8,15 @@ import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AppointmentComponent } from './pages/shared/appointment/appointment.component';
 import { NavigationBarComponent } from './pages/shared/navigation-bar/navigation-bar.component';
 import {MaterialAngularModule} from './material-angular.module';
+import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-option-dialog/generic-two-option-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     AppointmentComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    GenericTwoOptionDialogComponent
   ],
   imports: [
     BrowserModule,
