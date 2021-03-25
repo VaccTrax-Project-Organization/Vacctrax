@@ -6,6 +6,8 @@ const compress = require("compression");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 
 // Define the Express configuration method
 module.exports = function () {
@@ -41,6 +43,25 @@ module.exports = function () {
     })
   );
 
+  const options = {
+    definition : {
+      openapi: "3.0.0",
+      info: {
+        title: "Vacctrx Api",
+        version: "1.0.0",
+        description: "Rest Api's for Vacctrax Application."
+      },
+      servers: [
+        {
+          url: "http://localhost:3000"
+        }
+      ]
+    },
+    apis: ["../app/routes/*.js"]
+  };
+
+  const specs = swaggerJsDoc(options);
+
   // Set the application view engine and 'views' folder
   app.set("views", "./app/views");
   app.set("view engine", "ejs");
@@ -53,6 +74,7 @@ module.exports = function () {
   // Configure static file serving
   app.use(express.static("./public"));
 
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
   // Return the Express application instance
   return app;
 };
