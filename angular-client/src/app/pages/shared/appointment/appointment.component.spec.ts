@@ -1,19 +1,19 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {AppointmentComponent} from './appointment.component';
-import {MatTableDataSource, MatTableModule} from "@angular/material/table";
-import {NavigationBarComponent} from "../navigation-bar/navigation-bar.component";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {DebugElement} from "@angular/core";
-import {By} from "@angular/platform-browser";
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {DebugElement} from '@angular/core';
+import {By} from '@angular/platform-browser';
 
 describe('AppointmentComponent', () => {
   let component: AppointmentComponent;
   let fixture: ComponentFixture<AppointmentComponent>;
   let de: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AppointmentComponent, NavigationBarComponent ],
       imports: [ MatTableModule, MatIconModule, MatButtonModule]
