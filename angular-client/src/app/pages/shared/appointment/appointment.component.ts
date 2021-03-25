@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {Role} from "../../../models/enums/role.enum";
 
 @Component({
   selector: 'app-appointment',
@@ -9,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
+  @Input() role: Role;
   displayedColumns: string[] = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 
@@ -19,6 +21,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  get Role(){
+    return Role;
   }
 }
 
