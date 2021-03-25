@@ -6,9 +6,13 @@ const VaccineSchema = new Schema({
     isRationed: Boolean,
     manufacturer: String,
     shelfLife: Number,
-    province: {
+    approvedProvinces: {
         type: String,
-        enum: ['NL', 'PE', 'NS', 'NB','QC','ON','MB','SK','AB','BC','YT','NT']
+   
+    },
+    vaccineId:{
+        type: Number,
+        unique:true,
     }
 });
 // Configure the 'Vaccine' to use getters and virtuals when transforming to JSON

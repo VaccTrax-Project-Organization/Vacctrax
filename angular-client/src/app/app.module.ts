@@ -6,14 +6,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './angular.material';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { AppointmentComponent } from './pages/shared/appointment/appointment.component';
-import { PatientContainerComponent } from './pages/patient-container/patient-container.component';
-import { MaterialAngularModule } from './material-angular.module';
+import { NavigationBarComponent } from './pages/shared/navigation-bar/navigation-bar.component';
+import {MaterialAngularModule} from './material-angular.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     AppointmentComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
