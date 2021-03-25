@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../shared/generic-two-option-dialog/generic-two-option-dialog.component';
-import {GenericTwoOptionDialogData} from "../../models/generic-two-option-dialog-data";
+import {GenericTwoOptionDialogData} from '../../models/generic-two-option-dialog-data';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit, OnDestroy {
   private subSink: SubSink;
 
   constructor(public dialog: MatDialog) {
@@ -17,16 +17,23 @@ export class HomepageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+  }
+
+  public ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
 
+  // this method should not be within the homepage, its temporary for until we
+  // have the appointment cancellation stuff ready
   public openCancelVaccinationDialog(): void {
+    const dialogTitle = 'CANCEL APPOINTMENT';
+    const dialogDescription = 'Are you sure you would like to cancel the selected appointment (enter appoint number here or something), this action cannot be undone';
     const dialogRef = this.dialog.open(GenericTwoOptionDialogComponent, {
       panelClass: 'dialog-panel-class',
-      width: '700px',
-      height: '400px',
+      width: '650px',
+      height: '350px',
       disableClose: true,
-      data: new GenericTwoOptionDialogData('CONFIRMATION', 'Are you sure you would like to cancel the selected appoint (enter appoint number here or something), this action cannot be undone')
+      data: new GenericTwoOptionDialogData(dialogTitle, dialogDescription)
     });
 
     // get call back data on close

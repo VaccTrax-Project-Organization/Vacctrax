@@ -8,7 +8,8 @@ import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dia
   styleUrls: ['./generic-two-option-dialog.component.scss']
 })
 export class GenericTwoOptionDialogComponent implements OnInit {
-
+  // This dialog component retrieves data from the parent component that calls it
+  // All text fields visible on the component are editable through the GenericTwoOptionDialogData object
   constructor(@Inject(MAT_DIALOG_DATA) public data: GenericTwoOptionDialogData) { }
 
   public ngOnInit(): void {
