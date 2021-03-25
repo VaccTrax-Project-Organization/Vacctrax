@@ -11,6 +11,7 @@ import {Role} from "../../../models/enums/role.enum";
 export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() role: Role;
+  @Input() title = 'Title';
   displayedColumns: string[] = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 

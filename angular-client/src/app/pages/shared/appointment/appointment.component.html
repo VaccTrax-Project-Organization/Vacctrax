@@ -1,7 +1,5 @@
-<app-navigation-bar></app-navigation-bar>
-
-<div class="container-fluid">
-  <h1>List of Appointments</h1>
+<div>
+  <h3>{{title}}</h3>
 
   <mat-table matSort [dataSource]="dataSource" class="w-100 mat-elevation-z8">
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

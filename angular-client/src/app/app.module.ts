@@ -26,6 +26,10 @@ import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-opti
     MaterialAngularModule,
   ],
   providers: [],
+  exports: [
+    AppointmentComponent,
+    NavigationBarComponent
+  ],
   bootstrap: [AppComponent]
 })
 
