@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.scss']
 })
-export class AppointmentComponent implements OnInit {
+export class AppointmentComponent implements OnInit, AfterViewInit {
+  @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 }
 

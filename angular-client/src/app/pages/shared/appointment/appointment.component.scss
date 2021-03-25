@@ -1,11 +1,17 @@
 :host{
   .mat-header-row{
     background-color: #757575 !important;
-
+    color: white;
     > th {
       color: white;
     }
-
   }
 
+  ::ng-deep .mat-sort-header-arrow {
+      color: white !important;
+  }
+
+  th.mat-sort-header-sorted {
+    color: black;
+  }
 }
