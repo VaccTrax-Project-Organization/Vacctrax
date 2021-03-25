@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 
 @Component({
   selector: 'app-generic-two-option-dialog',
@@ -7,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenericTwoOptionDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: GenericTwoOptionDialogData) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
 }

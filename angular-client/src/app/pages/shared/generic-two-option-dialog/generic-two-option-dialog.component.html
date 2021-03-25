@@ -1,1 +1,19 @@
-<p>generic-two-option-dialog works!</p>
+<div class="row">
+  <div class="col">{{this.data.title}}</div>
+</div>
+
+<div class="row">
+  <div class="col">{{this.data.description}}</div>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <!--    This button will perform all the accept actions, and return a truthy value-->
+    <button mat-raised-button type="button" [mat-dialog-close]="true">{{this.data.acceptMessage}}</button>
+  </div>
+  <div class="col">
+    <!--    This button will perform all the decline / reject actions and return a falsy value-->
+    <button mat-raised-button type="button" [mat-dialog-close]="false">{{this.data.declineMessage}}</button>
+  </div>
+</div>
