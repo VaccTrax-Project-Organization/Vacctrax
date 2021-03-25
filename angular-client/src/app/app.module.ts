@@ -1,22 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppMaterialModule} from './angular.material';
-import { HomepageComponent } from './pages/homepage/homepage.component';
-import { AppointmentComponent } from './pages/shared/appointment/appointment.component';
-import { NavigationBarComponent } from './pages/shared/navigation-bar/navigation-bar.component';
+import {HomepageComponent} from './pages/homepage/homepage.component';
 import {MaterialAngularModule} from './material-angular.module';
-import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-option-dialog/generic-two-option-dialog.component';
+import {SharedModule} from './pages/shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    AppointmentComponent,
-    NavigationBarComponent,
-    GenericTwoOptionDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -24,10 +19,13 @@ import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-opti
     BrowserAnimationsModule,
     AppMaterialModule,
     MaterialAngularModule,
+    SharedModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 
 
-export class AppModule { }
+export class AppModule {
+}

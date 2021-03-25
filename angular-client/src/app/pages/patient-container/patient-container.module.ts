@@ -7,18 +7,20 @@ import {PatientContainerComponent} from './patient-container.component';
 import {MaterialAngularModule} from 'src/app/material-angular.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     PatientContainerComponent,
-    RequestAppointmentComponent
+    RequestAppointmentComponent,
   ],
   imports: [
     CommonModule,
     PatientContainerRoutingModule,
     MaterialAngularModule,
     NgxMaterialTimepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 
