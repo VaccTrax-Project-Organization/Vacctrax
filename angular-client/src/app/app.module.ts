@@ -9,6 +9,8 @@ import { AppointmentComponent } from './pages/shared/appointment/appointment.com
 import { NavigationBarComponent } from './pages/shared/navigation-bar/navigation-bar.component';
 import {MaterialAngularModule} from './material-angular.module';
 import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-option-dialog/generic-two-option-dialog.component';
+import { AppointmentDetailsComponent } from './pages/appointment-details/appointment-details.component';
+import { ConfirmedAppointmentsComponent } from './pages/confirmed-appointments/confirmed-appointments.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-opti
     HomepageComponent,
     AppointmentComponent,
     NavigationBarComponent,
-    GenericTwoOptionDialogComponent
+    GenericTwoOptionDialogComponent,
+    AppointmentDetailsComponent,
+    ConfirmedAppointmentsComponent
   ],
   imports: [
     BrowserModule,
