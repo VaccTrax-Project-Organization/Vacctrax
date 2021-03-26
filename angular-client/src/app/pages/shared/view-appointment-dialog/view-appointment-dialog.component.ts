@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class ViewAppointmentDialogComponent implements OnInit {
   displayedData = [
-    /*{
+    {
       title: 'Patient',
       data: 'June Elder'
     },
@@ -35,7 +35,7 @@ export class ViewAppointmentDialogComponent implements OnInit {
     {
       title: 'Medical Condition',
       data: '175 cm/300 lb'
-    },*/
+    },
   ];
 
   buttons = [
@@ -54,14 +54,14 @@ export class ViewAppointmentDialogComponent implements OnInit {
   ]
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ViewAppointmentDialogComponent) {
-    if (data){
+    /*if (data){
       Object.keys(data).forEach(obj => {
         this.displayedData.push({
           title: obj,
           data: data[obj]
         })
       });
-    }
+    }*/
   }
 
   ngOnInit(): void {

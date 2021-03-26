@@ -14,21 +14,17 @@ import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-ap
 export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   // Using the role enum to determine the functionality for the appointment component
-  @Input() role: Role;
+  @Input() roleInput: Role;
   @Input() title = 'Title';
 
+  showActionDelete: boolean;
   displayedColumns: string[] = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 
-  constructor(public dialog: MatDialog) {
-  }
-
-  get Role() {
-    console.count('Role');
-    return Role;
-  }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
+    this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.HEALTH_PRACTITIONER;
   }
 
   ngAfterViewInit() {
