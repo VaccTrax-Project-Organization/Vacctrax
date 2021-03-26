@@ -6,7 +6,6 @@ import {HomepageComponent} from './pages/homepage/homepage.component';
 import {AppointmentComponent} from './pages/shared/appointment/appointment.component';
 import {DashboardComponent} from './pages/patient-container/dashboard/dashboard.component';
 
-
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'appointment', component: AppointmentComponent},
