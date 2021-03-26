@@ -48,9 +48,9 @@ module.exports = function () {
     definition : {
       openapi: "3.0.0",
       info: {
-        title: "Vacctrx Api",
+        title: "VaccTrax Api",
         version: "1.0.0",
-        description: "Rest Api's for Vacctrax Application."
+        description: "Rest Api's for VaccTrax Application."
       },
       servers: [
         {
@@ -72,6 +72,7 @@ module.exports = function () {
   require("../app/routes/appointments.server.routes.js")(app);
   require("../app/routes/clinics.server.routes.js")(app);
   require("../app/routes/vaccine.server.route.js")(app);
+  require("../app/routes/patients.server.routes.js")(app);
   // Configure static file serving
   app.use(express.static("./public"));
 

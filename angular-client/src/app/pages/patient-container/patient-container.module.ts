@@ -7,8 +7,9 @@ import {PatientContainerComponent} from './patient-container.component';
 import {MaterialAngularModule} from 'src/app/material-angular.module';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {ReactiveFormsModule} from '@angular/forms';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import {AppModule} from '../../app.module';
+import {SharedModule} from '../shared/shared.module';
+import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {AppModule} from '../../app.module';
     PatientContainerComponent,
     RequestAppointmentComponent,
     DashboardComponent,
+    FailedEligibilityCheckComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,7 @@ import {AppModule} from '../../app.module';
     MaterialAngularModule,
     NgxMaterialTimepickerModule,
     ReactiveFormsModule,
-    AppModule,
+    SharedModule
   ]
 })
 

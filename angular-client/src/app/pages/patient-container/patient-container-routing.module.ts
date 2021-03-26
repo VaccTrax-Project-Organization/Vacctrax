@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {PatientContainerComponent} from './patient-container.component';
 import {RequestAppointmentComponent} from './request-appointment/request-appointment.component';
+import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -10,7 +11,7 @@ const routes: Routes = [
     component: PatientContainerComponent,
     children: [
       {path: 'requestAppointment', component: RequestAppointmentComponent},
-
+      {path: 'failedEligibilityCheck', component: FailedEligibilityCheckComponent}
     ]
   },
 

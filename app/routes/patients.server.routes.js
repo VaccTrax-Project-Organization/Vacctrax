@@ -1,8 +1,11 @@
 // import patients controller
-const patients = require("../controllers/patient.server.controller");
+const patientController = require("../controllers/patient.server.controller");
 
 module.exports = function (app) {
 
     // if any route contains the patient Id param this middle ware is called first
-    app.param("patientId", patients.getPatientById);
+    //DO NOT UNCOMMENT THIS APP PARAM METHOD - ASAD
+    app.param("patientId", patientController.getPatientById);
+
+    // app.route().get();
 };

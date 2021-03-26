@@ -33,6 +33,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       width: '650px',
       height: '350px',
       disableClose: true,
+      autoFocus: false,
       data: new GenericTwoOptionDialogData(dialogTitle, dialogDescription)
     });
 
