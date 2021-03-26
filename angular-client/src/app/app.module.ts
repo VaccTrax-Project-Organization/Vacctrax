@@ -9,6 +9,7 @@ import {MaterialAngularModule} from './material-angular.module';
 import {SharedModule} from './pages/shared/shared.module';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
+import { RolePipe } from './pipes/role.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/con
     HomepageComponent,
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
+    RolePipe,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,8 @@ import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/con
   ],
   providers: [],
   exports: [
-    NavigationBarComponent
+    NavigationBarComponent,
+    RolePipe
   ],
   bootstrap: [AppComponent]
 })

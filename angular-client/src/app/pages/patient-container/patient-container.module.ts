@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {AppModule} from "../../app.module";
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {DashboardComponent} from './dashboard/dashboard.component';
     MaterialAngularModule,
     NgxMaterialTimepickerModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    AppModule
   ]
 })
 

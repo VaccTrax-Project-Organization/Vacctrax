@@ -10,10 +10,13 @@ import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-ap
   templateUrl: './appointment.component.html',
   styleUrls: ['./appointment.component.scss']
 })
+
 export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
+  // Using the role enum to determine the functionality for the appointment component
   @Input() role: Role;
   @Input() title = 'Title';
+
   displayedColumns: string[] = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
   dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
 
@@ -21,6 +24,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   }
 
   get Role() {
+    console.count('Role');
     return Role;
   }
 

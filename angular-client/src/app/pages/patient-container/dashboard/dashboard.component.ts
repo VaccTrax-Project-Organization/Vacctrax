@@ -7,13 +7,12 @@ import { Role } from 'src/app/models/enums/role.enum';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  role: Role;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
+    this.role = Role.PATIENT;
   }
 
-  get Role() {
-    return Role;
+  ngOnInit(): void {
   }
 }
