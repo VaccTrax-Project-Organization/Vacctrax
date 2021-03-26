@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
 const swaggerUI = require("swagger-ui-express");
-const swaggerJsDoc = require("swagger-jsdoc");
+// const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerDocument = require("../swagger.json");
 
 // Define the Express configuration method
 module.exports = function () {
@@ -60,7 +61,7 @@ module.exports = function () {
     apis: ["../app/routes/*.js"]
   };
 
-  const specs = swaggerJsDoc(options);
+  // const specs = swaggerJsDoc(options);
 
   // Set the application view engine and 'views' folder
   app.set("views", "./app/views");
@@ -74,7 +75,7 @@ module.exports = function () {
   // Configure static file serving
   app.use(express.static("./public"));
 
-  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
   // Return the Express application instance
   return app;
 };

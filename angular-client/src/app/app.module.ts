@@ -7,11 +7,15 @@ import {AppMaterialModule} from './angular.material';
 import {HomepageComponent} from './pages/homepage/homepage.component';
 import {MaterialAngularModule} from './material-angular.module';
 import {SharedModule} from './pages/shared/shared.module';
+import { AppointmentDetailsComponent } from './pages/appointment-details/appointment-details.component';
+import { ConfirmedAppointmentsComponent } from './pages/confirmed-appointments/confirmed-appointments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
+    AppointmentDetailsComponent,
+    ConfirmedAppointmentsComponent,
   ],
   imports: [
     BrowserModule,

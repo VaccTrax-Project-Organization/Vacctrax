@@ -26,7 +26,7 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
 
     Appointment.find({clinic: clinic}, (err, appointments) => {
         if (err) {
-            return next(err);
+            res.status(500).send(err).end();
         } else {
             console.log(appointments);
             // getting appointment list
@@ -62,6 +62,27 @@ exports.getPatientAppointmentDetail = (req,res,next) => {
             next();          
         }
     })
+}
+
+exports.bookAppointment = (req, res) => {
+    console.log(req.body);
+    
+    let appointment = new Appointment(req.body);
+
+    appointment.save((err, app) => {
+        if (err) {
+            res.status(500).send({
+                error: {
+                    message: err.message
+                }
+            });
+        } else {
+            console.log(app);
+            res.status(200).send({
+                payload: app
+            });
+        }
+    });
 }
 
 const samplePayloadForRequestAppointment = {
