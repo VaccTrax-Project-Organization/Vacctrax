@@ -4,16 +4,19 @@ import {AppointmentComponent} from './appointment/appointment.component';
 import {NavigationBarComponent} from './navigation-bar/navigation-bar.component';
 import {GenericTwoOptionDialogComponent} from './generic-two-option-dialog/generic-two-option-dialog.component';
 import {MaterialAngularModule} from '../../material-angular.module';
+import {ViewAppointmentDialogComponent} from './view-appointment-dialog/view-appointment-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppointmentComponent,
     NavigationBarComponent,
-    GenericTwoOptionDialogComponent
+    GenericTwoOptionDialogComponent,
+    ViewAppointmentDialogComponent
   ],
   exports: [
-    NavigationBarComponent
+    NavigationBarComponent,
+    AppointmentComponent
   ],
   imports: [
     CommonModule,
