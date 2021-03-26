@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/app/models/enums/role.enum';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,4 +13,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get Role() {
+    return Role;
+  }
 }

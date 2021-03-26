@@ -1,4 +1,7 @@
 <div class="container-fluid">
   <h1>Patient Dashboard</h1>
-  <app-appointment title="List of Appointments"></app-appointment>
+  <app-appointment 
+    [title]="'List of Appointments'"
+    [role]="Role.PATIENT">
+  </app-appointment>
 </div>
