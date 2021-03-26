@@ -1,23 +1,5 @@
-<nav class="navbar navbar-expand-md fixed-top navbar-back">
-  <a class="navbar-brand" href="#"><img src="./assets/images/VaccTrax.png" alt="vacctrax logo"></a>
-  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#MyNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<app-navigation-bar></app-navigation-bar>
 
-  <div class="collapse navbar-collapse" id="MyNavbar">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Sign In</a>
-      </li>
-    </ul>
-  </div>
-</nav>
 <div id="content">
   <div class="container-fluid">
 <div class="row align-items-center" style="padding-top: 100px;">
@@ -28,7 +10,7 @@
       <h2>COVID-19</h2>
       <h2>Appointments</h2>
       <br>
-      <button mat-button id="sign-up-button">Sign Up Today</button>
+      <button mat-button id="sign-up-button" (click)="this.openCancelVaccinationDialog()">Sign Up Today</button>
     </div>
   </div>
   <div class="col-6">
