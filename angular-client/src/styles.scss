@@ -27,3 +27,21 @@ a {
     background-color: $background-color;
   }
 }
+
+#vacc-dialog-container{
+  --icon-size: 2rem;
+
+  #close-button{
+    .mat-icon{
+      font-size: var(--icon-size);
+      height: var(--icon-size);
+      width: var(--icon-size);
+      line-height: var(--icon-size);
+    }
+  }
+
+  .mat-flat-button {
+    background-color: #8F190A !important;
+    color: #F6EA8C !important;
+  }
+}
