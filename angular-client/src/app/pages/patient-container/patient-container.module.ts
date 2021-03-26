@@ -10,10 +10,12 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
 
+
 @NgModule({
   declarations: [
     PatientContainerComponent,
     RequestAppointmentComponent,
+    DashboardComponent,
     FailedEligibilityCheckComponent,
   ],
   imports: [
