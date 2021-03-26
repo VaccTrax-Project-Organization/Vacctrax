@@ -20,7 +20,7 @@ import {ViewAppointmentDialogComponent} from './view-appointment-dialog/view-app
   ],
   imports: [
     CommonModule,
-    MaterialAngularModule
+    MaterialAngularModule,
   ]
 })
 export class SharedModule {
