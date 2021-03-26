@@ -53,4 +53,6 @@ module.exports = function (app) {
 
     app.get("/api/getAllClinicAppointments/:clinicId", appointments.getAllAppointmentsForClinic);
 
+    app.post("/api/bookAppointment", appointments.bookAppointment);
+
 };

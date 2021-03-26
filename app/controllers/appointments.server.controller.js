@@ -64,6 +64,27 @@ exports.getPatientAppointmentDetail = (req,res,next) => {
     })
 }
 
+exports.bookAppointment = (req, res) => {
+    console.log(req.body);
+    
+    let appointment = new Appointment(req.body);
+
+    appointment.save((err, app) => {
+        if (err) {
+            res.status(500).send({
+                error: {
+                    message: err.message
+                }
+            });
+        } else {
+            console.log(app);
+            res.status(200).send({
+                payload: app
+            });
+        }
+    });
+}
+
 const samplePayloadForRequestAppointment = {
     reason: 'Sample Reason',
     preferredDate: '2021-03-30T13:00:00',
