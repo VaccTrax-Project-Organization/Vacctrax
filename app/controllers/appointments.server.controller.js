@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Appointment = require('mongoose').model('Appointment');
 
 exports.requestAppointment = (req, res) => {
@@ -24,7 +25,7 @@ exports.requestAppointment = (req, res) => {
 exports.getAllAppointmentsForClinic = (req, res, next) => {
     const clinic = req.clinic;
 
-    Appointment.find({clinic: clinic}, (err, appointments) => {
+    Appointment.find({clinic: mongoose.Types.ObjectId(clinic)}, (err, appointments) => {
         if (err) {
             res.status(500).send(err).end();
         } else {
@@ -36,14 +37,17 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
 }
 
 //pass in a patient to the req. This is so a medical admin or a patient can get all their appointments.
-exports.getPatientAppointment = (req,res,next) => {
-    const patient = req.patient;
-    Appointment.find({patient:patient},(err,appointments)=>{
+exports.getPatientAppointments = (req,res,next) => {
+    const patient = res.locals.patient;
+    console.log("patient", res.locals);
+    Appointment.find({patient: mongoose.Types.ObjectId(patient._id)},(err,appointments)=>{
         if(err){
-            return next(err);
+            // return next(err);
+            console.log("error", err);
+            return res.status(500).send(err).end();
         }else{
-            console.log("Patient " + patient.id + "'s appointments: \n" +appointments );
-            res.status(200).send(appointments);
+            // console.log("Patient " + patient.id + "'s appointments: \n" +appointments );
+            return res.status(200).send(appointments);
         }
     })
 }

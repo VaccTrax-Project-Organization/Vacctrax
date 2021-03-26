@@ -1,14 +1,17 @@
-// Load the 'appointments' controller
-const appointments = require("../controllers/appointments.server.controller");
+// Load the controllers
+const appointmentController = require("../controllers/appointments.server.controller");
+const patientController = require("../controllers/patient.server.controller");
 
 // Define the routes module' method
-module.exports = function (app) {
+module.exports = (app)  => {
     // Mount the 'appointments' controller's 'requestAppointment' method
+    app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
-    app.post("/api/requestAppointment", appointments.requestAppointment);
+    app.get("/api/getAllAppointmentsByClinicId/:clinicId", appointmentController.getAllAppointmentsForClinic);
 
-    app.get("/api/getAllAppointmentsByClinicId/:clinicId", appointments.getAllAppointmentsForClinic);
+    app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
-    app.post("/api/bookAppointment", appointments.bookAppointment);
+    app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
 
+    // app.param("patientId", patientController.getPatientById);
 };
