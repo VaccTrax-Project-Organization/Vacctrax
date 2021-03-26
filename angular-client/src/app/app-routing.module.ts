@@ -4,6 +4,7 @@ import {AppointmentDetailsComponent} from './pages/appointment-details/appointme
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HomepageComponent} from './pages/homepage/homepage.component';
 import {AppointmentComponent} from './pages/shared/appointment/appointment.component';
+import {DashboardComponent} from "./pages/patient-container/dashboard/dashboard.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -12,7 +13,7 @@ const routes: Routes = [
     path: 'patient',
     loadChildren: () => import('./pages/patient-container/patient-container.module').then(m => m.PatientContainerModule)
   },
-
+  {path: 'dashboard', component: DashboardComponent},
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},
   {path: 'confirmedappointment', component: ConfirmedAppointmentsComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'},

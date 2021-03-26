@@ -4,7 +4,6 @@ import {PatientContainerComponent} from './patient-container.component';
 import {RequestAppointmentComponent} from './request-appointment/request-appointment.component';
 import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {AppointmentComponent} from '../shared/appointment/appointment.component';
 
 const routes: Routes = [
   {
@@ -13,7 +12,6 @@ const routes: Routes = [
     children: [
       {path: 'requestAppointment', component: RequestAppointmentComponent},
       {path: 'failedEligibilityCheck', component: FailedEligibilityCheckComponent},
-      {path: 'dashboard', component: DashboardComponent},
     ]
   },
 
