@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Vacctrx Api",
+    "title": "VaccTrax Api",
     "version": "1.0.0",
-    "description": "Rest Api's for Vacctrax Application."
+    "description": "Rest Api's for VaccTrax Application."
   },
   "servers": [
     {
@@ -18,7 +18,9 @@
   "paths": {
     "/requestAppointment": {
       "post": {
-        "tags": ["Appointment"],
+        "tags": [
+          "Appointment"
+        ],
         "summary": "Request an Appointment",
         "operationId": "requestAppointment",
         "requestBody": {
@@ -46,7 +48,6 @@
           "400": {
             "description": "Invalid Json",
             "content": {
-
             }
           },
           "500": {
@@ -57,7 +58,9 @@
     },
     "/getAllAppointmentsByClinicId/{clinicId}": {
       "get": {
-        "tags": ["Appointment"],
+        "tags": [
+          "Appointment"
+        ],
         "summary": "Get the Appointments for a specific clinic by clinic Id.",
         "operationId": "getAllAppointmentsByClinicId",
         "parameters": [
@@ -65,7 +68,49 @@
             "name": "clinicId",
             "in": "path",
             "required": true,
-            "schema":{
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getAllAppointmentsByPatientId/{patientId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Appointments for a specific patient by patient id.",
+        "operationId": "getAllAppointmentsByPatientId",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
               "type": "string"
             }
           }
@@ -97,7 +142,9 @@
     },
     "/addVaccine": {
       "post": {
-        "tags": ["Vaccine"],
+        "tags": [
+          "Vaccine"
+        ],
         "summary": "Adds a Vaccine in the system.",
         "operationId": "adVaccine",
         "requestBody": {
@@ -135,7 +182,9 @@
     },
     "/vaccines": {
       "get": {
-        "tags": ["Vaccine"],
+        "tags": [
+          "Vaccine"
+        ],
         "summary": "Get all the vaccines in the system.",
         "operationId": "getAlVaccines",
         "responses": {
@@ -165,7 +214,9 @@
     },
     "/vaccines/{vaccineId}": {
       "get": {
-        "tags": ["Vaccine"],
+        "tags": [
+          "Vaccine"
+        ],
         "summary": "Get the Vaccine By Vaccine Id.",
         "operationId": "getVaccineById",
         "parameters": [
@@ -173,7 +224,7 @@
             "name": "vaccineId",
             "in": "path",
             "required": true,
-            "schema":{
+            "schema": {
               "type": "string"
             }
           }
@@ -200,7 +251,9 @@
         }
       },
       "put": {
-        "tags": ["Vaccine"],
+        "tags": [
+          "Vaccine"
+        ],
         "summary": "Update an Vaccine By Vaccine Id.",
         "operationId": "updateVaccineById",
         "requestBody": {
@@ -236,7 +289,9 @@
         }
       },
       "delete": {
-        "tags": ["Vaccine"],
+        "tags": [
+          "Vaccine"
+        ],
         "summary": "Delete the Vaccine By Vaccine Id.",
         "operationId": "deleteVaccineById",
         "parameters": [
@@ -244,7 +299,7 @@
             "name": "vaccineId",
             "in": "path",
             "required": true,
-            "schema":{
+            "schema": {
               "type": "string"
             }
           }
@@ -253,7 +308,6 @@
           "200": {
             "description": "Operation Successful",
             "content": {
-
             }
           },
           "400": {
@@ -332,7 +386,12 @@
           },
           "type": {
             "type": "string",
-            "enum": ["PATIENT", "MEDICALADMIN", "HEALTHPRACTITIONER", "GOVERNMENT"],
+            "enum": [
+              "PATIENT",
+              "MEDICALADMIN",
+              "HEALTHPRACTITIONER",
+              "GOVERNMENT"
+            ],
             "description": "Account Type"
           }
         }
@@ -372,7 +431,7 @@
           },
           "name": {
             "type": "string",
-            "example": "Pfyzer"
+            "example": "Pfizer"
           },
           "isRationed": {
             "type": "boolean",
@@ -380,7 +439,7 @@
           },
           "manufacturer": {
             "type": "string",
-            "example": "Pfyzer"
+            "example": "Pfizer"
           },
           "shelfLife": {
             "type": "number",
@@ -408,7 +467,7 @@
         "properties": {
           "name": {
             "type": "string",
-            "example": "Pfyzer"
+            "example": "Pfizer"
           },
           "isRationed": {
             "type": "boolean",
@@ -416,7 +475,7 @@
           },
           "manufacturer": {
             "type": "string",
-            "example": "Pfyzer"
+            "example": "Pfizer"
           },
           "shelfLife": {
             "type": "number",
@@ -517,7 +576,12 @@
           },
           "type": {
             "type": "string",
-            "enum": ["CONFIRMED", "REQUESTED", "CANCELLED", "COMPLETED"],
+            "enum": [
+              "CONFIRMED",
+              "REQUESTED",
+              "CANCELLED",
+              "COMPLETED"
+            ],
             "default": "REQUESTED"
           },
           "clinic": {
@@ -563,7 +627,12 @@
           },
           "type": {
             "type": "string",
-            "enum": ["CONFIRMED", "REQUESTED", "CANCELLED", "COMPLETED"],
+            "enum": [
+              "CONFIRMED",
+              "REQUESTED",
+              "CANCELLED",
+              "COMPLETED"
+            ],
             "default": "REQUESTED"
           },
           "clinicId": {
