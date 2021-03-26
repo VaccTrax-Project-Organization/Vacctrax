@@ -26,7 +26,7 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
 
     Appointment.find({clinic: clinic}, (err, appointments) => {
         if (err) {
-            return next(err);
+            res.status(500).send(err).end();
         } else {
             console.log(appointments);
             // getting appointment list
