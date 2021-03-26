@@ -9,6 +9,8 @@ import { AppointmentComponent } from './pages/shared/appointment/appointment.com
 import { NavigationBarComponent } from './pages/shared/navigation-bar/navigation-bar.component';
 import { MaterialAngularModule } from './material-angular.module';
 import { GenericTwoOptionDialogComponent } from './pages/shared/generic-two-option-dialog/generic-two-option-dialog.component';
+import { AppointmentDetailsComponent } from './pages/appointment-details/appointment-details.component';
+import { ConfirmedAppointmentsComponent } from './pages/confirmed-appointments/confirmed-appointments.component';
 import { ViewAppointmentDialogComponent } from './pages/shared/view-appointment-dialog/view-appointment-dialog.component';
 
 @NgModule({
@@ -18,7 +20,9 @@ import { ViewAppointmentDialogComponent } from './pages/shared/view-appointment-
     AppointmentComponent,
     NavigationBarComponent,
     GenericTwoOptionDialogComponent,
-    ViewAppointmentDialogComponent
+    AppointmentDetailsComponent,
+    ConfirmedAppointmentsComponent,
+    ViewAppointmentDialogComponent,
   ],
   imports: [
     BrowserModule,
