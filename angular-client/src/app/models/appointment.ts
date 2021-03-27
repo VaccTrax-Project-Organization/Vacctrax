@@ -3,13 +3,14 @@ import {Clinic} from './clinic';
 import {AppointmentType} from './enums/appointment.enum';
 
 export class Appointment {
-  appointmentId: number;
-  clinic: Clinic;
-  reason: string;
-  preferredDate: Date;
-  preferredTime: Date;
-  startTime: Date;
-  endTime: Date;
-  type: AppointmentType;
-  patient: Patient;
+  constructor(public appointmentId: number,
+              public clinic: Clinic,
+              public reason: string,
+              public preferredDate: Date,
+              public preferredTime: Date,
+              public startTime: Date,
+              public endTime: Date,
+              public type: AppointmentType,
+              public patient: Patient) {
+  }
 }

@@ -1,16 +1,12 @@
 import {Address} from './address';
-import {IAccount} from './interfaces/account';
 
-export abstract class Account implements IAccount {
-  accountId: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  address: Address;
-  phone: string;
-
-  constructor() {
-
+export abstract class Account {
+  constructor(public accountId = '',
+              public firstName = '',
+              public lastName = '',
+              public email = '',
+              public password?: string,
+              public address = new Address(),
+              public  phone = '') {
   }
 }

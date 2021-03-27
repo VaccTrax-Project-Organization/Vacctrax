@@ -1,0 +1,30 @@
+.content-container {
+  display: grid;
+  place-items: center;
+
+  .content {
+    padding: 1rem 2rem;
+    background: #fff;
+    width: 700px;
+    height: 670px;
+    box-shadow: 0px 1px 3px #00000029;
+    border-radius: 4px;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.time-icon {
+  margin-right: 0.5rem;
+  cursor: pointer;
+  color: #757575;
+}
+
+button {
+  background-color: #8F190A !important;
+  color: #F6EA8C !important;
+  width: 250px;
+  height: 60px;
+}

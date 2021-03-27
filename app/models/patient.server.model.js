@@ -14,4 +14,10 @@ const PatientSchema = new Schema({
     }
 });
 
+// Configure the 'PatientSchema' to use getters and virtuals when transforming to JSON
+PatientSchema.set("toJSON", {
+    getters: true,
+    virtuals: true,
+});
+
 mongoose.model('Patient', PatientSchema);

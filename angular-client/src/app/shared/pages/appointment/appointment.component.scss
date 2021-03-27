@@ -1,0 +1,38 @@
+:host{
+  $table-height: 32px;
+  .mat-header-row{
+    background-color: #757575 !important;
+    color: white;
+    height: $table-height;
+    min-height: $table-height;
+
+    > mat-header-cell {
+      color: white;
+      text-overflow: ellipsis;
+    }
+  }
+
+  ::ng-deep .mat-sort-header-arrow {
+      color: white !important;
+  }
+
+  .table-container{
+    overflow: auto;
+
+    .mat-table{
+      min-width: 800px;
+    }
+
+    .mat-cell:first-of-type,
+    .mat-cell:last-of-type,
+    .mat-header-cell:first-of-type,
+    .mat-header-cell:last-of-type{
+      padding: 0 8px;
+    }
+
+    .mat-cell,
+    .mat-header-cell{
+      padding: 0 8px;
+    }
+  }
+}
