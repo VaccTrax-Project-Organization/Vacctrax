@@ -8,7 +8,6 @@ import {ViewAppointmentDialogComponent} from './pages/view-appointment-dialog/vi
 import {PatientPipe} from './pipes/patient.pipe';
 import {RolePipe} from './pipes/role.pipe';
 
-
 @NgModule({
   declarations: [
     AppointmentComponent,
@@ -29,5 +28,5 @@ import {RolePipe} from './pipes/role.pipe';
     MaterialAngularModule,
   ]
 })
-export class SharedModule {
-}
+
+export class SharedModule {}

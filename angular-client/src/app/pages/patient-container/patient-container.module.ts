@@ -19,6 +19,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
     DashboardComponent,
     FailedEligibilityCheckComponent,
   ],
+
   imports: [
     CommonModule,
     PatientContainerRoutingModule,
