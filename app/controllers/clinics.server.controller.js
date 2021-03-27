@@ -33,6 +33,17 @@ exports.getClinicById = (req, res, next , id) => {
     });
 };
 
+exports.updateClinicById = function (req,res,next){
+    console.log(req.body);
+    Clinic.findByIdAndUpdate(req.clinic.id, req.body, function(err,clinic){
+        if(err){
+            console.log(err);
+            return next(err);
+        }
+        res.json(clinic);
+    })
+}
+
 exports.deleteClinicById = function(req,res,next){
     Clinic.findByIdAndDelete(req.clinic.id, req.body, function (err, clinic) {
         if (err) return next(err);
