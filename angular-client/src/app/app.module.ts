@@ -8,6 +8,7 @@ import {MaterialAngularModule} from './material-angular.module';
 import {SharedModule} from './shared/shared.module';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/con
     ConfirmedAppointmentsComponent,
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
