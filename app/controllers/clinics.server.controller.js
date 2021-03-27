@@ -33,6 +33,14 @@ exports.getClinicById = (req, res, next , id) => {
     });
 };
 
+exports.deleteClinicById = function(req,res,next){
+    Clinic.findByIdAndDelete(req.clinic.id, req.body, function (err, clinic) {
+        if (err) return next(err);
+        console.log("deleting clinic: " + req.clinic.id );
+        res.json(clinic);
+    });
+}
+
 exports.testSave = (req, res, next) => {
     const address = new Address(
         {
