@@ -41,12 +41,12 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
 exports.getPatientAppointments = (req, res, next) => {
     const patient = res.locals.patient;
     console.log("patient", res.locals);
-    Appointment.find({patient: mongoose.Types.ObjectId(patient._id)}, (err) => {
+    Appointment.find({patient}, (err) => {
         if (err) {
             return res.status(500).send(err).end();
         }
         // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
-    }).populate(["clinic", "patient", {path: "healthPractitioner", select: "account"}]).then(appointments => {
+    }).populate(["clinic", {path: "patient", populate: "account"}, "healthPractitioner"]).then(appointments => {
         console.log("appointments", appointments);
         return res.status(200).send(appointments);
     });
