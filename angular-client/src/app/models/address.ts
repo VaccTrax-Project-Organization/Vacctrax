@@ -1,7 +1,8 @@
 export class Address {
-  streetLine1: string;
-  streetLine2: string;
-  postalCode: string;
-  province: string;
-  city: string;
+  constructor(public streetLine1: string = '',
+              public streetLine2: string = '',
+              public postalCode: string = '',
+              public province: string = '',
+              public city: string = '') {
+  }
 }
