@@ -4,9 +4,10 @@ import {HealthPractitioner} from './healthPractitioner';
 import {MedicalAdmin} from './medicalAdmin';
 
 export class Clinic {
-  address: Address;
-  appointments: Appointment[];
-  healthPractitioners: HealthPractitioner[];
-  medicalAdmins: MedicalAdmin[];
-  name: string;
+  constructor(public address: Address,
+              public appointments: Appointment[],
+              public healthPractitioners: HealthPractitioner[],
+              public medicalAdmins: MedicalAdmin[],
+              public name: string) {
+  }
 }
