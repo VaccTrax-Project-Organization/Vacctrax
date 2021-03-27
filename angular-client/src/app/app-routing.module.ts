@@ -3,18 +3,16 @@ import {Routes, RouterModule} from '@angular/router';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HomepageComponent} from './pages/homepage/homepage.component';
-import {AppointmentComponent} from './pages/shared/appointment/appointment.component';
+import {AppointmentComponent} from './shared/pages/appointment/appointment.component';
 import {DashboardComponent} from './pages/patient-container/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'appointment', component: AppointmentComponent},
-  {path: 'dashboard', component: DashboardComponent},
   {
     path: 'patient',
     loadChildren: () => import('./pages/patient-container/patient-container.module').then(m => m.PatientContainerModule)
   },
-
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},
   {path: 'confirmedappointment', component: ConfirmedAppointmentsComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'},
