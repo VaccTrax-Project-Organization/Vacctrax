@@ -1,22 +1,31 @@
 <div class="container-fluid">
+  <div>
+    <h1>Patient Dashboard</h1>
+  </div>
+
   <div class="row">
-    <div class="col-lg-4">
-      <h1>Patient Dashboard</h1>
+    <div id="profile-section" class="col-auto mb-2">
       <mat-card>
         <mat-card-header>
-          <div mat-card-avatar class="profile-image"></div>
-          <mat-card-title>{{patient | patientfullname}}</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+          <div mat-card-avatar id="profile-image"></div>
+          <mat-card-title>{{patient | patientfullname}} - #{{patient.accountId}}</mat-card-title>
+          <mat-card-subtitle>
+            <div>{{patient.email}}</div>
+            <div>{{patient.healthCard}}</div>
+          </mat-card-subtitle>
         </mat-card-header>
-
       </mat-card>
     </div>
 
-    <div class="col-lg-8">
-      <app-appointment
-        [title]="'List of Appointments'"
-        [roleInput]="role">
-      </app-appointment>
+    <div class="col-lg">
+      <mat-card>
+        <mat-card-content>
+          <app-appointment
+            [title]="'List of Appointments'"
+            [roleInput]="role">
+          </app-appointment>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
