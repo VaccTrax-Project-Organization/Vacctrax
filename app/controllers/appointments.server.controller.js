@@ -46,6 +46,7 @@ exports.getPatientAppointments = (req, res, next) => {
             return res.status(500).send(err).end();
         }
         // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
+        //FOR SOME WEIRD REASON THE HEALTHPRACTITIONER DOESNT POPULATE IDK WHY!>@#>!@#>!>@#>!@>#!>>!@# (IT RETURNS NULL)
     }).populate(["clinic", {path: "patient", populate: "account"}, "healthPractitioner"]).then(appointments => {
         console.log("appointments", appointments);
         return res.status(200).send(appointments);
@@ -90,12 +91,33 @@ exports.bookAppointment = (req, res) => {
 }
 
 exports.updateAppointment = (req, res, next) => {
-
+    console.log("req.body", req.body);
+    Appointment.findByIdAndUpdate(res.locals.appointment._id, {$set: req.body}, {new: true}, (err, appointment) => {
+        if(err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(appointment).end();
+        }
+    });
 };
 
 // to be implemented in the future
 exports.deleteAppointment = (req, res, next) => {
 
+};
+
+// param middleware used to get object for other CRUD activities
+exports.getAppointmentById = (req, res, next, id) => {
+    Appointment.findById(id, (err, appointment) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else if (!appointment) {
+            return res.status(404).send({message: `Appointment with the id of ${id} not found`}).end();
+        } else {
+            res.locals.appointment = appointment;
+            return next();
+        }
+    });
 };
 
 const samplePayloadForRequestAppointment = {

@@ -16,4 +16,5 @@ module.exports = (app) => {
         .put(appointmentController.updateAppointment)
         .delete(appointmentController.deleteAppointment);
 
+    app.param("appointmentId", appointmentController.getAppointmentById);
 };
