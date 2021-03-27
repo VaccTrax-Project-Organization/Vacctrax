@@ -4,12 +4,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HomepageComponent} from './pages/homepage/homepage.component';
-import {NavigationBarComponent} from './pages/shared/navigation-bar/navigation-bar.component';
+import {NavigationBarComponent} from './shared/pages/navigation-bar/navigation-bar.component';
 import {MaterialAngularModule} from './material-angular.module';
-import {SharedModule} from './pages/shared/shared.module';
+import {SharedModule} from './shared/shared.module';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
-import { RolePipe } from './pipes/role.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { RolePipe } from './pipes/role.pipe';
     HomepageComponent,
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
-    RolePipe,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +27,6 @@ import { RolePipe } from './pipes/role.pipe';
   providers: [],
   exports: [
     NavigationBarComponent,
-    RolePipe
   ],
   bootstrap: [AppComponent]
 })
