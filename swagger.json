@@ -212,6 +212,36 @@
         }
       }
     },
+    "/clinics": {
+      "get": {
+        "tags": [
+          "Clinic"
+        ],
+        "summary": "Get all the clinics in the system.",
+        "operationId": "getAllClinics",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Clinic"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/vaccines/{vaccineId}": {
       "get": {
         "tags": [
