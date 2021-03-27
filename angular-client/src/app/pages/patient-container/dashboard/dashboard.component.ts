@@ -22,11 +22,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subSink.add(patientService.getPatient().subscribe(res => {
       this.patient = res;
     }));
-
-    this.subSink.add(vaccineService.getVaccines().subscribe(res => {
-      console.log(res);
-    }));
-
   }
 
   ngOnInit(): void {
