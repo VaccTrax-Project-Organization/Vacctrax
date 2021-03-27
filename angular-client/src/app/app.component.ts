@@ -7,5 +7,5 @@ import {Component} from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'vacctrax-frontend';
+  public title = 'VaccTrax';
 }

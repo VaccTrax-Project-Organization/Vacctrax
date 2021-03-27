@@ -10,7 +10,6 @@ const AddressSchema = new Schema({
     },
     streetLine2: {
         type: String,
-        required: "Street line two is required",
         trim: true
     },
     postalCode: {
@@ -20,8 +19,7 @@ const AddressSchema = new Schema({
     },
     province: {
         type: String,
-        required: "Province is required",
-        trim: true
+        enum: ['NL', 'PE', 'NS', 'NB','QC','ON','MB','SK','AB','BC','YT','NT']
     },
     city: {
         type: String,
