@@ -561,6 +561,14 @@
             "type": "string",
             "format": "date-time"
           },
+          "vaccineDose": {
+            "type": "number",
+            "example": 1
+          },
+          "vaccine": {
+            "type": "string",
+            "example": "Pfizer"
+          },
           "type": {
             "type": "string",
             "enum": ["CONFIRMED", "REQUESTED", "CANCELLED", "COMPLETED"],

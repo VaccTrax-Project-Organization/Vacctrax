@@ -24,6 +24,8 @@ exports.requestAppointment = (req, res) => {
 exports.getAllAppointmentsForClinic = (req, res, next) => {
     const clinic = req.clinic;
 
+    console.log(clinic);
+
     Appointment.find({clinic: clinic}, (err, appointments) => {
         if (err) {
             res.status(500).send(err).end();
@@ -32,20 +34,23 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
             // getting appointment list
             res.status(200).send(appointments);
         }
-    });
+    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, 'healthPractitioner', 'vaccine']);
 }
 
 //pass in a patient to the req. This is so a medical admin or a patient can get all their appointments.
-exports.getPatientAppointment = (req,res,next) => {
-    const patient = req.patient;
-    Appointment.find({patient:patient},(err,appointments)=>{
-        if(err){
-            return next(err);
-        }else{
-            console.log("Patient " + patient.id + "'s appointments: \n" +appointments );
-            res.status(200).send(appointments);
+exports.getPatientAppointments = (req, res, next) => {
+    const patient = res.locals.patient;
+    console.log("patient", res.locals);
+    Appointment.find({patient: patient}, (err) => {
+        if (err) {
+            return res.status(500).send(err).end();
         }
-    })
+        // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
+        //FOR SOME WEIRD REASON THE HEALTHPRACTITIONER DOESNT POPULATE IDK WHY!>@#>!@#>!>@#>!@>#!>>!@# (IT RETURNS NULL)
+    }).populate(["clinic", {path: "patient", populate: {path: "account", model: "Account"}}, "healthPractitioner", "vaccine"]).then(appointments => {
+        console.log("appointments", appointments);
+        return res.status(200).send(appointments);
+    });
 }
 
 //for a specific appoint for a specific patient (get it by it's id)
@@ -62,6 +67,80 @@ exports.getPatientAppointmentDetail = (req,res,next) => {
             next();          
         }
     })
+}
+
+exports.bookAppointment = (req, res) => {
+    console.log(req.body);
+
+    let appointment = new Appointment(req.body);
+
+    appointment.save((err, app) => {
+        if (err) {
+            res.status(500).send({
+                error: {
+                    message: err.message
+                }
+            });
+        } else {
+            console.log(app);
+            res.status(200).send({
+                payload: app
+            });
+        }
+    });
+}
+
+exports.updateAppointment = (req, res, next) => {
+    console.log("req.body", req.body);
+    Appointment.findByIdAndUpdate(res.locals.appointment._id, {$set: req.body}, {new: true}, (err, appointment) => {
+        if(err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(appointment).end();
+        }
+    });
+};
+
+// to be implemented in the future
+exports.deleteAppointment = (req, res, next) => {
+
+};
+
+// param middleware used to get object for other CRUD activities
+exports.getAppointmentById = (req, res, next, id) => {
+    Appointment.findById(id, (err, appointment) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else if (!appointment) {
+            return res.status(404).send({message: `Appointment with the id of ${id} not found`}).end();
+        } else {
+            res.locals.appointment = appointment;
+            return next();
+        }
+    });
+};
+
+exports.testCreate = (req, res, next) => {
+
+    console.log(req.body);
+
+    let appointment = new Appointment(req.body);
+    appointment.vaccine = req.body.vaccineId;
+    appointment.patient = req.body.patientId;
+    appointment.clinic = req.body.clinicId;
+    appointment.healthPractitioner = req.body.healthPractitionerId;
+
+    appointment.save((err, app) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            if (app) {
+                return res.status(200).send(app);
+            } else {
+                return res.status(500).send({message: "There was an error saving appointment."}).end();
+            }
+        }
+    });
 }
 
 const samplePayloadForRequestAppointment = {
