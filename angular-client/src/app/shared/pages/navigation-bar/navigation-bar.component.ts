@@ -9,9 +9,12 @@ import {Role} from '../../../models/enums/role.enum';
 export class NavigationBarComponent implements OnInit {
   @Input() public roleInput: Role;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit() {
+    console.log(this.roleInput);
   }
 
 }

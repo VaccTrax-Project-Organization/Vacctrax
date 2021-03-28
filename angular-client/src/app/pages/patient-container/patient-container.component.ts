@@ -7,7 +7,7 @@ import {Role} from '../../models/enums/role.enum';
   styleUrls: ['./patient-container.component.scss']
 })
 export class PatientContainerComponent implements OnInit {
-  public role: typeof Role;
+  public role = Role;
   constructor() { }
 
   ngOnInit() {
