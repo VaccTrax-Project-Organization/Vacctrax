@@ -10,9 +10,9 @@
       <mat-card>
         <mat-card-header>
           <div mat-card-avatar id="profile-image"></div>
-          <mat-card-title>{{patient | patientfullname}} - #{{patient.accountId}}</mat-card-title>
+          <mat-card-title>{{patient | patientfullname}} - #{{patient.account.accountId}}</mat-card-title>
           <mat-card-subtitle>
-            <div>{{patient.email}}</div>
+            <div>{{patient.account.email}}</div>
             <div>{{patient.healthCardNo}}</div>
           </mat-card-subtitle>
         </mat-card-header>
