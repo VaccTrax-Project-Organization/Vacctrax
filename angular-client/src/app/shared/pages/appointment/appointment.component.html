@@ -4,7 +4,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
     <ng-container matColumnDef="patientName">
-      <mat-header-cell mat-sort-header *matHeaderCellDef>PatientModel Name</mat-header-cell>
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Patient Name</mat-header-cell>
       <mat-cell *matCellDef="let element">{{element.patientName}}</mat-cell>
     </ng-container>
 
