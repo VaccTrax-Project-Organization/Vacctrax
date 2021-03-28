@@ -13,7 +13,7 @@
           <mat-card-title>{{patient | patientfullname}} - #{{patient.accountId}}</mat-card-title>
           <mat-card-subtitle>
             <div>{{patient.email}}</div>
-            <div>{{patient.healthCard}}</div>
+            <div>{{patient.healthCardNo}}</div>
           </mat-card-subtitle>
         </mat-card-header>
       </mat-card>
@@ -22,8 +22,8 @@
     <div class="col-lg">
       <mat-card>
         <mat-card-content>
+          <h3>{{"List of Vaccine Appointments"}}</h3>
           <app-appointment
-            [title]="'List of Vaccine Appointments'"
             [roleInput]="role"
             [tableDataSource]="dataSource">
           </app-appointment>

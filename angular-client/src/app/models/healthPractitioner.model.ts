@@ -1,5 +1,4 @@
-import {Appointment} from './appointment';
-import {Address} from './address';
+import {Appointment} from './appointment.model';
 import {Account} from './account.class';
 
 export class HealthPractitioner extends Account {

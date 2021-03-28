@@ -1,9 +1,9 @@
-import {Patient} from './patient';
-import {Clinic} from './clinic';
+import {Patient} from './patient.model';
+import {Clinic} from './clinic.model';
 import {AppointmentType} from './enums/appointment.enum';
 
 export class Appointment {
-  constructor(public appointmentId: number,
+  constructor(public _id: string,
               public clinic: Clinic,
               public reason: string,
               public preferredDate: Date,
