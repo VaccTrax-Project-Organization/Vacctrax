@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Role} from '../../../models/enums/role.enum';
-import {Patient} from '../../../models/patient';
+import {Patient} from '../../../models/patient.model';
 import {SubSink} from 'subsink';
 import {PatientService} from '../../../services/patient/patient.service';
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
