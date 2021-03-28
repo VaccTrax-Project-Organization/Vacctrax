@@ -1,5 +1,5 @@
 // Load the 'clinics' controller
-const clinics = require("../controllers/clinics.server.controller");
+const clinicController = require("../controllers/clinics.server.controller");
 
 // Define the routes module' method
 module.exports = function (app) {
