@@ -274,7 +274,7 @@
             }
           },
           "400": {
-            "description": "Invalid Json",
+            "description": "Invalid Json"
           },
           "500": {
             "description": "Internal Server Error"
