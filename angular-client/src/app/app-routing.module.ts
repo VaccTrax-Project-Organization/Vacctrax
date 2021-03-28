@@ -4,7 +4,7 @@ import {AppointmentDetailsComponent} from './pages/appointment-details/appointme
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HomepageComponent} from './pages/homepage/homepage.component';
 import {AppointmentComponent} from './shared/pages/appointment/appointment.component';
-import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.component';
+import {VaccineHistoryComponent} from './shared/pages/vaccine-history/vaccine-history.component';
 import {DashboardComponent} from './pages/patient-container/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -14,9 +14,15 @@ const routes: Routes = [
     path: 'patient',
     loadChildren: () => import('./pages/patient-container/patient-container.module').then(m => m.PatientContainerModule)
   },
+  {
+    path: 'healthPractitioner',
+    // tslint:disable-next-line:max-line-length
+    loadChildren: () => import('./pages/health-practitioner-container/health-practitioner-container.module').then(m => m.HealthPractitionerContainerModule)
+  },
+
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},
   {path: 'confirmedappointment', component: ConfirmedAppointmentsComponent},
-  {path: 'vaccinehistory', component: VaccineHistoryComponent},
+
   {path: '**', redirectTo: '', pathMatch: 'full'},
 
 ];

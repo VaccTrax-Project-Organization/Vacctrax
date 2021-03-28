@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Role} from '../../models/enums/role.enum';
-import {Patient} from '../../models/patient';
+import {Role} from '../../../models/enums/role.enum';
+import {Patient} from '../../../models/patient';
 import {SubSink} from 'subsink';
-import {PatientService} from '../../services/patient/patient.service';
-import {VaccinesService} from '../../services/vaccines/vaccines.service';
+import {PatientService} from '../../../services/patient/patient.service';
+import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 
 @Component({
   selector: 'app-vaccine-history',
