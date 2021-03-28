@@ -7,6 +7,7 @@ import {MaterialAngularModule} from '../material-angular.module';
 import {ViewAppointmentDialogComponent} from './pages/view-appointment-dialog/view-appointment-dialog.component';
 import {PatientPipe} from './pipes/patient.pipe';
 import {RolePipe} from './pipes/role.pipe';
+import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {RolePipe} from './pipes/role.pipe';
     ViewAppointmentDialogComponent,
     RolePipe,
     PatientPipe,
+    VaccineHistoryComponent
   ],
   exports: [
     NavigationBarComponent,
@@ -25,7 +27,7 @@ import {RolePipe} from './pipes/role.pipe';
   ],
   imports: [
     CommonModule,
-    MaterialAngularModule,
+    MaterialAngularModule
   ]
 })
 
