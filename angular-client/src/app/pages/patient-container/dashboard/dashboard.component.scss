@@ -1,0 +1,27 @@
+:host{
+  $navigation-bar-height: 56px;
+
+  #dashboard-container{
+    height: calc(100vh - #{$navigation-bar-height});
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    position: relative;
+    > div {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      overflow: auto;
+    }
+
+    #profile-section{
+      width: 400px;
+      #profile-image {
+        background-image: url('./../../../../assets/images/profile.jpg');
+        background-size: cover;
+      }
+    }
+  }
+}

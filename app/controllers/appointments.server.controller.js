@@ -1,4 +1,6 @@
-const Appointment = require('mongoose').model('Appointment');
+const mongoose = require("mongoose");
+const Appointment = mongoose.model('Appointment');
+const Account = mongoose.model("Account");
 
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
@@ -54,17 +56,17 @@ exports.getPatientAppointments = (req, res, next) => {
 }
 
 //for a specific appoint for a specific patient (get it by it's id)
-exports.getPatientAppointmentDetail = (req,res,next) => {
+exports.getPatientAppointmentDetail = (req, res, next) => {
     const patient = req.patient;
     Appointment.findOne({
-        _id:id
-    },(err,appointment)=>{
-        if(err){
+        _id: id
+    }, (err, appointment) => {
+        if (err) {
             return next(err);
-        }else{
+        } else {
             req.appointment = appointment;
             console.log(appointment);
-            next();          
+            next();
         }
     })
 }

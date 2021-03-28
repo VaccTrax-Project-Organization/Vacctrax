@@ -2,8 +2,9 @@
 const appointmentController = require("../controllers/appointments.server.controller");
 
 // Define the routes module' method
-module.exports = function (app) {
+module.exports = (app) => {
     // Mount the 'appointments' controller's 'requestAppointment' method
+    app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
     app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
@@ -18,4 +19,6 @@ module.exports = function (app) {
         .delete(appointmentController.deleteAppointment);
 
     app.param("appointmentId", appointmentController.getAppointmentById);
+
+    app.get("/api/getAllAppointmentsByClinicId/:clinicId", appointmentController.getAllAppointmentsForClinic);
 };

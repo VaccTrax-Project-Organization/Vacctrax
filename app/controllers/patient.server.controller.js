@@ -3,19 +3,17 @@ const Patient = mongoose.model('Patient');
 const Account = mongoose.model('Account');
 const Address = mongoose.model('Address');
 
-exports.getPatientById=(req,res,next,id)=>{
-    console.log("Finding Patient");
-    Patient.findOne({
-        _id:id
-    },(err,patient)=>{
-        if(err){
-            return next(err);
-        }else{
-            req.patient  = patient;
-            console.log(patient);
-            next();          
+exports.getPatientById = (req, res, next, id) => {
+    Patient.findById(id, (err, patient) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else if (!patient) {
+            return res.status(404).send({message: `Patient with the id of ${id} not found`}).end();
+        } else {
+            res.locals.patient = patient;
+            return next();
         }
-    })
+    });
 }
 
 exports.createPatientTest = (req, res, next) => {

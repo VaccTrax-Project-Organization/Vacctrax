@@ -30,7 +30,15 @@ const AppointmentSchema = new Schema({
         type: String,
         enum : ['CONFIRMED','REQUESTED', 'CANCELLED', 'COMPLETED'],
         default: 'REQUESTED',
-        required: "type is required",
+        required: "Type is required",
+    },
+    vaccine: {
+        type: String,
+        required: "Vaccine is required"
+    },
+    vaccineDose: {
+        type: Number,
+        required: "Vaccine dose is required"
     },
     vaccine: {
         type: Schema.Types.ObjectId,

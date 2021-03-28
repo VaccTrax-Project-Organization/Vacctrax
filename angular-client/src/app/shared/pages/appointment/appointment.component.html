@@ -1,0 +1,53 @@
+<div class="table-container">
+  <mat-table matSort [dataSource]="dataSource" class="w-100 mat-elevation-z1">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <ng-container matColumnDef="patientName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Patient Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.patientName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="appointmentDateTime">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Appointment Date and Time</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.appointmentDateTime}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="practitionerName">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Practitioner Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.practitionerName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="vaccine">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Vaccine</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.vaccine}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="comments">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Comments</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.comments}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" stickyEnd>
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        <button *ngIf="showActionDelete" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button (click)="openViewAppointmentDialog(element)" mat-icon-button>
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+
+        <button (click)="openCancelVaccinationDialog()" *ngIf="showActionDelete" mat-icon-button color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  </mat-table>
+</div>
