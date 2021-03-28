@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {SubSink} from 'subsink';
-import {GenericTwoOptionDialogComponent} from '../shared/generic-two-option-dialog/generic-two-option-dialog.component';
+import {GenericTwoOptionDialogComponent} from '../../shared/pages/generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../models/generic-two-option-dialog-data';
 
 @Component({
@@ -33,6 +33,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       width: '650px',
       height: '350px',
       disableClose: true,
+      autoFocus: false,
       data: new GenericTwoOptionDialogData(dialogTitle, dialogDescription)
     });
 

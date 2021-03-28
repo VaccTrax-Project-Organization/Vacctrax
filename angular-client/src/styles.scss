@@ -3,6 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 $background-color:  #F8E4E4 !important;
+$colour-1: #8f190a;
+$colour-2: #e9d057;
 
 html, body {
   height: 100%;
@@ -26,4 +28,30 @@ a {
   .mat-dialog-container {
     background-color: $background-color;
   }
+}
+
+#vacc-dialog-container {
+  $icon-size: 2rem;
+
+  #close-button{
+    .mat-icon{
+      font-size: $icon-size;
+      height: $icon-size;
+      width: $icon-size;
+      line-height: $icon-size;
+    }
+  }
+
+  .mat-flat-button {
+    background-color: #8F190A !important;
+    color: #F6EA8C !important;
+  }
+}
+
+.timepicker-overlay {
+  z-index: 1100 !important;
+}
+
+.timepicker-backdrop-overlay {
+  z-index: 1100 !important;
 }

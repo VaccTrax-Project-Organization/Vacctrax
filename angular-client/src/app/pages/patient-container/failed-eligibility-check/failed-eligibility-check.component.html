@@ -1,0 +1,37 @@
+<div class="content-container">
+  <div class="content">
+    <div class="row text-center">
+      <div class="col">
+        <h3>Failed Eligibility</h3>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col">
+        <h4>You Failed Eligibility For The Following Reasons:</h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <ul>
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.age?.didPass">
+            You selected your age to be {{this.ineligible[this.navigationBehaviorOptions?.state?.age?.value]}}
+          </li>
+
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.eligibleGroup?.didPass">
+            You selected your eligibility group to be {{this.ineligible[this.navigationBehaviorOptions?.state?.eligibleGroup?.value]}}
+          </li>
+
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.doesChronicConditionsPass?.didPass">
+            You selected your chronic conditions to be {{this.ineligible[this.navigationBehaviorOptions?.state?.doesChronicConditionsPass?.value]}}
+          </li>
+
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.doesGreaterRiskPass?.didPass">
+            You selected your community of greater risk to be {{this.ineligible[this.navigationBehaviorOptions?.state?.doesGreaterRiskPass?.value]}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
