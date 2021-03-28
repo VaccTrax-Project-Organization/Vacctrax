@@ -6,6 +6,7 @@ import {SubSink} from 'subsink';
 import {Appointment} from '../../../models/appointment.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details/modify-appointment-details.component';
+import {DeclineRequestedAppointmentDialogComponent} from "../decline-requested-appointment-dialog/decline-requested-appointment-dialog.component";
 
 @Component({
   selector: 'app-medical-admin-dashboard',
@@ -36,13 +37,23 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
-   
+
   public openModifyAppointmentDialog(): void {
     const dialogRef = this.dialog.open(ModifyAppointmentDetailsComponent, {
       panelClass: 'dialog-panel-class',
       disableClose: false,
       autoFocus: false,
       height: '620px'
+    });
+  }
+
+  public openDeclineAppointmentRequestDialog(): void {
+    const dialogRef = this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
+      panelClass: 'dialog-panel-class',
+      disableClose: false,
+      autoFocus: false,
+      height: '400px',
+      width: '650px'
     });
   }
 
