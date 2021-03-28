@@ -36,7 +36,7 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
             // getting appointment list
             res.status(200).send(appointments);
         }
-    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, 'healthPractitioner', 'vaccine']);
+    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
 
 //pass in a patient to the req. This is so a medical admin or a patient can get all their appointments.
@@ -49,7 +49,7 @@ exports.getPatientAppointments = (req, res, next) => {
         }
         // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
         //FOR SOME WEIRD REASON THE HEALTHPRACTITIONER DOESNT POPULATE IDK WHY!>@#>!@#>!>@#>!@>#!>>!@# (IT RETURNS NULL)
-    }).populate(["clinic", {path: "patient", populate: {path: "account", model: "Account"}}, "healthPractitioner", "vaccine"]).then(appointments => {
+    }).populate(["clinic", {path: "patient", populate: {path: "account", model: "Account"}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, "vaccine"]).then(appointments => {
         console.log("appointments", appointments);
         return res.status(200).send(appointments);
     });

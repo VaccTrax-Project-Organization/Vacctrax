@@ -672,8 +672,9 @@
           "preferredDate",
           "preferredTime",
           "type",
-          "clinic",
-          "patient"
+          "clinicId",
+          "patientId",
+          "healthPractitionerId"
         ],
         "properties": {
           "reason": {
@@ -699,9 +700,8 @@
             "type": "number",
             "example": 1
           },
-          "vaccine": {
-            "type": "string",
-            "example": "Pfizer"
+          "vaccineId": {
+            "type": "string"
           },
           "type": {
             "type": "string",
