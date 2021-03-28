@@ -15,12 +15,18 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
   @Input() public title = 'Title';
+  @Input()
+  set tableDataSource(data) {
+    this.dataSource = new MatTableDataSource<any>(data);
+
+  }
   public showActionDelete: boolean;
   public displayedColumns: string[];
   public dataSource: MatTableDataSource<any>;
 
   constructor(public dialog: MatDialog) {
-    this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
+     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
+    // this.displayedColumns = [ 'vaccine', 'actions'];
     this.dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
   }
 

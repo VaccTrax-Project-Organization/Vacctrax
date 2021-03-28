@@ -1,7 +1,14 @@
 // Load the 'clinics' controller
-const clinics = require("../controllers/clinics.server.controller");
+const clinicController = require("../controllers/clinics.server.controller");
 
 // Define the routes module' method
 module.exports = function (app) {
-    app.param('clinicId', clinics.getClinicById);
+    app.get("/api/clinics", clinicController.getAllClinics);
+
+    app.route('/api/clinics/:clinicId')
+        // .get(clinics.getClinicById)
+        .put(clinicController.updateClinicById)
+        .delete(clinicController.deleteClinicById)
+
+    app.param('clinicId', clinicController.getClinicById);
 };
