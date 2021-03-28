@@ -1,0 +1,87 @@
+<div class="content-container">
+    <div class="content">
+        <div class="row">
+            <div class="col text-center">
+                <h3>
+                    Modify Appointment Details
+                </h3>
+            </div>
+        </div>
+      <form [formGroup]="this.modifyApptForm">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+                <mat-label>Health Practitioner</mat-label>
+                <mat-select formControlName="healthPractitioner">
+                  <mat-option value="John Smith">John Smith</mat-option>
+                  <mat-option value="Joe Smith">Joe Smith</mat-option>
+                </mat-select>
+                <mat-error>Health Practitioner is <strong>Required</strong></mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col">
+              <mat-form-field appearance="outline">
+                <mat-label>Date</mat-label>
+                <input formControlName="date" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error>Date is <strong>Required</strong></mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+            <mat-label>Time</mat-label>
+            <input formControlName="time" matInput aria-label="12hr format"
+                    [ngxTimepicker]="default"
+                    readonly #timeInput>
+            <ngx-material-timepicker #default></ngx-material-timepicker>
+            <mat-icon class="time-icon" (click)="timeInput.click()" matSuffix>alarm</mat-icon>
+            <mat-error>Time is <strong>Required</strong></mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+                <mat-label>Vaccine Type</mat-label>
+                <mat-select formControlName="vaccineType">
+                  <mat-option value="Pfizer">Pfizer</mat-option>
+                  <mat-option value="Moderna">Moderna</mat-option>
+                </mat-select>
+                <mat-error>Vaccine Type is <strong>Required</strong></mat-error>
+              </mat-form-field> 
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+                <mat-label>Vaccine Dose</mat-label>
+                <mat-select formControlName="vaccineDose">
+                  <mat-option value="1">1</mat-option>
+                  <mat-option value="2">2</mat-option>
+                </mat-select>
+                <mat-error>Vaccine Dose is <strong>Required</strong></mat-error>
+              </mat-form-field>
+          </div>
+        </div>
+  
+        
+        <div class="row">
+            <div class="col text-center">
+              <button mat-raised-button type="button" class="mr-5"
+                      [mat-dialog-close]="true">Save</button>
+          
+              <button mat-raised-button type="button" class="ml-5"
+                      [mat-dialog-close]="false">Cancel</button>
+            </div>
+          </div>
+      </form>
+    </div>
+  </div>
+  
