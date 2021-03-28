@@ -7,11 +7,12 @@ import { RouterModule } from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import { TestComponent } from './test/test.component';
 import {HealthPractitionerContainerComponent} from './health-practitioner-container.component';
+import { HealthPractitionerDashboardComponent } from './health-practitioner-dashboard/health-practitioner-dashboard.component';
 
 
 
 @NgModule({
-  declarations: [TestComponent, HealthPractitionerContainerComponent],
+  declarations: [TestComponent, HealthPractitionerContainerComponent, HealthPractitionerDashboardComponent],
   imports: [
     CommonModule,
     HealthPractitionerContainerRoutingModule,
