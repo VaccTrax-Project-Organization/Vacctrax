@@ -1,0 +1,35 @@
+<!--<app-navigation-bar></app-navigation-bar>-->
+
+<div class="container-fluid">
+  <div>
+
+  </div>
+
+  <div class="row">
+    <div id="profile-section" class="col-auto mb-2">
+      <mat-card>
+        <mat-card-header>
+          <div mat-card-avatar id="profile-image"></div>
+          <mat-card-title>{{patient | patientfullname}} - #{{patient.account.accountId}}</mat-card-title>
+          <mat-card-subtitle>
+            <div>{{patient.account.email}}</div>
+            <div>{{patient.healthCardNo}}</div>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+
+    <div class="col-lg">
+      <mat-card>
+        <mat-card-content>
+          <h3>{{"List of Vaccine Appointments"}}</h3>
+          <app-appointment
+            [roleInput]="role"
+            [tableDataSource]="dataSource">
+          </app-appointment>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

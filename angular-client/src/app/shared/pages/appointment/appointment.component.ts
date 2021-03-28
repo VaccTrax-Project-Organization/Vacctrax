@@ -4,6 +4,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
 import {MatDialog} from '@angular/material/dialog';
 import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-appointment-dialog.component';
+import {SubSink} from 'subsink';
+import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
+import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
+import {Appointment} from '../../../models/appointment.model';
 
 @Component({
   selector: 'app-appointment',
@@ -14,14 +18,18 @@ import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-ap
 export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
-  @Input() public title = 'Title';
+  @Input()
+  set tableDataSource(data: MatTableDataSource<Appointment>) {
+    this.dataSource = data;
+  }
   public showActionDelete: boolean;
   public displayedColumns: string[];
-  public dataSource: MatTableDataSource<any>;
+  public dataSource: MatTableDataSource<Appointment>;
+  private subSink: SubSink;
 
   constructor(public dialog: MatDialog) {
-    this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'actions'];
-    this.dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+    this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
+    this.dataSource = new MatTableDataSource<Appointment>();
   }
 
   ngOnInit() {
@@ -32,7 +40,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  openViewAppointmentDialog(element: any) {
+  openViewAppointmentDialog(element: Appointment) {
     console.log(element);
     this.dialog.open(ViewAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',
@@ -41,43 +49,22 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
       data: element
     });
   }
-}
 
-export interface PeriodicElement {
-  patientName: string;
-  appointmentDateTime: string;
-  practitionerName: string;
-  status: string;
-  vaccine: string;
-}
+  public openCancelVaccinationDialog(): void {
+    const dialogTitle = 'CANCEL APPOINTMENT';
+    const dialogDescription = 'Are you sure you would like to cancel the selected appointment (enter appoint number here or something), this action cannot be undone';
+    const dialogRef = this.dialog.open(GenericTwoOptionDialogComponent, {
+      panelClass: 'dialog-panel-class',
+      width: '650px',
+      height: '350px',
+      disableClose: true,
+      autoFocus: false,
+      data: new GenericTwoOptionDialogData(dialogTitle, dialogDescription)
+    });
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    patientName: 'June Elder',
-    appointmentDateTime: 'January 1 2021 at 4:30 pm',
-    practitionerName: 'Dr.Drake',
-    status: 'Requested',
-    vaccine: 'Pfizer'
-  },
-  {
-    patientName: 'Bob Barker',
-    appointmentDateTime: 'January 1 2021 at 4:30 pm',
-    practitionerName: 'Dr.Drake',
-    status: 'Requested',
-    vaccine: 'Pfizer'
-  },
-  {
-    patientName: 'Jonathan Joestar',
-    appointmentDateTime: 'January 1 2021 at 4:30 pm',
-    practitionerName: 'Dr.Drake',
-    status: 'Requested',
-    vaccine: 'Pfizer'
-  },
-  {
-    patientName: 'John Henry',
-    appointmentDateTime: 'January 1 2021 at 4:30 pm',
-    practitionerName: 'Dr.Drake',
-    status: 'Requested',
-    vaccine: 'Pfizer'
-  },
-];
+    // get call back data on close
+    this.subSink.add(dialogRef.afterClosed().subscribe(res => {
+      console.log('after close callback', res);
+    }));
+  }
+}

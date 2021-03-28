@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Patient} from '../../models/patient';
+import {Patient} from '../../models/patient.model';
+import {Account} from '../../models/account.class';
 
 @Pipe({
   name: 'patientfullname'
@@ -7,6 +8,8 @@ import {Patient} from '../../models/patient';
 
 export class PatientPipe implements PipeTransform {
   transform(patient: Patient): string {
-    return `${patient.firstName} ${patient.lastName}`;
+    if (typeof(patient.account) !== 'string'){
+      return `${patient.account.firstName} ${patient.account.lastName}`;
+    }
   }
 }

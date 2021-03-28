@@ -8,7 +8,9 @@ import {MaterialAngularModule} from './material-angular.module';
 import {SharedModule} from './shared/shared.module';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
+import {HealthPractitionerContainerModule} from './pages/health-practitioner-container/health-practitioner-container.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialAngularModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   providers: [],
   exports: [],
