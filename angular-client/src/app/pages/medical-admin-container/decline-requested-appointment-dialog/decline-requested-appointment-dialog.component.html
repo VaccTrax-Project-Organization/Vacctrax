@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col text-center"><h3>CANCEL / DECLINE APPOINTMENT</h3></div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-10">
+    Reason For Cancellation
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-10">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <textarea matInput rows="8" [formControl]="note" style="width: 100%;">
+
+      </textarea>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="row ">
+  <div class="col text-center">
+    <!--    This button will perform all the accept actions, and return a truthy value-->
+    <button mat-raised-button type="button" class="mr-5"
+            (click)="save()">Cancel & Send Notification</button>
+  </div>
+</div>
