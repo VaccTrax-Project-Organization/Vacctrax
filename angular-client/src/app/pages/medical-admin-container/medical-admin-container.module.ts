@@ -5,6 +5,7 @@ import { MedicalAdminDashboardComponent } from './medical-admin-dashboard/medica
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {MedicalAdminContainerRoutingModule} from './medical-admin-container-routing.module';
+import {MaterialAngularModule} from "../../material-angular.module";
 
 @NgModule({
   declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent],
@@ -12,7 +13,8 @@ import {MedicalAdminContainerRoutingModule} from './medical-admin-container-rout
     MedicalAdminContainerRoutingModule,
     CommonModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    MaterialAngularModule
   ]
 })
 export class MedicalAdminContainerModule { }

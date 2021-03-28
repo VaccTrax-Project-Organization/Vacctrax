@@ -7,6 +7,7 @@ import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-ap
 import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
+import {Appointment} from '../../../models/appointment';
 
 @Component({
   selector: 'app-appointment',
@@ -18,18 +19,17 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
   @Input()
-  set tableDataSource(data) {
-    this.dataSource = new MatTableDataSource<any>(data);
+  set tableDataSource(data: Appointment[]) {
+    this.dataSource = new MatTableDataSource<Appointment>(data);
   }
   public showActionDelete: boolean;
   public displayedColumns: string[];
-  public dataSource: MatTableDataSource<any>;
+  public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
   constructor(public dialog: MatDialog) {
-     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
-    // this.displayedColumns = [ 'vaccine', 'actions'];
-    this.dataSource = new MatTableDataSource<any>();
+    this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
+    this.dataSource = new MatTableDataSource<Appointment>();
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  openViewAppointmentDialog(element: any) {
+  openViewAppointmentDialog(element: Appointment) {
     console.log(element);
     this.dialog.open(ViewAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',
