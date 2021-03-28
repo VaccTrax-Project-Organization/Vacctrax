@@ -5,14 +5,16 @@ import {AppointmentRequest} from '../../../models/appointment-request.model';
 import {ClinicService} from '../../../services/clinic/clinic.service';
 import {Clinic} from '../../../models/clinic.model';
 import {AppointmentType} from '../../../models/enums/appointment.enum';
-import {Patient} from "../../../models/patient.model";
-import {PatientService} from "../../../services/patient/patient.service";
+import {Patient} from '../../../models/patient.model';
+import {PatientService} from '../../../services/patient/patient.service';
+import {AppointmentService} from '../../../services/appointment/appointment.service';
 
 @Component({
   selector: 'app-request-appointment',
   templateUrl: './request-appointment.component.html',
   styleUrls: ['./request-appointment.component.scss']
 })
+
 export class RequestAppointmentComponent implements OnInit, OnDestroy {
   public requestApptForm: FormGroup;
   public currentDate: Date;
@@ -22,7 +24,8 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
               private clinicService: ClinicService,
-              private patientService: PatientService) {
+              private patientService: PatientService,
+              private appointmentService: AppointmentService) {
     this.subSink = new SubSink();
     this.currentDate = new Date();
     this.clinics = [];
@@ -49,7 +52,7 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       clinicId: ['', Validators.required],
       preferredDate: ['', Validators.required],
       preferredTime: ['', Validators.required],
-      vaccineType: ['', Validators.required],
+      vaccineId: ['', Validators.required],
       vaccineDose: ['', Validators.required],
       reason: ['', Validators.required],
     });
@@ -62,7 +65,7 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { clinicId, preferredDate, preferredTime, vaccineType, vaccineDose, reason } = this.requestApptForm.getRawValue();
+    const { clinicId, preferredDate, preferredTime, vaccine, vaccineDose, reason } = this.requestApptForm.getRawValue();
 
     const appointmentRequest: AppointmentRequest = {
       patientId: this.patient._id,
@@ -71,8 +74,12 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       preferredTime,
       type: AppointmentType.REQUESTED,
       reason,
-      vaccineType,
+      vaccineId: vaccine,
       vaccineDose
     }
+
+    this.appointmentService.requestAppointment(appointmentRequest).subscribe(res => {
+      console.log(res);
+    });
   }
 }

@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
     this.role = Role.PATIENT;
+    this.dataSource = new MatTableDataSource<Appointment>();
+
     this.subSink.add(patientService.getPatient().subscribe(res => {
       this.patient = res;
     }));
