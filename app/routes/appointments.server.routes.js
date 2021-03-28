@@ -10,7 +10,6 @@ module.exports = (app) => {
 
     app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
-    app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
 
     app.route("/api/appointments/:appointmentId")
         .put(appointmentController.updateAppointment)
