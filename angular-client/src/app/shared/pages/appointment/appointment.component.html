@@ -30,6 +30,11 @@
       <mat-cell *matCellDef="let element"> {{element.vaccine}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="comments">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Comments</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.comments}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="actions" stickyEnd>
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index">

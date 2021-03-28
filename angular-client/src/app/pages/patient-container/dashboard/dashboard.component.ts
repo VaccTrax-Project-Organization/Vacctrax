@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   role: Role;
   patient: Patient;
   subSink: SubSink;
+  public dataSource =[];
 
   constructor(private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
@@ -25,6 +26,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     this.subSink.add(vaccineService.getVaccines().subscribe(res => {
       console.log(res);
+    }));
+
+    this.subSink.add(patientService.getPatientAppointments().subscribe(res => {
+      console.log(res);
+      this.dataSource = res;
+    },error => {
+      console.log(error);
     }));
 
   }

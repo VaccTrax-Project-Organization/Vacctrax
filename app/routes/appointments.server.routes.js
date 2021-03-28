@@ -11,7 +11,7 @@ module.exports = (app)  => {
 
     app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
-    app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
 
+    app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
     // app.param("patientId", patientController.getPatientById);
 };

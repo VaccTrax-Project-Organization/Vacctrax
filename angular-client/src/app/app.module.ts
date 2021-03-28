@@ -8,7 +8,8 @@ import {MaterialAngularModule} from './material-angular.module';
 import {SharedModule} from './shared/shared.module';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
+import { VaccineHistoryComponent } from './pages/vaccine-history/vaccine-history.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
     HomepageComponent,
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
+    VaccineHistoryComponent,
   ],
   imports: [
     HttpClientModule,

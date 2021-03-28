@@ -4,6 +4,7 @@ import {AppointmentDetailsComponent} from './pages/appointment-details/appointme
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HomepageComponent} from './pages/homepage/homepage.component';
 import {AppointmentComponent} from './shared/pages/appointment/appointment.component';
+import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.component';
 import {DashboardComponent} from './pages/patient-container/dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   },
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},
   {path: 'confirmedappointment', component: ConfirmedAppointmentsComponent},
+  {path: 'vaccinehistory', component: VaccineHistoryComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'},
 
 ];
