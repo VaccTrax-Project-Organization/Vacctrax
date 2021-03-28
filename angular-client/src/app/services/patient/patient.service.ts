@@ -6,15 +6,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {Appointment} from '../../models/appointment.model';
 import {catchError} from 'rxjs/operators';
+import {Service} from '../service.class';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class PatientService {
-  url = environment.apiUrl;
-  httpHeader = new HttpHeaders({'Content-Type': 'application/JSON'});
-
+export class PatientService extends Service{
   mockPatient: Patient = {
     _id: '',
     accountId: '1232',
@@ -29,6 +27,7 @@ export class PatientService {
   }
 
   constructor(private http: HttpClient) {
+    super();
   }
 
   public getPatient(): Observable<Patient>{

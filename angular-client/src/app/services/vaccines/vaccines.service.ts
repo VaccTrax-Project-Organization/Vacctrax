@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {Service} from '../service.class';
+import {Vaccine} from '../../models/vaccine.model';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class VaccinesService {
-  url = environment.apiUrl;
-  httpHeader = new HttpHeaders({'Content-Type': 'application/JSON'});
 
-  constructor(private http: HttpClient) { }
+export class VaccinesService extends Service {
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-  public getVaccines(): Observable<any> {
-    return this.http.get<any>(`${this.url}/vaccines`, {headers: this.httpHeader, withCredentials: true})
+  public getVaccines(): Observable<Vaccine[]> {
+    return this.http.get<Vaccine[]>(`${this.url}/vaccines`, {headers: this.httpHeader, withCredentials: true})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
   }
 }
