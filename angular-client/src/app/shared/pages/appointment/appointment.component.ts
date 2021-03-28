@@ -4,10 +4,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
 import {MatDialog} from '@angular/material/dialog';
 import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-appointment-dialog.component';
-import {AppointmentService} from "../../../services/appointment/appointment.service";
-import {SubSink} from "subsink";
-import {GenericTwoOptionDialogComponent} from "../generic-two-option-dialog/generic-two-option-dialog.component";
-import {GenericTwoOptionDialogData} from "../../../models/generic-two-option-dialog-data";
+import {SubSink} from 'subsink';
+import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
+import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 
 @Component({
   selector: 'app-appointment',
@@ -18,11 +17,9 @@ import {GenericTwoOptionDialogData} from "../../../models/generic-two-option-dia
 export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
-  @Input() public title = 'Title';
   @Input()
   set tableDataSource(data) {
     this.dataSource = new MatTableDataSource<any>(data);
-
   }
   public showActionDelete: boolean;
   public displayedColumns: string[];
@@ -32,7 +29,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   constructor(public dialog: MatDialog) {
      this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
     // this.displayedColumns = [ 'vaccine', 'actions'];
-    this.dataSource = new MatTableDataSource<any>(ELEMENT_DATA);
+    this.dataSource = new MatTableDataSource<any>();
   }
 
   ngOnInit() {

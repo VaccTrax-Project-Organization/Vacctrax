@@ -4,8 +4,6 @@ import {AppointmentDetailsComponent} from './pages/appointment-details/appointme
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HomepageComponent} from './pages/homepage/homepage.component';
 import {AppointmentComponent} from './shared/pages/appointment/appointment.component';
-import {VaccineHistoryComponent} from './shared/pages/vaccine-history/vaccine-history.component';
-import {DashboardComponent} from './pages/patient-container/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -18,6 +16,12 @@ const routes: Routes = [
     path: 'healthPractitioner',
     // tslint:disable-next-line:max-line-length
     loadChildren: () => import('./pages/health-practitioner-container/health-practitioner-container.module').then(m => m.HealthPractitionerContainerModule)
+  },
+
+  {
+    path: 'medicalAdmin',
+    // tslint:disable-next-line:max-line-length
+    loadChildren: () => import('./pages/medical-admin-container/medical-admin-container.module').then(m => m.MedicalAdminContainerModule)
   },
 
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},
