@@ -1,4 +1,4 @@
-import {Address} from './address';
+import {Address} from './address.model';
 
 export abstract class Account {
   constructor(public accountId = '',
