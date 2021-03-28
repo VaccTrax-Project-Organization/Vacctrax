@@ -11,32 +11,32 @@
 
     <ng-container matColumnDef="patientName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Patient Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.patientName}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.patient | patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="appointmentDateTime">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Appointment Date and Time</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.appointmentDateTime}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.preferredDate | date: 'yyyy-MM-dd'}} at {{element.preferredDate | date: 'shortTime'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="practitionerName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Practitioner Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.practitionerName}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.healthPractitioner | patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
       <mat-header-cell mat-sort-header *matHeaderCellDef> Status </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="vaccine">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Vaccine</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.vaccine}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.vaccine.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="comments">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Comments</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.comments}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.reason}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="actions" stickyEnd>

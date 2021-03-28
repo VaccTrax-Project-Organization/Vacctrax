@@ -1,8 +1,8 @@
 import {Patient} from './patient.model';
 import {Clinic} from './clinic.model';
 import {AppointmentType} from './enums/appointment.enum';
-import {HealthPractitioner} from "./healthPractitioner.model";
-import {Vaccine} from "./vaccine.model";
+import {HealthPractitioner} from './healthPractitioner.model';
+import {Vaccine} from './vaccine.model';
 
 export class Appointment {
   constructor(public _id: string,
