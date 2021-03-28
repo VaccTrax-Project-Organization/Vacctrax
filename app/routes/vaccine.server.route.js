@@ -1,16 +1,16 @@
-var vaccines = require('../controllers/vaccine.server.controller');
-var express = require('express');
-var router = express.Router();
+const vaccineController = require('../controllers/vaccine.server.controller');
+const express = require('express');
+const router = express.Router();
 
-module.exports =  function(app){
-    app.post('/api/addVaccine',vaccines.create);
-    app.get('/api/vaccines',vaccines.list);
+module.exports = (app) => {
+    app.post('/api/addVaccine', vaccineController.create);
+    app.get('/api/vaccines', vaccineController.list);
 
     //setting up vaccine search by mongodb id paramter
     app.route('/api/vaccines/:vaccineId')
-    .get(vaccines.read)
-    .put(vaccines.update)
-    .delete(vaccines.delete)
+        .get(vaccineController.read)
+        .put(vaccineController.update)
+        .delete(vaccineController.delete)
 
-    app.param('vaccineId',vaccines.vaccineByID);
+    app.param('vaccineId', vaccineController.vaccineByID);
 }
