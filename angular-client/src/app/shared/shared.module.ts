@@ -5,7 +5,7 @@ import {NavigationBarComponent} from './pages/navigation-bar/navigation-bar.comp
 import {GenericTwoOptionDialogComponent} from './pages/generic-two-option-dialog/generic-two-option-dialog.component';
 import {MaterialAngularModule} from '../material-angular.module';
 import {ViewAppointmentDialogComponent} from './pages/view-appointment-dialog/view-appointment-dialog.component';
-import {PatientPipe} from './pipes/patient.pipe';
+import {PatientFullNamePipe} from './pipes/patient.pipe';
 import {RolePipe} from './pipes/role.pipe';
 import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.component';
 
@@ -16,15 +16,17 @@ import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.c
     GenericTwoOptionDialogComponent,
     ViewAppointmentDialogComponent,
     RolePipe,
-    PatientPipe,
+    PatientFullNamePipe,
     VaccineHistoryComponent
   ],
+
   exports: [
     NavigationBarComponent,
     AppointmentComponent,
     RolePipe,
-    PatientPipe
+    PatientFullNamePipe
   ],
+
   imports: [
     CommonModule,
     MaterialAngularModule
