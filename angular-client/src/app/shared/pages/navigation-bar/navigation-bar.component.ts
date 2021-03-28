@@ -8,7 +8,7 @@ import {Role} from '../../../models/enums/role.enum';
 })
 export class NavigationBarComponent implements OnInit {
   @Input() public roleInput: Role;
-
+  public role = Role;
   constructor() {
 
   }
