@@ -1,9 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SubSink} from 'subsink';
-import {AppointmentRequest} from "../../../models/appointment-request.model";
-import {ClinicService} from "../../../services/clinic/clinic.service";
-import {Clinic} from "../../../models/clinic.model";
+import {AppointmentRequest} from '../../../models/appointment-request.model';
+import {ClinicService} from '../../../services/clinic/clinic.service';
+import {Clinic} from '../../../models/clinic.model';
+import {AppointmentType} from '../../../models/enums/appointment.enum';
+import {Patient} from "../../../models/patient.model";
+import {PatientService} from "../../../services/patient/patient.service";
 
 @Component({
   selector: 'app-request-appointment',
@@ -15,8 +18,11 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
   public currentDate: Date;
   private subSink: SubSink;
   public clinics: Clinic[];
+  private patient: Patient;
 
-  constructor(private formBuilder: FormBuilder, private clinicService: ClinicService) {
+  constructor(private formBuilder: FormBuilder,
+              private clinicService: ClinicService,
+              private patientService: PatientService) {
     this.subSink = new SubSink();
     this.currentDate = new Date();
     this.clinics = [];
@@ -25,9 +31,12 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.createRequestApptForm();
 
-    this.clinicService.getClinics().subscribe(res => {
+    this.subSink.add(this.clinicService.getClinics().subscribe(res => {
       this.clinics = res;
-    })
+    }));
+
+    // replace this later with NgRx Store or wherever the logged in patient is stored
+    this.subSink.add(this.patientService.getPatient().subscribe(res => this.patient = res));
   }
 
   public ngOnDestroy(): void {
@@ -37,7 +46,7 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
   // create the request form fields to bind to from the .html
   private createRequestApptForm(): void {
     this.requestApptForm = this.formBuilder.group({
-      clinic: ['', Validators.required],
+      clinicId: ['', Validators.required],
       preferredDate: ['', Validators.required],
       preferredTime: ['', Validators.required],
       vaccineType: ['', Validators.required],
@@ -53,10 +62,17 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const test: { reason, preferredDate, startTime } = this.requestApptForm.getRawValue();
+    const { clinicId, preferredDate, preferredTime, vaccineType, vaccineDose, reason } = this.requestApptForm.getRawValue();
 
-   /* const appointmentRequest: AppointmentRequest = {
-      clinicId: this.requestApptForm.getRawValue();
-    }*/
+    const appointmentRequest: AppointmentRequest = {
+      patientId: this.patient._id,
+      clinicId,
+      preferredDate,
+      preferredTime,
+      type: AppointmentType.REQUESTED,
+      reason,
+      vaccineType,
+      vaccineDose
+    }
   }
 }

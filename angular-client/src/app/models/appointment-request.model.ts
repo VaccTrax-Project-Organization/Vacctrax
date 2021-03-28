@@ -4,10 +4,12 @@ export interface AppointmentRequest{
   reason: string;
   preferredDate: Date;
   preferredTime: Date;
-  startTime: Date;
-  endTime: Date;
+  startTime?: Date;
+  endTime?: Date;
+  vaccineType: string;
+  vaccineDose: string;
   type: AppointmentType;
   clinicId: string;
   patientId: string;
-  healthPractitionerId: string;
+  healthPractitionerId?: string;
 }

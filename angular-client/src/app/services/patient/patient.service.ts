@@ -22,7 +22,6 @@ export class PatientService extends Service{
     firstName: 'June',
     lastName: 'Elder',
     healthCardNo: '123456-7890',
-    patientId: '',
     phone: '',
   }
 
