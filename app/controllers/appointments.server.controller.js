@@ -26,7 +26,9 @@ exports.requestAppointment = (req, res) => {
 exports.getAllAppointmentsForClinic = (req, res, next) => {
     const clinic = req.clinic;
 
-    Appointment.find({clinic: mongoose.Types.ObjectId(clinic)}, (err, appointments) => {
+    console.log(clinic);
+
+    Appointment.find({clinic: clinic}, (err, appointments) => {
         if (err) {
             res.status(500).send(err).end();
         } else {
@@ -34,20 +36,20 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
             // getting appointment list
             res.status(200).send(appointments);
         }
-    });
+    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
 
 //pass in a patient to the req. This is so a medical admin or a patient can get all their appointments.
 exports.getPatientAppointments = (req, res, next) => {
     const patient = res.locals.patient;
     console.log("patient", res.locals);
-    Appointment.find({patient}, (err) => {
+    Appointment.find({patient: patient}, (err) => {
         if (err) {
             return res.status(500).send(err).end();
         }
         // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
         //FOR SOME WEIRD REASON THE HEALTHPRACTITIONER DOESNT POPULATE IDK WHY!>@#>!@#>!>@#>!@>#!>>!@# (IT RETURNS NULL)
-    }).populate(["clinic", {path: "patient", populate: "account"}, "healthPractitioner"]).then(appointments => {
+    }).populate(["clinic", {path: "patient", populate: {path: "account", model: "Account"}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, "vaccine"]).then(appointments => {
         console.log("appointments", appointments);
         return res.status(200).send(appointments);
     });
@@ -119,6 +121,29 @@ exports.getAppointmentById = (req, res, next, id) => {
         }
     });
 };
+
+exports.testCreate = (req, res, next) => {
+
+    console.log(req.body);
+
+    let appointment = new Appointment(req.body);
+    appointment.vaccine = req.body.vaccineId;
+    appointment.patient = req.body.patientId;
+    appointment.clinic = req.body.clinicId;
+    appointment.healthPractitioner = req.body.healthPractitionerId;
+
+    appointment.save((err, app) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            if (app) {
+                return res.status(200).send(app);
+            } else {
+                return res.status(500).send({message: "There was an error saving appointment."}).end();
+            }
+        }
+    });
+}
 
 const samplePayloadForRequestAppointment = {
     reason: 'Sample Reason',
