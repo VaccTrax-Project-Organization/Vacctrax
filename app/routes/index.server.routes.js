@@ -1,8 +1,8 @@
 // Load the 'index' controller
-const index = require("../controllers/index.server.controller");
+const indexController = require("../controllers/index.server.controller");
 
 // Define the routes module' method
-module.exports = function (app) {
+module.exports = (app) => {
   // Mount the 'index' controller's 'render Homepage' method
-  app.get("/", index.renderHomePage);
+  app.get("/", indexController.renderHomePage);
 };

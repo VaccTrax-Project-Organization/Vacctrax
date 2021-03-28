@@ -140,6 +140,46 @@
         }
       }
     },
+    "/appointments/{appointmentId}": {
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Update an appointment by appointment id. (Can enter ANY fields for update, so all fields, or even one field)",
+        "operationId": "updateAppointment",
+        "requestBody": {
+          "description": "Update Appointment Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Appointment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/addVaccine": {
       "post": {
         "tags": [
@@ -205,6 +245,36 @@
             "description": "Invalid Json",
             "content": {
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/clinics": {
+      "get": {
+        "tags": [
+          "Clinic"
+        ],
+        "summary": "Get all the clinics in the system.",
+        "operationId": "getAllClinics",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Clinic"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
           },
           "500": {
             "description": "Internal Server Error"
