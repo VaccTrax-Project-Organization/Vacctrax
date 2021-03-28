@@ -3,5 +3,5 @@ import {Account} from './account.class';
 
 export class MedicalAdmin extends Account {
   appointments: Appointment[] | string[];
-  account: Account | string;
+  account: Account;
 }

@@ -76,12 +76,12 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
 
     const { clinicId, preferredDate, preferredTime, vaccineId, vaccineDose, reason } = this.requestApptForm.getRawValue();
 
-    const test = moment(preferredTime).utc().toDate();
+    const test = moment(preferredTime, ['h:mm A']).format();
     const appointmentRequest: AppointmentRequest = {
       patientId: '6060df17c0edd45cd49d2f57',
       clinicId,
       preferredDate,
-      preferredTime: moment(preferredTime).utc().toDate(),
+      preferredTime: moment(preferredTime).format(),
       startTime: null,
       endTime: null,
       type: null,
