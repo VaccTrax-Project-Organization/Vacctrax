@@ -10,6 +10,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../../shared/shared.module';
 import {FailedEligibilityCheckComponent} from './failed-eligibility-check/failed-eligibility-check.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {EligibilityCheckComponent} from './eligibility-check/eligibility-check.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
     RequestAppointmentComponent,
     DashboardComponent,
     FailedEligibilityCheckComponent,
+    EligibilityCheckComponent
   ],
 
   imports: [
