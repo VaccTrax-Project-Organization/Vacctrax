@@ -87,6 +87,8 @@ module.exports = function () {
   require("../app/routes/clinics.server.routes.js")(app);
   require("../app/routes/vaccine.server.route.js")(app);
   require("../app/routes/patients.server.routes.js")(app);
+  require("../app/routes/healthPractitioners.server.routes.js")(app);
+  require("../app/routes/patients.server.routes.js")(app);
   // Configure static file serving
   app.use(express.static("./public"));
 
