@@ -4,7 +4,7 @@ import {Account} from './account.class';
 export class Patient {
   constructor(public _id: string,
               public appointments: Appointment[] | string[],
-              public account:  Account | string,
+              public account:  Account,
               public healthCardNo: string) {
     this.appointments = [];
   }

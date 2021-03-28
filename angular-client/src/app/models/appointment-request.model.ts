@@ -2,10 +2,10 @@ import {AppointmentType} from './enums/appointment.enum';
 
 export interface AppointmentRequest{
   reason: string;
-  preferredDate: Date;
-  preferredTime: Date;
-  startTime?: Date;
-  endTime?: Date;
+  preferredDate: string;
+  preferredTime: string;
+  startTime?: string;
+  endTime?: string;
   vaccineId: string;
   vaccineDose: string;
   type: AppointmentType;

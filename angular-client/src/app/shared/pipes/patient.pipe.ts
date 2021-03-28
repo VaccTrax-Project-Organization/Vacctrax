@@ -6,7 +6,7 @@ import {Account} from '../../models/account.class';
   name: 'patientfullname'
 })
 
-export class PatientPipe implements PipeTransform {
+export class PatientFullNamePipe implements PipeTransform {
   transform(patient: Patient): string {
     if (typeof(patient.account) !== 'string'){
       return `${patient.account.firstName} ${patient.account.lastName}`;
