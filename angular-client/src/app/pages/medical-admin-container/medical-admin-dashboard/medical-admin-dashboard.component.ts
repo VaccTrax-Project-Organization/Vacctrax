@@ -4,6 +4,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import {PatientService} from '../../../services/patient/patient.service';
 import {SubSink} from 'subsink';
 import {Appointment} from '../../../models/appointment.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details/modify-appointment-details.component';
 
 @Component({
   selector: 'app-medical-admin-dashboard',
@@ -15,7 +17,7 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
-  constructor(private patientService: PatientService) {
+  constructor(private patientService: PatientService, private dialog: MatDialog) {
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 
@@ -30,8 +32,18 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
   }
 
+
   ngOnDestroy(): void {
     this.subSink.unsubscribe();
+  }
+   
+  public openModifyAppointmentDialog(): void {
+    const dialogRef = this.dialog.open(ModifyAppointmentDetailsComponent, {
+      panelClass: 'dialog-panel-class',
+      disableClose: false,
+      autoFocus: false,
+      height: '620px'
+    });
   }
 
 }

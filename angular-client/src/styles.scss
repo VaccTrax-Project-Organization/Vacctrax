@@ -45,3 +45,11 @@ a {
     color: #F6EA8C !important;
   }
 }
+
+.timepicker-overlay {
+  z-index: 1100 !important;
+}
+
+.timepicker-backdrop-overlay {
+  z-index: 1100 !important;
+}
