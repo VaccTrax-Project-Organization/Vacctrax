@@ -3,11 +3,11 @@
     <div class="row">
       <div class="col-12">
         <div>
-          <h1>Patient Dashboard</h1>
+          <h1>Medical Admin Dashboard</h1>
         </div>
       </div>
 
-      <div class="col-lg">
+      <div class="col-lg-6 mb-3">
         <mat-card>
           <mat-card-content>
             <h3>{{"List of Appointments"}}</h3>
@@ -16,6 +16,17 @@
               [roleInput]="role"
               [tableDataSource]="dataSource">
             </app-appointment>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-6">
+        <mat-card>
+          <mat-card-content>
+            <h3>Inventory Statistics</h3>
+
+            <!-- graph goes here -->
+
           </mat-card-content>
         </mat-card>
       </div>

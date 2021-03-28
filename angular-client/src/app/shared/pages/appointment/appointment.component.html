@@ -1,6 +1,4 @@
 <div class="table-container">
-  <h3>{{title}}</h3>
-
   <mat-table matSort [dataSource]="dataSource" class="w-100 mat-elevation-z1">
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
@@ -46,7 +44,7 @@
           <mat-icon>remove_red_eye</mat-icon>
         </button>
 
-        <button *ngIf="showActionDelete" mat-icon-button color="warn">
+        <button (click)="openCancelVaccinationDialog()" *ngIf="showActionDelete" mat-icon-button color="warn">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

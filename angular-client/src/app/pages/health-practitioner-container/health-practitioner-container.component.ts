@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Role} from '../../models/enums/role.enum';
 
 @Component({
   selector: 'app-health-practitioner-container',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./health-practitioner-container.component.scss']
 })
 export class HealthPractitionerContainerComponent implements OnInit {
+  public role = Role;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -18,7 +18,6 @@ import { RouterModule } from '@angular/router';
     HomepageComponent,
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
-
   ],
   imports: [
     HttpClientModule,
