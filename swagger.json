@@ -1,0 +1,721 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "VaccTrax Api",
+    "version": "1.0.0",
+    "description": "Rest Api's for VaccTrax Application."
+  },
+  "servers": [
+    {
+      "url": "https://vacctrax-backend.herokuapp.com/api",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/requestAppointment": {
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Request an Appointment",
+        "operationId": "requestAppointment",
+        "requestBody": {
+          "description": "Request Appointment Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestAppointmentDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getAllAppointmentsByClinicId/{clinicId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Appointments for a specific clinic by clinic Id.",
+        "operationId": "getAllAppointmentsByClinicId",
+        "parameters": [
+          {
+            "name": "clinicId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getAllAppointmentsByPatientId/{patientId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Appointments for a specific patient by patient id.",
+        "operationId": "getAllAppointmentsByPatientId",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/appointments/{appointmentId}": {
+      "put": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Update an appointment by appointment id. (Can enter ANY fields for update, so all fields, or even one field)",
+        "operationId": "updateAppointment",
+        "requestBody": {
+          "description": "Update Appointment Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Appointment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/addVaccine": {
+      "post": {
+        "tags": [
+          "Vaccine"
+        ],
+        "summary": "Adds a Vaccine in the system.",
+        "operationId": "adVaccine",
+        "requestBody": {
+          "description": "Add Vaccine Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaccineDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vaccine"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vaccines": {
+      "get": {
+        "tags": [
+          "Vaccine"
+        ],
+        "summary": "Get all the vaccines in the system.",
+        "operationId": "getAlVaccines",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Vaccine"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/clinics": {
+      "get": {
+        "tags": [
+          "Clinic"
+        ],
+        "summary": "Get all the clinics in the system.",
+        "operationId": "getAllClinics",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Clinic"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/vaccines/{vaccineId}": {
+      "get": {
+        "tags": [
+          "Vaccine"
+        ],
+        "summary": "Get the Vaccine By Vaccine Id.",
+        "operationId": "getVaccineById",
+        "parameters": [
+          {
+            "name": "vaccineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vaccine"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vaccine"
+        ],
+        "summary": "Update an Vaccine By Vaccine Id.",
+        "operationId": "updateVaccineById",
+        "requestBody": {
+          "description": "Update Vaccine Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VaccineDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Vaccine"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Vaccine"
+        ],
+        "summary": "Delete the Vaccine By Vaccine Id.",
+        "operationId": "deleteVaccineById",
+        "parameters": [
+          {
+            "name": "vaccineId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Address": {
+        "type": "object",
+        "required": [
+          "streetLine1",
+          "postalCode",
+          "province",
+          "city"
+        ],
+        "properties": {
+          "streetLine1": {
+            "type": "string",
+            "example": "43, Test Street"
+          },
+          "streetLine2": {
+            "type": "string",
+            "example": "45, Test Street"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "J7J7J7"
+          },
+          "city": {
+            "type": "string",
+            "example": "Scarborough"
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "password",
+          "phone",
+          "address",
+          "type"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "example": "John"
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@gmail.com"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "PATIENT",
+              "MEDICALADMIN",
+              "HEALTHPRACTITIONER",
+              "GOVERNMENT"
+            ],
+            "description": "Account Type"
+          }
+        }
+      },
+      "Clinic": {
+        "type": "object",
+        "required": [
+          "name",
+          "address"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Centennial Clinic"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        }
+      },
+      "Vaccine": {
+        "type": "object",
+        "required": [
+          "name",
+          "isRationed",
+          "manufacturer",
+          "shelfLife",
+          "approvedProvinces",
+          "vaccineId"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string",
+            "example": "Pfizer"
+          },
+          "isRationed": {
+            "type": "boolean",
+            "default": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "example": "Pfizer"
+          },
+          "shelfLife": {
+            "type": "number",
+            "example": 5
+          },
+          "approvedProvinces": {
+            "type": "string",
+            "example": "ON"
+          },
+          "vaccineId": {
+            "type": "number"
+          }
+        }
+      },
+      "VaccineDTO": {
+        "type": "object",
+        "required": [
+          "name",
+          "isRationed",
+          "manufacturer",
+          "shelfLife",
+          "approvedProvinces",
+          "vaccineId"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Pfizer"
+          },
+          "isRationed": {
+            "type": "boolean",
+            "default": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "example": "Pfizer"
+          },
+          "shelfLife": {
+            "type": "number",
+            "example": 5
+          },
+          "approvedProvinces": {
+            "type": "string",
+            "example": "ON"
+          },
+          "vaccineId": {
+            "type": "number"
+          }
+        }
+      },
+      "Patient": {
+        "type": "object",
+        "required": [
+          "healthCardNo",
+          "account"
+        ],
+        "properties": {
+          "healthCardNo": {
+            "type": "string"
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          }
+        }
+      },
+      "HealthPractitioner": {
+        "type": "object",
+        "required": [
+          "account",
+          "clinic"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "clinic": {
+            "$ref": "#/components/schemas/Clinic"
+          }
+        }
+      },
+      "MedicalAdmin": {
+        "type": "object",
+        "required": [
+          "account",
+          "clinic"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "account": {
+            "$ref": "#/components/schemas/Account"
+          },
+          "clinic": {
+            "$ref": "#/components/schemas/Clinic"
+          }
+        }
+      },
+      "Appointment": {
+        "type": "object",
+        "required": [
+          "reason",
+          "preferredDate",
+          "preferredTime",
+          "type",
+          "clinic",
+          "patient"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "preferredDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "preferredTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONFIRMED",
+              "REQUESTED",
+              "CANCELLED",
+              "COMPLETED"
+            ],
+            "default": "REQUESTED"
+          },
+          "clinic": {
+            "$ref": "#/components/schemas/Clinic"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/Patient"
+          },
+          "healthPractitioner": {
+            "$ref": "#/components/schemas/HealthPractitioner"
+          }
+        }
+      },
+      "RequestAppointmentDTO": {
+        "type": "object",
+        "required": [
+          "reason",
+          "preferredDate",
+          "preferredTime",
+          "type",
+          "clinic",
+          "patient"
+        ],
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "preferredDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "preferredTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONFIRMED",
+              "REQUESTED",
+              "CANCELLED",
+              "COMPLETED"
+            ],
+            "default": "REQUESTED"
+          },
+          "clinicId": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string"
+          },
+          "healthPractitionerId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

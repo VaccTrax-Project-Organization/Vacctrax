@@ -1,58 +1,20 @@
-// Load the 'appointments' controller
-const appointments = require("../controllers/appointments.server.controller");
+// Load the controllers
+const appointmentController = require("../controllers/appointments.server.controller");
 
 // Define the routes module' method
-module.exports = function (app) {
+module.exports = (app) => {
     // Mount the 'appointments' controller's 'requestAppointment' method
+    app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
-    /**
-     * @swagger
-     * components:
-     *  schemas:
-     *      Appointment:
-     *          type:object
-     *          required:
-     *              -reason
-     *              -type
-     *              -preferredDate
-     *              -preferredTime
-     *          properties:
-     *              _id:
-     *                  type: string
-     *                  description: Auto-generated id of the appointment
-     *              reason:
-     *                  type: string
-     *                  description: Reason for the appointment request
-     *              preferredDate:
-     *                  type: string
-     *                  description: Preferred date for the appointment
-     *              preferredTime:
-     *                  type: string
-     *                  description: Preferred Time for the appointment
-     *              startTime:
-     *                  type: string
-     *                  description: Start Time of the appointment
-     *              endTime:
-     *                  type: string
-     *                  description: End Time of the appointment
-     *              type:
-     *                  type: string
-     *                  description: Type of the appointment ('CONFIRMED','REQUESTED', 'CANCELLED', 'COMPLETED')
-     *              clinic:
-     *                  type: object
-     *                  description: Clinic linked to the patient
-     *              patient:
-     *                  type: object
-     *                  description: Patient linked to the appointment
-     *              healthPractitioner:
-     *                  type: object
-     *                  description: Health Practitioner linked to the appointment
-     * */
+    app.get("/api/getAllAppointmentsByClinicId/:clinicId", appointmentController.getAllAppointmentsForClinic);
 
-    app.post("/api/requestAppointment", appointments.requestAppointment);
+    app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
-    app.get("/api/getAllClinicAppointments/:clinicId", appointments.getAllAppointmentsForClinic);
+    app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
 
-    app.post("/api/bookAppointment", appointments.bookAppointment);
+    app.route("/api/appointments/:appointmentId")
+        .put(appointmentController.updateAppointment)
+        .delete(appointmentController.deleteAppointment);
 
+    app.param("appointmentId", appointmentController.getAppointmentById);
 };
