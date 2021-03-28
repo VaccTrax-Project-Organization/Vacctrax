@@ -1,17 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Role } from 'src/app/models/enums/role.enum';
+import {Role} from '../../../models/enums/role.enum';
 import {Patient} from '../../../models/patient';
-import {Address} from '../../../models/address';
-import {PatientService} from '../../../services/patient/patient.service';
 import {SubSink} from 'subsink';
+import {PatientService} from '../../../services/patient/patient.service';
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-vaccine-history',
+  templateUrl: './vaccine-history.component.html',
+  styleUrls: ['./vaccine-history.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class VaccineHistoryComponent implements OnInit, OnDestroy {
+
   role: Role;
   patient: Patient;
   subSink: SubSink;

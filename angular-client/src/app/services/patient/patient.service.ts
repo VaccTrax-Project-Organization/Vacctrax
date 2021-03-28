@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {Address} from '../../models/address';
 import {Patient} from '../../models/patient';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {environment} from "../../../environments/environment";
+import {environment} from '../../../environments/environment';
+import {Appointment} from '../../models/appointment';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +33,13 @@ export class PatientService {
   public getPatient(): Observable<Patient>{
     this.http.get(this.url, {headers: this.httpHeader} )
     return of(this.mockPatient);
+  }
+  public getPatientAppointments(): Observable<any>{
+    return this.http.get(this.url + '/getAllAppointmentsByPatientId/605e313002e8ba38a71c700c', {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+
   }
 }
