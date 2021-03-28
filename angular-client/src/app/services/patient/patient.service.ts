@@ -13,7 +13,7 @@ import {Service} from '../service.class';
 export class PatientService extends Service{
   mockPatient: Patient = {
     _id: '',
-    account: '1232',
+    account: null,
     appointments: [],
     healthCardNo: '123456-7890',
   }
