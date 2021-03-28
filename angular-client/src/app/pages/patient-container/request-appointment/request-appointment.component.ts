@@ -1,6 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SubSink} from 'subsink';
+import {AppointmentRequest} from "../../../models/appointment-request.model";
+import {ClinicService} from "../../../services/clinic/clinic.service";
+import {Clinic} from "../../../models/clinic.model";
 
 @Component({
   selector: 'app-request-appointment',
@@ -8,18 +11,23 @@ import {SubSink} from 'subsink';
   styleUrls: ['./request-appointment.component.scss']
 })
 export class RequestAppointmentComponent implements OnInit, OnDestroy {
-
   public requestApptForm: FormGroup;
   public currentDate: Date;
   private subSink: SubSink;
+  public clinics: Clinic[];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private clinicService: ClinicService) {
     this.subSink = new SubSink();
     this.currentDate = new Date();
+    this.clinics = [];
   }
 
   public ngOnInit(): void {
     this.createRequestApptForm();
+
+    this.clinicService.getClinics().subscribe(res => {
+      this.clinics = res;
+    })
   }
 
   public ngOnDestroy(): void {
@@ -44,5 +52,11 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       console.log('form invalid!');
       return;
     }
+
+    const test: { reason, preferredDate, startTime } = this.requestApptForm.getRawValue();
+
+   /* const appointmentRequest: AppointmentRequest = {
+      clinicId: this.requestApptForm.getRawValue();
+    }*/
   }
 }

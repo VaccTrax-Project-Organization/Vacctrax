@@ -6,8 +6,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Clinic</mat-label>
             <mat-select formControlName="clinic">
-              <mat-option value="Scarborough Health Clinic">Scarborough Health Clinic</mat-option>
-              <mat-option value="Centennial Clinic">Centennial Clinic</mat-option>
+              <mat-option *ngFor="let clinic of clinics" [value]="clinic._id">{{clinic.name}}</mat-option>
             </mat-select>
             <mat-error>Clinic is <strong>Required</strong></mat-error>
           </mat-form-field>
