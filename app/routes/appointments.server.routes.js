@@ -1,5 +1,6 @@
 // Load the 'appointments' controller
 const appointmentController = require("../controllers/appointments.server.controller");
+const medicalAdminController = require('../controllers/medicalAdmin.server.controller');
 
 // Define the routes module' method
 module.exports = (app) => {
@@ -9,6 +10,11 @@ module.exports = (app) => {
     app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
     app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
+
+    app.route('/api/declineAppointment/:appointmentId')
+        .put(medicalAdminController.declineAppointment);
+
+    app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
     app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
