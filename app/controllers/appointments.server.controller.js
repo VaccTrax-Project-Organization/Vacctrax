@@ -4,7 +4,6 @@ const Account = mongoose.model("Account");
 
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
-    Appointment
     let appointment = new Appointment(req.body);
 
     appointment.save((err, app) => {
@@ -73,7 +72,6 @@ exports.getPatientAppointmentDetail = (req, res, next) => {
 
 exports.bookAppointment = (req, res) => {
     console.log(req.body);
-
     let appointment = new Appointment(req.body);
 
     appointment.save((err, app) => {
