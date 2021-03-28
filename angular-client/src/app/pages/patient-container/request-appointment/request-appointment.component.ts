@@ -8,6 +8,9 @@ import {AppointmentType} from '../../../models/enums/appointment.enum';
 import {Patient} from '../../../models/patient.model';
 import {PatientService} from '../../../services/patient/patient.service';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
+import {VaccinesService} from '../../../services/vaccines/vaccines.service';
+import {Vaccine} from '../../../models/vaccine.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-request-appointment',
@@ -20,12 +23,14 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
   public currentDate: Date;
   private subSink: SubSink;
   public clinics: Clinic[];
+  public vaccines: Vaccine[];
   private patient: Patient;
 
   constructor(private formBuilder: FormBuilder,
               private clinicService: ClinicService,
               private patientService: PatientService,
-              private appointmentService: AppointmentService) {
+              private appointmentService: AppointmentService,
+              private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
     this.currentDate = new Date();
     this.clinics = [];
@@ -36,6 +41,10 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
 
     this.subSink.add(this.clinicService.getClinics().subscribe(res => {
       this.clinics = res;
+    }));
+
+    this.subSink.add(this.vaccineService.getVaccines().subscribe(res => {
+      this.vaccines = res;
     }));
 
     // replace this later with NgRx Store or wherever the logged in patient is stored
@@ -65,17 +74,21 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { clinicId, preferredDate, preferredTime, vaccine, vaccineDose, reason } = this.requestApptForm.getRawValue();
+    const { clinicId, preferredDate, preferredTime, vaccineId, vaccineDose, reason } = this.requestApptForm.getRawValue();
 
+    const test = moment(preferredTime).utc().toDate();
     const appointmentRequest: AppointmentRequest = {
-      patientId: this.patient._id,
+      patientId: '6060df17c0edd45cd49d2f57',
       clinicId,
       preferredDate,
-      preferredTime,
-      type: AppointmentType.REQUESTED,
+      preferredTime: moment(preferredTime).utc().toDate(),
+      startTime: null,
+      endTime: null,
+      type: null,
       reason,
-      vaccineId: vaccine,
-      vaccineDose
+      vaccineId,
+      vaccineDose,
+      healthPractitionerId: '',
     }
 
     this.appointmentService.requestAppointment(appointmentRequest).subscribe(res => {

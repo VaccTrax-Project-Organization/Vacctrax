@@ -5,7 +5,7 @@ import {MedicalAdmin} from './medicalAdmin.model';
 
 export class Clinic {
   constructor(public _id: string,
-              public address: string | Address,
+              public address:  Address | string,
               public name: string) {
   }
 }
