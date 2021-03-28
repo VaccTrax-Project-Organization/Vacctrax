@@ -40,6 +40,14 @@ const AppointmentSchema = new Schema({
         type: Number,
         required: "Vaccine dose is required"
     },
+    vaccine: {
+        type: Schema.Types.ObjectId,
+        ref: 'Vaccine'
+    },
+    vaccineDose: {
+        type: String,
+        required: "Vaccine dose is required"
+    },
     clinic: {
         type: Schema.Types.ObjectId,
         ref: 'Clinic'

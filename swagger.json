@@ -672,8 +672,9 @@
           "preferredDate",
           "preferredTime",
           "type",
-          "clinic",
-          "patient"
+          "clinicId",
+          "patientId",
+          "healthPractitionerId"
         ],
         "properties": {
           "reason": {
@@ -694,6 +695,13 @@
           "endTime": {
             "type": "string",
             "format": "date-time"
+          },
+          "vaccineDose": {
+            "type": "number",
+            "example": 1
+          },
+          "vaccineId": {
+            "type": "string"
           },
           "type": {
             "type": "string",
