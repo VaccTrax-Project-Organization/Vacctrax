@@ -1,0 +1,69 @@
+<div class="content-container">
+  <div class="content">
+    <form [formGroup]="this.eligibilityForm" (ngSubmit)="this.submitEligibilityForm()">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>What is you age?</mat-label>
+            <mat-select formControlName="age">
+              <mat-option value="USF">Under Seventy Five</mat-option>
+              <mat-option value="ASF">Above Seventy Five</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Eligible group?</mat-label>
+            <mat-select formControlName="eligibleGroup">
+              <mat-option value="FN">First Nations</mat-option>
+              <mat-option value="CHHR">Chronic Home Healthcare Recipients</mat-option>
+              <mat-option value="LTCHRAS">Long Term Care Home Residents And Staff</mat-option>
+              <mat-option value="ALRAS">Assisted Living Residents And Staff</mat-option>
+              <mat-option value="RHRAS">Retirement Home Resident And Staff</mat-option>
+              <mat-option value="ECFCHR">Essential Caregivers For Care Home Residents</mat-option>
+              <mat-option value="PSW">Personal Support Workers</mat-option>
+              <mat-option value="FHCW">Frontline Health Care Workers</mat-option>
+              <mat-option value="O">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Do you have any of these Chronic conditions?</mat-label>
+            <mat-select formControlName="chronicConditions">
+              <mat-option value="OTR">Organ Transplant Recipients</mat-option>
+              <mat-option value="HSCTR">Hematopoietic Stem Cell Transplant Recipients</mat-option>
+              <mat-option value="PWNDIWRFMBC">People With Neurological Diseases In Which Respiratory Function May Be Compromised</mat-option>
+              <mat-option value="HMDWTLY">Haematological Malignancy Diagnosed Within The Last Year</mat-option>
+              <mat-option value="KDWEGFR">Kidney Disease With Estimated Glomerular Filtration Rate (egfr) Under 30</mat-option>
+              <mat-option value="O">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Do You Belong To Below Mentioned Communities At Greater Risk?</mat-label>
+            <mat-select formControlName="greaterRisk">
+              <mat-option value="BAORP">Black And Other Racialized Populations</mat-option>
+              <mat-option value="HSWHAOHROD">Hot Spots With Historic And Ongoing High Rates Of Death, Hospitalization And Transmission</mat-option>
+              <mat-option value="O">Other</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <button mat-raised-button type="submit">Check Eligibility</button>
+      </div>
+    </form>
+  </div>
+</div>
