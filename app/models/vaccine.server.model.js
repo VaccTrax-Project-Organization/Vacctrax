@@ -8,7 +8,6 @@ const VaccineSchema = new Schema({
     shelfLife: Number,
     approvedProvinces: {
         type: String,
-   
     },
     vaccineId:{
         type: Number,
