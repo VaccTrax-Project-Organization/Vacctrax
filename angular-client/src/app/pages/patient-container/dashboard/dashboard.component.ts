@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Role } from 'src/app/models/enums/role.enum';
-import {Patient} from '../../../models/patient';
-import {Address} from '../../../models/address';
+import {Patient} from '../../../models/patient.model';
+import {Address} from '../../../models/address.model';
 import {PatientService} from '../../../services/patient/patient.service';
 import {SubSink} from 'subsink';
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 import {MatTableDataSource} from '@angular/material/table';
-import {Appointment} from '../../../models/appointment';
+import {Appointment} from '../../../models/appointment.model';
 
 @Component({
   selector: 'app-dashboard',

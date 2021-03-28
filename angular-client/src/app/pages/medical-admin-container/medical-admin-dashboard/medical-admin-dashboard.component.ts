@@ -3,7 +3,7 @@ import {Role} from '../../../models/enums/role.enum';
 import {MatTableDataSource} from '@angular/material/table';
 import {PatientService} from '../../../services/patient/patient.service';
 import {SubSink} from 'subsink';
-import {Appointment} from '../../../models/appointment';
+import {Appointment} from '../../../models/appointment.model';
 
 @Component({
   selector: 'app-medical-admin-dashboard',

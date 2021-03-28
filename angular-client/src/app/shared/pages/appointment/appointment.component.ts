@@ -7,7 +7,7 @@ import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-ap
 import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
-import {Appointment} from '../../../models/appointment';
+import {Appointment} from '../../../models/appointment.model';
 
 @Component({
   selector: 'app-appointment',

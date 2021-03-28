@@ -1,7 +1,7 @@
-import {Appointment} from './appointment';
-import {Address} from './address';
-import {HealthPractitioner} from './healthPractitioner';
-import {MedicalAdmin} from './medicalAdmin';
+import {Appointment} from './appointment.model';
+import {Address} from './address.model';
+import {HealthPractitioner} from './healthPractitioner.model';
+import {MedicalAdmin} from './medicalAdmin.model';
 
 export class Clinic {
   constructor(public address: Address,

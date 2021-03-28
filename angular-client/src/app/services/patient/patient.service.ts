@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Address} from '../../models/address';
-import {Patient} from '../../models/patient';
+import {Address} from '../../models/address.model';
+import {Patient} from '../../models/patient.model';
 import {Observable, of, throwError} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {Appointment} from '../../models/appointment';
+import {Appointment} from '../../models/appointment.model';
 import {catchError} from 'rxjs/operators';
 
 @Injectable({
@@ -16,13 +16,14 @@ export class PatientService {
   httpHeader = new HttpHeaders({'Content-Type': 'application/JSON'});
 
   mockPatient: Patient = {
+    _id: '',
     accountId: '1232',
     address: new Address(),
     appointments: [],
     email: 'email@gmail.com',
     firstName: 'June',
     lastName: 'Elder',
-    healthCard: '123456-7890',
+    healthCardNo: '123456-7890',
     patientId: '',
     phone: '',
   }
