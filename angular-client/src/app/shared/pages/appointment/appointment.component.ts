@@ -19,8 +19,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
   @Input()
-  set tableDataSource(data: Appointment[]) {
-    this.dataSource = new MatTableDataSource<Appointment>(data);
+  set tableDataSource(data: MatTableDataSource<Appointment>) {
+    this.dataSource = data;
   }
   public showActionDelete: boolean;
   public displayedColumns: string[];

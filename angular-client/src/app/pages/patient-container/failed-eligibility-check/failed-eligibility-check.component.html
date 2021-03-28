@@ -15,8 +15,21 @@
     <div class="row">
       <div class="col">
         <ul>
-          <li>You are under 18 years of age</li>
-          <li>You self-identified as pregnant</li>
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.age?.didPass">
+            You selected your age to be {{this.ineligible[this.navigationBehaviorOptions?.state?.age?.value]}}
+          </li>
+
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.eligibleGroup?.didPass">
+            You selected your eligibility group to be {{this.ineligible[this.navigationBehaviorOptions?.state?.eligibleGroup?.value]}}
+          </li>
+
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.doesChronicConditionsPass?.didPass">
+            You selected your chronic conditions to be {{this.ineligible[this.navigationBehaviorOptions?.state?.doesChronicConditionsPass?.value]}}
+          </li>
+
+          <li *ngIf="!this.navigationBehaviorOptions?.state?.doesGreaterRiskPass?.didPass">
+            You selected your community of greater risk to be {{this.ineligible[this.navigationBehaviorOptions?.state?.doesGreaterRiskPass?.value]}}
+          </li>
         </ul>
       </div>
     </div>
