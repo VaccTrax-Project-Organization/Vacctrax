@@ -224,7 +224,7 @@
         }
       }
     },
-    
+
     "/addVaccine": {
       "post": {
         "tags": [
