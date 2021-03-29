@@ -8,6 +8,7 @@ import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 import {Appointment} from '../../../models/appointment.model';
+import {ViewAppointmentDialogInterface} from '../../../models/interfaces/view-appointment-dialog.interface';
 import {UpdateAppointmentVaccineDetailsDialogComponent} from '../update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 
 @Component({
@@ -68,7 +69,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
       panelClass: 'dialog-panel-class',
       disableClose: true,
       autoFocus: false,
-      data: element
+      data: element,
     });
   }
 

@@ -45,7 +45,7 @@
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>Vaccine Type</mat-label>
-            <mat-select formControlName="vaccineId">
+            <mat-select formControlName="vaccine">
               <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine._id">{{vaccine.name}}</mat-option>
             </mat-select>
             <mat-error>Vaccine Type is <strong>Required</strong></mat-error>

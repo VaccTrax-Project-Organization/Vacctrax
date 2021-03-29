@@ -1,75 +1,28 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Appointment} from '../../../models/appointment.model';
 
 @Component({
   selector: 'app-view-appointment',
   templateUrl: './view-appointment-dialog.component.html',
   styleUrls: ['./view-appointment-dialog.component.scss']
 })
+
 export class ViewAppointmentDialogComponent implements OnInit {
   public displayedData: any[];
   public buttons: any[];
+  public readonly bookedAppointmentLabels = ['patient', 'vaccine', 'when', 'contact', 'vaccineDose', 'medicalCondition', 'healthCard', 'healthPractitioner'];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: ViewAppointmentDialogComponent) {
-    this.displayedData = [
-      {
-        title: 'Patient',
-        data: 'June Elder'
-      },
-      {
-        title: 'Age',
-        data: '25'
-      },
-      {
-        title: 'Vaccine',
-        data: 'Pfizer'
-      },
-      {
-        title: 'When',
-        data: '2:05 PM, Monday, March 8, 2021'
-      },
-      {
-        title: 'Contact',
-        data: '(416)555-2525'
-      },
-      {
-        title: 'Vaccine Dose',
-        data: '#1'
-      },
-      {
-        title: 'Medical Condition',
-        data: '175 cm/300 lb'
-      },
-    ];
-
-    this.buttons = [
-      {
-        label: 'Check-in Appointment',
-        action: ''
-      },
-      {
-        label: 'View Vaccine History',
-        action: ''
-      },
-      {
-        label: 'Add Comments',
-        action: ''
-      },
-    ];
-
-
-    /*if (data){
-      Object.keys(data).forEach(obj => {
-        this.displayedData.push({
-          title: obj,
-          data: data[obj]
-        })
-      });
-    }*/
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Appointment) {
+    this.displayedData = [];
   }
 
   ngOnInit(): void {
 
   }
 
+  camelToSentence(text: string){
+    const result = text.replace( /([A-Z])/g, ' $1' );
+    return result.charAt(0).toUpperCase() + result.slice(1);
+  }
 }
