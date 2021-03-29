@@ -25,6 +25,7 @@
     "angular-cli-ghpages": "^0.6.2",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.6",
     "subsink": "^1.0.2",

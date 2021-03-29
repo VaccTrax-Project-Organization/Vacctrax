@@ -4,7 +4,6 @@ const Account = mongoose.model("Account");
 
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
-    Appointment
     let appointment = new Appointment(req.body);
 
     appointment.save((err, app) => {
@@ -29,6 +28,21 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
     console.log(clinic);
 
     Appointment.find({clinic: clinic}, (err, appointments) => {
+        if (err) {
+            res.status(500).send(err).end();
+        } else {
+            console.log(appointments);
+            // getting appointment list
+            res.status(200).send(appointments);
+        }
+    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
+}
+
+exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
+    const clinic = req.clinic;
+    console.log(clinic);
+
+    Appointment.find({clinic: clinic, type: "CONFIRMED"}, (err, appointments) => {
         if (err) {
             res.status(500).send(err).end();
         } else {
@@ -73,7 +87,6 @@ exports.getPatientAppointmentDetail = (req, res, next) => {
 
 exports.bookAppointment = (req, res) => {
     console.log(req.body);
-
     let appointment = new Appointment(req.body);
 
     appointment.save((err, app) => {

@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
     this.role = Role.PATIENT;
+    this.dataSource = new MatTableDataSource<Appointment>();
+
     this.subSink.add(patientService.getPatient().subscribe(res => {
       this.patient = res;
     }));
@@ -33,10 +35,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subSink.add(patientService.getPatientAppointments().subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource<Appointment>(res);
+      console.log(this.dataSource);
     },error => {
       console.log(error);
     }));
-
   }
 
   ngOnInit(): void {
