@@ -1,3 +1,21 @@
-<h1>Dashboard</h1>
-<h3>{{"List of Appointments"}}</h3>
-<app-appointment [roleInput]="this.role"></app-appointment>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <h1>Health Practitioner Dashboard</h1>
+      </div>
+    </div>
+
+    <div class="col-lg">
+      <mat-card>
+        <mat-card-content>
+          <h3>{{"List of Confirmed Appointments"}}</h3>
+          <app-appointment
+            [roleInput]="this.role"
+            [tableDataSource]="dataSource">
+          </app-appointment>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

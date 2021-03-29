@@ -37,7 +37,7 @@ const AppointmentSchema = new Schema({
         required: "Vaccine is required"
     },
     vaccineDose: {
-        type: Number,
+        type: String,
         required: "Vaccine dose is required"
     },
     clinic: {

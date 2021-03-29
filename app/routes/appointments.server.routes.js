@@ -10,6 +10,7 @@ module.exports = (app) => {
     app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
     app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
+    app.get("/api/getConfirmedAppointmentsByClinicId/:clinicId", appointmentController.getAllConfirmedAppointmentsForClinic);
 
     app.route('/api/declineAppointment/:appointmentId')
         .put(medicalAdminController.declineAppointment);
