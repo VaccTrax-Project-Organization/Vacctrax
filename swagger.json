@@ -140,6 +140,50 @@
         }
       }
     },
+
+    "/getConfirmedAppointmentsByClinicId/{clinicId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the CONFIRMED Appointments for a specific clinic by clinic id.",
+        "operationId": "getConfirmedAppointmentsByClinicId",
+        "parameters": [
+          {
+            "name": "clinicId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+
     "/appointments/{appointmentId}": {
       "put": {
         "tags": [
@@ -180,6 +224,7 @@
         }
       }
     },
+    
     "/addVaccine": {
       "post": {
         "tags": [
