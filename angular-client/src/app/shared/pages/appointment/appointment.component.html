@@ -31,7 +31,7 @@
 
     <ng-container matColumnDef="vaccine">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Vaccine</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.vaccine.name}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.vaccine?.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="comments">

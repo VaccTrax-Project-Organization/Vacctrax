@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
@@ -15,7 +15,7 @@ import {Appointment} from '../../../models/appointment.model';
   styleUrls: ['./appointment.component.scss']
 })
 
-export class AppointmentComponent implements OnInit, AfterViewInit {
+export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
   @Input()
@@ -28,6 +28,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
   private subSink: SubSink;
 
   constructor(public dialog: MatDialog) {
+    this.subSink = new SubSink();
     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
     this.dataSource = new MatTableDataSource<Appointment>();
   }
@@ -38,6 +39,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy(): void {
+    this.subSink.unsubscribe();
   }
 
   openViewAppointmentDialog(element: Appointment) {
