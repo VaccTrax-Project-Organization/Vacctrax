@@ -22,6 +22,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   set tableDataSource(data: MatTableDataSource<Appointment>) {
     this.dataSource = data;
   }
+
+  public role: Role;
   public showActionDelete: boolean;
   public displayedColumns: string[];
   public dataSource: MatTableDataSource<Appointment>;
@@ -34,7 +36,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.HEALTH_PRACTITIONER;
+    this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.MEDICAL_ADMIN;
   }
 
   ngAfterViewInit() {

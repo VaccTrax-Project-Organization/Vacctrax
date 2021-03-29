@@ -14,11 +14,11 @@ export class HealthPractitionerDashboardComponent implements OnInit {
   public dataSource: MatTableDataSource<Appointment>;
 
   constructor(private appointmentService: AppointmentService) {
+    this.role = Role.HEALTH_PRACTITIONER;
     this.dataSource = new MatTableDataSource<Appointment>();
   }
 
   public ngOnInit(): void {
-    this.role = Role.HEALTH_PRACTITIONER;
     this.appointmentService.getConfirmedAppointmentsByClinicId().subscribe(res => {
       this.dataSource = new MatTableDataSource<Appointment>(res);
     });
