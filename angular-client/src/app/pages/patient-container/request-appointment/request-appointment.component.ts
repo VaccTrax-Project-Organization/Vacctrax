@@ -61,7 +61,7 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       clinicId: ['', Validators.required],
       preferredDate: ['', Validators.required],
       preferredTime: ['', Validators.required],
-      vaccineId: ['', Validators.required],
+      vaccine: ['', Validators.required],
       vaccineDose: ['', Validators.required],
       reason: ['', Validators.required],
     });
@@ -74,19 +74,19 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { clinicId, preferredDate, preferredTime, vaccineId, vaccineDose, reason } = this.requestApptForm.getRawValue();
+    const { clinicId, preferredDate, preferredTime, vaccine, vaccineDose, reason } = this.requestApptForm.getRawValue();
 
     const test = moment(preferredTime, ['h:mm A']).format();
     const appointmentRequest: AppointmentRequest = {
       patientId: '6060df17c0edd45cd49d2f57',
       clinicId,
       preferredDate,
-      preferredTime: moment(preferredTime).format(),
+      preferredTime: moment(preferredTime, ['h:mm A']).format(),
       startTime: null,
       endTime: null,
-      type: null,
+      type: AppointmentType.REQUESTED,
       reason,
-      vaccineId,
+      vaccine,
       vaccineDose,
       healthPractitionerId: '',
     }
