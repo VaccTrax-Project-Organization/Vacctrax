@@ -8,6 +8,7 @@ import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 import {Appointment} from '../../../models/appointment.model';
+import {UpdateAppointmentVaccineDetailsDialogComponent} from '../update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 
 @Component({
   selector: 'app-appointment',
@@ -46,7 +47,21 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
+  openEditAppointmentVaccineDetails(element : Appointment){
+      const dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
+        panelClass: 'dialog-panel-class',
+        width: '650px',
+        height: 'auto',
+        disableClose: true,
+        autoFocus: false,
+        restoreFocus:false,
+        data: element
+      });
 
+      this.subSink.add(dialogRef.afterClosed().subscribe(res => {
+        console.log(res);
+      }));
+  }
   openViewAppointmentDialog(element: Appointment) {
     console.log(element);
     this.dialog.open(ViewAppointmentDialogComponent, {
