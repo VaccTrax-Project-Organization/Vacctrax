@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     },error => {
       console.log(error);
     }));
-
   }
 
   ngOnInit(): void {

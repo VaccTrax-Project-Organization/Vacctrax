@@ -38,6 +38,21 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
     }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
 
+exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
+    const clinic = req.clinic;
+    console.log(clinic);
+
+    Appointment.find({clinic: clinic, type: "CONFIRMED"}, (err, appointments) => {
+        if (err) {
+            res.status(500).send(err).end();
+        } else {
+            console.log(appointments);
+            // getting appointment list
+            res.status(200).send(appointments);
+        }
+    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
+}
+
 //pass in a patient to the req. This is so a medical admin or a patient can get all their appointments.
 exports.getPatientAppointments = (req, res, next) => {
     const patient = res.locals.patient;
