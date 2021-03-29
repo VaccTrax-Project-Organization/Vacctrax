@@ -3,8 +3,8 @@ import {Account} from './account.class';
 
 export class Patient {
   constructor(public _id: string,
-              public appointments: string[] | Appointment[],
-              public account: string | Account,
+              public appointments: Appointment[] | string[],
+              public account: Account,
               public healthCardNo: string) {
     this.appointments = [];
   }

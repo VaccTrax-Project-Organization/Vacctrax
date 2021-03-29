@@ -27,6 +27,22 @@ export class AppointmentService extends Service{
           return throwError(err);
         }));
   }
+
+  public getAppointmentsByClinic(): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(this.url + '/getAllAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public getConfirmedAppointmentsByClinicId(): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
 }
 
 const MOCK_APPOINTMENTS = [

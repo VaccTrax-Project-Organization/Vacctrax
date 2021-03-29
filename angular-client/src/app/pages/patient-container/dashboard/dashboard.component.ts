@@ -35,10 +35,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.subSink.add(patientService.getPatientAppointments().subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource<Appointment>(res);
+      console.log(this.dataSource);
     },error => {
       console.log(error);
     }));
-
   }
 
   ngOnInit(): void {
