@@ -37,7 +37,7 @@ export class AppointmentService extends Service {
   }
 
   public getAppointmentsByClinic(): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(this.url + '/getAllAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
+    return this.http.get<Appointment[]>(this.url + '/getAllAppointmentsByClinicId/6060df3ac0edd45cd49d2f5a', {headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);

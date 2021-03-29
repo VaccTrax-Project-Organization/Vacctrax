@@ -26,7 +26,7 @@
         <!--      <div class="col-2">Vaccine Dose:</div>-->
         <div class="col-10">
           <mat-form-field appearance="outline" style="width: 100%">
-            <input type="number" matInput [formControl]="dose" style="width: 100%;">
+            <input type="text" matInput [formControl]="dose" style="width: 100%;">
           </mat-form-field>
         </div>
       </div>
@@ -37,9 +37,7 @@
         <div class="col-10">
           <mat-form-field appearance="outline">
             <mat-select [formControl]="type">
-              <mat-option value="M">M</mat-option>
-              <mat-option value="P">P</mat-option>
-              <mat-option value="A">A</mat-option>
+              <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine._id">{{vaccine.name}}</mat-option>
             </mat-select>
           </mat-form-field>
         </div>
