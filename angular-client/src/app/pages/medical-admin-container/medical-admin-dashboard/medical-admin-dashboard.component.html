@@ -1,0 +1,42 @@
+<div id="dashboard-container">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <h1>Medical Admin Dashboard</h1>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mb-3">
+        <mat-card>
+          <mat-card-content>
+            <h3>{{"List of Appointments"}}</h3>
+
+            <app-appointment
+              [roleInput]="role"
+              [tableDataSource]="dataSource">
+            </app-appointment>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div class="col-lg-6">
+        <mat-card>
+          <mat-card-content>
+            <h3>Inventory Statistics</h3>
+
+            <!-- graph goes here -->
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+<button mat-raised-button (click)="this.openModifyAppointmentDialog()">
+  Open Modify Appointments
+</button>
+
+<button mat-raised-button (click)="this.openDeclineAppointmentRequestDialog()">
+  Open Decline Appointment
+</button>

@@ -1,0 +1,6 @@
+export enum Role {
+  PATIENT,
+  MEDICAL_ADMIN,
+  HEALTH_PRACTITIONER,
+  GOVERNMENT,
+}

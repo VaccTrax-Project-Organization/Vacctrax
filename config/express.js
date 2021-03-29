@@ -6,6 +6,10 @@ const compress = require("compression");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const swaggerUI = require("swagger-ui-express");
+const cors = require('cors');
+// const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerDocument = require("../swagger.json");
 
 // Define the Express configuration method
 module.exports = function () {
@@ -25,6 +29,19 @@ module.exports = function () {
       extended: true,
     })
   );
+
+  app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", config.frontendDomain);
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+  app.use(cors({
+    origin: config.frontendDomain, // specify the domain origin that is allowed to make requests to this server
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }));
+
   app.use(bodyParser.json());
   app.use(methodOverride());
   //handle the use of PUT or DELETE methods
@@ -41,16 +58,41 @@ module.exports = function () {
     })
   );
 
+  const options = {
+    definition : {
+      openapi: "3.0.0",
+      info: {
+        title: "VaccTrax Api",
+        version: "1.0.0",
+        description: "Rest Api's for VaccTrax Application."
+      },
+      servers: [
+        {
+          url: "http://localhost:3000"
+        }
+      ]
+    },
+    apis: ["../app/routes/*.js"]
+  };
+
+  // const specs = swaggerJsDoc(options);
+
   // Set the application view engine and 'views' folder
   app.set("views", "./app/views");
   app.set("view engine", "ejs");
 
   // Load the routing files
   require("../app/routes/index.server.routes.js")(app);
-
+  require("../app/routes/appointments.server.routes.js")(app);
+  require("../app/routes/clinics.server.routes.js")(app);
+  require("../app/routes/vaccine.server.route.js")(app);
+  require("../app/routes/patients.server.routes.js")(app);
+  require("../app/routes/healthPractitioners.server.routes.js")(app);
+  require("../app/routes/patients.server.routes.js")(app);
   // Configure static file serving
   app.use(express.static("./public"));
 
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
   // Return the Express application instance
   return app;
 };

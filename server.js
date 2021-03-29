@@ -12,10 +12,11 @@ const db = configureMongoose();
 const app = configureExpress();
 
 // Use the Express application instance to listen to the '3000' port
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
 
 // Log the server status to the console
 console.log("Server running at http://localhost:3000/");
+console.log("Swagger at http://localhost:3000/api-docs");
 
 // Use the module.exports property to expose our Express application instance for external usage
 module.exports = app;
