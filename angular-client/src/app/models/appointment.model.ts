@@ -9,6 +9,7 @@ export class Appointment {
               public clinic: Clinic ,
               public healthPractitioner: HealthPractitioner,
               public vaccine:  Vaccine,
+              public vaccineDose: string,
               public reason: string,
               public preferredDate: Date,
               public preferredTime: Date,
