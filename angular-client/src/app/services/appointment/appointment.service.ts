@@ -32,8 +32,13 @@ export class AppointmentService extends Service{
         }));
   }
 
+ 
   public getConfirmedAppointmentsByClinicId(): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
+  }
+  public declineAppointment(): Observable<Appointment[]>{
+    return this.http.put<Appointment[]>(this.url + '/declineAppointment/6060e1549107f28980861695', {headers: this.httpHeader})
+ 
       .pipe(
         catchError(err => {
           return throwError(err);
