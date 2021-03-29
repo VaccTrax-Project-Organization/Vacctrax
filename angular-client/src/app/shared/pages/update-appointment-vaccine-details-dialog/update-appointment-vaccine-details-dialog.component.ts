@@ -8,18 +8,25 @@ import {SubSink} from 'subsink';
   templateUrl: './update-appointment-vaccine-details-dialog.component.html',
   styleUrls: ['./update-appointment-vaccine-details-dialog.component.scss']
 })
-export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit,OnDestroy {
+export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit, OnDestroy {
   private subSink: SubSink;
+  appointmentDetails: any;
   note = new FormControl();
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: UpdateAppointmentVaccineDetailsDialogComponent, public dialog: MatDialog) {
     this.subSink = new SubSink();
+    if (data) {
+      this.appointmentDetails = data;
+    }
   }
 
   ngOnInit(): void {
   }
+
   public ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
+
   save() {
     console.log(this.note.value);
     // Put the api request to decline appointment here
