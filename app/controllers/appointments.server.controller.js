@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Appointment = mongoose.model('Appointment');
 const Account = mongoose.model("Account");
+const Appointment = require('mongoose').model('Appointment');
+const Patient = require('mongoose').model('Patient');
 
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
@@ -49,6 +51,15 @@ exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
             console.log(appointments);
             // getting appointment list
             res.status(200).send(appointments);
+//pass in a patient to the req. This is so a medical admin or a patient can get all their appointments. also sends the patient object used.
+exports.getPatientAppointment = (req,res,next) => {
+    const patient = req.patient;
+    Appointment.find({patient:patient._id},(err,appointments)=>{
+        if(err){
+            return next(err);
+        }else{
+            console.log("Patient " + patient.id + "'s appointments: \n" +appointments );
+            res.status(200).send(appointments,patient);
         }
     }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
