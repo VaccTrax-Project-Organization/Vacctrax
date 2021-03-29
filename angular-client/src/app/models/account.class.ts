@@ -5,8 +5,8 @@ export abstract class Account {
               public firstName = '',
               public lastName = '',
               public email = '',
-              public password?: string,
-              public address = new Address(),
-              public  phone = '') {
+              public address: Address = new Address(),
+              public phone = '',
+              public password?: string,) {
   }
 }

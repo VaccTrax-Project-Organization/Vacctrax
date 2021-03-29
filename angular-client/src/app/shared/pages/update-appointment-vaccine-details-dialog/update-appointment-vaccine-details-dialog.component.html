@@ -1,0 +1,57 @@
+<div class="row no-gutters justify-content-between align-items-center mb-3">
+  <div></div>
+  <h4 class="m-0">Update Appointment Vaccine Details</h4>
+  <button id="close-button" mat-icon-button [mat-dialog-close]="false">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div class="row justify-content-center">
+  Appointment #:
+</div>
+<div class="row justify-content-center">
+  {{appointmentDetails?.id}}
+</div>
+<div class="ml-5">
+  <div class="row">
+    <div class="col-6">
+      <label>Vaccine Dose:</label>
+    </div>
+    <div class="col-6">
+      <label>Vaccine Type:</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="row">
+        <!--      <div class="col-2">Vaccine Dose:</div>-->
+        <div class="col-10">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <input type="text" matInput [formControl]="dose" style="width: 100%;">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="row">
+        <!--      <div class="col-2">Vaccine Type:</div>-->
+        <div class="col-10">
+          <mat-form-field appearance="outline">
+            <mat-select [formControl]="type">
+              <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine._id">{{vaccine.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row ">
+  <div class="col text-center">
+    <button mat-raised-button type="submit" class="mr-5 submitButton"
+            (click)="save()">Save
+    </button>
+    <button mat-raised-button type="button" class="mr-5 ml-2 submitButton"
+            [mat-dialog-close]="false">Cancel
+    </button>
+  </div>
+</div>

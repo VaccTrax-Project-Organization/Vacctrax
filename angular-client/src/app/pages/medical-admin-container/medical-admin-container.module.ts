@@ -5,13 +5,14 @@ import { MedicalAdminDashboardComponent } from './medical-admin-dashboard/medica
 import {SharedModule} from '../../shared/shared.module';
 import {RouterModule} from '@angular/router';
 import {MedicalAdminContainerRoutingModule} from './medical-admin-container-routing.module';
-import {MaterialAngularModule} from "../../material-angular.module";
+import {MaterialAngularModule} from '../../material-angular.module';
 import { ModifyAppointmentDetailsComponent } from './modify-appointment-details/modify-appointment-details.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeclineRequestedAppointmentDialogComponent } from './decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 
 @NgModule({
-  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent],
+  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent],
   imports: [
     MedicalAdminContainerRoutingModule,
     CommonModule,

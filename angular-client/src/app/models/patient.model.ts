@@ -1,11 +1,11 @@
 import {Appointment} from './appointment.model';
 import {Account} from './account.class';
 
-export class Patient extends Account {
+export class Patient {
   constructor(public _id: string,
-              public appointments: Appointment[],
+              public appointments: Appointment[] | string[],
+              public account: Account,
               public healthCardNo: string) {
-    super();
     this.appointments = [];
   }
 }

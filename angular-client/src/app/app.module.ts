@@ -11,6 +11,8 @@ import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/con
 import {HttpClientModule} from '@angular/common/http';
 import {HealthPractitionerContainerModule} from './pages/health-practitioner-container/health-practitioner-container.module';
 import { RouterModule } from '@angular/router';
+import {UpdateAppointmentVaccineDetailsDialogComponent} from './shared/pages/update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { RouterModule } from '@angular/router';
     HomepageComponent,
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
+    UpdateAppointmentVaccineDetailsDialogComponent,
   ],
   imports: [
     HttpClientModule,
@@ -26,7 +29,8 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     MaterialAngularModule,
     SharedModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   providers: [],
   exports: [],
