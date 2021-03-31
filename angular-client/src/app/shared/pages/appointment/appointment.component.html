@@ -49,6 +49,9 @@
         <button (click)="openViewAppointmentDialog(element)" mat-icon-button>
           <mat-icon>remove_red_eye</mat-icon>
         </button>
+        <button (click)="openDeclineAppointmentRequestDialog()" mat-icon-button>
+          <mat-icon>approval</mat-icon>
+        </button>
 
         <button (click)="openCancelVaccinationDialog()" *ngIf="showActionDelete" mat-icon-button color="warn">
           <mat-icon>delete</mat-icon>

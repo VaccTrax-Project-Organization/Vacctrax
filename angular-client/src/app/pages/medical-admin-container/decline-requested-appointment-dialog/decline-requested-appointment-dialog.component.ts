@@ -21,7 +21,18 @@ export class DeclineRequestedAppointmentDialogComponent implements OnInit,OnDest
   private subSink: SubSink;
 
   note = new FormControl();
-  constructor() { }
+
+  constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
+    this.subSink = new SubSink();
+    this.dataSource = new MatTableDataSource<Appointment>();
+
+    this.subSink.add(appointmentService.getAppointmentsByClinic().subscribe(res => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource<Appointment>(res);
+    },error => {
+      console.log(error);
+    }));
+  }
 
   ngOnInit(): void {
   }
