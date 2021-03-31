@@ -3,7 +3,7 @@
   "info": {
     "title": "VaccTrax Api",
     "version": "1.0.0",
-    "description": "Rest Api's for VaccTrax Application. Made with Node Js and Express"
+    "description": "Rest Api's for VaccTrax Application."
   },
   "servers": [
     {
