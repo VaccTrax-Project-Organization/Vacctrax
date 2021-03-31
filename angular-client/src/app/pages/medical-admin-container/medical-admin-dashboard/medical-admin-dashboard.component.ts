@@ -8,7 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details/modify-appointment-details.component';
 import {DeclineRequestedAppointmentDialogComponent} from '../decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
-import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details/modify-appointment-details.component';
 
 @Component({
   selector: 'app-medical-admin-dashboard',
