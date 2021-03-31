@@ -1,5 +1,5 @@
 # Vacctrax
-
+.
 This is a Vaccination Tracking application for course "COMP 231-003". This project has been developed under the guidance of professor Jake Nesovic with the motive of having a collaborative tracking system for vaccines at province or country level. The team members contributing towards this project are Benjamin Weymouth, Mohammd Bakir, Alvin Yap, Anmoldeep Singh Gill, Jarod Lavine, Asad Mahmood, Kharak Singh Kular, Shankar Sidgel and Jhase Campbell.
 
 ---
