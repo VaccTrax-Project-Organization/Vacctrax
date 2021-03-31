@@ -6,7 +6,7 @@ export interface AppointmentRequest{
   preferredTime: string;
   startTime?: string;
   endTime?: string;
-  vaccineId: string;
+  vaccine: string;
   vaccineDose: string;
   type: AppointmentType;
   clinicId: string;
