@@ -1,0 +1,88 @@
+<div class="content-container">
+  <div class="content">
+    <form [formGroup]="this.requestApptForm" (ngSubmit)="this.submitRequestApptForm()">
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Clinic</mat-label>
+            <mat-select formControlName="clinicId">
+              <mat-option *ngFor="let clinic of clinics" [value]="clinic._id">{{clinic.name}}</mat-option>
+            </mat-select>
+            <mat-error>Clinic is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Preferred Date</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="preferredDate" [min]="this.currentDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>Preferred Date is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Preferred Time</mat-label>
+            <input matInput aria-label="12hr format"
+                   formControlName="preferredTime"
+                   [ngxTimepicker]="default"
+                   readonly #timeInput>
+            <ngx-material-timepicker #default></ngx-material-timepicker>
+            <mat-icon class="time-icon" (click)="timeInput.click()" matSuffix>alarm</mat-icon>
+            <mat-error>Preferred Time is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Vaccine Type</mat-label>
+            <mat-select formControlName="vaccine">
+              <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine._id">{{vaccine.name}}</mat-option>
+            </mat-select>
+            <mat-error>Vaccine Type is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Vaccine Dose</mat-label>
+            <mat-select formControlName="vaccineDose">
+              <mat-option value="Shot #1">Shot #1</mat-option>
+              <mat-option value="Shot #2">Shot #2</mat-option>
+              <mat-option value="Shot #3">Shot #3</mat-option>
+            </mat-select>
+            <mat-error>Vaccine Dose is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Reason of Appointment</mat-label>
+            <textarea matInput
+                      formControlName="reason"
+                      cdkAutosizeMinRows="5">
+            </textarea>
+            <mat-error>Reason of Appointment is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <button mat-raised-button type="submit">Send Appointment Request</button>
+      </div>
+    </form>
+  </div>
+</div>
