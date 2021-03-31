@@ -1,0 +1,17 @@
+.content-container {
+  display: grid;
+  place-items: center;
+
+  .content {
+    padding: 1rem 2rem;
+    background: #fff;
+    width: 700px;
+    //height: 670px;
+    box-shadow: 0px 1px 3px #00000029;
+    border-radius: 4px;
+  }
+}
+
+h4 {
+  color: red;
+}

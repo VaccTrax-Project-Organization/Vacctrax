@@ -7,20 +7,18 @@ exports.create = function(req,res,next){
         var vaccine = new Vaccine(req.body);
         console.log("body: "+ req.body.name);
 
-        vaccine.save(function(err){
+        vaccine.save(function(err, vac){
             if(err){
-                return next(err);
+                return res.status(500).send(err).end();
             }else{
-                res.json(vaccine);
+                return res.status(200).send(vac);
             }
         })
 
     }catch(e){
         console.log('Error creating vaccine object see error below: \n' + e);
+        return res.status(500).send(e).end();
     }
-    
-   
-
 }
 
 exports.list = function (req, res, next) {
