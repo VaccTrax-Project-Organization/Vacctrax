@@ -11,7 +11,7 @@
 
     <ng-container matColumnDef="patientName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Patient Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.patient | patientfullname}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.patient.account | patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="appointmentDateTime">
@@ -21,7 +21,7 @@
 
     <ng-container matColumnDef="practitionerName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Practitioner Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.healthPractitioner | patientfullname}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.healthPractitioner.account | patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -42,7 +42,7 @@
     <ng-container matColumnDef="actions" stickyEnd>
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index">
-        <button *ngIf="showActionDelete" mat-icon-button>
+        <button (click)="openEditAppointmentVaccineDetails(element)" *ngIf="showActionDelete" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
 

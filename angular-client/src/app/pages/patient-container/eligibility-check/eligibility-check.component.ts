@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router, NavigationExtras} from '@angular/router';
 
 @Component({
-  selector: 'app-request-appointment',
+  selector: 'app-eligibility-check',
   templateUrl: './eligibility-check.component.html',
   styleUrls: ['./eligibility-check.component.scss']
 })
@@ -11,29 +11,28 @@ export class EligibilityCheckComponent implements OnInit {
 
   public eligibilityForm: FormGroup;
   public currentDate: Date;
-  private eligible: string[];
+  private readonly eligible = [
+    'ASF',
+    'FN',
+    'CHHR',
+    'LTCHRAS',
+    'ALRAS',
+    'RHRAS',
+    'ECFCHR',
+    'PSW',
+    'FHCW',
+    'OTR',
+    'HSCTR',
+    'PWNDIWRFMBC',
+    'HMDWTLY',
+    'KDWEGFR',
+    'BAORP',
+    'HSWHAOHROD',
+    'FHCW',
+  ];
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
     this.currentDate = new Date();
-    this.eligible = [
-      'ASF',
-      'FN',
-      'CHHR',
-      'LTCHRAS',
-      'ALRAS',
-      'RHRAS',
-      'ECFCHR',
-      'PSW',
-      'FHCW',
-      'OTR',
-      'HSCTR',
-      'PWNDIWRFMBC',
-      'HMDWTLY',
-      'KDWEGFR',
-      'BAORP',
-      'HSWHAOHROD',
-      'FHCW',
-    ];
   }
 
   public ngOnInit(): void {
