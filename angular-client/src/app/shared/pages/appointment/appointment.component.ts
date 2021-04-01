@@ -8,6 +8,7 @@ import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 import {Appointment} from '../../../models/appointment.model';
+import {DeclineRequestedAppointmentDialogComponent} from "../../../pages/medical-admin-container/decline-requested-appointment-dialog/decline-requested-appointment-dialog.component";
 import {ViewAppointmentDialogInterface} from '../../../models/interfaces/view-appointment-dialog.interface';
 import {UpdateAppointmentVaccineDetailsDialogComponent} from '../update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import { AppointmentService } from 'src/app/services/appointment/appointment.service';
@@ -75,6 +76,18 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  public openDeclineAppointmentRequestDialog(): void {
+    const dialogRef = this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
+      panelClass: 'dialog-panel-class',
+      disableClose: false,
+      autoFocus: false,
+      height: '400px',
+      width: '650px'
+    });
+  }
+
+
+   
   public openCancelVaccinationDialog(element: Appointment): void {
     const dialogTitle = 'CANCEL APPOINTMENT';
     const dialogDescription = 'Are you sure you would like to cancel the selected appointment (enter appoint number here or something), this action cannot be undone';
@@ -86,6 +99,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
       autoFocus: false,
       data: new GenericTwoOptionDialogData(dialogTitle, dialogDescription)
     });
+
+
 
     // get call back data on close
     this.subSink.add(dialogRef.afterClosed().subscribe(res => {
