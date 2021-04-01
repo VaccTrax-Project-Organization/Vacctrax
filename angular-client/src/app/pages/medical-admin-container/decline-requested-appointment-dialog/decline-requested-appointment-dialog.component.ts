@@ -26,7 +26,7 @@ export class DeclineRequestedAppointmentDialogComponent implements OnInit,OnDest
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 
-    this.subSink.add(appointmentService.getAppointmentsByClinic().subscribe(res => {
+    this.subSink.add(appointmentService.getConfirmedAppointmentsByClinicId().subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource<Appointment>(res);
     },error => {

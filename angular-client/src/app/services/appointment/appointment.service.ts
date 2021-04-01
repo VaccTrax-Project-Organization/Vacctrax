@@ -34,6 +34,7 @@ export class AppointmentService extends Service {
 
 
   public getConfirmedAppointmentsByClinicId(): Observable<Appointment[]> {
+    // tslint:disable-next-line:max-line-length
     return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
   }
 
