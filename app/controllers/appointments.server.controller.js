@@ -40,7 +40,7 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
 
 exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
     const clinic = req.clinic;
-    console.log(clinic);
+    console.log("check clinic", clinic);
 
     Appointment.find({clinic: clinic, type: "CONFIRMED"}, (err, appointments) => {
         if (err) {
@@ -123,6 +123,7 @@ exports.deleteAppointment = (req, res, next) => {
 
 // param middleware used to get object for other CRUD activities
 exports.getAppointmentById = (req, res, next, id) => {
+    console.log("id");
     Appointment.findById(id, (err, appointment) => {
         if (err) {
             return res.status(500).send(err).end();
