@@ -33,9 +33,11 @@ module.exports = function () {
   app.use((req, res, next) => {
     const allowedOrigins = [config.frontendDomain, config.frontendLocalDomain];
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
+    console.log("origin", origin);
+    console.log("allowedOrigins", allowedOrigins);
+    // if (allowedOrigins.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
-    }
+    // }
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
