@@ -91,8 +91,8 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       healthPractitionerId: '',
     }
 
-    this.appointmentService.requestAppointment(appointmentRequest).subscribe(res => {
+    this.subSink.add(this.appointmentService.requestAppointment(appointmentRequest).subscribe(res => {
       console.log(res);
-    });
+    }));
   }
 }
