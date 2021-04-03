@@ -24,6 +24,14 @@ export class AppointmentService extends Service {
         }));
   }
 
+  public updateAppointment(appointment: Appointment): Observable<Appointment>{
+    return this.http.put<Appointment>(`${this.url}/appointments/${appointment._id}`, appointment, {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
   public updateAppointmentVaccine(appointment: any): Observable<Appointment> {
     return this.http.put<Appointment>(this.url + '/appointments/' + appointment.id , appointment, {headers: this.httpHeader})
       .pipe(
@@ -32,7 +40,7 @@ export class AppointmentService extends Service {
         }));
   }
 
- 
+
   public getConfirmedAppointmentsByClinicId(): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader}).pipe(
         catchError(err => {

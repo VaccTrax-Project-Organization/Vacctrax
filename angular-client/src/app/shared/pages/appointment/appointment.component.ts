@@ -9,7 +9,6 @@ import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/gene
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 import {Appointment} from '../../../models/appointment.model';
 import {DeclineRequestedAppointmentDialogComponent} from '../../../pages/medical-admin-container/decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
-import {ViewAppointmentDialogInterface} from '../../../models/interfaces/view-appointment-dialog.interface';
 import {UpdateAppointmentVaccineDetailsDialogComponent} from '../update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import {AppointmentService} from 'src/app/services/appointment/appointment.service';
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
@@ -55,19 +54,37 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public openEditAppointmentVaccineDetails(element: Appointment) {
-    const dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
-      panelClass: 'dialog-panel-class',
-      width: '650px',
-      height: 'auto',
-      disableClose: true,
-      autoFocus: false,
-      restoreFocus: false,
-      data: element
-    });
+    if (this.role === Role.HEALTH_PRACTITIONER){
+      const dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
+        panelClass: 'dialog-panel-class',
+        width: '650px',
+        height: 'auto',
+        disableClose: true,
+        autoFocus: false,
+        restoreFocus: false,
+        data: element
+      });
 
-    this.subSink.add(dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-    }));
+      this.subSink.add(dialogRef.afterClosed().subscribe(res => {
+        console.log(res);
+      }));
+    }
+
+    if (this.role === Role.HEALTH_PRACTITIONER){
+      const dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
+        panelClass: 'dialog-panel-class',
+        width: '650px',
+        height: 'auto',
+        disableClose: true,
+        autoFocus: false,
+        restoreFocus: false,
+        data: element
+      });
+
+      this.subSink.add(dialogRef.afterClosed().subscribe(res => {
+        console.log(res);
+      }));
+    }
   }
 
   public openModifyAppointmentDetailsDialog(element: Appointment) {
