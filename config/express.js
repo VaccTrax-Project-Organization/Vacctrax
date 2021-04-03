@@ -33,16 +33,18 @@ module.exports = function () {
   app.use((req, res, next) => {
     const allowedOrigins = [config.frontendDomain, config.frontendLocalDomain];
     const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin)) {
-      res.header("Access-Control-Allow-Origin", origin);
-    }
+    console.log("origin", origin);
+    console.log("allowedOrigins", allowedOrigins);
+    // if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    // }
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
 
   app.use(cors({
-    origin: config.frontendDomain, // specify the domain origin that is allowed to make requests to this server
+    origin: '*', // specify the domain origin that is allowed to make requests to this server
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }));
 
