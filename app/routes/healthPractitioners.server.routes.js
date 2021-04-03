@@ -4,4 +4,6 @@ const healthPractitioner = require("../controllers/healthPractitioners.server.co
 module.exports = (app) => {
 
     app.post("/api/healthPractitioner", healthPractitioner.createHealthPractitionerTest);
+
+
 };
