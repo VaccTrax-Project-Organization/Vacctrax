@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-appointment-dialog.component';
 import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
@@ -12,7 +12,7 @@ import {DeclineRequestedAppointmentDialogComponent} from '../../../pages/medical
 import {UpdateAppointmentVaccineDetailsDialogComponent} from '../update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import {AppointmentService} from 'src/app/services/appointment/appointment.service';
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
-import {ModifyAppointmentDetailsDialogComponent} from "../modify-appointment-details-dialog/modify-appointment-details-dialog.component";
+import {ModifyAppointmentDetailsDialogComponent} from '../modify-appointment-details-dialog/modify-appointment-details-dialog.component';
 
 @Component({
   selector: 'app-appointment',
@@ -23,7 +23,7 @@ import {ModifyAppointmentDetailsDialogComponent} from "../modify-appointment-det
 export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
-
+  @Output() modified: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Input()
   set tableDataSource(data: MatTableDataSource<Appointment>) {
     this.dataSource = data;
@@ -53,9 +53,17 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
+  emitModify(dialogRef: MatDialogRef<any>){
+    this.subSink.add(dialogRef.afterClosed().subscribe(res => {
+      if (res){
+        this.modified.emit(true);
+      }
+    }));
+  }
   public openEditAppointmentVaccineDetails(element: Appointment) {
+    let dialogRef;
     if (this.role === Role.HEALTH_PRACTITIONER){
-      const dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
+      dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',
         height: 'auto',
@@ -64,14 +72,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         restoreFocus: false,
         data: element
       });
-
-      this.subSink.add(dialogRef.afterClosed().subscribe(res => {
-        console.log(res);
-      }));
     }
 
     if (this.role === Role.HEALTH_PRACTITIONER){
-      const dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
+      dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',
         height: 'auto',
@@ -80,10 +84,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         restoreFocus: false,
         data: element
       });
+    }
 
-      this.subSink.add(dialogRef.afterClosed().subscribe(res => {
-        console.log(res);
-      }));
+    if (dialogRef){
+      this.emitModify(dialogRef);
     }
   }
 
@@ -98,9 +102,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
       data: element
     });
 
-    this.subSink.add(dialogRef.afterClosed().subscribe(res => {
-      console.log(res);
-    }));
+    this.emitModify(dialogRef);
   }
 
   public openViewAppointmentDialog(element: Appointment) {

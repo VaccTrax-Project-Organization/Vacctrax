@@ -8,35 +8,54 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details/modify-appointment-details.component';
 import {DeclineRequestedAppointmentDialogComponent} from '../decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
+import {finalize} from "rxjs/operators";
 
 @Component({
   selector: 'app-medical-admin-dashboard',
   templateUrl: './medical-admin-dashboard.component.html',
   styleUrls: ['./medical-admin-dashboard.component.scss']
 })
+
 export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   public role = Role.MEDICAL_ADMIN;
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
+  showLoading = false;
 
   constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 
-    this.subSink.add(appointmentService.getAppointmentsByClinic().subscribe(res => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-    },error => {
-      console.log(error);
-    }));
+    this.getTableData();
   }
 
   ngOnInit(): void {
   }
 
-
   ngOnDestroy(): void {
     this.subSink.unsubscribe();
+  }
+
+  getTableData(){
+    this.showLoading = true;
+
+    this.subSink.add(this.appointmentService.getAppointmentsByClinic().pipe(
+      finalize(() => this.showLoading = false),
+    ).subscribe(res => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource<Appointment>(res);
+    },error => {
+      console.log(error);
+    }));
+
+    this.subSink.add(this.appointmentService.getAppointmentsByClinic().subscribe(res => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource<Appointment>(res);
+      this.showLoading = false;
+    },error => {
+      console.log(error);
+      this.showLoading = false;
+    }));
   }
 
   public openModifyAppointmentDialog(): void {
@@ -45,6 +64,12 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
       disableClose: false,
       autoFocus: false,
       height: '620px'
+    });
+
+    dialogRef.afterClosed().subscribe(res => {
+      if (res){
+        this.getTableData();
+      }
     });
   }
 
