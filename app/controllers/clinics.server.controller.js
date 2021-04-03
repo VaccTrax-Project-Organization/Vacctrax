@@ -19,16 +19,16 @@ exports.getAllClinics = function (req, res, next) {
 exports.getClinicById = (req, res, next , id) => {
     console.log(id);
     // Using the 'Clinic' static 'findById' method to retrieve a specific clinic
-    Clinic.find( { _id : id}, (err, clinic) => {
+    Clinic.findById( id, (err, clinic) => {
         if (err) {
             // Call the next middleware with an error message
             return next(err);
         } else {
             // Set the 'req.clinic' property
-            req.clinic = clinic;
+            res.locals.clinic = clinic;
             console.log(clinic);
             // Call the next middleware
-            next();
+            return next();
         }
     });
 };
