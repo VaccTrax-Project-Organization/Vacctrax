@@ -25,7 +25,6 @@ export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit, O
     this.subSink = new SubSink();
     if (data) {
       this.appointmentDetails = data;
-      console.log("appt det", this.appointmentDetails);
       this.dose.setValue(this.appointmentDetails.vaccineDose);
       this.type.setValue(this.appointmentDetails.vaccine.id);
     }

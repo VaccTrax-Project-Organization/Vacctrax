@@ -32,10 +32,6 @@ const AppointmentSchema = new Schema({
         default: 'REQUESTED',
         required: "Type is required",
     },
-    // vaccine: {
-    //     type: String,
-    //     required: "Vaccine is required"
-    // },
     vaccine: {
         type: Schema.Types.ObjectId,
         ref: 'Vaccine',
