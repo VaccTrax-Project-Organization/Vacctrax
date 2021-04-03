@@ -44,7 +44,7 @@ module.exports = function () {
   });
 
   app.use(cors({
-    origin: config.frontendLocalDomain, // specify the domain origin that is allowed to make requests to this server
+    origin: '*', // specify the domain origin that is allowed to make requests to this server
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }));
 

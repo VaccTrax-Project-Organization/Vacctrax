@@ -39,7 +39,8 @@ export class AppointmentService extends Service {
           return throwError(err);
         }));
   }
-  public declineAppointment(): Observable<Appointment[]>{
+
+  public declineAppointment(): Observable<Appointment[]> {
     return this.http.put<Appointment[]>(this.url + '/declineAppointment/6060e1549107f28980861695', {headers: this.httpHeader})
       .pipe(
         catchError(err => {
