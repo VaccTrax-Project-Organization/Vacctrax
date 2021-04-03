@@ -4,40 +4,40 @@
 
 <div class="row content-description">
   <div class="col">
-    <form [formGroup]="this.modifyApptForm">
+    <form [formGroup]="this.modifyApptForm" (ngSubmit)="this.submitUpdatedAppointment()">
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <mat-form-field appearance="outline">
             <mat-label>Health Practitioner</mat-label>
-            <mat-select>
-<!--              <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine._id">{{vaccine.name}}</mat-option>-->
-            <mat-option [value]="'hi'">hi</mat-option>
+            <mat-select formControlName="healthPractitioner">
+              <mat-option *ngFor="let healthPractitioner of this.healthPractitioners$ | async"
+                          [value]="healthPractitioner._id">{{ healthPractitioner.account | patientfullname}}</mat-option>
             </mat-select>
-<!--            <mat-error>Vaccine Type is <strong>Required</strong></mat-error>-->
+            <mat-error>Health Practitioner is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <mat-form-field appearance="outline">
             <mat-label>Appointment Date</mat-label>
-            <input matInput [matDatepicker]="picker"  [min]="this.currentDate">
+            <input matInput [matDatepicker]="picker" [min]="this.currentDate" formControlName="appointmentDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error>Appointment Date is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
-
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <mat-form-field appearance="outline">
             <mat-label>Appointment Time</mat-label>
             <input matInput aria-label="12hr format"
                    [ngxTimepicker]="default"
-                   readonly #timeInput>
+                   readonly #timeInput
+                   formControlName="appointmentTime">
             <ngx-material-timepicker #default></ngx-material-timepicker>
             <mat-icon class="time-icon" (click)="timeInput.click()" matSuffix>alarm</mat-icon>
             <mat-error>Appointment Time is <strong>Required</strong></mat-error>
@@ -46,7 +46,7 @@
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <mat-form-field appearance="outline">
             <mat-label>Vaccine Type</mat-label>
             <mat-select formControlName="vaccine">
@@ -58,7 +58,7 @@
       </div>
 
       <div class="row">
-        <div class="col">
+        <div class="col-12">
           <mat-form-field appearance="outline">
             <mat-label>Vaccine Dose</mat-label>
             <mat-select formControlName="vaccineDose">
@@ -70,17 +70,16 @@
           </mat-form-field>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <button mat-raised-button type="submit" class="mr-5">Save</button>
+
+          <button mat-raised-button type="button" class="ml-5"
+                  [mat-dialog-close]="false">Cancel</button>
+        </div>
+      </div>
     </form>
   </div>
 </div>
 
-
-<div class="row ">
-  <div class="col text-center">
-    <button mat-raised-button type="button" class="mr-5"
-            [mat-dialog-close]="true">Save</button>
-
-    <button mat-raised-button type="button" class="ml-5"
-            [mat-dialog-close]="false">Cancel</button>
-  </div>
-</div>

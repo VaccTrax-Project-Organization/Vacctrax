@@ -23,11 +23,11 @@ exports.requestAppointment = (req, res) => {
 }
 
 exports.getAllAppointmentsForClinic = (req, res, next) => {
-    const clinic = req.clinic;
+    const clinic = res.locals.clinic;
 
     console.log(clinic);
 
-    Appointment.find({clinic: clinic}, (err, appointments) => {
+    Appointment.find({clinic: clinic._id}, (err, appointments) => {
         if (err) {
             res.status(500).send(err).end();
         } else {
@@ -42,7 +42,7 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
 }
 
 exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
-    const clinic = req.clinic;
+    const clinic = res.locals.clinic;
     console.log("check clinic", clinic);
 
     Appointment.find({clinic: clinic, type: "CONFIRMED"}, (err, appointments) => {
