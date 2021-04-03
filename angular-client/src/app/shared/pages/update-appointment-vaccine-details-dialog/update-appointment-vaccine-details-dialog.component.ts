@@ -18,12 +18,16 @@ export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit, O
   dose = new FormControl('', [Validators.required]);
   type = new FormControl('', [Validators.required]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: UpdateAppointmentVaccineDetailsDialogComponent, private vaccinesService: VaccinesService, private dialogRef: MatDialogRef<UpdateAppointmentVaccineDetailsDialogComponent>, private appointmentService: AppointmentService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: UpdateAppointmentVaccineDetailsDialogComponent,
+              private vaccinesService: VaccinesService,
+              private dialogRef: MatDialogRef<UpdateAppointmentVaccineDetailsDialogComponent>,
+              private appointmentService: AppointmentService) {
     this.subSink = new SubSink();
     if (data) {
       this.appointmentDetails = data;
+      console.log("appt det", this.appointmentDetails);
       this.dose.setValue(this.appointmentDetails.vaccineDose);
-      this.type.setValue(this.appointmentDetails._id);
+      this.type.setValue(this.appointmentDetails.vaccine.id);
     }
   }
 
