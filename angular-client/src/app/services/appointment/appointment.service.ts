@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of, throwError} from 'rxjs';
@@ -11,7 +11,7 @@ import {Service} from '../service.class';
   providedIn: 'root'
 })
 
-export class AppointmentService extends Service{
+export class AppointmentService extends Service {
   constructor(private http: HttpClient) {
     super();
   }
@@ -24,16 +24,33 @@ export class AppointmentService extends Service{
         }));
   }
 
-  public getAppointmentsByClinic(): Observable<Appointment[]>{
-    return this.http.get<Appointment[]>(this.url + '/getAllAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
+  public updateAppointmentVaccine(appointment: any): Observable<Appointment> {
+    return this.http.put<Appointment>(this.url + '/appointments/' + appointment.id , appointment, {headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);
         }));
   }
 
+ 
   public getConfirmedAppointmentsByClinicId(): Observable<Appointment[]>{
-    return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader})
+    return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader}).pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public declineAppointment(): Observable<Appointment[]> {
+    return this.http.put<Appointment[]>(this.url + '/declineAppointment/6060e1549107f28980861695', {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public cancelAppointment(appointment: Appointment): Observable<Appointment[]>{
+    const reqBody = {type:appointment.type};
+    return this.http.put<Appointment[]>(this.url + '/appointments/' + appointment._id, reqBody,{headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);

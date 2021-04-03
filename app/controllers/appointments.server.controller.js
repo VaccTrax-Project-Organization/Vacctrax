@@ -23,11 +23,11 @@ exports.requestAppointment = (req, res) => {
 }
 
 exports.getAllAppointmentsForClinic = (req, res, next) => {
-    const clinic = req.clinic;
+    const clinic = res.locals.clinic;
 
     console.log(clinic);
 
-    Appointment.find({clinic: clinic}, (err, appointments) => {
+    Appointment.find({clinic: clinic._id}, (err, appointments) => {
         if (err) {
             res.status(500).send(err).end();
         } else {
@@ -35,12 +35,15 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
             // getting appointment list
             res.status(200).send(appointments);
         }
-    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
+    }).populate(['clinic', {
+        path: 'patient',
+        populate: {path: 'account', model: 'Account'}
+    }, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
 
 exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
-    const clinic = req.clinic;
-    console.log(clinic);
+    const clinic = res.locals.clinic;
+    console.log("check clinic", clinic);
 
     Appointment.find({clinic: clinic, type: "CONFIRMED"}, (err, appointments) => {
         if (err) {
@@ -50,23 +53,28 @@ exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
             // getting appointment list
             res.status(200).send(appointments);
         }
-    }).populate(['clinic', {path: 'patient', populate: {path: 'account', model: 'Account'}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
+    }).populate(['clinic', {
+        path: 'patient',
+        populate: {path: 'account', model: 'Account'}
+    }, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
 
 //pass in a patient to the req. This is so a medical admin or a patient can get all their appointments.
 exports.getPatientAppointments = (req, res, next) => {
     const patient = res.locals.patient;
-    console.log("patient", res.locals);
-    Appointment.find({patient: patient}, (err) => {
+    Appointment.find({patient: patient}, (err, appointments) => {
         if (err) {
             return res.status(500).send(err).end();
         }
-        // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
-        //FOR SOME WEIRD REASON THE HEALTHPRACTITIONER DOESNT POPULATE IDK WHY!>@#>!@#>!>@#>!@>#!>>!@# (IT RETURNS NULL)
-    }).populate(["clinic", {path: "patient", populate: {path: "account", model: "Account"}}, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, "vaccine"]).then(appointments => {
-        console.log("appointments", appointments);
+
         return res.status(200).send(appointments);
-    });
+        // populate will auto fill the reference Id's with the actual object of each listed (including their ids)
+    }).populate([
+        "clinic",
+        "vaccine",
+        {path: "patient", populate: {path: "account"}},
+        {path: "healthPractitioner", populate: {path: "account"}}
+    ]);
 }
 
 //for a specific appoint for a specific patient (get it by it's id)
@@ -108,7 +116,7 @@ exports.bookAppointment = (req, res) => {
 exports.updateAppointment = (req, res, next) => {
     console.log("req.body", req.body);
     Appointment.findByIdAndUpdate(res.locals.appointment._id, {$set: req.body}, {new: true}, (err, appointment) => {
-        if(err) {
+        if (err) {
             return res.status(500).send(err).end();
         } else {
             return res.status(200).send(appointment).end();
@@ -123,6 +131,7 @@ exports.deleteAppointment = (req, res, next) => {
 
 // param middleware used to get object for other CRUD activities
 exports.getAppointmentById = (req, res, next, id) => {
+    console.log("id");
     Appointment.findById(id, (err, appointment) => {
         if (err) {
             return res.status(500).send(err).end();
