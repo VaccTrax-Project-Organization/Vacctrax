@@ -78,7 +78,7 @@ exports.getHealthPractitionersByClinicId = (req, res, next) => {
         if (err) {
             return res.status(500).send({message: "There was an Error In Getting the Health Practitioners."}).end();
         }
-        
+
         return res.status(200).send(healthPractitioners).end();
-    }).populate(["account"]);
+    }).populate([{path: "account", populate: "address"}]);
 };
