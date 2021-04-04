@@ -16,6 +16,29 @@ export class AppointmentService extends Service {
     super();
   }
 
+  public getAppointmentsByPatient(patientId = '6060df3ac0edd45cd49d2f5a'): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(`${this.url}/getAllAppointmentsByPatientId/${patientId}`, {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public getAppointmentsByClinic(clinicId = '6060e1549107f28980861695'): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(`${this.url}/getAllAppointmentsByClinicId/${clinicId}`, {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public getConfirmedAppointmentsByClinicId(clinicId = '6060e1549107f28980861695'): Observable<Appointment[]>{
+    return this.http.get<Appointment[]>(`${this.url}/getConfirmedAppointmentsByClinicId/${clinicId}`, {headers: this.httpHeader}).pipe(
+      catchError(err => {
+        return throwError(err);
+      }));
+  }
+
   public requestAppointment(appointment: AppointmentRequest): Observable<Appointment>{
     return this.http.post<Appointment>(this.url + '/requestAppointment', appointment, {headers: this.httpHeader})
       .pipe(
@@ -24,24 +47,24 @@ export class AppointmentService extends Service {
         }));
   }
 
-  public updateAppointmentVaccine(appointment: any): Observable<Appointment> {
-    return this.http.put<Appointment>(this.url + '/appointments/' + appointment.id , appointment, {headers: this.httpHeader})
+  public updateAppointment(appointment: Appointment): Observable<Appointment>{
+    return this.http.put<Appointment>(`${this.url}/appointments/${appointment._id}`, appointment, {headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);
         }));
   }
 
- 
-  public getConfirmedAppointmentsByClinicId(): Observable<Appointment[]>{
-    return this.http.get<Appointment[]>(this.url + '/getConfirmedAppointmentsByClinicId/6060e1549107f28980861695', {headers: this.httpHeader}).pipe(
+  public updateAppointmentVaccine(appointment: any): Observable<Appointment> {
+    return this.http.put<Appointment>(`${this.url}/appointments/${appointment.id}` , appointment, {headers: this.httpHeader})
+      .pipe(
         catchError(err => {
           return throwError(err);
         }));
   }
 
-  public declineAppointment(): Observable<Appointment[]> {
-    return this.http.put<Appointment[]>(this.url + '/declineAppointment/6060e1549107f28980861695', {headers: this.httpHeader})
+  public declineAppointment(appointmentId = '6060e1549107f28980861695'): Observable<Appointment[]> {
+    return this.http.put<Appointment[]>(`${this.url}/declineAppointment/${appointmentId}`, {headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);
@@ -50,7 +73,7 @@ export class AppointmentService extends Service {
 
   public cancelAppointment(appointment: Appointment): Observable<Appointment[]>{
     const reqBody = {type:appointment.type};
-    return this.http.put<Appointment[]>(this.url + '/appointments/' + appointment._id, reqBody,{headers: this.httpHeader})
+    return this.http.put<Appointment[]>(`${this.url}/appointments/${appointment._id}`, reqBody,{headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);

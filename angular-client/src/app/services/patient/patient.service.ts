@@ -26,14 +26,4 @@ export class PatientService extends Service{
     this.http.get(this.url, {headers: this.httpHeader} )
     return of(this.mockPatient);
   }
-
-  public getPatientAppointments(): Observable<Appointment[]>{
-    return this.http.get<Appointment[]>(this.url + '/getAllAppointmentsByPatientId/6060df3ac0edd45cd49d2f5a', {headers: this.httpHeader})
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        }));
-  }
-
-
 }
