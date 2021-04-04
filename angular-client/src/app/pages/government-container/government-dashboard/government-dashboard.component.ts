@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Role} from '../../../models/enums/role.enum';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
-import {MatTableDataSource} from "@angular/material/table";
-import {Appointment} from "../../../models/appointment.model";
+import {MatTableDataSource} from '@angular/material/table';
+import {Appointment} from '../../../models/appointment.model';
 
 @Component({
-  selector: 'app-health-practitioner-dashboard',
-  templateUrl: './health-practitioner-dashboard.component.html',
-  styleUrls: ['./health-practitioner-dashboard.component.scss']
+  selector: 'app-government-dashboard',
+  templateUrl: './government-dashboard.component.html',
+  styleUrls: ['./government-dashboard.component.scss']
 })
-export class HealthPractitionerDashboardComponent implements OnInit {
+export class GovernmentDashboardComponent implements OnInit {
   public role: Role;
   public dataSource: MatTableDataSource<Appointment>;
 

@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HealthPractitionerContainerComponent} from './health-practitioner-container.component';
-import {VaccineHistoryComponent} from '../../shared/pages/vaccine-history/vaccine-history.component';
-import { HealthPractitionerDashboardComponent } from './health-practitioner-dashboard/health-practitioner-dashboard.component';
+import {GovernmentContainerComponent} from './government-container.component';
+import {GovernmentDashboardComponent} from './government-dashboard/government-dashboard.component';
+import {VaccinesListComponent} from './vaccines-list/vaccines-list.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HealthPractitionerContainerComponent,
+    component: GovernmentContainerComponent,
     children: [
 
-      {path: 'vaccineHistory', component: VaccineHistoryComponent},
-      {path: 'dashboard', component: HealthPractitionerDashboardComponent}
+      {path: 'vaccinesList', component: VaccinesListComponent},
+      {path: 'dashboard', component: GovernmentDashboardComponent}
     ]
   },
 ];
@@ -20,5 +20,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HealthPractitionerContainerRoutingModule {
+export class GovernmentContainerRoutingModule {
 }
