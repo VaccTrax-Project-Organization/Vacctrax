@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {Appointment} from '../../../models/appointment.model';
 
+
 @Component({
   selector: 'app-view-appointment',
   templateUrl: './view-appointment-dialog.component.html',

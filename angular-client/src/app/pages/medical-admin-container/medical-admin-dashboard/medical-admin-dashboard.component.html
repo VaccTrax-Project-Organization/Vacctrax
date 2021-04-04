@@ -11,10 +11,14 @@
         <mat-card>
           <mat-card-content>
             <h3>{{"List of Appointments"}}</h3>
+            <div class="row justify-content-center p-2">
+              <mat-spinner *ngIf="showLoading" matSuffix mode="indeterminate" diameter="70"></mat-spinner>
+            </div>
 
-            <app-appointment
+            <app-appointment *ngIf="!showLoading"
               [roleInput]="role"
-              [tableDataSource]="dataSource">
+              [tableDataSource]="dataSource"
+              (modified)="getTableData()">
             </app-appointment>
           </mat-card-content>
         </mat-card>
