@@ -2,7 +2,6 @@
 module.exports = {
   //To sign the session identifier, use a secret string
   sessionSecret: "productionSessionSecret",
-  frontendLocalDomain: "http://localhost:4200",
   frontendDomain: "https://vacctrax-project-organization.github.io",
   // db: "mongodb://localhost/vacctrax-db",
   // cloud database
