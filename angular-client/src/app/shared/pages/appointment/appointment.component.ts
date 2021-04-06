@@ -3,16 +3,17 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {ViewAppointmentDialogComponent} from '../view-appointment-dialog/view-appointment-dialog.component';
+import {ViewAppointmentDialogComponent} from './view-appointment-dialog/view-appointment-dialog.component';
 import {SubSink} from 'subsink';
 import {GenericTwoOptionDialogComponent} from '../generic-two-option-dialog/generic-two-option-dialog.component';
 import {GenericTwoOptionDialogData} from '../../../models/generic-two-option-dialog-data';
 import {Appointment} from '../../../models/appointment.model';
 import {DeclineRequestedAppointmentDialogComponent} from '../../../pages/medical-admin-container/decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
-import {UpdateAppointmentVaccineDetailsDialogComponent} from '../update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
+import {UpdateAppointmentVaccineDetailsDialogComponent} from './update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import {AppointmentService} from 'src/app/services/appointment/appointment.service';
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
-import {ModifyAppointmentDetailsDialogComponent} from '../modify-appointment-details-dialog/modify-appointment-details-dialog.component';
+import {ModifyAppointmentDetailsDialogComponent} from './modify-appointment-details-dialog/modify-appointment-details-dialog.component';
+import { CreateAppointmentDialogComponent } from './create-appointment-dialog/create-appointment-dialog.component';
 
 @Component({
   selector: 'app-appointment',
@@ -60,6 +61,20 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }));
   }
+
+  public addNewClicked(){
+    let dialogRef;
+    dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
+      panelClass: 'dialog-panel-class',
+      width: '650px',
+      height: 'auto',
+      disableClose: true,
+      autoFocus: false,
+      restoreFocus: false,
+      data: new Appointment()
+    });
+  }
+
   public openEditAppointmentVaccineDetails(element: Appointment) {
     let dialogRef;
     if (this.role === Role.HEALTH_PRACTITIONER){
