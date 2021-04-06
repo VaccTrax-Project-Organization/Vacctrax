@@ -4,8 +4,8 @@ import {HealthPractitioner} from './healthPractitioner.model';
 import {MedicalAdmin} from './medicalAdmin.model';
 
 export class Clinic {
-  constructor(public _id: string,
-              public address:  Address,
-              public name: string) {
+  constructor(public _id: string = '',
+              public address:  Address = null,
+              public name: string = '',) {
   }
 }
