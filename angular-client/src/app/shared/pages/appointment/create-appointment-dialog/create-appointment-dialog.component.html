@@ -1,25 +1,20 @@
 <div class="row">
-  <div class="col text-center"><h3>Modify Appointment Details</h3></div>
+  <div class="col text-center"><h3>Create Appointment</h3></div>
 </div>
 
 <div class="row content-description">
-  <div class="col">
+  <div class="col-12">
     <form [formGroup]="this.modifyApptForm" (ngSubmit)="this.submitUpdatedAppointment()">
       <div class="row">
-        <div class="col-12">
+        <div class="col-6">
           <mat-form-field appearance="outline">
-            <mat-label>Doctor</mat-label>
-            <mat-select formControlName="healthPractitioner">
-              <mat-option *ngFor="let healthPractitioner of this.healthPractitioners$ | async"
-                          [value]="healthPractitioner._id">{{ healthPractitioner.account | patientfullname}}</mat-option>
-            </mat-select>
-            <mat-error>Health Practitioner is <strong>Required</strong></mat-error>
+            <mat-label>Patient Name</mat-label>
+            <input type="text" matInput formControlName="patient">
+            <mat-error>Patient is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12">
+        <div class="col-6">
           <mat-form-field appearance="outline">
             <mat-label>Appointment Date</mat-label>
             <input matInput [matDatepicker]="picker" [min]="this.currentDate" formControlName="appointmentDate">
@@ -28,10 +23,8 @@
             <mat-error>Appointment Date is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12">
+        <div class="col-6">
           <mat-form-field appearance="outline">
             <mat-label>Appointment Time</mat-label>
             <input matInput aria-label="12hr format"
@@ -43,22 +36,28 @@
             <mat-error>Appointment Time is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12">
+
+        <div class="col-6">
           <mat-form-field appearance="outline">
-            <mat-label>Vaccine Type</mat-label>
-            <mat-select formControlName="vaccine">
-              <mat-option *ngFor="let vaccine of this.vaccines$ | async" [value]="vaccine._id">{{vaccine.name}}</mat-option>
-            </mat-select>
-            <mat-error>Vaccine Type is <strong>Required</strong></mat-error>
+            <mat-label>Reason</mat-label>
+            <input type="text" matInput formControlName="reason">
+            <mat-error>Patient is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-12">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Doctor</mat-label>
+            <mat-select formControlName="healthPractitioner">
+              <mat-option *ngFor="let healthPractitioner of this.healthPractitioners$ | async"
+                          [value]="healthPractitioner._id">{{ healthPractitioner.account | patientfullname}}</mat-option>
+            </mat-select>
+            <mat-error>Health Practitioner is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
           <mat-form-field appearance="outline">
             <mat-label>Vaccine Dose</mat-label>
             <mat-select formControlName="vaccineDose">
@@ -67,6 +66,16 @@
               <mat-option value="Shot #3">Shot #3</mat-option>
             </mat-select>
             <mat-error>Vaccine Dose is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Vaccine Type</mat-label>
+            <mat-select formControlName="vaccine">
+              <mat-option *ngFor="let vaccine of this.vaccines$ | async" [value]="vaccine._id">{{vaccine.name}}</mat-option>
+            </mat-select>
+            <mat-error>Vaccine Type is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
       </div>

@@ -64,20 +64,28 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public addNewClicked(){
     let dialogRef;
-    dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
-      panelClass: 'dialog-panel-class',
-      width: '650px',
-      height: 'auto',
-      disableClose: true,
-      autoFocus: false,
-      restoreFocus: false,
-      data: new Appointment()
-    });
+    if (this.roleInput === Role.MEDICAL_ADMIN){
+      dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
+        panelClass: 'dialog-panel-class',
+        width: '650px',
+        height: 'auto',
+        disableClose: true,
+        autoFocus: false,
+        restoreFocus: false,
+        data: new Appointment()
+      });
+    }
+
+    // other dialog here
+
+    if (dialogRef){
+      this.emitModify(dialogRef);
+    }
   }
 
   public openEditAppointmentVaccineDetails(element: Appointment) {
     let dialogRef;
-    if (this.role === Role.HEALTH_PRACTITIONER){
+    if (this.roleInput === Role.HEALTH_PRACTITIONER){
       dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',
@@ -89,7 +97,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
 
-    if (this.role === Role.HEALTH_PRACTITIONER){
+    if (this.roleInput === Role.HEALTH_PRACTITIONER){
       dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',

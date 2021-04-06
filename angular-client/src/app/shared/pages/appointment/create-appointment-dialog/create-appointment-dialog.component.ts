@@ -31,16 +31,20 @@ export class CreateAppointmentDialogComponent implements OnInit {
     this.createModifyApptForm();
     this.currentDate = new Date();
     this.vaccines$ = this.vaccineService.getVaccines();
-    this.healthPractitioners$ = this.healthPractitionerService.getHealthPractitionersByClinicId(this.data.clinic._id);
+
+    const tempClinicId = '6060e1549107f28980861695';
+    this.healthPractitioners$ = this.healthPractitionerService.getHealthPractitionersByClinicId(tempClinicId);
   }
 
   private createModifyApptForm(): void {
     this.modifyApptForm = this.formBuilder.group({
-      vaccine: [this.data?.vaccine?._id || '', Validators.required],
-      vaccineDose: [this.data?.vaccineDose || '', Validators.required],
-      healthPractitioner: [this.data?.healthPractitioner._id, Validators.required],
-      appointmentDate: [new Date(this.data?.startTime) || '', Validators.required],
-      appointmentTime: [new Date(this.data?.startTime).toISOString().match(/\d\d:\d\d/)[0] || '', Validators.required],
+      patient: ['', Validators.required],
+      vaccine: ['', Validators.required],
+      vaccineDose: ['', Validators.required],
+      healthPractitioner: ['', Validators.required],
+      appointmentDate: [new Date(Date.now()) || '', Validators.required],
+      appointmentTime: [new Date(Date.now()).toISOString().match(/\d\d:\d\d/)[0] || '', Validators.required],
+      reason: ['', Validators.required],
     });
   }
 
