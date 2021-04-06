@@ -8,6 +8,9 @@ import {ViewAppointmentDialogComponent} from './pages/view-appointment-dialog/vi
 import {PatientFullNamePipe} from './pipes/patient.pipe';
 import {RolePipe} from './pipes/role.pipe';
 import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ModifyAppointmentDetailsDialogComponent} from './pages/modify-appointment-details-dialog/modify-appointment-details-dialog.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.c
     ViewAppointmentDialogComponent,
     RolePipe,
     PatientFullNamePipe,
-    VaccineHistoryComponent
+    VaccineHistoryComponent,
+    ModifyAppointmentDetailsDialogComponent
   ],
 
   exports: [
@@ -29,8 +33,11 @@ import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.c
 
   imports: [
     CommonModule,
-    MaterialAngularModule
+    MaterialAngularModule,
+    ReactiveFormsModule,
+    NgxMaterialTimepickerModule
   ]
 })
 
-export class SharedModule {}
+export class SharedModule {
+}

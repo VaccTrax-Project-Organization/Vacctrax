@@ -23,6 +23,11 @@ const routes: Routes = [
     // tslint:disable-next-line:max-line-length
     loadChildren: () => import('./pages/medical-admin-container/medical-admin-container.module').then(m => m.MedicalAdminContainerModule)
   },
+  {
+    path: 'government',
+    // tslint:disable-next-line:max-line-length
+    loadChildren: () => import('./pages/government-container/government-container.module').then(m => m.GovernmentContainerModule)
+  },
 
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},
   {path: 'confirmedappointment', component: ConfirmedAppointmentsComponent},
