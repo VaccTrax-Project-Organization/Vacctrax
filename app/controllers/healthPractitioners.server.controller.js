@@ -23,7 +23,10 @@ exports.createHealthPractitionerTest = (req, res, next) => {
 
                 account.save((err, acc) => {
                     if (err) {
-                        return res.status(500).send({message: "There was an Error Creating the Patient Account.", err: err}).end();
+                        return res.status(500).send({
+                            message: "There was an Error Creating the Patient Account.",
+                            err: err
+                        }).end();
                     } else {
                         if (acc) {
 
@@ -36,13 +39,19 @@ exports.createHealthPractitionerTest = (req, res, next) => {
                                         practitioner.account = acc;
                                         practitioner.clinic = clinic
 
-                                        practitioner.save((err, pract)=> {
+                                        practitioner.save((err, pract) => {
                                             if (err) {
-                                                return res.status(500).send({message: "There was an Error Creating the practitioner.", err: err}).end();
+                                                return res.status(500).send({
+                                                    message: "There was an Error Creating the practitioner.",
+                                                    err: err
+                                                }).end();
                                             } else {
                                                 if (pract) {
                                                     console.log(pract);
-                                                    return res.status(200).send({account: acc, practitioner: practitioner});
+                                                    return res.status(200).send({
+                                                        account: acc,
+                                                        practitioner: practitioner
+                                                    });
                                                 } else {
                                                     return res.status(500).send({message: "There was an Error Creating the practitioner."}).end();
                                                 }
@@ -62,3 +71,14 @@ exports.createHealthPractitionerTest = (req, res, next) => {
         }
     });
 }
+
+exports.getHealthPractitionersByClinicId = (req, res, next) => {
+    const clinic = res.locals.clinic;
+    HealthPractitioner.find({clinic: clinic?._id}, (err, healthPractitioners) => {
+        if (err) {
+            return res.status(500).send({message: "There was an Error In Getting the Health Practitioners."}).end();
+        }
+
+        return res.status(200).send(healthPractitioners).end();
+    }).populate([{path: "account", populate: "address"}]);
+};

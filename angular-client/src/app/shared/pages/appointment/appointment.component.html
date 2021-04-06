@@ -42,7 +42,7 @@
     <ng-container matColumnDef="actions" stickyEnd>
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index">
-        <button (click)="openEditAppointmentVaccineDetails(element)" *ngIf="showActionDelete" mat-icon-button>
+        <button (click)="openModifyAppointmentDetailsDialog(element)" *ngIf="showActionDelete" mat-icon-button>
           <mat-icon>edit</mat-icon>
         </button>
 
@@ -50,7 +50,7 @@
           <mat-icon>remove_red_eye</mat-icon>
         </button>
         <button (click)="openDeclineAppointmentRequestDialog()" mat-icon-button>
-          <mat-icon>approval</mat-icon>      
+          <mat-icon>approval</mat-icon>
         </button>
 
         <button (click)="openCancelVaccinationDialog(element)" *ngIf="showActionDelete" mat-icon-button color="warn">
