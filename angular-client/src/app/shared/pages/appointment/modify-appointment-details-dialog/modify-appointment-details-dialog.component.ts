@@ -1,13 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {Appointment} from '../../../models/appointment.model';
-import {VaccinesService} from '../../../services/vaccines/vaccines.service';
-import {Vaccine} from '../../../models/vaccine.model';
+import {Appointment} from '../../../../models/appointment.model';
+import {VaccinesService} from '../../../../services/vaccines/vaccines.service';
+import {Vaccine} from '../../../../models/vaccine.model';
 import {Observable} from 'rxjs';
-import {HealthPractitionerService} from '../../../services/health-practitioner/health-practitioner.service';
-import {HealthPractitioner} from '../../../models/healthPractitioner.model';
-import {AppointmentService} from '../../../services/appointment/appointment.service';
+import {HealthPractitionerService} from '../../../../services/health-practitioner/health-practitioner.service';
+import {HealthPractitioner} from '../../../../models/healthPractitioner.model';
+import {AppointmentService} from '../../../../services/appointment/appointment.service';
 
 @Component({
   selector: 'app-modify-appointment-details-dialog',
@@ -46,7 +46,6 @@ export class ModifyAppointmentDetailsDialogComponent implements OnInit {
     });
   }
 
-  // add submit logic
   public submitUpdatedAppointment(): void {
     console.log('submit reached');
 
