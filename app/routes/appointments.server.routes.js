@@ -11,6 +11,7 @@ module.exports = (app) => {
 
     app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
     app.get("/api/getConfirmedAppointmentsByClinicId/:clinicId", appointmentController.getAllConfirmedAppointmentsForClinic);
+    app.get("/api/getConfirmedAppointmentsByPatient/:patientId",appointmentController.getBookedAppointment);
 
     app.route('/api/declineAppointment/:appointmentId')
         .put(medicalAdminController.declineAppointment);
