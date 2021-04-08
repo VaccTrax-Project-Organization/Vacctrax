@@ -17,6 +17,7 @@ exports.getPatientById = (req, res, next, id) => {
 }
 
 exports.getAllPatients = (req, res) => {
+    // only sending firstName and lastName in account for patient
     Patient.find({}, (err, patients) => {
         if (err) {
             return res.status(500).send(err).end();

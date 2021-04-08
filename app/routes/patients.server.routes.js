@@ -7,5 +7,5 @@ module.exports = (app) => {
 
     app.post("/api/patient", patientController.createPatientTest);
 
-    app.get("/api/getAllPatients", patientController.getAllPatients);
+    app.get("/api/patients", patientController.getAllPatients);
 };

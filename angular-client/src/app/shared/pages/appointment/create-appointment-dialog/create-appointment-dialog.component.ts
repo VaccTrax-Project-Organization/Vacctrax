@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -9,31 +9,46 @@ import { AppointmentService } from 'src/app/services/appointment/appointment.ser
 import { HealthPractitionerService } from 'src/app/services/health-practitioner/health-practitioner.service';
 import { VaccinesService } from 'src/app/services/vaccines/vaccines.service';
 import { ModifyAppointmentDetailsDialogComponent } from '../modify-appointment-details-dialog/modify-appointment-details-dialog.component';
+import {PatientService} from "../../../../services/patient/patient.service";
+import {PatientList} from "../../../Models/patientList";
+import {BookAppointmentDTO} from "../../../Models/bookAppointmentDTO";
+import {SubSink} from "subsink";
 
 @Component({
   selector: 'app-create-appointment-dialog',
   templateUrl: './create-appointment-dialog.component.html',
   styleUrls: ['./create-appointment-dialog.component.scss']
 })
-export class CreateAppointmentDialogComponent implements OnInit {
+export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   public modifyApptForm: FormGroup;
   public currentDate: Date;
   public vaccines$: Observable<Vaccine[]>;
+  public patients$: Observable<PatientList[]>;
   public healthPractitioners$: Observable<HealthPractitioner[]>;
+  private subSink: SubSink;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Appointment,
               private dialogRef: MatDialogRef<ModifyAppointmentDetailsDialogComponent>,
               private formBuilder: FormBuilder,
               private vaccineService: VaccinesService,
-              private healthPractitionerService: HealthPractitionerService) { }
+              private healthPractitionerService: HealthPractitionerService,
+              private patientService: PatientService,
+              private appointmentService: AppointmentService) {
+    this.subSink = new SubSink();
+  }
 
   ngOnInit() {
     this.createModifyApptForm();
     this.currentDate = new Date();
     this.vaccines$ = this.vaccineService.getVaccines();
+    this.patients$ = this.patientService.getAllPatients();
 
     const tempClinicId = '6060e1549107f28980861695';
     this.healthPractitioners$ = this.healthPractitionerService.getHealthPractitionersByClinicId(tempClinicId);
+  }
+
+  ngOnDestroy(): void {
+    this.subSink.unsubscribe();
   }
 
   private createModifyApptForm(): void {
@@ -52,14 +67,22 @@ export class CreateAppointmentDialogComponent implements OnInit {
     console.log('submit reached');
 
     if (this.modifyApptForm.valid) {
-      const {vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime} = this.modifyApptForm.getRawValue();
+      const {vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime, patient, reason } = this.modifyApptForm.getRawValue();
       const startTime = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime);
 
-      const createdAppointment = {...this.data, vaccine, vaccineDose, healthPractitioner, startTime};
+      // TODO replace the hardcoded clinic Id with the clinic Id of Medical Admin Signed In when Sign in is implemented
+      const bookAppointmentPayload = {...new BookAppointmentDTO(), vaccineDose, startTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: '6060e1549107f28980861695', reason};
 
-      // TODO: Integrate API
+      console.log(bookAppointmentPayload);
 
-      this.dialogRef.close(true);
+      this.subSink.add(this.appointmentService.bookAppointment(bookAppointmentPayload).subscribe(result => {
+        console.log(result);
+        this.dialogRef.close(true);
+      }, err => {
+        console.log(err);
+        this.dialogRef.close(true);
+      }));
     }
   }
 }
+
