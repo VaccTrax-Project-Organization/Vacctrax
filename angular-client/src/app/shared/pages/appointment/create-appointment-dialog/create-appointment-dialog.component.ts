@@ -14,6 +14,8 @@ import {PatientList} from '../../../Models/patientList';
 import {BookAppointmentDTO} from '../../../Models/bookAppointmentDTO';
 import {SubSink} from 'subsink';
 import { Role } from 'src/app/models/enums/role.enum';
+import { ClinicService } from 'src/app/services/clinic/clinic.service';
+import { Clinic } from 'src/app/models/clinic.model';
 
 // tslint:disable: max-line-length
 @Component({
@@ -26,6 +28,7 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   public currentDate: Date;
   public vaccines$: Observable<Vaccine[]>;
   public patients$: Observable<PatientList[]>;
+  public clinics: Clinic[];
   public healthPractitioners$: Observable<HealthPractitioner[]>;
   public modularLabels;
   public isPatient: boolean;
@@ -35,15 +38,25 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
               private dialogRef: MatDialogRef<ModifyAppointmentDetailsDialogComponent>,
               private formBuilder: FormBuilder,
               private vaccineService: VaccinesService,
+              private clinicService: ClinicService,
               private healthPractitionerService: HealthPractitionerService,
               private patientService: PatientService,
               private appointmentService: AppointmentService) {
+    this.clinics = [];
     if (data) {
       this.isPatient = data.role === Role.PATIENT;
 
       if (this.isPatient) {
+        let title = '';
+
+        if (this.data.appointment){
+          title = 'Request Change Appointment';
+        } else {
+          title = 'Request Appointment';
+        }
+
         this.modularLabels = {
-          title: 'Request Appointment',
+          title,
           appointmentDate: 'Preferred Date',
           appointmentTime: 'Preferred Time',
         }
@@ -59,6 +72,10 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.subSink.add(this.clinicService.getClinics().subscribe(res => {
+      this.clinics = res;
+    }));
+
     this.createModifyApptForm();
     this.currentDate = new Date();
     this.vaccines$ = this.vaccineService.getVaccines();
@@ -73,16 +90,30 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   }
 
   private createModifyApptForm(): void {
-    this.modifyApptForm = this.formBuilder.group({
-      patient: ['', Validators.required],
-      clinic: ['', Validators.required],
-      vaccine: ['', Validators.required],
-      vaccineDose: ['', Validators.required],
-      healthPractitioner: ['', Validators.required],
-      appointmentDate: [new Date(Date.now()) || '', Validators.required],
-      appointmentTime: [new Date(Date.now()).toISOString().match(/\d\d:\d\d/)[0] || '', Validators.required],
-      reason: ['', Validators.required],
-    });
+    if (this.data?.appointment) {
+      const appointment = this.data.appointment;
+      this.modifyApptForm = this.formBuilder.group({
+        patient: [appointment.patient._id, Validators.required],
+        clinic: [appointment.clinic._id, Validators.required],
+        vaccine: [appointment.vaccine._id, Validators.required],
+        vaccineDose: [appointment.vaccineDose, Validators.required],
+        healthPractitioner: [appointment.healthPractitioner, Validators.required],
+        appointmentDate: [new Date(appointment.preferredDate) || '', Validators.required],
+        appointmentTime: [new Date(appointment.preferredTime).toISOString().match(/\d\d:\d\d/)[0] || '', Validators.required],
+        reason: [appointment.reason, Validators.required],
+      });
+    } else {
+      this.modifyApptForm = this.formBuilder.group({
+        patient: ['', Validators.required],
+        clinic: ['', Validators.required],
+        vaccine: ['', Validators.required],
+        vaccineDose: ['', Validators.required],
+        healthPractitioner: ['', Validators.required],
+        appointmentDate: [new Date(Date.now()) || '', Validators.required],
+        appointmentTime: [new Date(Date.now()).toISOString().match(/\d\d:\d\d/)[0] || '', Validators.required],
+        reason: ['', Validators.required],
+      });
+    }
 
     // disable validation for hidden fields
     if(this.isPatient){
@@ -117,5 +148,6 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
 }
 
 export interface CreateAppointmentDialogModel{
+  appointment?: Appointment;
   role: Role;
 }

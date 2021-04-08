@@ -116,6 +116,15 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         break;
 
       case Role.PATIENT:
+        dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
+          panelClass: 'dialog-panel-class',
+          width: '650px',
+          height: 'auto',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+          data: {appointment: element, role: this.roleInput} as CreateAppointmentDialogModel
+        });
         break;
       default:
         break;
