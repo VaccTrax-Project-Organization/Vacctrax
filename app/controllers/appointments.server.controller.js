@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Appointment = mongoose.model('Appointment');
 const Account = mongoose.model("Account");
+const Patient = mongoose.model("Patient");
+const HealthPractitioner = mongoose.model("HealthPractitioner");
+const Clinic = mongoose.model("Clinic");
+const Vaccine = mongoose.model("Vaccine");
 
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
@@ -95,22 +99,61 @@ exports.getPatientAppointmentDetail = (req, res, next) => {
 
 exports.bookAppointment = (req, res) => {
     console.log(req.body);
-    let appointment = new Appointment(req.body);
+    Promise.all([findIfPatientExistsByPatientId(req.body.patientId, res),
+        findIfHealthPractitionerExistsByPractitionerId(req.body.healthPractitionerId, res),
+        findIfClinicExistsByClinicId(req.body.clinicId, res),
+        findIfVaccineExistsByVaccineId(req.body.vaccineId, res)
+    ]).then((val) => {
+        const patient = val[0];
+        const healthPractitioner = val[1];
+        const clinic = val[2];
+        const vaccine = val[3];
+        if (patient && healthPractitioner && clinic && vaccine) {
+            let appointment = new Appointment(req.body);
+            appointment.reason = req.body.reason;
+            appointment.preferredDate = req.body.preferredDate;
+            appointment.preferredTime = req.body.preferredTime;
+            appointment.startTime = req.body.startTime;
+            appointment.endTime = req.body.endTime;
+            appointment.type = 'CONFIRMED';
+            appointment.clinic = clinic;
+            appointment.patient = patient;
+            appointment.vaccine = vaccine;
+            appointment.healthPractitioner = healthPractitioner;
 
-    appointment.save((err, app) => {
-        if (err) {
-            res.status(500).send({
-                error: {
-                    message: err.message
+            appointment.save((err, app) => {
+                if (err) {
+                    return res.status(500).send(err).end();
+                } else {
+                    return res.status(200).send(app);
                 }
-            });
-        } else {
-            console.log(app);
-            res.status(200).send({
-                payload: app
-            });
+            })
         }
+    }).catch((err) => {
+        console.log(err);
     });
+    // findIfPatientExistsByPatientId(req.body.patientId, res).then((patient) => {
+    //     console.log(patient);
+    //     res.status(200).send(patient);
+    // });
+    // console.log(app);
+    // res.status(200).send(app);
+    // let appointment = new Appointment(req.body);
+    //
+    // appointment.save((err, app) => {
+    //     if (err) {
+    //         res.status(500).send({
+    //             error: {
+    //                 message: err.message
+    //             }
+    //         });
+    //     } else {
+    //         console.log(app);
+    //         res.status(200).send({
+    //             payload: app
+    //         });
+    //     }
+    // });
 }
 
 exports.updateAppointment = (req, res, next) => {
@@ -143,6 +186,71 @@ exports.getAppointmentById = (req, res, next, id) => {
         }
     });
 };
+
+function findIfPatientExistsByPatientId(patientId, res) {
+    return new Promise(resolve => {
+        Patient.findById(patientId, (err, patient) => {
+            if (err) {
+                res.status(500).send(err).end();
+            } else {
+                if (patient) {
+                    resolve(patient);
+                } else {
+                    res.status(404).send('Patient with the given Id Not found.').end();
+                }
+            }
+        });
+    });
+}
+
+function findIfHealthPractitionerExistsByPractitionerId(healthPractitionerId, res) {
+    return new Promise(resolve => {
+        HealthPractitioner.findById(healthPractitionerId, (err, practitioner) => {
+            if (err) {
+                res.status(500).send(err).end();
+            } else {
+                if (practitioner) {
+                    resolve(practitioner);
+                } else {
+                    res.status(404).send('Health Practitioner with the given Id Not found.').end();
+                }
+            }
+        });
+    });
+}
+
+function findIfClinicExistsByClinicId(clinicId, res) {
+    return new Promise(resolve => {
+        Clinic.findById(clinicId, (err, clinic) => {
+            if (err) {
+                res.status(500).send(err).end();
+            } else {
+                if (clinic) {
+                    resolve(clinic);
+                } else {
+                    res.status(404).send('Clinic with the given Id Not found.').end();
+                }
+            }
+        });
+    });
+}
+
+function findIfVaccineExistsByVaccineId(vaccineId, res) {
+    return new Promise(resolve => {
+        console.log(vaccineId);
+        Vaccine.findById(vaccineId, (err, vaccine) => {
+            if (err) {
+                res.status(500).send(err).end();
+            } else {
+                if (vaccine) {
+                    resolve(vaccine);
+                } else {
+                    res.status(404).send('Vaccine with the given Id Not found.').end();
+                }
+            }
+        });
+    });
+}
 
 exports.testCreate = (req, res, next) => {
 

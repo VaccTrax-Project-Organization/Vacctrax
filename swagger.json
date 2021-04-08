@@ -56,6 +56,46 @@
         }
       }
     },
+    "/bookAppointment": {
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Book an Appointment",
+        "operationId": "bookAppointment",
+        "requestBody": {
+          "description": "Book Appointment Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestAppointmentDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/getAllAppointmentsByClinicId/{clinicId}": {
       "get": {
         "tags": [
@@ -82,6 +122,38 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getAllPatients": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Get the Patients in the system.",
+        "operationId": "getAllPatients",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Patient"
                   }
                 }
               }
