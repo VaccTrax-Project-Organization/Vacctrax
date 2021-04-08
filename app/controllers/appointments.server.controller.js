@@ -124,6 +124,47 @@ exports.updateAppointment = (req, res, next) => {
     });
 };
 
+exports.getBookedAppointment = (req,res,next)=>{
+    //first get all the booked appointments for the 
+    const patient = res.locals.patient;
+    Appointment.find({patient: patient,type:"CONFIRMED"}, (err, appointments) => {
+        
+        if (err) {
+            return res.status(500).send(err).end();
+        }
+        //will return a list of appointments with the confimred status. The user will be be able then select which of the booked appointment they want to access and we use the GetPaitentAppointment method to get the specified one
+        return res.status(200).send(appointments);
+        //populate will auto fill the reference Id's with the actual object of each listed (including their ids)
+    }).populate([
+        "clinic",
+        "vaccine",
+        {path: "patient", populate: {path: "account"}},
+        {path: "healthPractitioner", populate: {path: "account"}}
+    ]);
+}
+
+
+exports.getRequestedAppointment = (req,res,next)=>{
+    //first get all the booked appointments for the 
+    const patient = res.locals.patient;
+    Appointment.find({patient: patient,type:"REQUESTED"}, (err, appointments) => {
+        
+        if (err) {
+            return res.status(500).send(err).end();
+        }
+        //will return a list of appointments with the REQUESTED status. The user will be be able then select which of the Requested appointment they want to access and we use the GetPaitentAppointment method to get the specified one
+        return res.status(200).send(appointments);
+        //populate will auto fill the reference Id's with the actual object of each listed (including their ids)
+    }).populate([
+        "clinic",
+        "vaccine",
+        {path: "patient", populate: {path: "account"}},
+        {path: "healthPractitioner", populate: {path: "account"}}
+    ]);
+}
+
+
+
 // to be implemented in the future
 exports.deleteAppointment = (req, res, next) => {
 
