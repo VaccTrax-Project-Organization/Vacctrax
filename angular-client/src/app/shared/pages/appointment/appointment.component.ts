@@ -87,49 +87,44 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  public openEditAppointmentVaccineDetails(element: Appointment) {
+  public openModifyAppointmentDetailsDialog(element: Appointment) {
     let dialogRef;
-    if (this.roleInput === Role.HEALTH_PRACTITIONER){
-      dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
-        panelClass: 'dialog-panel-class',
-        width: '650px',
-        height: 'auto',
-        disableClose: true,
-        autoFocus: false,
-        restoreFocus: false,
-        data: element
-      });
+
+    switch(this.roleInput){
+      case Role.MEDICAL_ADMIN:
+        dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
+          panelClass: 'dialog-panel-class',
+          width: '650px',
+          height: 'auto',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+          data: element
+        });
+        break;
+
+      case Role.HEALTH_PRACTITIONER:
+        dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
+          panelClass: 'dialog-panel-class',
+          width: '650px',
+          height: 'auto',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+          data: element
+        });
+        break;
+
+      case Role.PATIENT:
+        break;
+      default:
+        break;
     }
 
-    if (this.roleInput === Role.HEALTH_PRACTITIONER){
-      dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
-        panelClass: 'dialog-panel-class',
-        width: '650px',
-        height: 'auto',
-        disableClose: true,
-        autoFocus: false,
-        restoreFocus: false,
-        data: element
-      });
-    }
 
     if (dialogRef){
       this.emitModify(dialogRef);
     }
-  }
-
-  public openModifyAppointmentDetailsDialog(element: Appointment) {
-    const dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
-      panelClass: 'dialog-panel-class',
-      width: '650px',
-      height: 'auto',
-      disableClose: true,
-      autoFocus: false,
-      restoreFocus: false,
-      data: element
-    });
-
-    this.emitModify(dialogRef);
   }
 
   public openViewAppointmentDialog(element: Appointment) {
