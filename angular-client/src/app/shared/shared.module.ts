@@ -12,6 +12,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {ModifyAppointmentDetailsDialogComponent} from './pages/appointment/modify-appointment-details-dialog/modify-appointment-details-dialog.component';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { CreateAppointmentDialogComponent } from './pages/appointment/create-appointment-dialog/create-appointment-dialog.component';
+import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dialog/add-update-vaccine-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CreateAppointmentDialogComponent } from './pages/appointment/create-app
     PatientFullNamePipe,
     VaccineHistoryComponent,
     ModifyAppointmentDetailsDialogComponent,
-    CreateAppointmentDialogComponent
+    CreateAppointmentDialogComponent,
+    AddUpdateVaccineDialogComponent
   ],
 
   exports: [
