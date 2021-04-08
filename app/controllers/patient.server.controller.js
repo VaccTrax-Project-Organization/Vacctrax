@@ -16,6 +16,16 @@ exports.getPatientById = (req, res, next, id) => {
     });
 }
 
+exports.getAllPatients = (req, res) => {
+    Patient.find({}, (err, patients) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(patients);
+        }
+    }).lean().populate('account', 'firstName lastName');
+}
+
 exports.createPatientTest = (req, res, next) => {
 
     console.log(req.body);

@@ -6,4 +6,6 @@ module.exports = (app) => {
     app.param("patientId", patientController.getPatientById);
 
     app.post("/api/patient", patientController.createPatientTest);
+
+    app.get("/api/getAllPatients", patientController.getAllPatients);
 };
