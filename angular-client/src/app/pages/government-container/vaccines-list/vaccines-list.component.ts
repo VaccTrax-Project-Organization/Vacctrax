@@ -29,7 +29,7 @@ export class VaccinesListComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(public dialog: MatDialog,
               public vaccinesService: VaccinesService) {
     this.subSink = new SubSink();
-    this.displayedColumns = ['vaccineName', 'approvedDateTime', 'type', 'actions'];
+    this.displayedColumns = ['vaccineName', 'approvedDateTime', 'type', 'approvedProvinces', 'actions'];
     this.dataSource = new MatTableDataSource<Vaccine>();
   }
 
@@ -70,6 +70,16 @@ export class VaccinesListComponent implements OnInit, AfterViewInit, OnDestroy {
         vaccine: element
       }
     });
+    this.subSink.add(dialogRef.afterClosed().subscribe((vaccine: Vaccine) => {
+      // the newly updated vaccine object will contain the existing vaccine id for update
+      vaccine._id = element._id;
+      vaccine.isRationed = element.isRationed;
+      vaccine.vaccineId = element.vaccineId;
+      this.subSink.add(this.vaccinesService.updateVaccine(vaccine).subscribe(updateResponse => {
+        this.getVaccineTableData();
+      }));
+    }));
+    
   }
 
   public openAddVaccineDialog(): void {
@@ -79,6 +89,12 @@ export class VaccinesListComponent implements OnInit, AfterViewInit, OnDestroy {
         title: 'Add',
       }
     });
+
+    this.subSink.add(dialogRef.afterClosed().subscribe((vaccine: Vaccine) => {
+      this.subSink.add(this.vaccinesService.addVaccine(vaccine).subscribe(res => {
+        this.getVaccineTableData();
+      }));
+    }));  
   }
 
   private getVaccineTableData(): void {

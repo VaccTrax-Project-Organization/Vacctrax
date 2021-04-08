@@ -25,7 +25,7 @@ import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dial
     VaccineHistoryComponent,
     ModifyAppointmentDetailsDialogComponent,
     CreateAppointmentDialogComponent,
-    AddUpdateVaccineDialogComponent
+    AddUpdateVaccineDialogComponent,
   ],
 
   exports: [

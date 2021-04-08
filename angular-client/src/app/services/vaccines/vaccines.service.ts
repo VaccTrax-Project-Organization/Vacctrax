@@ -29,8 +29,16 @@ export class VaccinesService extends Service {
           return throwError(err);
         }));
   }
-  public updateVaccine(vaccine: Vaccine): Observable<Vaccine[]> {
-    return this.http.put<Vaccine[]>(`${this.url}/vaccines/${vaccine._id}`, vaccine, {headers: this.httpHeader, withCredentials: true})
+  public updateVaccine(vaccine: Vaccine): Observable<Vaccine> {
+    return this.http.put<Vaccine>(`${this.url}/vaccines/${vaccine._id}`, vaccine, {headers: this.httpHeader, withCredentials: true})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public addVaccine(vaccine: Vaccine): Observable<Vaccine> {
+    return this.http.post<Vaccine>(`${this.url}/addVaccine`, vaccine, {headers: this.httpHeader, withCredentials: true})
       .pipe(
         catchError(err => {
           return throwError(err);
