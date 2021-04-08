@@ -1,0 +1,17 @@
+:host {
+  mat-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+  }
+
+  button {
+    background-color: #8F190A !important;
+    color: #F6EA8C !important;
+    width: 120px;
+    height: 60px;
+  }
+}
