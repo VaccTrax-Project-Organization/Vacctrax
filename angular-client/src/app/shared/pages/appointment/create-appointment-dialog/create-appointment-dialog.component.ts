@@ -16,7 +16,6 @@ import {SubSink} from 'subsink';
 import { Role } from 'src/app/models/enums/role.enum';
 
 // tslint:disable: max-line-length
-
 @Component({
   selector: 'app-create-appointment-dialog',
   templateUrl: './create-appointment-dialog.component.html',
@@ -84,6 +83,14 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
       appointmentTime: [new Date(Date.now()).toISOString().match(/\d\d:\d\d/)[0] || '', Validators.required],
       reason: ['', Validators.required],
     });
+
+    // disable validation for hidden fields
+    if(this.isPatient){
+      this.modifyApptForm.get('patient').clearValidators();
+      this.modifyApptForm.get('healthPractitioner').clearValidators();
+    } else {
+      this.modifyApptForm.get('clinic').clearValidators();
+    }
   }
 
   public submitUpdatedAppointment(): void {
