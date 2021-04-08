@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
@@ -14,7 +15,6 @@ import {AppointmentService} from 'src/app/services/appointment/appointment.servi
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
 import {ModifyAppointmentDetailsDialogComponent} from './modify-appointment-details-dialog/modify-appointment-details-dialog.component';
 import { CreateAppointmentDialogComponent, CreateAppointmentDialogModel } from './create-appointment-dialog/create-appointment-dialog.component';
-
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
@@ -36,7 +36,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
-  constructor(public dialog: MatDialog, private appointmentService: AppointmentService) {
+  constructor(private router: Router, public dialog: MatDialog, private appointmentService: AppointmentService,) {
     this.subSink = new SubSink();
     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
     this.dataSource = new MatTableDataSource<Appointment>();
@@ -65,7 +65,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   public addNewClicked(){
     let dialogRef;
 
-    if (this.roleInput === Role.MEDICAL_ADMIN || this.roleInput === Role.PATIENT){
+    if (this.roleInput === Role.MEDICAL_ADMIN){
       dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',
@@ -75,6 +75,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         restoreFocus: false,
         data: {role: this.roleInput} as CreateAppointmentDialogModel
       });
+    }
+
+    if (this.roleInput === Role.PATIENT){
+      this.router.navigate(['/patient/requestAppointment']);
     }
 
     // other dialog here
