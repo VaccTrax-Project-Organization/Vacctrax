@@ -6,6 +6,7 @@ import {Appointment} from '../../models/appointment.model';
 import {AppointmentRequest} from '../../models/appointment-request.model';
 import {catchError} from 'rxjs/operators';
 import {Service} from '../service.class';
+import {BookAppointmentDTO} from "../../shared/Models/bookAppointmentDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,17 @@ export class AppointmentService extends Service {
   public cancelAppointment(appointment: Appointment): Observable<Appointment[]>{
     const reqBody = {type:appointment.type};
     return this.http.put<Appointment[]>(`${this.url}/appointments/${appointment._id}`, reqBody,{headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  /**
+   * Used By Medical Admin to Call the api that books the appointment for a patient
+   * */
+  public bookAppointment(bookAppointmentPayload: BookAppointmentDTO): Observable<Appointment>{
+    return this.http.post<Appointment>(this.url + '/bookAppointment', bookAppointmentPayload, {headers: this.httpHeader})
       .pipe(
         catchError(err => {
           return throwError(err);

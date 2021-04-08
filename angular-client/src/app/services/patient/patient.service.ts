@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {Appointment} from '../../models/appointment.model';
 import {catchError} from 'rxjs/operators';
 import {Service} from '../service.class';
+import {PatientList} from "../../shared/Models/patientList";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,13 @@ export class PatientService extends Service{
   public getPatient(): Observable<Patient>{
     this.http.get(this.url, {headers: this.httpHeader} )
     return of(this.mockPatient);
+  }
+
+  public getAllPatients(): Observable<PatientList[]>{
+    return this.http.get<PatientList[]>(this.url + '/patients', {headers: this.httpHeader} )
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
   }
 }
