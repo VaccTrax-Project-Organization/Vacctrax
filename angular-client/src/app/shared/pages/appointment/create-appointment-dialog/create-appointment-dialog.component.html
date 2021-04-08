@@ -9,7 +9,10 @@
         <div class="col-6">
           <mat-form-field appearance="outline">
             <mat-label>Patient Name</mat-label>
-            <input type="text" matInput formControlName="patient">
+            <mat-select formControlName="patient">
+              <mat-option *ngFor="let patient of this.patients$ | async"
+                          [value]="patient._id">{{ patient.account | patientfullname}}</mat-option>
+            </mat-select>
             <mat-error>Patient is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
