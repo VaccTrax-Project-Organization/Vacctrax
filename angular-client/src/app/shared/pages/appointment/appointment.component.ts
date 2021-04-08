@@ -13,7 +13,7 @@ import {UpdateAppointmentVaccineDetailsDialogComponent} from './update-appointme
 import {AppointmentService} from 'src/app/services/appointment/appointment.service';
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
 import {ModifyAppointmentDetailsDialogComponent} from './modify-appointment-details-dialog/modify-appointment-details-dialog.component';
-import { CreateAppointmentDialogComponent } from './create-appointment-dialog/create-appointment-dialog.component';
+import { CreateAppointmentDialogComponent, CreateAppointmentDialogModel } from './create-appointment-dialog/create-appointment-dialog.component';
 
 @Component({
   selector: 'app-appointment',
@@ -64,7 +64,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public addNewClicked(){
     let dialogRef;
-    if (this.roleInput === Role.MEDICAL_ADMIN){
+
+    if (this.roleInput === Role.MEDICAL_ADMIN || this.roleInput === Role.PATIENT){
       dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',
@@ -72,12 +73,11 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         disableClose: true,
         autoFocus: false,
         restoreFocus: false,
-        data: new Appointment()
+        data: {role: this.roleInput} as CreateAppointmentDialogModel
       });
     }
 
     // other dialog here
-
     if (dialogRef){
       this.emitModify(dialogRef);
     }

@@ -9,10 +9,13 @@ import { AppointmentService } from 'src/app/services/appointment/appointment.ser
 import { HealthPractitionerService } from 'src/app/services/health-practitioner/health-practitioner.service';
 import { VaccinesService } from 'src/app/services/vaccines/vaccines.service';
 import { ModifyAppointmentDetailsDialogComponent } from '../modify-appointment-details-dialog/modify-appointment-details-dialog.component';
-import {PatientService} from "../../../../services/patient/patient.service";
-import {PatientList} from "../../../Models/patientList";
-import {BookAppointmentDTO} from "../../../Models/bookAppointmentDTO";
-import {SubSink} from "subsink";
+import {PatientService} from '../../../../services/patient/patient.service';
+import {PatientList} from '../../../Models/patientList';
+import {BookAppointmentDTO} from '../../../Models/bookAppointmentDTO';
+import {SubSink} from 'subsink';
+import { Role } from 'src/app/models/enums/role.enum';
+
+// tslint:disable: max-line-length
 
 @Component({
   selector: 'app-create-appointment-dialog',
@@ -25,15 +28,34 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   public vaccines$: Observable<Vaccine[]>;
   public patients$: Observable<PatientList[]>;
   public healthPractitioners$: Observable<HealthPractitioner[]>;
+  public modularLabels;
+  public isPatient: boolean;
   private subSink: SubSink;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Appointment,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: CreateAppointmentDialogModel,
               private dialogRef: MatDialogRef<ModifyAppointmentDetailsDialogComponent>,
               private formBuilder: FormBuilder,
               private vaccineService: VaccinesService,
               private healthPractitionerService: HealthPractitionerService,
               private patientService: PatientService,
               private appointmentService: AppointmentService) {
+    if (data) {
+      this.isPatient = data.role === Role.PATIENT;
+
+      if (this.isPatient) {
+        this.modularLabels = {
+          title: 'Request Appointment',
+          appointmentDate: 'Preferred Date',
+          appointmentTime: 'Preferred Time',
+        }
+      } else {
+        this.modularLabels = {
+          title: 'Create Appointment',
+          appointmentDate: 'Appointment Date',
+          appointmentTime: 'Appointment Time',
+        }
+      }
+    }
     this.subSink = new SubSink();
   }
 
@@ -54,6 +76,7 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   private createModifyApptForm(): void {
     this.modifyApptForm = this.formBuilder.group({
       patient: ['', Validators.required],
+      clinic: ['', Validators.required],
       vaccine: ['', Validators.required],
       vaccineDose: ['', Validators.required],
       healthPractitioner: ['', Validators.required],
@@ -86,3 +109,6 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
   }
 }
 
+export interface CreateAppointmentDialogModel{
+  role: Role;
+}
