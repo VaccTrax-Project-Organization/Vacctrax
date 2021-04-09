@@ -4,6 +4,7 @@ import {Patient} from '../../../models/patient.model';
 import {SubSink} from 'subsink';
 import {PatientService} from '../../../services/patient/patient.service';
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
+import {AppointmentService} from "../../../services/appointment/appointment.service";
 
 @Component({
   selector: 'app-vaccine-history',
@@ -17,7 +18,7 @@ export class VaccineHistoryComponent implements OnInit, OnDestroy {
   subSink: SubSink;
   public dataSource =[];
 
-  constructor(private patientService: PatientService, private vaccineService: VaccinesService) {
+  constructor(private appointmentService: AppointmentService, private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
     this.role = Role.PATIENT;
     this.subSink.add(patientService.getPatient().subscribe(res => {
@@ -28,7 +29,7 @@ export class VaccineHistoryComponent implements OnInit, OnDestroy {
       console.log(res);
     }));
 
-    this.subSink.add(patientService.getPatientAppointments().subscribe(res => {
+    this.subSink.add(appointmentService.getAppointmentsByPatient().subscribe(res => {
       console.log(res);
       this.dataSource = res;
     },error => {

@@ -23,7 +23,10 @@ exports.createHealthPractitionerTest = (req, res, next) => {
 
                 account.save((err, acc) => {
                     if (err) {
-                        return res.status(500).send({message: "There was an Error Creating the Patient Account.", err: err}).end();
+                        return res.status(500).send({
+                            message: "There was an Error Creating the Patient Account.",
+                            err: err
+                        }).end();
                     } else {
                         if (acc) {
 
@@ -36,13 +39,19 @@ exports.createHealthPractitionerTest = (req, res, next) => {
                                         practitioner.account = acc;
                                         practitioner.clinic = clinic
 
-                                        practitioner.save((err, pract)=> {
+                                        practitioner.save((err, pract) => {
                                             if (err) {
-                                                return res.status(500).send({message: "There was an Error Creating the practitioner.", err: err}).end();
+                                                return res.status(500).send({
+                                                    message: "There was an Error Creating the practitioner.",
+                                                    err: err
+                                                }).end();
                                             } else {
                                                 if (pract) {
                                                     console.log(pract);
-                                                    return res.status(200).send({account: acc, practitioner: practitioner});
+                                                    return res.status(200).send({
+                                                        account: acc,
+                                                        practitioner: practitioner
+                                                    });
                                                 } else {
                                                     return res.status(500).send({message: "There was an Error Creating the practitioner."}).end();
                                                 }
@@ -59,6 +68,55 @@ exports.createHealthPractitionerTest = (req, res, next) => {
             } else {
                 return res.status(500).send({message: "There was an Error Creating the Patient Address."}).end();
             }
+        }
+    });
+}
+
+exports.getHealthPractitionersByClinicId = (req, res, next) => {
+    const clinic = res.locals.clinic;
+    HealthPractitioner.find({clinic: clinic?._id}, (err, healthPractitioners) => {
+        if (err) {
+            return res.status(500).send({message: "There was an Error In Getting the Health Practitioners."}).end();
+        }
+
+        return res.status(200).send(healthPractitioners).end();
+    }).populate([{path: "account", populate: "address"}]);
+};
+
+
+exports.getHealthPractitionerDetails = (req,res,next) => {
+    const practitioner = res.locals.practitioner;
+    HealthPractitioner.find({id: practitioner?._id},(err, practitioner) =>{
+        if (err) {
+            return res.status(500).send({message: "There was an Error In Finding The Health Practioner."}).end();
+        }
+        return res.status(200).send(healthPractitioners).end();
+    }).populate([{path: "account", populate: "address"}]);
+}
+
+exports.updateHealthPractitionerDetails = (req,res,next) => {
+    console.log("req.body", req.body);
+    HealthPractitioner.findByIdAndUpdate(res.locals.practitioner._id, {$set: req.body}, {new: true}, (err, practitioner) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(practitioner).end();
+        }
+    });
+
+}
+
+
+//middleware to get the pracitioner by their id
+exports.getHealthPracitionerById = (req,res,next,id) =>{
+    HealthPractitioner.findById(id, (err, practitioner) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else if (!practitioner) {
+            return res.status(404).send({message: `Practitioner with the id of ${id} not found`}).end();
+        } else {
+            res.locals.practitioner = practitioner;
+            return next();
         }
     });
 }

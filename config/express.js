@@ -31,14 +31,25 @@ module.exports = function () {
   );
 
   app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", config.frontendDomain);
+    const allowedOrigins = [config.frontendDomain, config.frontendLocalDomain];
+    const origin = req.headers.origin;
+    console.log("origin", origin);
+    console.log("allowedOrigins", allowedOrigins);
+    // if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    // }
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
 
   app.use(cors({
+    // I HAVE TO COMMENT OUT THIS origin: '*', cause for some reason if I don't I get a CORS error when calling get for vaccines
+    // This is a temporary fix, I'll probably uncomment this later - Asad
     origin: config.frontendDomain, // specify the domain origin that is allowed to make requests to this server
+
+    //For now, this previous solution works and fixes the issue, will figure out whats causing the above later
+    // origin: config.frontendLocalDomain, // specify the domain origin that is allowed to make requests to this server
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }));
 
