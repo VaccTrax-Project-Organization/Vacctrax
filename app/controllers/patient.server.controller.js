@@ -16,6 +16,29 @@ exports.getPatientById = (req, res, next, id) => {
     });
 }
 
+//update the patient via it's unique id
+exports.updatePatientDetails = (req,res,next,id) => {
+    console.log("req.body", req.body);
+    Patient.findByIdAndUpdate(res.locals.patient._id, {$set: req.body}, {new: true}, (err, patient) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(patient).end();
+        }
+    });
+}
+
+exports.getAllPatients = (req, res) => {
+    // only sending firstName and lastName in account for patient
+    Patient.find({}, (err, patients) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(patients);
+        }
+    }).lean().populate('account', 'firstName lastName');
+}
+
 exports.createPatientTest = (req, res, next) => {
 
     console.log(req.body);
