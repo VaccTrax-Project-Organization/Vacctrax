@@ -64,7 +64,7 @@ exports.createPatientTest = (req, res, next) => {
                             patient.account = acc;
                             patient.save((err, pat)=> {
                                 if (err) {
-                                    return res.status(500).send({message: "There was an Error Creating the Patient."}).end();
+                                    return res.status(500).send({message: "There was an Error Creating the Patient.", err: err}).end();
                                 } else {
                                     if (pat) {
                                         console.log(pat);

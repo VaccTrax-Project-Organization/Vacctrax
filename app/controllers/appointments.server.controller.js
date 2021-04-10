@@ -125,7 +125,7 @@ exports.bookAppointment = (req, res) => {
                 if (err) {
                     return res.status(500).send(err).end();
                 } else {
-                    return res.status(200).send(app);
+                    return res.status(200).send(app).end();
                 }
             })
         }
