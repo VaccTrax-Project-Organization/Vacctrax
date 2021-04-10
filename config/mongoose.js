@@ -21,7 +21,6 @@ module.exports = function () {
     require("../app/models/clinic.server.model");
     require("../app/models/address.server.model");
     require("../app/models/appointment.server.model");
-    require("../app/models/appointment-request.server.model");
     require("../app/models/healthPractitioner.server.model");
     require("../app/models/medicalAdmin.server.model");
     require("../app/models/patient.server.model");

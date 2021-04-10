@@ -96,7 +96,7 @@ module.exports = function () {
   require("../app/routes/index.server.routes.js")(app);
   require("../app/routes/appointments.server.routes.js")(app);
   require("../app/routes/clinics.server.routes.js")(app);
-  require("../app/routes/vaccine.server.routes.js")(app);
+  require("../app/routes/vaccine.server.route.js")(app);
   require("../app/routes/patients.server.routes.js")(app);
   require("../app/routes/healthPractitioners.server.routes.js")(app);
   require("../app/routes/patients.server.routes.js")(app);
