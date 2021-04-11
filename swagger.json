@@ -550,6 +550,123 @@
           }
         }
       }
+    },
+    "/signUp": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "summary": "Used to Sign Up a new patient.",
+        "operationId": "patientSignUp",
+        "requestBody": {
+          "description": "Patient Sign Up Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSignupDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/setPasswordVerifyToken": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Verifies if the given token is valid.",
+        "operationId": "verifyTokenSetPassword",
+        "requestBody": {
+          "description": "Verify Token Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TokenVerifyDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/setPassword": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Sets the password for an account.",
+        "operationId": "accountSetPassword",
+        "requestBody": {
+          "description": "Set a password for the patient",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPasswordDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -883,6 +1000,95 @@
             "type": "string"
           }
         }
+      },
+      "PatientSignupDTO": {
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "email",
+          "streetLine1",
+          "postalCode",
+          "province",
+          "city",
+          "healthCardNo"
+        ],
+        "properties": {
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "streetLine1": {
+            "type": "string"
+          },
+          "streetLine2": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "province": {
+            "type": "string",
+            "enum": [
+              "NL", "PE", "NS", "NB",
+              "QC",
+              "ON",
+              "MB",
+              "SK",
+              "AB",
+              "BC",
+              "YT",
+              "NT"
+            ],
+            "default": "ON"
+          },
+          "city": {
+            "type": "string"
+          },
+          "healthCardNo": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenVerifyDTO": {
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "SetPasswordDTO": {
+        "type": "object",
+        "required": [
+          "password",
+          "confirmPassword"
+        ],
+        "properties": {
+          "password": {
+            "type": "string"
+          },
+          "confirmPassword": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
       }
     }
   }
