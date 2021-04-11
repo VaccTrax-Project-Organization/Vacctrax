@@ -1,12 +1,22 @@
 <div class="row">
-  <div class="col text-center"><h3>Create Appointment</h3></div>
+  <div class="col text-center"><h3>{{this.modularLabels.title}}</h3></div>
 </div>
 
 <div class="row content-description">
   <div class="col-12">
     <form [formGroup]="this.modifyApptForm" (ngSubmit)="this.submitUpdatedAppointment()">
       <div class="row">
-        <div class="col-6">
+        <div class="col-6" *ngIf="this.isPatient">
+          <mat-form-field appearance="outline">
+            <mat-label>Clinic</mat-label>
+            <mat-select formControlName="clinic">
+              <mat-option *ngFor="let clinic of clinics" [value]="clinic._id">{{clinic.name}}</mat-option>
+            </mat-select>
+            <mat-error>Clinic is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6" *ngIf="!this.isPatient">
           <mat-form-field appearance="outline">
             <mat-label>Patient Name</mat-label>
             <mat-select formControlName="patient">
@@ -19,7 +29,7 @@
 
         <div class="col-6">
           <mat-form-field appearance="outline">
-            <mat-label>Appointment Date</mat-label>
+            <mat-label>{{this.modularLabels.appointmentDate}}</mat-label>
             <input matInput [matDatepicker]="picker" [min]="this.currentDate" formControlName="appointmentDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -29,7 +39,7 @@
 
         <div class="col-6">
           <mat-form-field appearance="outline">
-            <mat-label>Appointment Time</mat-label>
+            <mat-label>{{this.modularLabels.appointmentTime}}</mat-label>
             <input matInput aria-label="12hr format"
                    [ngxTimepicker]="default"
                    readonly #timeInput
@@ -49,7 +59,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-6">
+        <div class="col-6" *ngIf="!this.isPatient">
           <mat-form-field appearance="outline">
             <mat-label>Doctor</mat-label>
             <mat-select formControlName="healthPractitioner">
