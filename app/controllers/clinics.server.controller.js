@@ -22,7 +22,8 @@ exports.getClinicById = (req, res, next , id) => {
     Clinic.findById( id, (err, clinic) => {
         if (err) {
             // Call the next middleware with an error message
-            return next(err);
+            // return next(err);
+            return res.status(500).send(err).end();
         } else {
             // Set the 'req.clinic' property
             res.locals.clinic = clinic;

@@ -2,9 +2,9 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {SubSink} from 'subsink';
-import {AppointmentService} from '../../../services/appointment/appointment.service';
-import {VaccinesService} from '../../../services/vaccines/vaccines.service';
-import {Vaccine} from '../../../models/vaccine.model';
+import {AppointmentService} from '../../../../services/appointment/appointment.service';
+import {VaccinesService} from '../../../../services/vaccines/vaccines.service';
+import {Vaccine} from '../../../../models/vaccine.model';
 
 @Component({
   selector: 'app-update-appointment-vaccine-details-dialog',

@@ -9,10 +9,10 @@ import {SharedModule} from './shared/shared.module';
 import {AppointmentDetailsComponent} from './pages/appointment-details/appointment-details.component';
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HttpClientModule} from '@angular/common/http';
-import {HealthPractitionerContainerModule} from './pages/health-practitioner-container/health-practitioner-container.module';
 import { RouterModule } from '@angular/router';
-import {UpdateAppointmentVaccineDetailsDialogComponent} from './shared/pages/update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
+import {UpdateAppointmentVaccineDetailsDialogComponent} from './shared/pages/appointment/update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SignupComponent } from './pages/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
     UpdateAppointmentVaccineDetailsDialogComponent,
+    SignupComponent,
   ],
   imports: [
     HttpClientModule,

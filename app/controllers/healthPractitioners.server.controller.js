@@ -82,3 +82,41 @@ exports.getHealthPractitionersByClinicId = (req, res, next) => {
         return res.status(200).send(healthPractitioners).end();
     }).populate([{path: "account", populate: "address"}]);
 };
+
+
+exports.getHealthPractitionerDetails = (req,res,next) => {
+    const practitioner = res.locals.practitioner;
+    HealthPractitioner.find({id: practitioner?._id},(err, practitioner) =>{
+        if (err) {
+            return res.status(500).send({message: "There was an Error In Finding The Health Practioner."}).end();
+        }
+        return res.status(200).send(healthPractitioners).end();
+    }).populate([{path: "account", populate: "address"}]);
+}
+
+exports.updateHealthPractitionerDetails = (req,res,next) => {
+    console.log("req.body", req.body);
+    HealthPractitioner.findByIdAndUpdate(res.locals.practitioner._id, {$set: req.body}, {new: true}, (err, practitioner) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else {
+            return res.status(200).send(practitioner).end();
+        }
+    });
+
+}
+
+
+//middleware to get the pracitioner by their id
+exports.getHealthPracitionerById = (req,res,next,id) =>{
+    HealthPractitioner.findById(id, (err, practitioner) => {
+        if (err) {
+            return res.status(500).send(err).end();
+        } else if (!practitioner) {
+            return res.status(404).send({message: `Practitioner with the id of ${id} not found`}).end();
+        } else {
+            res.locals.practitioner = practitioner;
+            return next();
+        }
+    });
+}

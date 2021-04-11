@@ -3,9 +3,9 @@ import {Account} from './account.class';
 import {Clinic} from './clinic.model';
 
 export class HealthPractitioner extends Account {
-  constructor(public _id: number,
-              public account: Account,
-              public clinic: Clinic) {
+  constructor(public _id: number = null,
+              public account: Account = null,
+              public clinic: Clinic = new Clinic()) {
     super();
   }
 }
