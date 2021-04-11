@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {UpdateAppointmentVaccineDetailsDialogComponent} from './shared/pages/appointment/update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SignupComponent } from './pages/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     AppointmentDetailsComponent,
     ConfirmedAppointmentsComponent,
     UpdateAppointmentVaccineDetailsDialogComponent,
+    SignupComponent,
   ],
   imports: [
     HttpClientModule,

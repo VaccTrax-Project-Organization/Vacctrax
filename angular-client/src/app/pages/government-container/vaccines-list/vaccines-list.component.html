@@ -7,7 +7,7 @@
           <div class="table-container">
             <div class="row mb-2 justify-content-end">
               <div class="col-auto">
-                <button color="primary" *ngIf="showAction" mat-flat-button>Add New</button>
+                <button color="primary" *ngIf="showAction" mat-flat-button (click)="this.openAddVaccineDialog()">Add New</button>
               </div>
             </div>
 
@@ -17,23 +17,28 @@
 
               <ng-container matColumnDef="vaccineName">
                 <mat-header-cell mat-sort-header *matHeaderCellDef>Vaccine Name</mat-header-cell>
-                <mat-cell *matCellDef="let element"></mat-cell>
+                <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="approvedDateTime">
-                <mat-header-cell mat-sort-header *matHeaderCellDef>Approved Date and Time</mat-header-cell>
-                <mat-cell *matCellDef="let element"></mat-cell>
+                <mat-header-cell mat-sort-header *matHeaderCellDef>Shelf Life</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.shelfLife}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="type">
                 <mat-header-cell mat-sort-header *matHeaderCellDef>Type</mat-header-cell>
-                <mat-cell *matCellDef="let element"></mat-cell>
+                <mat-cell *matCellDef="let element">{{element.manufacturer}}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="approvedProvinces">
+                <mat-header-cell mat-sort-header *matHeaderCellDef>Approved Provinces</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.approvedProvinces}}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="actions" stickyEnd>
                 <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
                 <mat-cell *matCellDef="let element; let i = index">
-                  <button *ngIf="showAction" mat-icon-button>
+                  <button *ngIf="showAction" mat-icon-button (click)="this.openUpdateVaccineDialog(element)">
                     <mat-icon>edit</mat-icon>
                   </button>
 
@@ -44,7 +49,7 @@
                     <mat-icon>approval</mat-icon>
                   </button>
 
-                  <button *ngIf="showAction" mat-icon-button color="warn">
+                  <button *ngIf="showAction" mat-icon-button color="warn" (click)="this.openRemoveVaccineDialog(element)">
                     <mat-icon>delete</mat-icon>
                   </button>
                 </mat-cell>
