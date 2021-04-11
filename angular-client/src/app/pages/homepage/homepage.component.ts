@@ -24,8 +24,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
-  // this method should not be within the homepage, its temporary for until we
-  // have the appointment cancellation stuff ready
   public navigateToSignUp(): void {
     this.router.navigateByUrl('/signup').catch(err => console.log(err));
   }

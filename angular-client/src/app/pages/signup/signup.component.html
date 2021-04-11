@@ -1,1 +1,99 @@
-<p>signup works!</p>
+<app-navigation-bar></app-navigation-bar>
+
+<form [formGroup]="this.signUpForm" class="p-5">
+  <div class="row mb-3 mx-0 justify-content-center"><h2>COVID-19 Vaccination Pre-Registration</h2></div>
+  <div class="row mx-0">
+
+    <div class="col-md-6" >
+      <label for="firstName">First Name:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="firstName" matInput type="text" formControlName="firstName">
+        <mat-error>First Name is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="middleName">Middle Name:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="middleName" matInput type="text" formControlName="middleName">
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="lastName">Last Name:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="lastName" matInput type="text" formControlName="lastName">
+        <mat-error>Last Name is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="gender">Gender:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="gender" matInput type="text" formControlName="gender">
+        <mat-error>Gender is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="streetLine1">Street Line 1:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="streetLine1" matInput type="text" formControlName="streetLine1">
+        <mat-error>Street Line 1 is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="streetLine2">Street Line 2:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="streetLine2" matInput type="text" formControlName="streetLine2">
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="postalCode">Postal Code:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="postalCode" matInput type="text" formControlName="postalCode">
+        <mat-error>Postal Code is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="city">City:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="city" matInput type="text" formControlName="city">
+        <mat-error>City is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="phone">Phone:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="phone" matInput type="text" formControlName="phone">
+        <mat-error>Phone is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="healthCard">Health Card:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="healthCard" matInput type="text" formControlName="healthCard">
+        <mat-error>Health Card is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="preferredNotification">Preferred Notification Method:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="preferredNotification" matInput type="text" formControlName="preferredNotification">
+        <mat-error>Preferred Notification Method is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row mx-0">
+    <div class="col-auto">
+      <button mat-raised-button type="submit" class="mr-5 px-4 py-1 mat-flat-button">Sign Up</button>
+    </div>
+  </div>
+</form>
