@@ -11,12 +11,10 @@ const AppointmentSchema = new Schema({
     preferredDate: {
         type: Date,
         default: new Date(),
-        required: "Preferred Date is required",
     },
     preferredTime: {
         type: Date,
         default: new Date(),
-        required: "Preferred Time is required",
     },
     startTime: {
         type: Date,
