@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
@@ -13,8 +14,7 @@ import {UpdateAppointmentVaccineDetailsDialogComponent} from './update-appointme
 import {AppointmentService} from 'src/app/services/appointment/appointment.service';
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
 import {ModifyAppointmentDetailsDialogComponent} from './modify-appointment-details-dialog/modify-appointment-details-dialog.component';
-import { CreateAppointmentDialogComponent } from './create-appointment-dialog/create-appointment-dialog.component';
-
+import { CreateAppointmentDialogComponent, CreateAppointmentDialogModel } from './create-appointment-dialog/create-appointment-dialog.component';
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
@@ -36,7 +36,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
-  constructor(public dialog: MatDialog, private appointmentService: AppointmentService) {
+  constructor(private router: Router, public dialog: MatDialog, private appointmentService: AppointmentService,) {
     this.subSink = new SubSink();
     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
     this.dataSource = new MatTableDataSource<Appointment>();
@@ -64,6 +64,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public addNewClicked(){
     let dialogRef;
+
     if (this.roleInput === Role.MEDICAL_ADMIN){
       dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
         panelClass: 'dialog-panel-class',
@@ -72,60 +73,67 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
         disableClose: true,
         autoFocus: false,
         restoreFocus: false,
-        data: new Appointment()
+        data: {role: this.roleInput} as CreateAppointmentDialogModel
       });
+    }
+
+    if (this.roleInput === Role.PATIENT){
+      this.router.navigate(['/patient/requestAppointment']);
     }
 
     // other dialog here
-
-    if (dialogRef){
-      this.emitModify(dialogRef);
-    }
-  }
-
-  public openEditAppointmentVaccineDetails(element: Appointment) {
-    let dialogRef;
-    if (this.roleInput === Role.HEALTH_PRACTITIONER){
-      dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
-        panelClass: 'dialog-panel-class',
-        width: '650px',
-        height: 'auto',
-        disableClose: true,
-        autoFocus: false,
-        restoreFocus: false,
-        data: element
-      });
-    }
-
-    if (this.roleInput === Role.HEALTH_PRACTITIONER){
-      dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
-        panelClass: 'dialog-panel-class',
-        width: '650px',
-        height: 'auto',
-        disableClose: true,
-        autoFocus: false,
-        restoreFocus: false,
-        data: element
-      });
-    }
-
     if (dialogRef){
       this.emitModify(dialogRef);
     }
   }
 
   public openModifyAppointmentDetailsDialog(element: Appointment) {
-    const dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
-      panelClass: 'dialog-panel-class',
-      width: '650px',
-      height: 'auto',
-      disableClose: true,
-      autoFocus: false,
-      restoreFocus: false,
-      data: element
-    });
+    let dialogRef;
 
-    this.emitModify(dialogRef);
+    switch(this.roleInput){
+      case Role.MEDICAL_ADMIN:
+        dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
+          panelClass: 'dialog-panel-class',
+          width: '650px',
+          height: 'auto',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+          data: element
+        });
+        break;
+
+      case Role.HEALTH_PRACTITIONER:
+        dialogRef = this.dialog.open(UpdateAppointmentVaccineDetailsDialogComponent, {
+          panelClass: 'dialog-panel-class',
+          width: '650px',
+          height: 'auto',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+          data: element
+        });
+        break;
+
+      case Role.PATIENT:
+        dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
+          panelClass: 'dialog-panel-class',
+          width: '650px',
+          height: 'auto',
+          disableClose: true,
+          autoFocus: false,
+          restoreFocus: false,
+          data: {appointment: element, role: this.roleInput} as CreateAppointmentDialogModel
+        });
+        break;
+      default:
+        break;
+    }
+
+
+    if (dialogRef){
+      this.emitModify(dialogRef);
+    }
   }
 
   public openViewAppointmentDialog(element: Appointment) {
