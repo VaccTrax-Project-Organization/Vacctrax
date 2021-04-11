@@ -7,15 +7,13 @@ module.exports = (app) => {
     // Mount the 'appointments' controller's 'requestAppointment' method
     app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
-    app.post("/api/requestAppointment", appointmentController.requestAppointment);
-
     app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
     app.get("/api/getConfirmedAppointmentsByClinicId/:clinicId", appointmentController.getAllConfirmedAppointmentsForClinic);
+    app.get("/api/getConfirmedAppointmentsByPatient/:patientId",appointmentController.getBookedAppointment);
+    app.get("/api/getRequestAppointmentsByPatient/:patientId",appointmentController.getRequestedAppointment);
 
     app.route('/api/declineAppointment/:appointmentId')
         .put(medicalAdminController.declineAppointment);
-
-    app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
     app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
@@ -25,7 +23,8 @@ module.exports = (app) => {
         .put(appointmentController.updateAppointment)
         .delete(appointmentController.deleteAppointment);
 
+    app.post("/api/requestAppointmentUpdate", appointmentController.requestAppointmentUpdate);
+
     app.param("appointmentId", appointmentController.getAppointmentById);
 
-    app.get("/api/getAllAppointmentsByClinicId/:clinicId", appointmentController.getAllAppointmentsForClinic);
 };

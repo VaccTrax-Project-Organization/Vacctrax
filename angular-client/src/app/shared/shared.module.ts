@@ -4,10 +4,15 @@ import {AppointmentComponent} from './pages/appointment/appointment.component';
 import {NavigationBarComponent} from './pages/navigation-bar/navigation-bar.component';
 import {GenericTwoOptionDialogComponent} from './pages/generic-two-option-dialog/generic-two-option-dialog.component';
 import {MaterialAngularModule} from '../material-angular.module';
-import {ViewAppointmentDialogComponent} from './pages/view-appointment-dialog/view-appointment-dialog.component';
+import {ViewAppointmentDialogComponent} from './pages/appointment/view-appointment-dialog/view-appointment-dialog.component';
 import {PatientFullNamePipe} from './pipes/patient.pipe';
 import {RolePipe} from './pipes/role.pipe';
 import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ModifyAppointmentDetailsDialogComponent} from './pages/appointment/modify-appointment-details-dialog/modify-appointment-details-dialog.component';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { CreateAppointmentDialogComponent } from './pages/appointment/create-appointment-dialog/create-appointment-dialog.component';
+import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dialog/add-update-vaccine-dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +22,10 @@ import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.c
     ViewAppointmentDialogComponent,
     RolePipe,
     PatientFullNamePipe,
-    VaccineHistoryComponent
+    VaccineHistoryComponent,
+    ModifyAppointmentDetailsDialogComponent,
+    CreateAppointmentDialogComponent,
+    AddUpdateVaccineDialogComponent,
   ],
 
   exports: [
@@ -29,8 +37,11 @@ import {VaccineHistoryComponent} from './pages/vaccine-history/vaccine-history.c
 
   imports: [
     CommonModule,
-    MaterialAngularModule
+    MaterialAngularModule,
+    ReactiveFormsModule,
+    NgxMaterialTimepickerModule
   ]
 })
 
-export class SharedModule {}
+export class SharedModule {
+}

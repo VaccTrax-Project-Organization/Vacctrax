@@ -4,10 +4,12 @@ import {AppointmentDetailsComponent} from './pages/appointment-details/appointme
 import {ConfirmedAppointmentsComponent} from './pages/confirmed-appointments/confirmed-appointments.component';
 import {HomepageComponent} from './pages/homepage/homepage.component';
 import {AppointmentComponent} from './shared/pages/appointment/appointment.component';
+import {SignupComponent} from './pages/signup/signup.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'appointment', component: AppointmentComponent},
+  {path: 'signup', component: SignupComponent},
   {
     path: 'patient',
     loadChildren: () => import('./pages/patient-container/patient-container.module').then(m => m.PatientContainerModule)
@@ -22,6 +24,11 @@ const routes: Routes = [
     path: 'medicalAdmin',
     // tslint:disable-next-line:max-line-length
     loadChildren: () => import('./pages/medical-admin-container/medical-admin-container.module').then(m => m.MedicalAdminContainerModule)
+  },
+  {
+    path: 'government',
+    // tslint:disable-next-line:max-line-length
+    loadChildren: () => import('./pages/government-container/government-container.module').then(m => m.GovernmentContainerModule)
   },
 
   {path: 'appointmentdetails', component: AppointmentDetailsComponent},

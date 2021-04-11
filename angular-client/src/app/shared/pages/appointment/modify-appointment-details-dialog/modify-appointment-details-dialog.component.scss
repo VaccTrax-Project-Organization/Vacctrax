@@ -1,0 +1,28 @@
+:host {
+  .content-description {
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+
+    .col {
+      max-width: 75%;
+    }
+  }
+
+  button {
+    background-color: #8F190A !important;
+    color: #F6EA8C !important;
+    width: 120px;
+    height: 60px;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: white;
+    border-radius: 5px;
+  }
+}
+
