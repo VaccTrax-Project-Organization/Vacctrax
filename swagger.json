@@ -667,6 +667,46 @@
           }
         }
       }
+    },
+    "/requestAppointmentUpdate": {
+      "post": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Request to update an appointment.",
+        "operationId": "requestAppointmentUpdate",
+        "requestBody": {
+          "description": "Update Appointment Body",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestAppointmentUpdateDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Appointment"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -974,8 +1014,68 @@
             "format": "date-time"
           },
           "vaccineDose": {
-            "type": "number",
-            "example": 1
+            "type": "string"
+          },
+          "vaccineId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "CONFIRMED",
+              "REQUESTED",
+              "CANCELLED",
+              "COMPLETED"
+            ],
+            "default": "REQUESTED"
+          },
+          "clinicId": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string"
+          },
+          "healthPractitionerId": {
+            "type": "string"
+          }
+        }
+      },
+      "RequestAppointmentUpdateDTO": {
+        "type": "object",
+        "required": [
+          "reason",
+          "preferredDate",
+          "preferredTime",
+          "type",
+          "clinicId",
+          "patientId",
+          "healthPractitionerId"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "preferredDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "preferredTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vaccineDose": {
+            "type": "string"
           },
           "vaccineId": {
             "type": "string"
