@@ -707,6 +707,70 @@
           }
         }
       }
+    },
+    "/signIn": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "summary": "Allows the User to sign In.",
+        "operationId": "signIn",
+        "requestBody": {
+          "description": "Allows the User to sign In.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignInDTO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "token": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1180,6 +1244,21 @@
             "type": "string"
           },
           "confirmPassword": {
+            "type": "string"
+          }
+        }
+      },
+      "SignInDTO": {
+        "type": "object",
+        "required": [
+          "password",
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
             "type": "string"
           }
         }
