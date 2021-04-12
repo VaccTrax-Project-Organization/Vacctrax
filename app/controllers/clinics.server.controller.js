@@ -25,11 +25,15 @@ exports.getClinicById = (req, res, next , id) => {
             // return next(err);
             return res.status(500).send(err).end();
         } else {
-            // Set the 'req.clinic' property
-            res.locals.clinic = clinic;
-            console.log(clinic);
-            // Call the next middleware
-            return next();
+            if (clinic) {
+                // Set the 'req.clinic' property
+                res.locals.clinic = clinic;
+                console.log(clinic);
+                // Call the next middleware
+                return next();
+            } else {
+                return res.status(404).send({message: "Clinic with Provided Id not found."}).end();
+            }
         }
     });
 };

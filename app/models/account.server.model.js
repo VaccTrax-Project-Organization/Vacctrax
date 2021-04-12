@@ -29,7 +29,6 @@ const AccountSchema = new Schema({
     },
     phone: {
         type: String,
-        required: "Phone is required",
         trim: true,
     },
     address: {
