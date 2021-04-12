@@ -10,6 +10,7 @@ module.exports = function () {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,
+            useFindAndModify: false
         })
         .then(() => console.log("DB Connected!"))
         .catch((err) => {
@@ -26,6 +27,7 @@ module.exports = function () {
     require("../app/models/patient.server.model");
     require("../app/models/vaccine.server.model");
     require("../app/models/account.server.model");
+    require("../app/models/requestAppointment.server.model");
   // Return the Mongoose connection instance
   return db;
 };

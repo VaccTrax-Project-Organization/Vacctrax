@@ -100,6 +100,7 @@ module.exports = function () {
   require("../app/routes/patients.server.routes.js")(app);
   require("../app/routes/healthPractitioners.server.routes.js")(app);
   require("../app/routes/patients.server.routes.js")(app);
+  require("../app/routes/accounts.server.routes.js")(app);
   // Configure static file serving
   app.use(express.static("./public"));
 
