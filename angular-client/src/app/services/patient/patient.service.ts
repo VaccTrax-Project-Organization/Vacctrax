@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Patient} from '../../models/patient.model';
 import {Observable, of, throwError} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Appointment} from '../../models/appointment.model';
 import {catchError} from 'rxjs/operators';
 import {Service} from '../service.class';
@@ -11,7 +11,7 @@ import {PatientList} from "../../shared/Models/patientList";
   providedIn: 'root'
 })
 
-export class PatientService extends Service{
+export class PatientService extends Service {
   mockPatient: Patient = {
     _id: '',
     account: null,
@@ -34,5 +34,18 @@ export class PatientService extends Service{
         catchError(err => {
           return throwError(err);
         }));
+  }
+
+  public signUpPatient(signUpData: any): Observable<any> {
+    return this.http.post<any>(`${this.url}/signUp`, signUpData).pipe(catchError(err => throwError(err)));
+  }
+
+  public setPasswordVerifyToken(token: string): Observable<any> {
+    return this.http.post<any>(`${this.url}/setPasswordVerifyToken`, { token }).pipe(catchError(err => throwError(err)));
+  }
+
+  public setPassword(password: string, confirmPassword: string, authToken: string): Observable<any> {
+    const headers = this.httpHeader.append('Authorization', `Bearer ${authToken}`);
+    return this.http.post<any>(`${this.url}/setPassword`, { password, confirmPassword }, {headers}).pipe(catchError(err => throwError(err)));
   }
 }
