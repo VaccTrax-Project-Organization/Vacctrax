@@ -7,28 +7,21 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./check-in.component.scss']
 })
 export class CheckInComponent implements OnInit {
-  signUpForm: FormGroup;
+  checkInForm: FormGroup;
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.signUpForm = this.createSignupForm();
+    this.checkInForm = this.createCheckInForm();
   }
 
-  createSignupForm(): FormGroup{
+  createCheckInForm(): FormGroup{
     return this.formBuilder.group({
-      firstName: ['', Validators.required],
-      middleName: [''],
-      lastName: ['', Validators.required],
-      gender:['', Validators.required],
-      dob:['', Validators.required],
-      email:['', Validators.required],
-      streetLine1:['', Validators.required],
-      streetLine2:[''],
-      postalCode:['', Validators.required],
-      city:['', Validators.required],
-      phone:['', Validators.required],
-      healthCard:['', Validators.required],
-      preferredNotification:['', Validators.required]
+      age: [''],
+      frontline: [false],
+      pregnant: [false],
+      hospitalWorker:[false],
+      indigenous:[false],
+      longTermCare:[false],
     })
   }
 
