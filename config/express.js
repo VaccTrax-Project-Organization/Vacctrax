@@ -44,7 +44,12 @@ module.exports = function () {
   });
 
   app.use(cors({
-    origin: config.frontendLocalDomain, // specify the domain origin that is allowed to make requests to this server
+    // I HAVE TO COMMENT OUT THIS origin: '*', cause for some reason if I don't I get a CORS error when calling get for vaccines
+    // This is a temporary fix, I'll probably uncomment this later - Asad
+    origin: config.frontendDomain, // specify the domain origin that is allowed to make requests to this server
+
+    //For now, this previous solution works and fixes the issue, will figure out whats causing the above later
+    // origin: config.frontendLocalDomain, // specify the domain origin that is allowed to make requests to this server
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }));
 
@@ -95,6 +100,7 @@ module.exports = function () {
   require("../app/routes/patients.server.routes.js")(app);
   require("../app/routes/healthPractitioners.server.routes.js")(app);
   require("../app/routes/patients.server.routes.js")(app);
+  require("../app/routes/accounts.server.routes.js")(app);
   // Configure static file serving
   app.use(express.static("./public"));
 
