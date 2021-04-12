@@ -50,7 +50,7 @@ export class ModifyAppointmentDetailsDialogComponent implements OnInit {
     console.log('submit reached');
 
     if (this.modifyApptForm.valid) {
-      const {vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime} = this.modifyApptForm.getRawValue();
+      const {vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime} = this.modifyApptForm.getRawValue();   
       const startTime = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime);
 
       const modifiedAppointment = {...this.data, vaccine, vaccineDose, healthPractitioner, startTime};
