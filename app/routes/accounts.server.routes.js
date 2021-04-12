@@ -7,4 +7,6 @@ module.exports = (app) => {
     app.post("/api/setPasswordVerifyToken", accountsController.verifyTokenForSetPassword);
 
     app.post("/api/setPassword", loginController.verifyToken, accountsController.setPassword);
+
+    app.post("/api/signIn", loginController.signIn);
 };
