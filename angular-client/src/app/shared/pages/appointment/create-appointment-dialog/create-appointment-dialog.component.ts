@@ -143,7 +143,7 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
         
         appointmentPayload = {
           _id: this.data.appointment._id,
-          preferredDate, 
+          preferredDate: appointmentDate, 
           preferredTime,
           reason,
           vaccineDose,
