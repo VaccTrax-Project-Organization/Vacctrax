@@ -16,6 +16,8 @@ import {SubSink} from 'subsink';
 import { Role } from 'src/app/models/enums/role.enum';
 import { ClinicService } from 'src/app/services/clinic/clinic.service';
 import { Clinic } from 'src/app/models/clinic.model';
+import * as moment from 'moment';
+import { AppointmentType } from 'src/app/models/enums/appointment.enum';
 
 // tslint:disable: max-line-length
 @Component({
@@ -130,11 +132,26 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
 
     if (this.modifyApptForm.valid) {
       let appointmentPayload;
+      const {clinic, vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime, patient, reason } = this.modifyApptForm.getRawValue();
+      console.log("appointment details", this.modifyApptForm.value);
       if (this.isPatient){
-        const {clinic, vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime, patient, reason } = this.modifyApptForm.getRawValue();
         const preferredDate = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime); 
+        // appointmentPayload = {...new BookAppointmentDTO(), vaccineDose, preferredDate, preferredTime: appointmentTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: clinic, reason, _id: this.data.appointment._id};
+        // let preferredTime= new Date(preferredDate).setTime(appointmentTime);
+        
+        let preferredTime = moment(appointmentTime, ['h:mm A']).format();
+        
+        appointmentPayload = {
+          _id: this.data.appointment._id,
+          preferredDate, 
+          preferredTime,
+          reason,
+          vaccineDose,
+          vaccine,
+          type: AppointmentType.REQUESTED
+        };
+        
 
-        appointmentPayload = {...new BookAppointmentDTO(), vaccineDose, preferredDate, preferredTime: appointmentTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: clinic, reason};
         this.subSink.add(this.appointmentService.updateAppointment(appointmentPayload).subscribe(result => {
           console.log(result);
           this.dialogRef.close(true);
@@ -145,7 +162,6 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
       }
       else
       {
-        const {vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime, patient, reason } = this.modifyApptForm.getRawValue();
         const startTime = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime);
         appointmentPayload = {...new BookAppointmentDTO(), vaccineDose, startTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: '6060e1549107f28980861695', reason};
 
