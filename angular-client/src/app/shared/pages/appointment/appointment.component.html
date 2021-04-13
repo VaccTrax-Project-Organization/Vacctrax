@@ -49,8 +49,7 @@
         <button (click)="openViewAppointmentDialog(element)" mat-icon-button>
           <mat-icon>remove_red_eye</mat-icon>
         </button>
-
-        <button (click)="openDeclineAppointmentRequestDialog()" *ngIf="this.roleInput === role.MEDICAL_ADMIN" mat-icon-button>
+        <button (click)="openDeclineAppointmentRequestDialog(element)" mat-icon-button>
           <mat-icon>approval</mat-icon>
         </button>
 

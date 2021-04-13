@@ -146,13 +146,14 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  public openDeclineAppointmentRequestDialog(): void {
+  public openDeclineAppointmentRequestDialog(element: Appointment): void {
     const dialogRef = this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',
       disableClose: false,
       autoFocus: false,
       height: '400px',
-      width: '650px'
+      width: '650px',
+      data: element
     });
   }
 

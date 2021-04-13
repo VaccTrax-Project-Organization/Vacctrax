@@ -1,13 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Role} from '../../../models/enums/role.enum';
 import {MatTableDataSource} from '@angular/material/table';
 import {PatientService} from '../../../services/patient/patient.service';
 import {SubSink} from 'subsink';
 import {Appointment} from '../../../models/appointment.model';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details/modify-appointment-details.component';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
+import { AppointmentType } from 'src/app/models/enums/appointment.enum';
 
 @Component({
   selector: 'app-decline-requested-appointment-dialog',
@@ -22,7 +23,7 @@ export class DeclineRequestedAppointmentDialogComponent implements OnInit,OnDest
 
   note = new FormControl();
 
-  constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
+  constructor(private appointmentService: AppointmentService, private dialog: MatDialog,  @Inject(MAT_DIALOG_DATA) private appointment: Appointment) {
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 
@@ -41,9 +42,16 @@ export class DeclineRequestedAppointmentDialogComponent implements OnInit,OnDest
     this.subSink.unsubscribe();
   }
 
-  save() {
+  save($event) {
+    this.appointment.type = AppointmentType.CANCELLED;
+    this.subSink.add(this.appointmentService.updateAppointment(this.appointment).subscribe(res=>{console.log(res)}));
     console.log(this.note.value);
     // Put the api request to decline appointment here
+  
   }
+
+ 
+
+  
 
 }
