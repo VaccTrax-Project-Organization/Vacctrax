@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   public submitSignIn(): void {
-    console.log("this.signInForm", this.signInForm.value);
+    console.log('this.signInForm', this.signInForm.value);
 
     /* if(this.signInForm.valid) {
     console.log("this.signInForm", this.signInForm.value);
