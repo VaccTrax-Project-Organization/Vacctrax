@@ -11,12 +11,10 @@ const AppointmentSchema = new Schema({
     preferredDate: {
         type: Date,
         default: new Date(),
-        required: "Preferred Date is required",
     },
     preferredTime: {
         type: Date,
         default: new Date(),
-        required: "Preferred Time is required",
     },
     startTime: {
         type: Date,
@@ -33,11 +31,12 @@ const AppointmentSchema = new Schema({
         required: "Type is required",
     },
     vaccine: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Vaccine',
         required: "Vaccine is required"
     },
     vaccineDose: {
-        type: Number,
+        type: String,
         required: "Vaccine dose is required"
     },
     clinic: {
@@ -46,11 +45,13 @@ const AppointmentSchema = new Schema({
     },
     patient: {
         type: Schema.Types.ObjectId,
-        ref: 'Patient'
+        ref: 'Patient',
+        required: "patient is required"
     },
     healthPractitioner: {
         type: Schema.Types.ObjectId,
-        ref: 'HealthPractitioner'
+        ref: 'HealthPractitioner',
+        required: "healthPractitioner is required"
     }
 });
 

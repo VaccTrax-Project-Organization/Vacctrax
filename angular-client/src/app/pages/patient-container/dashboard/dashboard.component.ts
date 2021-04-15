@@ -7,6 +7,7 @@ import {SubSink} from 'subsink';
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Appointment} from '../../../models/appointment.model';
+import {AppointmentService} from "../../../services/appointment/appointment.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   subSink: SubSink;
   public dataSource: MatTableDataSource<Appointment>;
 
-  constructor(private patientService: PatientService, private vaccineService: VaccinesService) {
+  constructor(private appointmentService: AppointmentService, private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
     this.role = Role.PATIENT;
     this.dataSource = new MatTableDataSource<Appointment>();
@@ -32,14 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       console.log(res);
     }));
 
-    this.subSink.add(patientService.getPatientAppointments().subscribe(res => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-      console.log(this.dataSource);
-    },error => {
-      console.log(error);
-    }));
-
+    this.getTableDataSource();
   }
 
   ngOnInit(): void {
@@ -47,5 +41,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subSink.unsubscribe();
+  }
+
+  public getTableDataSource(): void {
+    this.subSink.add(this.appointmentService.getAppointmentsByPatient().subscribe(res => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource<Appointment>(res);
+      console.log(this.dataSource);
+    },error => {
+      console.log(error);
+    }));
   }
 }

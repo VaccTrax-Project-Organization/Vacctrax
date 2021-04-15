@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-back">
-  <a class="navbar-brand" href="#"><img src="../../../../assets/images/VaccTrax.png" alt="vacctrax logo"></a>
+  <a class="navbar-brand" href="#"><img src="./assets/images/VaccTrax.png" alt="vacctrax logo"></a>
   <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#MyNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -22,12 +22,28 @@
         </li>
       </ng-container>
 
+      <ng-container *ngIf="roleInput === role.GOVERNMENT">
+        <li class="nav-item d-flex align-items-center">
+          <button mat-icon-button><mat-icon>search</mat-icon></button>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Vaccine History</a>
+        </li>
+      </ng-container>
+
       <ng-container *ngIf="!roleInput">
         <li class="nav-item">
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign Up</a>
+          <a class="nav-link" href="/signup">Sign Up</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Sign In</a>

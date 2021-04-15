@@ -1,0 +1,48 @@
+<div class="row no-gutters justify-content-between align-items-center mb-3">
+  <div></div>
+  <button id="close-button" mat-icon-button [mat-dialog-close]="false"><mat-icon>close</mat-icon></button>
+</div>
+
+<form [formGroup]="this.checkInForm" class="p-5">
+  <div class="row mb-3 mx-0 justify-content-center"><h2>Check In Questions List</h2></div>
+  <div class="row mx-0">
+
+    <div class="col-md-6" >
+      <label for="age">What is your age?</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="age" matInput type="text" formControlName="age">
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
+      <label for="frontline">Are you a frontline healthcare worker?</label><br/>
+      <mat-checkbox id="frontline" formControlName="frontline"></mat-checkbox>
+    </div>
+
+    <div class="col-md-6">
+      <label for="pregnant">Are you pregnant?</label><br/>
+      <mat-checkbox id="pregnant" formControlName="pregnant"></mat-checkbox>
+    </div>
+
+    <div class="col-md-6">
+      <label for="hospitalWorker">Are you a hospital worker?</label><br/>
+      <mat-checkbox id="hospitalWorker" formControlName="hospitalWorker"></mat-checkbox>
+    </div>
+
+    <div class="col-md-6">
+      <label for="indigenous">Are you an indigenous person?</label><br/>
+      <mat-checkbox id="indigenous" formControlName="indigenous"></mat-checkbox>
+    </div>
+
+    <div class="col-md-6">
+      <label for="longTermCare">Are you in a Long term care home?</label><br/>
+      <mat-checkbox id="longTermCare" formControlName="longTermCare"></mat-checkbox>
+    </div>
+  </div>
+
+  <div class="row mx-0">
+    <div class="col-auto">
+      <button mat-raised-button type="submit" class="mr-5 px-4 py-1 mat-flat-button" (click)="checkInPatient($event)">Check In Patient</button>
+    </div>
+  </div>
+</form>
