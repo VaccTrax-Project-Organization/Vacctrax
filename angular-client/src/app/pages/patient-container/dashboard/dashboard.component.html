@@ -14,7 +14,8 @@
 
             <app-appointment
               [roleInput]="role"
-              [tableDataSource]="dataSource">
+              [tableDataSource]="dataSource"
+              (modified)="this.getTableDataSource()">
             </app-appointment>
           </mat-card-content>
         </mat-card>

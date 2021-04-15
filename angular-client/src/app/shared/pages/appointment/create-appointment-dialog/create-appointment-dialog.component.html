@@ -40,8 +40,9 @@
         <div class="col-6">
           <mat-form-field appearance="outline">
             <mat-label>{{this.modularLabels.appointmentTime}}</mat-label>
-            <input matInput aria-label="12hr format"
+            <input matInput aria-label="24hr format"
                    [ngxTimepicker]="default"
+                   [format]="12"
                    readonly #timeInput
                    formControlName="appointmentTime">
             <ngx-material-timepicker #default></ngx-material-timepicker>
