@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Role } from 'src/app/models/enums/role.enum';
+import {Role} from 'src/app/models/enums/role.enum';
 import {Patient} from '../../../models/patient.model';
-import {Address} from '../../../models/address.model';
 import {PatientService} from '../../../services/patient/patient.service';
 import {SubSink} from 'subsink';
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Appointment} from '../../../models/appointment.model';
-import {AppointmentService} from "../../../services/appointment/appointment.service";
+import {AppointmentService} from '../../../services/appointment/appointment.service';
+import {getUserDetails} from '../../../shared/Functions/getUserDetails';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(private appointmentService: AppointmentService, private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
-    this.role = Role.PATIENT;
+    this.role = getUserDetails().type;
     this.dataSource = new MatTableDataSource<Appointment>();
 
     this.subSink.add(patientService.getPatient().subscribe(res => {
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       console.log(res);
       this.dataSource = new MatTableDataSource<Appointment>(res);
       console.log(this.dataSource);
-    },error => {
+    }, error => {
       console.log(error);
     }));
   }
