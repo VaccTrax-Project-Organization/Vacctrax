@@ -1,6 +1,6 @@
 <app-navigation-bar></app-navigation-bar>
 
-<form [formGroup]="this.signUpForm" class="p-5">
+<form [formGroup]="this.signUpForm" class="p-5" (ngSubmit)="this.submitSignUp()">
   <div class="row mb-3 mx-0 justify-content-center"><h2>COVID-19 Vaccination Pre-Registration</h2></div>
   <div class="row mx-0">
 
@@ -12,12 +12,13 @@
       </mat-form-field>
     </div>
 
-    <div class="col-md-6">
+    <!-- Uncomment if the backend fields update -->
+    <!-- <div class="col-md-6">
       <label for="middleName">Middle Name:</label><br/>
       <mat-form-field appearance="outline">
         <input id="middleName" matInput type="text" formControlName="middleName">
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div class="col-md-6">
       <label for="lastName">Last Name:</label><br/>
@@ -28,12 +29,21 @@
     </div>
 
     <div class="col-md-6">
+      <label for="email">Email:</label><br/>
+      <mat-form-field appearance="outline">
+        <input id="email" matInput type="email" formControlName="email">
+        <mat-error>Email is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Uncomment if the backend fields update -->
+    <!-- <div class="col-md-6">
       <label for="gender">Gender:</label><br/>
       <mat-form-field appearance="outline">
         <input id="gender" matInput type="text" formControlName="gender">
         <mat-error>Gender is <strong>required</strong></mat-error>
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div class="col-md-6">
       <label for="streetLine1">Street Line 1:</label><br/>
@@ -67,6 +77,24 @@
     </div>
 
     <div class="col-md-6">
+      <label for="province">Province:</label><br/>
+      <mat-form-field appearance="outline">
+        <!-- <input id="province" matInput type="text" formControlName="province"> -->
+        <mat-select id="province" formControlName="province">
+          <mat-option *ngFor="let province of this.provincesEnum | keyvalue"
+                      [value]="province.value">
+            {{province.value}}
+          </mat-option>
+          <!-- <mat-option value="volvo">Volvo</mat-option>
+          <mat-option value="saab">Saab</mat-option>
+          <mat-option value="mercedes">Mercedes</mat-option>
+          <mat-option value="audi">Audi</mat-option> -->
+        </mat-select>
+        <mat-error>Province is <strong>required</strong></mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-md-6">
       <label for="phone">Phone:</label><br/>
       <mat-form-field appearance="outline">
         <input id="phone" matInput type="text" formControlName="phone">
@@ -77,18 +105,19 @@
     <div class="col-md-6">
       <label for="healthCard">Health Card:</label><br/>
       <mat-form-field appearance="outline">
-        <input id="healthCard" matInput type="text" formControlName="healthCard">
+        <input id="healthCard" matInput type="text" formControlName="healthCardNo">
         <mat-error>Health Card is <strong>required</strong></mat-error>
       </mat-form-field>
     </div>
 
-    <div class="col-md-6">
+    <!-- Uncomment if the backend fields update -->
+    <!-- <div class="col-md-6">
       <label for="preferredNotification">Preferred Notification Method:</label><br/>
       <mat-form-field appearance="outline">
         <input id="preferredNotification" matInput type="text" formControlName="preferredNotification">
         <mat-error>Preferred Notification Method is <strong>required</strong></mat-error>
       </mat-form-field>
-    </div>
+    </div> -->
   </div>
 
   <div class="row mx-0">

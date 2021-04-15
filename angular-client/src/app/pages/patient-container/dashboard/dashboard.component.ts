@@ -33,13 +33,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       console.log(res);
     }));
 
-    this.subSink.add(appointmentService.getAppointmentsByPatient().subscribe(res => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-      console.log(this.dataSource);
-    },error => {
-      console.log(error);
-    }));
+    this.getTableDataSource();
   }
 
   ngOnInit(): void {
@@ -47,5 +41,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subSink.unsubscribe();
+  }
+
+  public getTableDataSource(): void {
+    this.subSink.add(this.appointmentService.getAppointmentsByPatient().subscribe(res => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource<Appointment>(res);
+      console.log(this.dataSource);
+    },error => {
+      console.log(error);
+    }));
   }
 }

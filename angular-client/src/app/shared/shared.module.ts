@@ -13,6 +13,7 @@ import {ModifyAppointmentDetailsDialogComponent} from './pages/appointment/modif
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { CreateAppointmentDialogComponent } from './pages/appointment/create-appointment-dialog/create-appointment-dialog.component';
 import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dialog/add-update-vaccine-dialog.component';
+import { PasswordPipe } from './pipes/password/password.pipe';
 
 @NgModule({
   declarations: [
@@ -26,13 +27,15 @@ import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dial
     ModifyAppointmentDetailsDialogComponent,
     CreateAppointmentDialogComponent,
     AddUpdateVaccineDialogComponent,
+    PasswordPipe,
   ],
 
   exports: [
     NavigationBarComponent,
     AppointmentComponent,
     RolePipe,
-    PatientFullNamePipe
+    PatientFullNamePipe,
+    PasswordPipe,
   ],
 
   imports: [
