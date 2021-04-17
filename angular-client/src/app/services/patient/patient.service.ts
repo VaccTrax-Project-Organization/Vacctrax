@@ -1,11 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Patient} from '../../models/patient.model';
 import {Observable, of, throwError} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Appointment} from '../../models/appointment.model';
+import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Service} from '../service.class';
-import {PatientList} from "../../shared/Models/patientList";
+import {PatientList} from '../../shared/Models/patientList';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +33,10 @@ export class PatientService extends Service {
         catchError(err => {
           return throwError(err);
         }));
+  }
+
+  public signIn(signInData: any): Observable<any> {
+    return this.http.post<any>(`${this.url}/signIn`, signInData ).pipe(catchError(err => throwError(err)));
   }
 
   public signUpPatient(signUpData: any): Observable<any> {

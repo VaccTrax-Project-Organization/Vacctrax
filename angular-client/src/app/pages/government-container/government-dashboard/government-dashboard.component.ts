@@ -3,6 +3,7 @@ import {Role} from '../../../models/enums/role.enum';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Appointment} from '../../../models/appointment.model';
+import {getUserDetails} from '../../../shared/Functions/getUserDetails';
 
 @Component({
   selector: 'app-government-dashboard',
@@ -14,7 +15,7 @@ export class GovernmentDashboardComponent implements OnInit {
   public dataSource: MatTableDataSource<Appointment>;
 
   constructor(private appointmentService: AppointmentService) {
-    this.role = Role.HEALTH_PRACTITIONER;
+    this.role = getUserDetails().type;
     this.dataSource = new MatTableDataSource<Appointment>();
   }
 
