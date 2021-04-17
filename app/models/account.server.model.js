@@ -37,7 +37,7 @@ const AccountSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ['PATIENT', 'MEDICALADMIN', 'HEALTHPRACTITIONER', 'GOVERNMENT']
+        enum: ['PATIENT', 'MEDICAL_ADMIN', 'HEALTH_PRACTITIONER', 'GOVERNMENT']
     }
 });
 
