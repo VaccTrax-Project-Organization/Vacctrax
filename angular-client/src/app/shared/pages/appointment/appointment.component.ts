@@ -30,7 +30,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.dataSource = data;
   }
 
-  public role: Role;
+  public role = Role;
   public showActionDelete: boolean;
   public displayedColumns: string[];
   public dataSource: MatTableDataSource<Appointment>;
@@ -78,7 +78,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.roleInput === Role.PATIENT){
-      this.router.navigate(['/patient/requestAppointment']);
+      this.router.navigate(['./patient/requestAppointment']);
     }
 
     // other dialog here
