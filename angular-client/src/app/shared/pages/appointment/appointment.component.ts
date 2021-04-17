@@ -78,7 +78,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (this.roleInput === Role.PATIENT){
-      this.router.navigate(['/patient/requestAppointment']);
+      this.router.navigate(['./patient/requestAppointment']);
     }
 
     // other dialog here
