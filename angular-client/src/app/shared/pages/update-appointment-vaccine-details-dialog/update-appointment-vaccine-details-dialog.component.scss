@@ -1,0 +1,22 @@
+.content-description {
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  .col {
+    max-width: 75%;
+  }
+}
+
+.submitButton {
+  background-color: #8F190A !important;
+  color: #F6EA8C !important;
+  width: 8rem;
+  height: 60px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 5px;
+}
+
+
