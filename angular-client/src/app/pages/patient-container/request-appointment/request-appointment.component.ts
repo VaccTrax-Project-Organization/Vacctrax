@@ -11,6 +11,8 @@ import {AppointmentService} from '../../../services/appointment/appointment.serv
 import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 import {Vaccine} from '../../../models/vaccine.model';
 import * as moment from 'moment';
+import { HealthPractitioner } from 'src/app/models/healthPractitioner.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-request-appointment',
@@ -30,7 +32,8 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
               private clinicService: ClinicService,
               private patientService: PatientService,
               private appointmentService: AppointmentService,
-              private vaccineService: VaccinesService) {
+              private vaccineService: VaccinesService,
+              private router: Router) {
     this.subSink = new SubSink();
     this.currentDate = new Date();
     this.clinics = [];
@@ -78,8 +81,8 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
 
     const test = moment(preferredTime, ['h:mm A']).format();
     const appointmentRequest: AppointmentRequest = {
-      patientId: '6060df17c0edd45cd49d2f57',
-      clinicId,
+      patient: '6060df17c0edd45cd49d2f57',
+      clinic: clinicId,
       preferredDate,
       preferredTime: moment(preferredTime, ['h:mm A']).format(),
       startTime: null,
@@ -88,11 +91,13 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       reason,
       vaccine,
       vaccineDose,
-      healthPractitionerId: '',
+      healthPractitioner: undefined,
     }
 
     this.subSink.add(this.appointmentService.requestAppointment(appointmentRequest).subscribe(res => {
       console.log(res);
+
+      this.router.navigateByUrl('/patient/dashboard');
     }));
   }
 }

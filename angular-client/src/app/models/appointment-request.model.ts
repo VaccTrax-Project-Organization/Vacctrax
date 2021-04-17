@@ -9,7 +9,7 @@ export interface AppointmentRequest{
   vaccine: string;
   vaccineDose: string;
   type: AppointmentType;
-  clinicId: string;
-  patientId: string;
-  healthPractitionerId?: string;
+  clinic: string;
+  patient: string;
+  healthPractitioner?: string;
 }
