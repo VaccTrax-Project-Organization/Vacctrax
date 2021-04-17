@@ -1,0 +1,31 @@
+<app-navigation-bar></app-navigation-bar>
+
+<div class="row mb-3 mx-0 justify-content-center"><h2>Sign In</h2></div>
+<div class="row justify-content-center">
+
+  <form [formGroup]="this.signInForm" class="p-5" (ngSubmit)="this.submitSignIn()">
+    <div class="row mb-3 mx-0 justify-content-center"><br>
+
+
+      <div class="col-md-12">
+          <div class="form-group ">
+            <label for="email">Email:</label><br/>
+            <input id="email" class="form-control" matInput type="email" placeholder="Email" formControlName="email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+
+            <a href="#" class="ForgetPwd">Forget Password?</a>
+          </div>
+          <div class="row mx-0">
+            <div class="col-auto">
+              <button mat-raised-button type="submit" class="mr-5 px-4 py-1 mat-flat-button">Sign In</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>
