@@ -23,8 +23,4 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
-
-  public navigateToSignUp(): void {
-    this.router.navigateByUrl('/signup').catch(err => console.log(err));
-  }
 }
