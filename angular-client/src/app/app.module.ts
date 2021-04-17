@@ -13,7 +13,10 @@ import { RouterModule } from '@angular/router';
 import {UpdateAppointmentVaccineDetailsDialogComponent} from './shared/pages/appointment/update-appointment-vaccine-details-dialog/update-appointment-vaccine-details-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SignupComponent } from './pages/signup/signup.component';
+import {SigninComponent} from './pages/signin/signin.component';
 import { CheckInComponent } from './pages/check-in/check-in.component';
+import { SetPasswordComponent } from './pages/set-password/set-password.component';
+import { CheckEmailComponent } from './pages/check-email/check-email.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { CheckInComponent } from './pages/check-in/check-in.component';
     ConfirmedAppointmentsComponent,
     UpdateAppointmentVaccineDetailsDialogComponent,
     SignupComponent,
-    CheckInComponent
+    SigninComponent,
+    CheckInComponent,
+    SetPasswordComponent,
+    CheckEmailComponent,
   ],
   imports: [
     HttpClientModule,

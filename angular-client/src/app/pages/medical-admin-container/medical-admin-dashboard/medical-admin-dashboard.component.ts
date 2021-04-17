@@ -9,6 +9,7 @@ import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details
 import {DeclineRequestedAppointmentDialogComponent} from '../decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
 import {finalize} from 'rxjs/operators';
+import {getUserDetails} from '../../../shared/Functions/getUserDetails';
 
 @Component({
   selector: 'app-medical-admin-dashboard',
@@ -17,12 +18,13 @@ import {finalize} from 'rxjs/operators';
 })
 
 export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
-  public role = Role.MEDICAL_ADMIN;
+  public role;
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
   showLoading = false;
 
   constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
+    this.role = getUserDetails().type;
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 

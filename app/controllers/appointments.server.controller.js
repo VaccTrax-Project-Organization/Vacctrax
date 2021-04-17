@@ -157,6 +157,7 @@ exports.bookAppointment = (req, res) => {
 
 exports.updateAppointment = (req, res, next) => {
     console.log("req.body", req.body);
+    console.log("res.locals", res.locals);
     Appointment.findByIdAndUpdate(res.locals.appointment._id, {$set: req.body}, {new: true}, (err, appointment) => {
         if (err) {
             return res.status(500).send(err).end();
