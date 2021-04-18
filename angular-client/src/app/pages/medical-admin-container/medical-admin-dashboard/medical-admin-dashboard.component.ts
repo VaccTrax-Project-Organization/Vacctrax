@@ -24,7 +24,11 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   showLoading = false;
 
   constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
-    this.role = getUserDetails().type;
+
+    this.role = getUserDetails()?.type;
+    if (!this.role)
+      this.role = Role.MEDICAL_ADMIN;
+
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 

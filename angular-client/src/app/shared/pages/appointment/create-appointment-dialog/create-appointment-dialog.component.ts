@@ -91,7 +91,7 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
-  private createModifyApptForm(): void {
+  public createModifyApptForm(): void {
     if (this.data?.appointment) {
       const appointment = this.data.appointment;
       console.log(appointment);
@@ -135,22 +135,22 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
       const {clinic, vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime, patient, reason } = this.modifyApptForm.getRawValue();
       console.log("appointment details", this.modifyApptForm.value);
       if (this.isPatient){
-        const preferredDate = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime); 
+        const preferredDate = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime);
         // appointmentPayload = {...new BookAppointmentDTO(), vaccineDose, preferredDate, preferredTime: appointmentTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: clinic, reason, _id: this.data.appointment._id};
         // let preferredTime= new Date(preferredDate).setTime(appointmentTime);
-        
+
         let preferredTime = moment(appointmentTime, ['h:mm A']).format();
-        
+
         appointmentPayload = {
           _id: this.data.appointment._id,
-          preferredDate: appointmentDate, 
+          preferredDate: appointmentDate,
           preferredTime,
           reason,
           vaccineDose,
           vaccine,
           type: AppointmentType.REQUESTED
         };
-        
+
 
         this.subSink.add(this.appointmentService.updateAppointment(appointmentPayload).subscribe(result => {
           console.log(result);

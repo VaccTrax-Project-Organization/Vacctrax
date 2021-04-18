@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { Province } from 'src/app/models/enums/province.enum';
 import { PatientService } from 'src/app/services/patient/patient.service';
@@ -16,7 +16,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   public provincesEnum: Object;
   constructor(private formBuilder: FormBuilder,
               private patientService: PatientService,
-              private router: Router) { 
+              private router: Router) {
                 this.subSink = new SubSink();
                 this.provincesEnum = Province;
   }
@@ -29,14 +29,11 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
+  /** create the sign up form to add validations and reference these controls in html */
   createSignupForm(): FormGroup{
-    // for the commented out lines, if the backend adds them, uncomment them.
     return this.formBuilder.group({
       firstName: ['', Validators.required],
-      // middleName: [''],
       lastName: ['', Validators.required],
-      // gender:['', Validators.required],
-      // dob:[''],
       email:['', Validators.required],
       streetLine1:['', Validators.required],
       streetLine2:[''],
@@ -44,18 +41,19 @@ export class SignupComponent implements OnInit, OnDestroy {
       city:['', Validators.required],
       phone:['', Validators.required],
       healthCardNo:['', Validators.required],
-      // preferredNotification:[''],
       province: ['', Validators.required]
     })
   }
 
+  /** called when sign up form submitted and if the values are valid call the api for
+  * user sign up*/
   public submitSignUp(): void {
-    console.log("this.signUpForm", this.signUpForm.value);
 
     if(this.signUpForm.valid) {
-    console.log("this.signUpForm", this.signUpForm.value);
+      // calling the patient service sign up patient function to call the sign up api with the values user entered
       this.subSink.add(this.patientService.signUpPatient(this.signUpForm.value).subscribe(res => {
-        console.log("res", res);
+
+        // if the api call is successfully then navigate to email sent page
         const navigationExtras: NavigationExtras = {
           state: {
             email: this.signUpForm.value.email
@@ -64,6 +62,7 @@ export class SignupComponent implements OnInit, OnDestroy {
 
         this.router.navigate(['/checkEmail'], navigationExtras);
       }, err => {
+        // if error message received from server then show an alert to the user
         alert(err.error.message);
       }));
     }
