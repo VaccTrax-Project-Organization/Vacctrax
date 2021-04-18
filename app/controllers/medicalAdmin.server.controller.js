@@ -1,4 +1,3 @@
-const MedicalAdmin = require('mongoose').model('MedicalAdmin');
 const Appointment = require('mongoose').model('Appointment');
 
 exports.declineAppointment = function (req, res, next) {
