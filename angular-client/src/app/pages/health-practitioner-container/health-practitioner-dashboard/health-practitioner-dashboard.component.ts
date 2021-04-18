@@ -15,7 +15,9 @@ export class HealthPractitionerDashboardComponent implements OnInit {
   public dataSource: MatTableDataSource<Appointment>;
 
   constructor(private appointmentService: AppointmentService) {
-    this.role = getUserDetails().type;
+    this.role = getUserDetails()?.type;
+    if (!this.role)
+      this.role = Role.HEALTH_PRACTITIONER;
     this.dataSource = new MatTableDataSource<Appointment>();
   }
 
