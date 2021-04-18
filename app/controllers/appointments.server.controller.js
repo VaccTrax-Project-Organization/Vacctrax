@@ -320,10 +320,6 @@ exports.requestAppointmentUpdate = (req,res) => {
         findIfClinicExistsByClinicId(req.body.clinicId, res),
         findIfVaccineExistsByVaccineId(req.body.vaccineId, res)
     ]).then((val) => {
-        // const patient = val[0];
-        // const healthPractitioner = val[1];
-        // const clinic = val[2];
-        // const vaccine = val[3];
         const [appoint, patient, healthPractitioner, clinic, vaccine] = val;
         if (patient && healthPractitioner && clinic && vaccine) {
             let appointment = new RequestAppointment({
