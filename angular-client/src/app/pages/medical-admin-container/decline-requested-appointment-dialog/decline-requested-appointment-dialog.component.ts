@@ -43,15 +43,8 @@ export class DeclineRequestedAppointmentDialogComponent implements OnInit,OnDest
   }
 
   save($event) {
-    this.appointment.type = AppointmentType.CANCELLED;
-    this.subSink.add(this.appointmentService.updateAppointment(this.appointment).subscribe(res=>{console.log(res)}));
+    const apiPayload = {_id: this.appointment._id, type: AppointmentType.CANCELLED}
+    this.subSink.add(this.appointmentService.updateAppointment(apiPayload).subscribe(res=>{console.log(res)}));
     console.log(this.note.value);
-    // Put the api request to decline appointment here
-  
   }
-
- 
-
-  
-
 }

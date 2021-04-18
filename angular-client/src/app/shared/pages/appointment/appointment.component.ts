@@ -89,7 +89,8 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public openModifyAppointmentDetailsDialog(element: Appointment) {
     let dialogRef;
-
+    console.log(this.roleInput);
+    
     switch(this.roleInput){
       case Role.MEDICAL_ADMIN:
         dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
