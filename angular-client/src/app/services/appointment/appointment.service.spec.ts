@@ -1,14 +1,12 @@
 import {async, inject, TestBed} from '@angular/core/testing';
-
 import { AppointmentService } from './appointment.service';
-import {PatientService} from '../patient/patient.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {environment} from '../../../environments/environment';
 import {AppointmentType} from '../../models/enums/appointment.enum';
-import {Vaccine} from "../../models/vaccine.model";
-import {Clinic} from "../../models/clinic.model";
-import {Patient} from "../../models/patient.model";
-import {HealthPractitioner} from "../../models/healthPractitioner.model";
+import {Vaccine} from '../../models/vaccine.model';
+import {Clinic} from '../../models/clinic.model';
+import {Patient} from '../../models/patient.model';
+import {HealthPractitioner} from '../../models/healthPractitioner.model';
 
 describe('AppointmentService', () => {
   let appointmentService: AppointmentService;
@@ -28,10 +26,12 @@ describe('AppointmentService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
+  /** checking if the component is created */
   it('should be created', () => {
     expect(appointmentService).toBeTruthy();
   });
 
+  /** Using hardcoded values to send request appointment api request and check if appointment created */
   it(`could request appointment`, async(inject([HttpTestingController, AppointmentService],
     (httpClient: HttpTestingController, appointService: AppointmentService) => {
 
@@ -69,6 +69,7 @@ describe('AppointmentService', () => {
 
     })));
 
+  /** Using hardcoded values to send cancel appointment api and check if appointment status changed to CANCELLED */
   it(`could cancel appointment`, async(inject([HttpTestingController, AppointmentService],
     (httpClient: HttpTestingController, appointService: AppointmentService) => {
 
