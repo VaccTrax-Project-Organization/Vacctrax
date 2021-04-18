@@ -21,7 +21,7 @@
 
     <ng-container matColumnDef="practitionerName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Practitioner Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.healthPractitioner.account | patientfullname}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element.healthPractitioner?.account | patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
