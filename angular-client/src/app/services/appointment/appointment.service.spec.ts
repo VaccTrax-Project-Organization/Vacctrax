@@ -32,7 +32,7 @@ describe('AppointmentService', () => {
   });
 
   /** Using hardcoded values to send request appointment api request and check if appointment created */
-  it(`could request appointment`, async(inject([HttpTestingController, AppointmentService],
+  it(`should be able to request appointment`, async(inject([HttpTestingController, AppointmentService],
     (httpClient: HttpTestingController, appointService: AppointmentService) => {
 
       appointService.requestAppointment({
@@ -70,7 +70,7 @@ describe('AppointmentService', () => {
     })));
 
   /** Using hardcoded values to send cancel appointment api and check if appointment status changed to CANCELLED */
-  it(`could cancel appointment`, async(inject([HttpTestingController, AppointmentService],
+  it(`should be able to cancel appointment`, async(inject([HttpTestingController, AppointmentService],
     (httpClient: HttpTestingController, appointService: AppointmentService) => {
 
       appointService.cancelAppointment({
@@ -107,6 +107,62 @@ describe('AppointmentService', () => {
           clinic: '6060e0d489d72d6c899a6284',
           patient: '6060df17c0edd45cd49d2f57',
         });
+      httpMock.verify();
+
+    })));
+
+  /** Using hardcoded patient id to send get patient appointments api request and check if appointment array received with at least 1 values */
+  it(`should get all appointments for a patient`, async(inject([HttpTestingController, AppointmentService],
+    (httpClient: HttpTestingController, appointService: AppointmentService) => {
+
+      appointService.getAppointmentsByPatient('6060df17c0edd45cd49d2f57')
+        .subscribe((result: any) => {
+          expect(result.length).toBeGreaterThan(0);
+        });
+
+      // @ts-ignore
+      const req = httpMock.expectOne(environment.apiUrl + '/getAllAppointmentsByPatientId/' + '6060df17c0edd45cd49d2f57');
+      expect(req.request.method).toBe('GET');
+
+      req.flush([{
+          _id: '6060edfa00b639ea04d96fe2',
+          reason: 'Unit test appointment',
+          preferredDate: '2021-03-28T20:48:45.535+00:00',
+          preferredTime: '2021-03-28T12:30:00.535+00:00',
+          vaccine: '6060e7d900130baf8c5b6a70',
+          vaccineDose: '2nd',
+          type: AppointmentType.CANCELLED,
+          clinic: '6060e0d489d72d6c899a6284',
+          patient: '6060df17c0edd45cd49d2f57',
+        }]);
+      httpMock.verify();
+
+    })));
+
+  /** Using hardcoded clinic id to send get appointments by clinic Id api request and check if appointment array received with at least 1 values */
+  it(`should get all appointments for a clinic`, async(inject([HttpTestingController, AppointmentService],
+    (httpClient: HttpTestingController, appointService: AppointmentService) => {
+
+      appointService.getAppointmentsByClinic('6060e1549107f28980861695')
+        .subscribe((result: any) => {
+          expect(result.length).toBeGreaterThan(0);
+        });
+
+      // @ts-ignore
+      const req = httpMock.expectOne(environment.apiUrl + '/getAllAppointmentsByClinicId/' + '6060e1549107f28980861695');
+      expect(req.request.method).toBe('GET');
+
+      req.flush([{
+        _id: '6060edfa00b639ea04d96fe2',
+        reason: 'Unit test appointment',
+        preferredDate: '2021-03-28T20:48:45.535+00:00',
+        preferredTime: '2021-03-28T12:30:00.535+00:00',
+        vaccine: '6060e7d900130baf8c5b6a70',
+        vaccineDose: '2nd',
+        type: AppointmentType.CANCELLED,
+        clinic: '6060e1549107f28980861695',
+        patient: '6060df17c0edd45cd49d2f57',
+      }]);
       httpMock.verify();
 
     })));
