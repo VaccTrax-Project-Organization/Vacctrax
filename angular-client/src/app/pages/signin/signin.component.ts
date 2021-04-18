@@ -48,7 +48,7 @@ export class SigninComponent implements OnInit, OnDestroy {
       console.log('this.signInForm', this.signInForm.value);
       this.subSink.add(this.patientService.signIn(this.signInForm.value).subscribe(res => {
         sessionStorage.setItem('signedInUser', JSON.stringify(res));
-        switch (getUserDetails().type) {
+        switch (getUserDetails()?.type) {
           case 'PATIENT': {
             this.router.navigate(['/patient/dashboard']);
             break;

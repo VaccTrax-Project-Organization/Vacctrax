@@ -14,7 +14,11 @@ import {UpdateAppointmentVaccineDetailsDialogComponent} from './update-appointme
 import {AppointmentService} from 'src/app/services/appointment/appointment.service';
 import {AppointmentType} from 'src/app/models/enums/appointment.enum';
 import {ModifyAppointmentDetailsDialogComponent} from './modify-appointment-details-dialog/modify-appointment-details-dialog.component';
-import { CreateAppointmentDialogComponent, CreateAppointmentDialogModel } from './create-appointment-dialog/create-appointment-dialog.component';
+import {
+  CreateAppointmentDialogComponent,
+  CreateAppointmentDialogModel
+} from './create-appointment-dialog/create-appointment-dialog.component';
+
 @Component({
   selector: 'app-appointment',
   templateUrl: './appointment.component.html',
@@ -25,6 +29,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) public sort: MatSort;
   @Input() public roleInput: Role;
   @Output() modified: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Input()
   set tableDataSource(data: MatTableDataSource<Appointment>) {
     this.dataSource = data;
@@ -36,14 +41,14 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
-  constructor(private router: Router, public dialog: MatDialog, private appointmentService: AppointmentService,) {
+  constructor(private router: Router, public dialog: MatDialog, private appointmentService: AppointmentService) {
     this.subSink = new SubSink();
     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
     this.dataSource = new MatTableDataSource<Appointment>();
   }
 
   public ngOnInit() {
-    this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.MEDICAL_ADMIN;
+    this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.MEDICAL_ADMIN || this.roleInput === Role.HEALTH_PRACTITIONER;
   }
 
   public ngAfterViewInit() {
@@ -54,18 +59,18 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
-  emitModify(dialogRef: MatDialogRef<any>){
+  emitModify(dialogRef: MatDialogRef<any>) {
     this.subSink.add(dialogRef.afterClosed().subscribe(res => {
-      if (res){
+      if (res) {
         this.modified.emit(true);
       }
     }));
   }
 
-  public addNewClicked(){
+  public addNewClicked() {
     let dialogRef;
 
-    if (this.roleInput === Role.MEDICAL_ADMIN){
+    if (this.roleInput === Role.MEDICAL_ADMIN) {
       dialogRef = this.dialog.open(CreateAppointmentDialogComponent, {
         panelClass: 'dialog-panel-class',
         width: '650px',
@@ -77,12 +82,12 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
 
-    if (this.roleInput === Role.PATIENT){
+    if (this.roleInput === Role.PATIENT) {
       this.router.navigate(['./patient/requestAppointment']);
     }
 
     // other dialog here
-    if (dialogRef){
+    if (dialogRef) {
       this.emitModify(dialogRef);
     }
   }
@@ -90,7 +95,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   public openModifyAppointmentDetailsDialog(element: Appointment) {
     let dialogRef;
 
-    switch(this.roleInput){
+    switch (this.roleInput) {
       case Role.MEDICAL_ADMIN:
         dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
           panelClass: 'dialog-panel-class',
@@ -113,6 +118,18 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
           restoreFocus: false,
           data: element
         });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(result);
+          if (result) {
+            this.subSink.add(this.appointmentService.getAppointmentsByPatient().subscribe(res => {
+              console.log(res);
+              // @ts-ignore
+              this.dataSource = res;
+            }, error => {
+              console.log(error);
+            }));
+          }
+        });
         break;
 
       case Role.PATIENT:
@@ -131,7 +148,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
 
-    if (dialogRef){
+    if (dialogRef) {
       this.emitModify(dialogRef);
     }
   }
