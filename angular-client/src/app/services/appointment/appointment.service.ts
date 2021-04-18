@@ -6,7 +6,7 @@ import {Appointment} from '../../models/appointment.model';
 import {AppointmentRequest} from '../../models/appointment-request.model';
 import {catchError} from 'rxjs/operators';
 import {Service} from '../service.class';
-import {BookAppointmentDTO} from "../../shared/Models/bookAppointmentDTO";
+import {BookAppointmentDTO} from '../../shared/Models/bookAppointmentDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class AppointmentService extends Service {
       }));
   }
 
-  public requestAppointment(appointment: AppointmentRequest): Observable<Appointment>{
+  public requestAppointment(appointment: any): Observable<Appointment>{
     return this.http.post<Appointment>(this.url + '/requestAppointment', appointment, {headers: this.httpHeader})
       .pipe(
         catchError(err => {

@@ -44,7 +44,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   public getTableDataSource(): void {
-    this.subSink.add(this.appointmentService.getAppointmentsByPatient().subscribe(res => {
+    const keys = getUserDetails();
+    this.subSink.add(this.appointmentService.getAppointmentsByPatient(keys?.id).subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource<Appointment>(res);
       console.log(this.dataSource);
