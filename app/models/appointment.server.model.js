@@ -51,7 +51,7 @@ const AppointmentSchema = new Schema({
     healthPractitioner: {
         type: Schema.Types.ObjectId,
         ref: 'HealthPractitioner',
-        required: "healthPractitioner is required"
+        // required: "healthPractitioner is required"
     }
 });
 
