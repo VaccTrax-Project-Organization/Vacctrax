@@ -1,5 +1,5 @@
 export function getUserDetails() {
   const keys = JSON.parse(sessionStorage.getItem('signedInUser'));
-  delete keys.token;
+  delete keys?.token;
   return keys;
 }
