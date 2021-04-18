@@ -9,7 +9,8 @@ const RequestAppointment = mongoose.model("RequestedAppointment");
 
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
-    let appointment = new RequestAppointment(req.body);
+    // let appointment = new RequestAppointment(req.body);
+    let appointment = new Appointment(req.body);
     appointment.type = 'REQUESTED';
 
     appointment.save((err, app) => {
