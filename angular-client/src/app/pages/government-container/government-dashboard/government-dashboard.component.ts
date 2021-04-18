@@ -15,7 +15,7 @@ export class GovernmentDashboardComponent implements OnInit {
   public dataSource: MatTableDataSource<Appointment>;
 
   constructor(private appointmentService: AppointmentService) {
-    this.role = getUserDetails().type;
+    this.role = getUserDetails()?.type;
     this.dataSource = new MatTableDataSource<Appointment>();
   }
 
