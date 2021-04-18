@@ -13,6 +13,7 @@ import {Vaccine} from '../../../models/vaccine.model';
 import * as moment from 'moment';
 import { HealthPractitioner } from 'src/app/models/healthPractitioner.model';
 import { Router } from '@angular/router';
+import {getUserDetails} from '../../../shared/Functions/getUserDetails';
 
 @Component({
   selector: 'app-request-appointment',
@@ -78,10 +79,11 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
     }
 
     const { clinicId, preferredDate, preferredTime, vaccine, vaccineDose, reason } = this.requestApptForm.getRawValue();
-
+    const keys = getUserDetails();
     const test = moment(preferredTime, ['h:mm A']).format();
     const appointmentRequest: AppointmentRequest = {
-      patient: '6060df17c0edd45cd49d2f57',
+      patient: keys.id,
+      // patient: '',
       clinic: clinicId,
       preferredDate,
       preferredTime: moment(preferredTime, ['h:mm A']).format(),
