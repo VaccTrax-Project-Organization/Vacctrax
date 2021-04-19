@@ -17,6 +17,7 @@ exports.sendCreatePasswordEmail = (res, user, token) => {
         templateId: config.sendgridTemplateId
     }
 
+    /** using sendgrid send method to send the email*/
     sgMail.send(msg)
         .then(() => {
             console.log('Email sent')

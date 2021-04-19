@@ -17,7 +17,7 @@ export class SetPasswordComponent implements OnInit, OnDestroy {
   constructor(private patientService: PatientService,
               private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { 
+              private router: Router) {
     this.subSink = new SubSink();
     this.authToken = this.activatedRoute.snapshot.paramMap.get('token');
   }
@@ -29,13 +29,16 @@ export class SetPasswordComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
-
+  /**
+   * createSetPasswordForm will generate the password form view for user to choose a password * */
   public createSetPasswordForm(): void {
     this.setPasswordForm = this.formBuilder.group({
       password: ['', Validators.compose([ Validators.required, Validators.minLength(7)])],
       confirmPassword: ['', Validators.compose([ Validators.required, Validators.minLength(7)])],
     });
   }
+  /**
+   * submitSetPasswordForm  takes password input. returns error if login fails * */
 
   public submitSetPasswordForm(): void {
     if (this.setPasswordForm.valid) {

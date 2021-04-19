@@ -21,12 +21,14 @@ describe('PatientService', () => {
     httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it(`should sign in`, async(inject([HttpTestingController, PatientService],
+  /** using hardcoded credentials to check if the sign in api is working */
+  it(`should be able to sign in`, async(inject([HttpTestingController, PatientService],
     // tslint:disable-next-line:no-shadowed-variable
     (httpClient: HttpTestingController, patientService: PatientService) => {
 
       patientService.signIn({email: 'localvac@yopmail.com', password: 'Tester123!'})
         .subscribe((result: any) => {
+          // confirm if test passed if the success variable in the returned payload is true
           expect(result.success).toBe(true);
         });
 

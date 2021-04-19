@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { inject } from '@angular/core/testing';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Appointment } from 'src/app/models/appointment.model';
 import { AppointmentType } from 'src/app/models/enums/appointment.enum';
@@ -15,7 +15,7 @@ import { SubSink } from 'subsink';
 export class CheckInComponent implements OnInit, OnDestroy {
   checkInForm: FormGroup;
   subSink: SubSink;
-  constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService, 
+  constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService,
      @Inject(MAT_DIALOG_DATA) private appointment: Appointment,) {
        this.subSink = new SubSink();
       }
@@ -26,7 +26,9 @@ export class CheckInComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkInForm = this.createCheckInForm();
   }
-
+  /**
+   * createCheckInForm will create form for check in.
+   * */
   createCheckInForm(): FormGroup{
     return this.formBuilder.group({
       age: [''],
@@ -37,10 +39,12 @@ export class CheckInComponent implements OnInit, OnDestroy {
       longTermCare:[false],
     })
   }
+  /**
+   * checkInPatient will create form for check in.
+   * */
 
   checkInPatient($event) {
-    this.appointment.type = AppointmentType.CONFIRMED;
-    this.subSink.add(this.appointmentService.updateAppointment(this.appointment).subscribe(res=>{console.log(res)}));
-      
+    const apiPayload = {_id: this.appointment._id, type: AppointmentType.CONFIRMED}
+    this.subSink.add(this.appointmentService.updateAppointment(apiPayload).subscribe(res=>{console.log(res)}));
   }
 }

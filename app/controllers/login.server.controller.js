@@ -7,6 +7,8 @@ const Patient = mongoose.model('Patient');
 const HealthPractitioner = mongoose.model('HealthPractitioner');
 const MedicalAdmin = mongoose.model('MedicalAdmin');
 
+/** Middle ware Used to verify the jwt token received in the api request
+ * and confirm that the user is logged in by validating the token */
 exports.verifyToken = (req, res, next) => {
     let token = (req.headers['x-access-token'] || req.headers['authorization']);
 
@@ -33,26 +35,29 @@ exports.verifyToken = (req, res, next) => {
     }
 }
 
-// used for user sign in
+/** Allows the user to sign in */
 exports.signIn = async (req, res) => {
 
     const {email, password} = req.body;
-    let userId = '-1';
-    let userSchema = {};
 
+    // checking if email and password provided in the request
     if (email && password) {
+        // finding if the account exists by the provided email
         Account.findOne({email: email}, (err, account) => {
             if (err) {
                 res.status(500).send({message: 'There was an error fetching this account.', err: err, success: false}).end();
             } else {
                 if (account) {
                     if (account.password) {
+                        // checking if the encrypted password in the database for that account matches the plain text password received from the api
                         if (bcrypt.compareSync(password, account.password)) {
+                            // creating a jwt token with the user details encrypted and can only be decrypted with the secret key
                             const token = jwt.sign({ id: account._id, email: account.email, role: account.type}, config.jwtSecretKey,
                                 {
                                     algorithm: "HS256",
                                     expiresIn: config.emailJwtLifespan
                                 });
+                            // checking th account type of the user trying to sign in and get the user details to sent the patientId, healthpractitionerId or MedicalAdminId
                             switch (account.type) {
                                 case 'PATIENT':
                                     sendUserDetails({type: account.type, user: Patient, account, token}, req, res);
@@ -83,6 +88,7 @@ exports.signIn = async (req, res) => {
     }
 }
 
+/** Receiving the type of user and fetch the user Id and send the api result to the frontend if successful sign in message */
 sendUserDetails = (details, req, res) => {
     details.user.findOne({account: details.account}, (err, schema) => {
         if (err) {

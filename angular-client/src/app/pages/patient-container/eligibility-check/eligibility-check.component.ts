@@ -42,7 +42,9 @@ export class EligibilityCheckComponent implements OnInit {
   get formControls() {
     return this.eligibilityForm.controls;
   }
-
+  /**
+   * createEligibilityForm will create eligibility form
+   * */
   private createEligibilityForm(): void {
     this.eligibilityForm = this.formBuilder.group({
       age: ['', Validators.required],
@@ -51,7 +53,9 @@ export class EligibilityCheckComponent implements OnInit {
       greaterRisk: ['', Validators.required]
     });
   }
-
+  /**
+   * submitEligibilityForm will submit eligibility form
+   * */
   public submitEligibilityForm(): void {
     if (this.eligibilityForm.valid) {
       if (this.eligible.includes(this.formControls.age.value)

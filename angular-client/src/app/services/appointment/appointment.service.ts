@@ -48,7 +48,7 @@ export class AppointmentService extends Service {
         }));
   }
 
-  public updateAppointment(appointment: Appointment): Observable<Appointment>{
+  public updateAppointment(appointment: any): Observable<any>{
     return this.http.put<Appointment>(`${this.url}/appointments/${appointment._id}`, appointment, {headers: this.httpHeader})
       .pipe(
         catchError(err => {
