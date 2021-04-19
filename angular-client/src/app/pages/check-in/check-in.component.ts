@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { inject } from '@angular/core/testing';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Appointment } from 'src/app/models/appointment.model';
 import { AppointmentType } from 'src/app/models/enums/appointment.enum';

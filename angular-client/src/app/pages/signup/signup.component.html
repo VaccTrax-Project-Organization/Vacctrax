@@ -12,14 +12,6 @@
       </mat-form-field>
     </div>
 
-    <!-- Uncomment if the backend fields update -->
-    <!-- <div class="col-md-6">
-      <label for="middleName">Middle Name:</label><br/>
-      <mat-form-field appearance="outline">
-        <input id="middleName" matInput type="text" formControlName="middleName">
-      </mat-form-field>
-    </div> -->
-
     <div class="col-md-6">
       <label for="lastName">Last Name:</label><br/>
       <mat-form-field appearance="outline">
@@ -35,15 +27,6 @@
         <mat-error>Email is <strong>required</strong></mat-error>
       </mat-form-field>
     </div>
-
-    <!-- Uncomment if the backend fields update -->
-    <!-- <div class="col-md-6">
-      <label for="gender">Gender:</label><br/>
-      <mat-form-field appearance="outline">
-        <input id="gender" matInput type="text" formControlName="gender">
-        <mat-error>Gender is <strong>required</strong></mat-error>
-      </mat-form-field>
-    </div> -->
 
     <div class="col-md-6">
       <label for="streetLine1">Street Line 1:</label><br/>
@@ -79,16 +62,11 @@
     <div class="col-md-6">
       <label for="province">Province:</label><br/>
       <mat-form-field appearance="outline">
-        <!-- <input id="province" matInput type="text" formControlName="province"> -->
         <mat-select id="province" formControlName="province">
           <mat-option *ngFor="let province of this.provincesEnum | keyvalue"
                       [value]="province.value">
             {{province.value}}
           </mat-option>
-          <!-- <mat-option value="volvo">Volvo</mat-option>
-          <mat-option value="saab">Saab</mat-option>
-          <mat-option value="mercedes">Mercedes</mat-option>
-          <mat-option value="audi">Audi</mat-option> -->
         </mat-select>
         <mat-error>Province is <strong>required</strong></mat-error>
       </mat-form-field>
@@ -110,14 +88,6 @@
       </mat-form-field>
     </div>
 
-    <!-- Uncomment if the backend fields update -->
-    <!-- <div class="col-md-6">
-      <label for="preferredNotification">Preferred Notification Method:</label><br/>
-      <mat-form-field appearance="outline">
-        <input id="preferredNotification" matInput type="text" formControlName="preferredNotification">
-        <mat-error>Preferred Notification Method is <strong>required</strong></mat-error>
-      </mat-form-field>
-    </div> -->
   </div>
 
   <div class="row mx-0">

@@ -18,8 +18,6 @@ module.exports = (app) => {
 
     app.post("/api/bookAppointment", appointmentController.bookAppointment);
 
-    app.post("/api/testSave", appointmentController.testCreate);
-
     app.route("/api/appointments/:appointmentId")
         .put(appointmentController.updateAppointment)
         .delete(appointmentController.deleteAppointment);
