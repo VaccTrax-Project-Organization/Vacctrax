@@ -11,7 +11,7 @@ import {GenericTwoOptionDialogData} from 'src/app/models/generic-two-option-dial
 import {AddUpdateVaccineDialogComponent} from 'src/app/shared/pages/add-update-vaccine-dialog/add-update-vaccine-dialog.component';
 
 @Component({
-  selector: 'app-appointment',
+  selector: 'app-vaccines-list',
   templateUrl: './vaccines-list.component.html',
   styleUrls: ['./vaccines-list.component.scss']
 })
@@ -55,7 +55,7 @@ export class VaccinesListComponent implements OnInit, AfterViewInit, OnDestroy {
   public openRemoveVaccineDialog(element: Vaccine): void {
     const dialogRef = this.dialog.open(GenericTwoOptionDialogComponent, {
       disableClose: true,
-      data: new GenericTwoOptionDialogData('Remove Vaccine', `Are you sure you wish to remove the ${element.name} vaccine?`),
+      data: new GenericTwoOptionDialogData("Remove Vaccine", `Are you sure you wish to remove the ${element.name} vaccine?`),
       panelClass: 'dialog-panel-class'
     });
 

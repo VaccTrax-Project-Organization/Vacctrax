@@ -91,6 +91,9 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
+  /*
+  * Create the angular reactive form
+  */
   public createModifyApptForm(): void {
     if (this.data?.appointment) {
       const appointment = this.data.appointment;
@@ -127,6 +130,9 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*
+  * Submit the updated appointment
+  */
   public submitUpdatedAppointment(): void {
     console.log('submit reached');
 

@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private appointmentService: AppointmentService, private patientService: PatientService, private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
     this.role = getUserDetails()?.type;
+    if (!this.role){
+      this.role = Role.PATIENT;
+    }
+
     this.dataSource = new MatTableDataSource<Appointment>();
 
     this.subSink.add(patientService.getPatient().subscribe(res => {
@@ -45,7 +49,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public getTableDataSource(): void {
     const keys = getUserDetails();
-    this.subSink.add(this.appointmentService.getAppointmentsByPatient(keys?.id).subscribe(res => {
+    this.subSink.add(this.appointmentService.getAppointmentsByPatient(keys?.userId).subscribe(res => {
       console.log(res);
       this.dataSource = new MatTableDataSource<Appointment>(res);
       console.log(this.dataSource);
