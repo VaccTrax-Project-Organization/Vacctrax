@@ -13,7 +13,7 @@
             <h3>{{"List of Appointments"}}</h3>
 
             <app-appointment
-              [roleInput]="role"
+              [roleInput]="this.role"
               [tableDataSource]="dataSource"
               (modified)="this.getTableDataSource()">
             </app-appointment>

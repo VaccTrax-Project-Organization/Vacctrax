@@ -7,8 +7,8 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
   templateUrl: './add-update-vaccine-dialog.component.html',
   styleUrls: ['./add-update-vaccine-dialog.component.scss']
 })
-export class AddUpdateVaccineDialogComponent implements OnInit {
 
+export class AddUpdateVaccineDialogComponent implements OnInit {
   public addUpdateVaccineForm: FormGroup;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -17,9 +17,11 @@ export class AddUpdateVaccineDialogComponent implements OnInit {
 
   public ngOnInit(): void {
     this.createAddUpdateVaccineForm();
-
   }
 
+  /*
+  * Create the angular reactive form
+  */
   public createAddUpdateVaccineForm(): void {
     this.addUpdateVaccineForm = this.formBuilder.group({ 
       name: [this.data.vaccine?.name || '', Validators.required],
@@ -29,6 +31,9 @@ export class AddUpdateVaccineDialogComponent implements OnInit {
     });
   }
 
+  /*
+  * Save and close the dialog and return the form values
+  */
   public saveAndCloseDialog(): void {
     this.addUpdateVaccineForm.markAllAsTouched();
     if (this.addUpdateVaccineForm.valid) {

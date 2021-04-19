@@ -27,7 +27,7 @@ import {
 
 export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) public sort: MatSort;
-  @Input() public roleInput: Role;
+  @Input() public roleInput: Role; 
   @Output() modified: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input()
@@ -51,14 +51,25 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.MEDICAL_ADMIN || this.roleInput === Role.HEALTH_PRACTITIONER;
   }
 
+  /*
+  * When the component view is initialized the sort
+  * for the table is added to the datasource
+  */
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 
+  /*
+  * When the component is destroyed the observables
+  * in the subsink are unsubscribed to prevent memory leaks
+  */
   public ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
 
+  /*
+  * Emit a modify even to the parent component to refresh the table
+  */
   emitModify(dialogRef: MatDialogRef<any>) {
     this.subSink.add(dialogRef.afterClosed().subscribe(res => {
       if (res) {
@@ -67,6 +78,10 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }));
   }
 
+  /*
+  * When the add new button is clicked this method evaluates the roleInput
+  * and opens the appropriate dialog
+  */
   public addNewClicked() {
     let dialogRef;
 
@@ -92,10 +107,15 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /*
+  * When the edit button is clicked this method evaluates the roleInput
+  * and opens the appropriate dialog
+  */
   public openModifyAppointmentDetailsDialog(element: Appointment) {
     let dialogRef;
+    console.log(this.roleInput);
 
-    switch (this.roleInput) {
+    switch(this.roleInput){
       case Role.MEDICAL_ADMIN:
         dialogRef = this.dialog.open(ModifyAppointmentDetailsDialogComponent, {
           panelClass: 'dialog-panel-class',
@@ -153,6 +173,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  /*
+  * When the view button is clicked the view appointment dialog is opened
+  */
   public openViewAppointmentDialog(element: Appointment) {
     console.log(element);
     this.dialog.open(ViewAppointmentDialogComponent, {
@@ -163,8 +186,11 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /*
+  * When the view button is clicked the decline appointment dialog is opened
+  */
   public openDeclineAppointmentRequestDialog(element: Appointment): void {
-    const dialogRef = this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
+    this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',
       disableClose: false,
       autoFocus: false,
@@ -174,6 +200,9 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
+  /*
+  * When the view button is clicked the generic dialog is opened
+  */
   public openCancelVaccinationDialog(element: Appointment): void {
     const dialogTitle = 'CANCEL APPOINTMENT';
     const dialogDescription = 'Are you sure you would like to cancel the selected appointment (enter appoint number here or something), this action cannot be undone';

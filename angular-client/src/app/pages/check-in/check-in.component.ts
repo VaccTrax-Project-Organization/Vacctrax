@@ -44,8 +44,7 @@ export class CheckInComponent implements OnInit, OnDestroy {
    * */
 
   checkInPatient($event) {
-    this.appointment.type = AppointmentType.CONFIRMED;
-    this.subSink.add(this.appointmentService.updateAppointment(this.appointment).subscribe(res=>{console.log(res)}));
-
+    const apiPayload = {_id: this.appointment._id, type: AppointmentType.CONFIRMED}
+    this.subSink.add(this.appointmentService.updateAppointment(apiPayload).subscribe(res=>{console.log(res)}));
   }
 }

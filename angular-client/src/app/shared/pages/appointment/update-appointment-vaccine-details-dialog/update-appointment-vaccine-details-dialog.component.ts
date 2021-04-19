@@ -5,6 +5,7 @@ import {SubSink} from 'subsink';
 import {AppointmentService} from '../../../../services/appointment/appointment.service';
 import {VaccinesService} from '../../../../services/vaccines/vaccines.service';
 import {Vaccine} from '../../../../models/vaccine.model';
+import { Appointment } from 'src/app/models/appointment.model';
 
 @Component({
   selector: 'app-update-appointment-vaccine-details-dialog',
@@ -13,12 +14,12 @@ import {Vaccine} from '../../../../models/vaccine.model';
 })
 export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit, OnDestroy {
   private subSink: SubSink;
-  appointmentDetails: any;
+  appointmentDetails: Appointment;
   vaccines: Vaccine[];
   dose = new FormControl('', [Validators.required]);
   type = new FormControl('', [Validators.required]);
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: UpdateAppointmentVaccineDetailsDialogComponent,
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Appointment,
               private vaccinesService: VaccinesService,
               private dialogRef: MatDialogRef<UpdateAppointmentVaccineDetailsDialogComponent>,
               private appointmentService: AppointmentService) {
@@ -26,7 +27,7 @@ export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit, O
     if (data) {
       this.appointmentDetails = data;
       this.dose.setValue(this.appointmentDetails.vaccineDose);
-      this.type.setValue(this.appointmentDetails.vaccine.id);
+      this.type.setValue(this.appointmentDetails.vaccine._id);
     }
   }
 
@@ -51,7 +52,8 @@ export class UpdateAppointmentVaccineDetailsDialogComponent implements OnInit, O
       console.log('-> this.type.value', this.type.value);
       this.appointmentDetails.vaccineDose = this.dose.value;
       this.appointmentDetails.vaccine = this.type.value;
-      this.subSink.add(this.appointmentService.updateAppointmentVaccine(this.appointmentDetails).subscribe(res => {
+      const apiData = {id: this.appointmentDetails._id, vaccineDose: this.dose.value, vaccine: this.type.value }
+      this.subSink.add(this.appointmentService.updateAppointmentVaccine(apiData).subscribe(res => {
         console.log('-> response', res);
         this.dialogRef.close(true);
       }));

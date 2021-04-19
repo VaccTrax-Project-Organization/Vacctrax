@@ -84,7 +84,7 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
     const keys = getUserDetails();
     const test = moment(preferredTime, ['h:mm A']).format();
     const appointmentRequest: AppointmentRequest = {
-      patient: keys.id,
+      patient: keys?.userId,
       // patient: '',
       clinic: clinicId,
       preferredDate,
