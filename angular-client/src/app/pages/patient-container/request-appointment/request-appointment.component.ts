@@ -70,7 +70,9 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
       reason: ['', Validators.required],
     });
   }
-
+  /**
+   * submitRequestApptForm will request appt form
+   * */
   public submitRequestApptForm(): void {
     console.log('submitted!');
     if (this.requestApptForm.invalid) {
