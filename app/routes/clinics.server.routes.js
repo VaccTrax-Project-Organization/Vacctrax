@@ -11,6 +11,4 @@ module.exports = function (app) {
         .delete(clinicController.deleteClinicById)
 
     app.param('clinicId', clinicController.getClinicById);
-
-    app.post("/api/clinic", clinicController.testSave);
 };

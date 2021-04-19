@@ -35,7 +35,6 @@ export class SigninComponent implements OnInit, OnDestroy {
  * Create sign up form will do the validation for email and password.
  * */
   createSignupForm(): FormGroup {
-    // for the commented out lines, if the backend adds them, uncomment them.
     return this.formBuilder.group({
 
       email: ['', Validators.required],
@@ -77,11 +76,6 @@ export class SigninComponent implements OnInit, OnDestroy {
       }, error => {
         alert(error.error.message);
       }));
-      // const navigationExtras: NavigationExtras = {
-      //   state: {
-      //     email: this.signInForm.value.email
-      //   }
-      // };
     }
   }
 }
