@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <div>
-        <h1>Health Practitioner Dashboard</h1>
+        <h1>Government Dashboard</h1>
       </div>
     </div>
 
@@ -10,10 +10,9 @@
       <mat-card>
         <mat-card-content>
           <h3>{{"List of Confirmed Appointments"}}</h3>
-          <app-appointment
-            [roleInput]="this.role"
-            [tableDataSource]="dataSource">
-          </app-appointment>
+          <app-vaccines-list
+            [roleInput]="this.role">
+          </app-vaccines-list>
         </mat-card-content>
       </mat-card>
     </div>

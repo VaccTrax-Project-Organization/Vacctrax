@@ -7,7 +7,7 @@
   Appointment #:
 </div>
 <div class="row justify-content-center">
-  {{appointmentDetails?.id}}
+  {{appointmentDetails?._id}}
 </div>
 <div class="ml-5">
 <!--  <div class="row">-->
@@ -21,11 +21,15 @@
   <div class="row">
     <div class="col-6">
       <div class="row">
-        <!--      <div class="col-2">Vaccine Dose:</div>-->
         <div class="col-10">
-          <mat-form-field appearance="outline" style="width: 100%">
+          <mat-form-field appearance="outline">
             <mat-label>Vaccine Dose</mat-label>
-            <input type="text" matInput [formControl]="dose" style="width: 100%;">
+            <mat-select [formControl]="dose">
+              <mat-option value="Shot #1">Shot #1</mat-option>
+              <mat-option value="Shot #2">Shot #2</mat-option>
+              <mat-option value="Shot #3">Shot #3</mat-option>
+            </mat-select>
+            <mat-error>Vaccine Dose is <strong>Required</strong></mat-error>
           </mat-form-field>
         </div>
       </div>

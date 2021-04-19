@@ -9,9 +9,7 @@ const routes: Routes = [
     path: '',
     component: GovernmentContainerComponent,
     children: [
-
-      {path: 'vaccinesList', component: VaccinesListComponent},
-      {path: 'dashboard', component: GovernmentDashboardComponent}
+      {path: 'dashboard', component: VaccinesListComponent},
     ]
   },
 ];
