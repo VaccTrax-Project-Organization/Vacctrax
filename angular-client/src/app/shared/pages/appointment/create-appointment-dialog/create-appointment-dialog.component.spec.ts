@@ -13,13 +13,14 @@ import {RouterModule} from '@angular/router';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {PatientService} from '../../../../services/patient/patient.service';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {ModifyAppointmentDetailsDialogComponent} from "../modify-appointment-details-dialog/modify-appointment-details-dialog.component";
+import {ModifyAppointmentDetailsDialogComponent} from '../modify-appointment-details-dialog/modify-appointment-details-dialog.component';
 
 describe('CreateAppointmentDialogComponent', () => {
   let component: CreateAppointmentDialogComponent;
   let fixture: ComponentFixture<CreateAppointmentDialogComponent>;
   const formBuilder: FormBuilder = new FormBuilder();
-  let dialogData: MatDialogRef<CreateAppointmentDialogComponent>();
+  // tslint:disable-next-line:prefer-const
+  let dialogData: MatDialogRef<CreateAppointmentDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
