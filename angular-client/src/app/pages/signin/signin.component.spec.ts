@@ -63,11 +63,12 @@ describe('SigninComponent', () => {
     component.createSignupForm();
   });
 
+  /** */
   it('can sign in', () => {
     component.signInForm.controls.email.setValue('localvac@yopmail.com');
     component.signInForm.controls.password.setValue('Tester123!');
     component.submitSignIn();
+    // tslint:disable:no-string-literal
     spyOn(component['patientService'], 'signIn');
-    // expect(component.['patientService'].signIn).toHaveBeenCalled();
   });
 });
