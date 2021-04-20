@@ -3,7 +3,8 @@ const config = require("../../config/config");
 
 // sending an email to the customer regarding creating new password
 exports.sendCreatePasswordEmail = (res, user, token) => {
-    sgMail.setApiKey(config.sendgridApiKey);
+    console.log(process.env.SENDGRID_API_KEY);
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     // change from local host to deployed template when deploying
     const msg = {
