@@ -7,6 +7,7 @@ const emailController = require("./email.server.controller")
 const config = require("../../config/config")
 const bcrypt = require("bcrypt");
 
+/** Get the patient by Id */
 exports.getPatientById = (req, res, next, id) => {
     Patient.findById(id, (err, patient) => {
         if (err) {
@@ -32,6 +33,7 @@ exports.updatePatientDetails = (req,res,next,id) => {
     });
 }
 
+/** get all patients in the database for the medical admin */
 exports.getAllPatients = (req, res) => {
     // only sending firstName and lastName in account for patient
     Patient.find({}, (err, patients) => {
@@ -43,6 +45,10 @@ exports.getAllPatients = (req, res) => {
     }).lean().populate('account', 'firstName lastName');
 }
 
+/**
+ * Sign Up function for validating if the account with email already exists if not then create a new account and
+ * link it with patient object and then send an email to the patient through sendgrid api
+ * */
 exports.signUp = (req, res, next) => {
 
     const body = req.body;
@@ -69,7 +75,7 @@ exports.signUp = (req, res, next) => {
                             // creating a new account object to save
                             let account = new Account({firstName: body.firstName, lastName: body.lastName, email: body.email, phone: body.phone, address: add, type: 'PATIENT'});
 
-
+                            // saving a new account object
                             account.save((err, acc) => {
                                 if (err) {
                                     return res.status(500).send({message: "There was an Error Creating the Patient Account.", err: err}).end();
@@ -81,13 +87,14 @@ exports.signUp = (req, res, next) => {
                                                 return res.status(500).send({message: "There was an Error Creating the Patient."}).end();
                                             } else {
                                                 if (pat) {
+                                                    // creating a new jwt token to be sent in the email to only allow verified users to create account password and validate user
                                                     const token = jwt.sign({ id: acc._id, email: req.body.email}, config.jwtSecretKey,
                                                         {
                                                             algorithm: "HS256",
                                                             expiresIn: config.emailJwtLifespan
                                                         });
+                                                    // sending email through r=email controller
                                                     emailController.sendCreatePasswordEmail(res, {email: acc.email, firstName: acc.firstName}, token);
-                                                    console.log(pat);
                                                 } else {
                                                     return res.status(500).send({message: "There was an Error Creating the Patient."}).end();
                                                 }

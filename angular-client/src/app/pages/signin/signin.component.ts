@@ -31,9 +31,10 @@ export class SigninComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.subSink.unsubscribe();
   }
-
+/**
+ * Create sign up form will do the validation for email and password.
+ * */
   createSignupForm(): FormGroup {
-    // for the commented out lines, if the backend adds them, uncomment them.
     return this.formBuilder.group({
 
       email: ['', Validators.required],
@@ -41,7 +42,9 @@ export class SigninComponent implements OnInit, OnDestroy {
 
     })
   }
-
+  /**
+   * Submit Sign In will submit the signin form data and route the user to the appropriate dashboard page
+   * */
   public submitSignIn() {
     console.log('this.signInForm', this.signInForm.value);
     if (this.signInForm.valid) {
@@ -73,11 +76,6 @@ export class SigninComponent implements OnInit, OnDestroy {
       }, error => {
         alert(error.error.message);
       }));
-      // const navigationExtras: NavigationExtras = {
-      //   state: {
-      //     email: this.signInForm.value.email
-      //   }
-      // };
     }
   }
 }

@@ -91,6 +91,9 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     this.subSink.unsubscribe();
   }
 
+  /*
+  * Create the angular reactive form
+  */
   public createModifyApptForm(): void {
     if (this.data?.appointment) {
       const appointment = this.data.appointment;
@@ -127,13 +130,16 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*
+  * Submit the updated appointment
+  */
   public submitUpdatedAppointment(): void {
     console.log('submit reached');
 
     if (this.modifyApptForm.valid) {
       let appointmentPayload;
       const {clinic, vaccine, vaccineDose, healthPractitioner, appointmentDate, appointmentTime, patient, reason } = this.modifyApptForm.getRawValue();
-      console.log("appointment details", this.modifyApptForm.value);
+      console.log('appointment details', this.modifyApptForm.value);
       if (this.isPatient){
         const preferredDate = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime);
         // appointmentPayload = {...new BookAppointmentDTO(), vaccineDose, preferredDate, preferredTime: appointmentTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: clinic, reason, _id: this.data.appointment._id};

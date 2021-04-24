@@ -49,6 +49,8 @@ describe('AppointmentService', () => {
           expect(result._id).toBe('6060edfa00b639ea04d96fe2');
         });
 
+      // using a mock http server to simulate the backend request and
+      // verify it with the real backend request payload received
       // @ts-ignore
       const req = httpMock.expectOne(environment.apiUrl + '/requestAppointment');
       expect(req.request.method).toBe('POST');
@@ -91,6 +93,8 @@ describe('AppointmentService', () => {
           expect(result.type).toBe(AppointmentType.CANCELLED);
         });
 
+      // using a mock http server to simulate the backend request and
+      // verify it with the real backend request payload received
       // @ts-ignore
       const req = httpMock.expectOne(environment.apiUrl + '/appointments/' + '6060ee5300b639ea04d96fe2');
       expect(req.request.method).toBe('PUT');

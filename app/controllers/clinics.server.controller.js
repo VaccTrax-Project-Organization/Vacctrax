@@ -1,5 +1,3 @@
-const Address = require('mongoose').model('Address');
-
 const Clinic = require('mongoose').model('Clinic');
 
 
@@ -65,33 +63,4 @@ exports.deleteClinicById = function(req,res,next){
         console.log("deleting clinic: " + req.clinic.id );
         res.json(clinic);
     });
-}
-
-exports.testSave = (req, res, next) => {
-    const address = new Address(
-        {
-            streetLine1: "Progress Ave",
-            streetLine2: "test street",
-            postalCode: "L7H7H7",
-            province: "ON",
-            city: "Scar"
-        }
-    );
-
-    let savedAddress = null;
-
-    address.save().then((add) => {
-        const clinic = new Clinic({
-            name: "Centennial Clinic",
-            address: add
-        });
-
-        clinic.save((err, cli) => {
-            if (err) {
-                return res.status(500).send(err).end();
-            } else {
-                return res.status(200).send(cli);
-            }
-        })
-    })
 }
