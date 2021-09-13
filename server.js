@@ -1,4 +1,5 @@
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const dotenv = require('dotenv');
 
 // Load the module dependencies
 const configureExpress = require("./config/express");
@@ -10,6 +11,9 @@ const db = configureMongoose();
 
 // Create a new Express application instance
 const app = configureExpress();
+
+// configure variables from.env file
+dotenv.config()
 
 // Use the Express application instance to listen to the '3000' port
 app.listen(process.env.PORT || 3000);
