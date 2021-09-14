@@ -6,14 +6,14 @@ const configureExpress = require("./config/express");
 const configureMongoose = require("./config/mongoose");
 // const cors = require('cors');
 
+// configure variables from.env file
+dotenv.config()
+
 // Create a new Mongoose connection instance
 const db = configureMongoose();
 
 // Create a new Express application instance
 const app = configureExpress();
-
-// configure variables from.env file
-dotenv.config()
 
 // Use the Express application instance to listen to the '3000' port
 app.listen(process.env.PORT || 3000);
