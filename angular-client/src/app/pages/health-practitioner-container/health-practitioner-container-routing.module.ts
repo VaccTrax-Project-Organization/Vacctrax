@@ -9,7 +9,6 @@ const routes: Routes = [
     path: '',
     component: HealthPractitionerContainerComponent,
     children: [
-
       {path: 'vaccineHistory', component: VaccineHistoryComponent},
       {path: 'dashboard', component: HealthPractitionerDashboardComponent}
     ]

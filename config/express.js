@@ -8,7 +8,6 @@ const methodOverride = require("method-override");
 const session = require("express-session");
 const swaggerUI = require("swagger-ui-express");
 const cors = require('cors');
-// const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerDocument = require("../swagger.json");
 
 // Define the Express configuration method
@@ -44,12 +43,8 @@ module.exports = function () {
   });
 
   app.use(cors({
-    // I HAVE TO COMMENT OUT THIS origin: '*', cause for some reason if I don't I get a CORS error when calling get for vaccines
-    // This is a temporary fix, I'll probably uncomment this later - Asad
     origin: config.frontendDomain, // specify the domain origin that is allowed to make requests to this server
 
-    //For now, this previous solution works and fixes the issue, will figure out whats causing the above later
-    // origin: config.frontendLocalDomain, // specify the domain origin that is allowed to make requests to this server
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
   }));
 
@@ -85,8 +80,6 @@ module.exports = function () {
     },
     apis: ["../app/routes/*.js"]
   };
-
-  // const specs = swaggerJsDoc(options);
 
   // Set the application view engine and 'views' folder
   app.set("views", "./app/views");

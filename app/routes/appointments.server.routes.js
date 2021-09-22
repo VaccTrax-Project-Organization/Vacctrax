@@ -11,13 +11,12 @@ module.exports = (app) => {
     app.get("/api/getConfirmedAppointmentsByClinicId/:clinicId", appointmentController.getAllConfirmedAppointmentsForClinic);
     app.get("/api/getConfirmedAppointmentsByPatient/:patientId",appointmentController.getBookedAppointment);
     app.get("/api/getRequestAppointmentsByPatient/:patientId",appointmentController.getRequestedAppointment);
+    app.get("/api/getAllAppointmentsByClinicId/:clinicId", appointmentController.getAllAppointmentsForClinic);
 
     app.route('/api/declineAppointment/:appointmentId')
         .put(medicalAdminController.declineAppointment);
 
     app.post("/api/bookAppointment", appointmentController.bookAppointment);
-
-    app.post("/api/testSave", appointmentController.testCreate);
 
     app.route("/api/appointments/:appointmentId")
         .put(appointmentController.updateAppointment)

@@ -1,9 +1,13 @@
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const dotenv = require('dotenv');
 
 // Load the module dependencies
 const configureExpress = require("./config/express");
 const configureMongoose = require("./config/mongoose");
 // const cors = require('cors');
+
+// configure variables from.env file
+dotenv.config()
 
 // Create a new Mongoose connection instance
 const db = configureMongoose();

@@ -15,11 +15,15 @@ export class GovernmentDashboardComponent implements OnInit {
   public dataSource: MatTableDataSource<Appointment>;
 
   constructor(private appointmentService: AppointmentService) {
-    this.role = getUserDetails().type;
+    this.role = getUserDetails()?.type;
+    /** Initializing datasource for the table
+     */
     this.dataSource = new MatTableDataSource<Appointment>();
   }
 
   public ngOnInit(): void {
+    /** A method to get confirmed appointment by the clinic id
+     */
     this.appointmentService.getConfirmedAppointmentsByClinicId().subscribe(res => {
       this.dataSource = new MatTableDataSource<Appointment>(res);
     });

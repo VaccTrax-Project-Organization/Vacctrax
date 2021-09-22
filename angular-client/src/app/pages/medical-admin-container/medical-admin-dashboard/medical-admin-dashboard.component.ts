@@ -24,7 +24,11 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   showLoading = false;
 
   constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
-    this.role = getUserDetails().type;
+
+    this.role = getUserDetails()?.type;
+    if (!this.role)
+      this.role = Role.MEDICAL_ADMIN;
+
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 
@@ -59,7 +63,9 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
       this.showLoading = false;
     }));
   }
-
+  /**
+   * openModifyAppointmentDialog will open dialog for modify appt
+   * */
   public openModifyAppointmentDialog(): void {
     const dialogRef = this.dialog.open(ModifyAppointmentDetailsComponent, {
       panelClass: 'dialog-panel-class',
@@ -74,7 +80,9 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
       }
     });
   }
-
+  /**
+   * openDeclineAppointmentRequestDialog will open the decline appt component
+   * */
   public openDeclineAppointmentRequestDialog(): void {
     const dialogRef = this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',
