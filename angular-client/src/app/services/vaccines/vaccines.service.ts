@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import {Service} from '../service.class';
 import {Vaccine} from '../../models/vaccine.model';
 import {catchError} from 'rxjs/operators';
