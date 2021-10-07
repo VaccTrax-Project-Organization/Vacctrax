@@ -9,6 +9,7 @@ import { ModifyAppointmentDetailsComponent } from '../modify-appointment-details
 import {DeclineRequestedAppointmentDialogComponent} from '../decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
 import {finalize} from 'rxjs/operators';
+import {getUserDetails} from '../../../shared/Functions/getUserDetails';
 
 @Component({
   selector: 'app-medical-admin-dashboard',
@@ -17,12 +18,17 @@ import {finalize} from 'rxjs/operators';
 })
 
 export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
-  public role = Role.MEDICAL_ADMIN;
+  public role;
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
   showLoading = false;
 
   constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
+
+    this.role = getUserDetails()?.type;
+    if (!this.role)
+      this.role = Role.MEDICAL_ADMIN;
+
     this.subSink = new SubSink();
     this.dataSource = new MatTableDataSource<Appointment>();
 
@@ -57,7 +63,9 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
       this.showLoading = false;
     }));
   }
-
+  /**
+   * openModifyAppointmentDialog will open dialog for modify appt
+   * */
   public openModifyAppointmentDialog(): void {
     const dialogRef = this.dialog.open(ModifyAppointmentDetailsComponent, {
       panelClass: 'dialog-panel-class',
@@ -72,7 +80,9 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
       }
     });
   }
-
+  /**
+   * openDeclineAppointmentRequestDialog will open the decline appt component
+   * */
   public openDeclineAppointmentRequestDialog(): void {
     const dialogRef = this.dialog.open(DeclineRequestedAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',

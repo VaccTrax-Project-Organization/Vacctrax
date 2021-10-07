@@ -13,8 +13,9 @@
             <h3>{{"List of Appointments"}}</h3>
 
             <app-appointment
-              [roleInput]="role"
-              [tableDataSource]="dataSource">
+              [roleInput]="this.role"
+              [tableDataSource]="dataSource"
+              (modified)="this.getTableDataSource()">
             </app-appointment>
           </mat-card-content>
         </mat-card>

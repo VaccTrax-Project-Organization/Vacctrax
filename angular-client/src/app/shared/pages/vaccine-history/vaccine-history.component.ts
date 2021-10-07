@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Role} from '../../../models/enums/role.enum';
 import {Patient} from '../../../models/patient.model';
 import {SubSink} from 'subsink';
@@ -13,14 +13,16 @@ import {AppointmentService} from "../../../services/appointment/appointment.serv
 })
 export class VaccineHistoryComponent implements OnInit, OnDestroy {
 
-  role: Role;
+  @Input() role: Role;
   patient: Patient;
   subSink: SubSink;
   public dataSource =[];
 
-  constructor(private appointmentService: AppointmentService, private patientService: PatientService, private vaccineService: VaccinesService) {
+  constructor(private appointmentService: AppointmentService,
+              private patientService: PatientService,
+              private vaccineService: VaccinesService) {
     this.subSink = new SubSink();
-    this.role = Role.PATIENT;
+    this.role = Role.HEALTH_PRACTITIONER;
     this.subSink.add(patientService.getPatient().subscribe(res => {
       this.patient = res;
     }));
