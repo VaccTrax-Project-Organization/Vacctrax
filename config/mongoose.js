@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 module.exports = function () {
     // Use Mongoose to connect to MongoDB
     const db = mongoose
-        .connect(process.env.DB, {
+        .connect(config.db, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,
