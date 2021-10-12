@@ -20,4 +20,4 @@ PatientSchema.set("toJSON", {
     virtuals: true,
 });
 
-mongoose.model('Patient', PatientSchema);
+mongoose.model('Patient', PatientSchema, "patients");
