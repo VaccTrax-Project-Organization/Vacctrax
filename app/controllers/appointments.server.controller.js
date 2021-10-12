@@ -7,6 +7,7 @@ const Clinic = mongoose.model("Clinic");
 const Vaccine = mongoose.model("Vaccine");
 const RequestAppointment = mongoose.model("RequestedAppointment");
 
+/** used by patient api to request an appointment */
 exports.requestAppointment = (req, res) => {
     console.log(req.body);
     // let appointment = new RequestAppointment(req.body);
@@ -29,10 +30,9 @@ exports.requestAppointment = (req, res) => {
     });
 }
 
+/** get all appointments for a clinic by its clinic Id */
 exports.getAllAppointmentsForClinic = (req, res, next) => {
     const clinic = res.locals.clinic;
-
-    console.log(clinic);
 
     // getting results for both collections and concatenating them in a single array
     Promise.all([
@@ -55,6 +55,7 @@ exports.getAllAppointmentsForClinic = (req, res, next) => {
     })
 }
 
+/** get confirmed appointments for a clinic by its clinic Id */
 exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
     const clinic = res.locals.clinic;
     console.log("check clinic", clinic);
@@ -73,7 +74,7 @@ exports.getAllConfirmedAppointmentsForClinic = (req, res, next) => {
     }, {path: "healthPractitioner", populate: {path: "account", model: "Account"}}, 'vaccine']);
 }
 
-//pass in a patient to the res.locals. This is so a medical admin or a patient can get all their appointments.
+/** pass in a patient to the res.locals. This is so a medical admin or a patient can get all their appointments. */
 exports.getPatientAppointments = (req, res, next) => {
     const patient = res.locals.patient;
 
@@ -98,7 +99,7 @@ exports.getPatientAppointments = (req, res, next) => {
     })
 }
 
-//for a specific appoint for a specific patient (get it by it's id)
+/** for a specific appoint for a specific patient (get it by it's id) */
 exports.getPatientAppointmentDetail = (req, res, next) => {
     const patient = req.patient;
     Appointment.findOne({
@@ -114,18 +115,15 @@ exports.getPatientAppointmentDetail = (req, res, next) => {
     })
 }
 
-// used to book appointment
+/** used by medical admin to book an appointment */
 exports.bookAppointment = (req, res) => {
-    console.log(req.body);
+    // check if the patient, practitoner, clinic and vaccine Ids provided
+    // in the payload exists in the database unless throw an error
     Promise.all([findIfPatientExistsByPatientId(req.body.patientId, res),
         findIfHealthPractitionerExistsByPractitionerId(req.body.healthPractitionerId, res),
         findIfClinicExistsByClinicId(req.body.clinicId, res),
         findIfVaccineExistsByVaccineId(req.body.vaccineId, res)
     ]).then((val) => {
-        // const patient = val[0];
-        // const healthPractitioner = val[1];
-        // const clinic = val[2];
-        // const vaccine = val[3];
         const [patient, healthPractitioner, clinic, vaccine] = val;
         if (patient && healthPractitioner && clinic && vaccine) {
             let appointment = new Appointment({
@@ -156,6 +154,7 @@ exports.bookAppointment = (req, res) => {
     });
 }
 
+/** update an appointment by appointment Id */
 exports.updateAppointment = (req, res, next) => {
     console.log("req.body", req.body);
     console.log("res.locals", res.locals);
@@ -171,6 +170,7 @@ exports.updateAppointment = (req, res, next) => {
 
 };
 
+/** get booked appointment by a patient Id */
 exports.getBookedAppointment = (req,res,next)=>{
     //first get all the booked appointments for the 
     const patient = res.locals.patient;
@@ -190,7 +190,7 @@ exports.getBookedAppointment = (req,res,next)=>{
     ]);
 }
 
-
+/** get requested appointments by patient Id */
 exports.getRequestedAppointment = (req,res,next)=>{
 
     const patient = res.locals.patient;
@@ -212,7 +212,7 @@ exports.getRequestedAppointment = (req,res,next)=>{
 
 
 
-// to be implemented in the future
+// to be implemented in the future (next release)
 exports.deleteAppointment = (req, res, next) => {
 
 };
@@ -232,6 +232,7 @@ exports.getAppointmentById = (req, res, next, id) => {
     });
 };
 
+/** checking if a patient already exists with that patient Id */
 function findIfPatientExistsByPatientId(patientId, res) {
     return new Promise(resolve => {
         Patient.findById(patientId, (err, patient) => {
@@ -248,6 +249,7 @@ function findIfPatientExistsByPatientId(patientId, res) {
     });
 }
 
+/** checking if an health practitioner already exists with that health practitioner Id */
 function findIfHealthPractitionerExistsByPractitionerId(healthPractitionerId, res) {
     return new Promise(resolve => {
         HealthPractitioner.findById(healthPractitionerId, (err, practitioner) => {
@@ -264,6 +266,7 @@ function findIfHealthPractitionerExistsByPractitionerId(healthPractitionerId, re
     });
 }
 
+/** checking if a clinic already exists with that clinic Id */
 function findIfClinicExistsByClinicId(clinicId, res) {
     return new Promise(resolve => {
         Clinic.findById(clinicId, (err, clinic) => {
@@ -280,6 +283,7 @@ function findIfClinicExistsByClinicId(clinicId, res) {
     });
 }
 
+/** checking if an vaccine already exists with that vaccine Id */
 function findIfVaccineExistsByVaccineId(vaccineId, res) {
     return new Promise(resolve => {
         console.log(vaccineId);
@@ -297,6 +301,7 @@ function findIfVaccineExistsByVaccineId(vaccineId, res) {
     });
 }
 
+/** checking if an appointment already exists with that appointment Id*/
 function findIfAppointmentExistsByAppointmentId(appointmentId, res) {
     return new Promise(resolve => {
         console.log(appointmentId);
@@ -314,6 +319,7 @@ function findIfAppointmentExistsByAppointmentId(appointmentId, res) {
     });
 }
 
+/** Used to update a requested appointment of a patient */
 exports.requestAppointmentUpdate = (req,res) => {
     Promise.all([findIfAppointmentExistsByAppointmentId(req.body._id, res),
         findIfPatientExistsByPatientId(req.body.patientId, res),
@@ -349,29 +355,6 @@ exports.requestAppointmentUpdate = (req,res) => {
     }).catch((err) => {
         console.log(err);
         res.status(500).send(err).end();
-    });
-}
-
-exports.testCreate = (req, res, next) => {
-
-    console.log(req.body);
-
-    let appointment = new Appointment(req.body);
-    appointment.vaccine = req.body.vaccineId;
-    appointment.patient = req.body.patientId;
-    appointment.clinic = req.body.clinicId;
-    appointment.healthPractitioner = req.body.healthPractitionerId;
-
-    appointment.save((err, app) => {
-        if (err) {
-            return res.status(500).send(err).end();
-        } else {
-            if (app) {
-                return res.status(200).send(app);
-            } else {
-                return res.status(500).send({message: "There was an error saving appointment."}).end();
-            }
-        }
     });
 }
 

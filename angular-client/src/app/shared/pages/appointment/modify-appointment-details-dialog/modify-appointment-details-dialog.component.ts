@@ -43,7 +43,6 @@ export class ModifyAppointmentDetailsDialogComponent implements OnInit, OnDestro
   }
 
   private createModifyApptForm(): void {
-    // const test = new Date(this.data?.startTime).toISOString().match(/\d\d:\d\d/)[0];
     this.modifyApptForm = this.formBuilder.group({
       vaccine: [this.data?.vaccine?._id || '', Validators.required],
       vaccineDose: [this.data?.vaccineDose || '', Validators.required],
