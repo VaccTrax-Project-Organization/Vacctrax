@@ -15,4 +15,4 @@ ClinicSchema.set("toJSON", {
 });
 
 // Create the 'Clinic' model out of the 'ClinicSchema'
-mongoose.model("Clinic", ClinicSchema);
+mongoose.model("Clinic", ClinicSchema, "clinics");

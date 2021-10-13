@@ -65,4 +65,4 @@ AppointmentSchema.set("toJSON", {
     virtuals: true,
 });
 
-mongoose.model('RequestedAppointment', AppointmentSchema);
+mongoose.model('RequestedAppointment', AppointmentSchema, "requestedAppointments");

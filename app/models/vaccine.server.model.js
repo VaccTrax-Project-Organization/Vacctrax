@@ -18,4 +18,4 @@ VaccineSchema.set("toJSON", {
 });
 
 // Create the 'Student' model out of the 'StudentSchema'
-mongoose.model("Vaccine", VaccineSchema);
+mongoose.model("Vaccine", VaccineSchema, "vaccines");

@@ -10,9 +10,10 @@ import { ModifyAppointmentDetailsComponent } from './modify-appointment-details/
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeclineRequestedAppointmentDialogComponent } from './decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
+import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient-details.component';
 
 @NgModule({
-  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent],
+  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent],
   imports: [
     MedicalAdminContainerRoutingModule,
     CommonModule,
