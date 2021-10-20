@@ -3,6 +3,8 @@ const config = require("../../config/config");
 
 // sending an email to the customer regarding creating new password
 exports.sendCreatePasswordEmail = (res, user, token) => {
+    if (!process.env.SENDGRID_API_KEY) throw "SENDGRID_API_KEY not set";
+    if (!process.env.CREATE_PASSWORD_TEMPLATE_ID) throw "CREATE_PASSWORD_TEMPLATE_ID not set";
     console.log(process.env.SENDGRID_API_KEY);
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
@@ -15,7 +17,7 @@ exports.sendCreatePasswordEmail = (res, user, token) => {
             token: token,
             firstName: user.firstName
         },
-        templateId: config.sendgridTemplateId
+        templateId: process.env.CREATE_PASSWORD_TEMPLATE_ID
     }
 
     /** using sendgrid send method to send the email*/
