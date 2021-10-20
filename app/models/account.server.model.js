@@ -47,4 +47,4 @@ AccountSchema.set("toJSON", {
     virtuals: true,
 });
 
-mongoose.model('Account', AccountSchema);
+mongoose.model('Account', AccountSchema, "accounts");

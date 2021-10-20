@@ -35,4 +35,4 @@ AddressSchema.set("toJSON", {
 });
 
 
-mongoose.model('Address', AddressSchema);
+mongoose.model('Address', AddressSchema, "addresses");
