@@ -25,6 +25,7 @@ module.exports = function () {
     require("../app/models/medicalAdmin.server.model");
     require("../app/models/patient.server.model");
     require("../app/models/vaccine.server.model");
+    require("../app/models/inventory.server.model");
     require("../app/models/account.server.model");
     require("../app/models/requestAppointment.server.model");
   // Return the Mongoose connection instance
