@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 module.exports = function () {
     // Use Mongoose to connect to MongoDB
     const db = mongoose
-        .connect(process.env.DB, {
+        .connect(config.db, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,
@@ -25,6 +25,7 @@ module.exports = function () {
     require("../app/models/medicalAdmin.server.model");
     require("../app/models/patient.server.model");
     require("../app/models/vaccine.server.model");
+    require("../app/models/inventory.server.model");
     require("../app/models/account.server.model");
     require("../app/models/requestAppointment.server.model");
   // Return the Mongoose connection instance

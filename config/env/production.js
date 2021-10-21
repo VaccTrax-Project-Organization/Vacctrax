@@ -4,8 +4,8 @@ module.exports = {
   sessionSecret: "productionSessionSecret",
   frontendDomain: "https://vacctrax-project-organization.github.io",
   // cloud database
-  db: "mongodb+srv://admin:vf1erPpOREgdlGYq@vacctraxcluster.keo45.mongodb.net/vacctrax-db?retryWrites=true&w=majority",
-  sendgridApiKey: "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",
+  db: "mongodb+srv://vacctrax-admin:ZG910hbIrR2zqUWe@vacctrax.84jrm.mongodb.net/vacctrax-db?retryWrites=true&w=majority",
+  sendgridApiKey: "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",
   jwtSecretKey: "aPdSgVkYp3s5v8y/B?E(H+MbQeThWmZq",
   saltRounds: 10,
   // 18000 seconds = 5 hours
