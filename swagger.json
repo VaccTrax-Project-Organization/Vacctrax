@@ -771,6 +771,122 @@
           }
         }
       }
+    },
+    "/inventory": {
+      "get": {
+        "tags": [
+          "Medical Admin"
+        ],
+        "summary": "Retrieve a list of vaccine inventories.",
+        "operationId": "inventory",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Inventory"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/addInventory": {
+      "post": {
+        "tags": [
+          "Medical Admin"
+        ],
+        "summary": "Creates a inventory item.",
+        "operationId": "addInventory",
+        "requestBody": {
+          "description": "Creates a inventory item.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "vaccines": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "numberOfVaccines": {
+                          "type": "number"
+                        },
+                        "vaccineType": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "vaccines": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "numberOfVaccines": {
+                            "type": "number"
+                          },
+                          "vaccineType": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1260,6 +1376,55 @@
           },
           "password": {
             "type": "string"
+          }
+        }
+      },
+      "Inventory": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "vaccines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "numberOfVaccines": {
+                  "type": "number"
+                },
+                "vaccineType": {
+                  "$ref": "#/components/schemas/InventoryVaccineType"
+                }
+              }
+            }
+          }
+        }
+      },
+      "InventoryVaccineType": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "isRationed": {
+            "type": "boolean",
+            "default": true
+          },
+          "manufacturer": {
+            "type": "string",
+            "example": "Pfizer"
+          },
+          "shelfLife": {
+            "type": "number",
+            "example": 5
+          },
+          "province": {
+            "type": "string",
+            "example": "ON"
           }
         }
       }
