@@ -3,7 +3,7 @@ const Inventory = mongoose.model('Inventory');
 
 exports.create = async function (req, res, next) {
     try {
-        var inventory = new Inventory(req.body);
+        const inventory = new Inventory(req.body);
         const saved = await inventory.save();
         return res.status(200).send(saved);
 
