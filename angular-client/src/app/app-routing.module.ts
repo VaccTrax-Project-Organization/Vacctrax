@@ -10,6 +10,7 @@ import { CheckInComponent } from './pages/check-in/check-in.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
 import { SetPasswordGuard } from './guards/set-password.guard';
 import { CheckEmailComponent } from './pages/check-email/check-email.component';
+import { InventoryStatisticsComponent } from './pages/medical-admin-container/inventory-statistics/inventory-statistics.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -17,6 +18,8 @@ const routes: Routes = [
   {path: 'signup', component: SignupComponent},
   {path: 'checkin', component: CheckInComponent},
   {path: 'signin', component: SigninComponent},
+  {path: 'inventory', component: InventoryStatisticsComponent},
+  
   {
     path: 'patient',
     loadChildren: () => import('./pages/patient-container/patient-container.module').then(m => m.PatientContainerModule)
