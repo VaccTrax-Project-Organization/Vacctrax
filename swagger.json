@@ -96,6 +96,90 @@
         }
       }
     },
+    "/getRequestAppointmentsByPatient/{patientId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Requested Appointments for a specific patient by patient Id.",
+        "operationId": "getRequestedAppointment",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getConfirmedAppointmentsByPatient/{patientId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Confirmed Appointments for a specific patient by patient Id.",
+        "operationId": "getBookedAppointment",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/getAllAppointmentsByClinicId/{clinicId}": {
       "get": {
         "tags": [
