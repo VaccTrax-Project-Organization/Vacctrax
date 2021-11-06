@@ -1,0 +1,115 @@
+<div class="content-container">
+  <div class="content">
+    <div class="row">
+      <div class="col text-center" style="padding-bottom: 2em">
+        <h3>
+          Modify Patient Details
+        </h3>
+      </div>
+    </div>
+    <form [formGroup]="this.editPatientDetailsForm">
+      <!--1st Form Controls Row-->
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName">
+            <mat-error>First Name is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="text" matInput formControlName="email">
+            <mat-error>Email is <strong>Not Valid</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--2nd Form Controls Row-->
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Middle Name</mat-label>
+            <input type="text" matInput formControlName="middleName">
+            <mat-error>Middle Name is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input type="text" matInput formControlName="address">
+            <mat-error>Address is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--3rd Form Controls Row-->
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName">
+            <mat-error>Last Name is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input type="number" maxlength="10" matInput formControlName="phone">
+            <mat-error>Phone is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--4th Form Controls Row-->
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Gender</mat-label>
+            <input type="text" matInput formControlName="gender">
+            <mat-error>Gender is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Health Card</mat-label>
+            <input type="text" matInput formControlName="healthCard">
+            <mat-error>Health Card is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!--5th Form Controls Row-->
+      <div class="row">
+        <div class="col-6">
+          <mat-form-field appearance="outline">
+            <mat-label>D.O.B</mat-label>
+            <input type="text" matInput formControlName="dob" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>Date Of Birth is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-6">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col text-center">
+          <button mat-raised-button type="button" class="mr-5"
+                  (click)="onSubmit()"
+                  >Save</button>
+
+          <button mat-raised-button type="button" class="ml-5"
+                  >Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
