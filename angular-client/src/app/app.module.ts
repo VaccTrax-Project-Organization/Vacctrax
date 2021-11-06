@@ -18,7 +18,6 @@ import { CheckInComponent } from './pages/check-in/check-in.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
 import { CheckEmailComponent } from './pages/check-email/check-email.component';
 import { InventoryStatisticsComponent } from './pages/medical-admin-container/inventory-statistics/inventory-statistics.component';
-import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -43,7 +42,6 @@ import { ChartsModule } from 'ng2-charts';
     SharedModule,
     RouterModule,
     ReactiveFormsModule,
-    ChartsModule,
   ],
   providers: [],
   exports: [],
