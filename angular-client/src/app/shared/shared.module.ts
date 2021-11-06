@@ -42,7 +42,7 @@ import { PasswordPipe } from './pipes/password/password.pipe';
     CommonModule,
     MaterialAngularModule,
     ReactiveFormsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
   ]
 })
 
