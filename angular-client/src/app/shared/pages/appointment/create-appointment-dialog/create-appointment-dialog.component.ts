@@ -83,7 +83,7 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     this.vaccines$ = this.vaccineService.getVaccines();
     this.patients$ = this.patientService.getAllPatients();
 
-    const tempClinicId = '6060e1549107f28980861695';
+    const tempClinicId = '616eac91af8bc1ddbd9c6f1f';
     this.healthPractitioners$ = this.healthPractitionerService.getHealthPractitionersByClinicId(tempClinicId);
   }
 
