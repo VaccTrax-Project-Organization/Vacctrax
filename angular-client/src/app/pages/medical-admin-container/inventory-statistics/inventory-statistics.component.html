@@ -1,0 +1,36 @@
+<app-navigation-bar [roleInput]="role.MEDICAL_ADMIN"></app-navigation-bar>
+
+<div class="row">
+  <div class="col text-center"><h3>Inventory Management </h3></div>
+</div>
+<br>
+<div class="row justify-content-center">
+  <mat-table matSort [dataSource]="dataSource" class="w-75 mat-elevation-z1">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Quantity</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Quantity }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.Type }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" stickyEnd>
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        <button mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  </mat-table>
+</div>

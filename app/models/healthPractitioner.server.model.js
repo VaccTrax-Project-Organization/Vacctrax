@@ -18,4 +18,4 @@ HealthPractitionerSchema.set("toJSON", {
 });
 
 // Create the 'HeatlhPractitioner' model out of the 'HeatlhPractitionerSchema'
-mongoose.model("HealthPractitioner", HealthPractitionerSchema);
+mongoose.model("HealthPractitioner", HealthPractitionerSchema, "healthPractitioners");
