@@ -25,7 +25,7 @@ export class AppointmentService extends Service {
         }));
   }
 
-  public getAppointmentsByClinic(clinicId = '6060e1549107f28980861695'): Observable<Appointment[]>{
+  public getAppointmentsByClinic(clinicId = '616eac91af8bc1ddbd9c6f1f'): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(`${this.url}/getAllAppointmentsByClinicId/${clinicId}`, {headers: this.httpHeader})
       .pipe(
         catchError(err => {
@@ -33,7 +33,7 @@ export class AppointmentService extends Service {
         }));
   }
 
-  public getConfirmedAppointmentsByClinicId(clinicId = '6060e1549107f28980861695'): Observable<Appointment[]>{
+  public getConfirmedAppointmentsByClinicId(clinicId = '616eac91af8bc1ddbd9c6f1f'): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(`${this.url}/getConfirmedAppointmentsByClinicId/${clinicId}`, {headers: this.httpHeader}).pipe(
       catchError(err => {
         return throwError(err);
