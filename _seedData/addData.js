@@ -18,7 +18,7 @@ const Appointment = mongoose.model("Appointment");
 const RequestedAppointment = mongoose.model("RequestedAppointment");
 
 const addedClinics = [];
-const addedPatients = [];
+let addedPatients = [];
 const addedVaccines = [];
 const addedPractitioners = [];
 const addedAdmins = [];
@@ -36,7 +36,6 @@ db.connect(
 ).then(() => {
         console.log("DB Connected...");
         addClinics();
-        addUsers();
     })
     .catch((err) => {
         console.log(`DB Connection Error: ${err.message}`);
@@ -260,11 +259,27 @@ addVaccines = async () => {
 addAppointments = async () => {
     const newAppointment = new Appointment({
         reason : "reason",
-        preferredDate: new Date(),
-        preferredTime: new Date(),
-        startTime: new Date(),
-        endTime: new Date(),
+        preferredDate: new Date('2021-12-22T10:00:00'),
+        preferredTime: new Date('2021-12-22T10:15:00'),
+        startTime: new Date('2021-12-22T10:00:00'),
+        endTime: new Date('2021-12-22T10:15:00'),
         type: "CONFIRMED",
+        vaccine: addedVaccines[0]?._id,
+        vaccineDose: "2nd dose",
+        clinic: addedClinics[0]?._id,
+        patient: addedPatients[0]._id,
+        healthPractitioner: addedPractitioners[0]?._id
+    });
+
+    addedAppointments.push(await newAppointment.save());
+
+    const newAppointment2 = new Appointment({
+        reason : "reason",
+        preferredDate: new Date('2021-12-05T14:00:00'),
+        preferredTime: new Date('2021-12-05T14:15:00'),
+        startTime: new Date('2021-12-05T14:00:00'),
+        endTime: new Date('2021-12-05T14:15:00'),
+        type: "COMPLETED",
         vaccine: addedVaccines[0]?._id,
         vaccineDose: "1st dose",
         clinic: addedClinics[0]?._id,
@@ -272,7 +287,8 @@ addAppointments = async () => {
         healthPractitioner: addedPractitioners[0]?._id
     });
 
-    addedAppointments.push(await newAppointment.save());
+    addedAppointments.push(await newAppointment2.save());
+
     console.log("Appointments saved !!");
 }
 
