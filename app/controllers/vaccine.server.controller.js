@@ -45,9 +45,7 @@ exports.read = function(req, res){
 //get a vaccine by its mongodb id
 exports.vaccineByID = function (req,res,next,id){
     console.log("finding vaccine");
-    Vaccine.findOne({
-        _id:id
-    },(err,vaccine)=>{
+    Vaccine.findById(id,(err,vaccine)=>{
         if(err){
             return next(err);
         }else{

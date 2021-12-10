@@ -16,7 +16,7 @@ exports.getPatientById = (req, res, next, id) => {
             return res.status(404).send({message: `Patient with the id of ${id} not found`});
         } else {
             res.locals.patient = patient;
-            console.log("patint found", patient);
+            console.log("patient found", patient);
             next();
         }
     }).select("-password");
