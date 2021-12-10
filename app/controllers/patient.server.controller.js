@@ -9,40 +9,43 @@ const bcrypt = require("bcrypt");
 
 /** Get the patient by Id */
 exports.getPatientById = (req, res, next, id) => {
-    Patient.findById(id, (err, patient) => {
+    Account.findOne({_id: id, type: "PATIENT"}, (err, patient) => {
         if (err) {
-            return res.status(500).send(err).end();
+            return res.status(500).send(err);
         } else if (!patient) {
-            return res.status(404).send({message: `Patient with the id of ${id} not found`}).end();
+            return res.status(404).send({message: `Patient with the id of ${id} not found`});
         } else {
             res.locals.patient = patient;
-            return next();
+            console.log("patint found", patient);
+            next();
         }
-    });
+    }).select("-password");
 }
 
 //update the patient via it's unique id
-exports.updatePatientDetails = (req,res,next,id) => {
+exports.updatePatientDetails = (req,res) => {
     console.log("req.body", req.body);
-    Patient.findByIdAndUpdate(res.locals.patient._id, {$set: req.body}, {new: true}, (err, patient) => {
+    delete req.body.password;
+    delete req.body.email;
+    Account.findOneAndUpdate({_id: res.locals.patient._id, type: "PATIENT"}, req.body, {new: true}, (err, patient) => {
         if (err) {
-            return res.status(500).send(err).end();
+            return res.status(500).send(err);
         } else {
-            return res.status(200).send(patient).end();
+            return res.status(200).send(patient);
         }
-    });
+    }).select("-password");
 }
 
 /** get all patients in the database for the medical admin */
 exports.getAllPatients = (req, res) => {
     // only sending firstName and lastName in account for patient
-    Patient.find({}, (err, patients) => {
+    Account.find({}, (err, patients) => {
         if (err) {
             return res.status(500).send(err).end();
         } else {
             return res.status(200).send(patients);
         }
-    }).lean().populate('account', 'firstName lastName');
+    }).lean().select('firstName lastName');
 }
 
 /**
@@ -59,6 +62,10 @@ exports.signUp = async (req, res, next) => {
 
         if (foundAccount) {
             return res.status(409).send({message: "An account with the current email already exists."});
+        }
+
+        if (!req.body.healthCardNo) {
+            return res.status(400).send({message: "Health Card number is required for sign up."});
         }
 
         let newAccount = new Account({firstName: body.firstName, lastName: body.lastName, email: body.email, phone: body.phone,
