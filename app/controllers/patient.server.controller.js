@@ -49,68 +49,40 @@ exports.getAllPatients = (req, res) => {
  * Sign Up function for validating if the account with email already exists if not then create a new account and
  * link it with patient object and then send an email to the patient through sendgrid api
  * */
-exports.signUp = (req, res, next) => {
+exports.signUp = async (req, res, next) => {
 
     const body = req.body;
     console.log(body);
 
-    // checking for email duplicates
-    Account.findOne({email: body.email}, (err, account) => {
-        if (err) {
-            return res.status(500).send({message: "There was an Error checking for patient email duplicate check.", err: err}).end();
-        } else {
-            if (account) {
-                return res.status(409).send({message: "An account with the current email already exists."}).end();
-            } else {
-                // making an address object to save patient address
-                let address = new Address({streetLine1: body.streetLine1, streetLine2: body.streetLine2, postalCode: body.postalCode, province: body.province, city: body.city});
+    try {
+        const foundAccount = await Account.findOne({email: body.email});
 
-
-                address.save((err, add) => {
-                    if (err) {
-                        return res.status(500).send({message: "There was an Error Creating the Patient Address.", err: err}).end();
-                    } else {
-                        if (add) {
-
-                            // creating a new account object to save
-                            let account = new Account({firstName: body.firstName, lastName: body.lastName, email: body.email, phone: body.phone, address: add, type: 'PATIENT'});
-
-                            // saving a new account object
-                            account.save((err, acc) => {
-                                if (err) {
-                                    return res.status(500).send({message: "There was an Error Creating the Patient Account.", err: err}).end();
-                                } else {
-                                    if (acc) {
-                                        let patient = new Patient({healthCardNo: body.healthCardNo, account: acc});
-                                        patient.save((err, pat)=> {
-                                            if (err) {
-                                                return res.status(500).send({message: "There was an Error Creating the Patient."}).end();
-                                            } else {
-                                                if (pat) {
-                                                    // creating a new jwt token to be sent in the email to only allow verified users to create account password and validate user
-                                                    const token = jwt.sign({ id: acc._id, email: req.body.email}, config.jwtSecretKey,
-                                                        {
-                                                            algorithm: "HS256",
-                                                            expiresIn: config.emailJwtLifespan
-                                                        });
-                                                    // sending email through r=email controller
-                                                    emailController.sendCreatePasswordEmail(res, {email: acc.email, firstName: acc.firstName}, token);
-                                                } else {
-                                                    return res.status(500).send({message: "There was an Error Creating the Patient."}).end();
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        return res.status(500).send({message: "Account not found."}).end();
-                                    }
-                                }
-                            });
-                        } else {
-                            return res.status(500).send({message: "There was an Error Creating the Patient Address."}).end();
-                        }
-                    }
-                })
-            }
+        if (foundAccount) {
+            return res.status(409).send({message: "An account with the current email already exists."});
         }
-    });
+
+        let newAccount = new Account({firstName: body.firstName, lastName: body.lastName, email: body.email, phone: body.phone,
+            address: {streetLine1: body.streetLine1, streetLine2: body.streetLine2, postalCode: body.postalCode, province: body.province, city: body.city},
+            type: 'PATIENT'});
+
+        const addedAccount = await newAccount.save();
+
+        if (addedAccount) {
+            const token = jwt.sign({ id: addedAccount._id, email: req.body.email}, config.jwtSecretKey,
+                {
+                    algorithm: "HS256",
+                    expiresIn: config.emailJwtLifespan
+                });
+            console.log(addedAccount);
+            // sending email through email controller
+            await emailController.sendCreatePasswordEmail(res, {email: req.body.email, firstName: addedAccount.firstName}, token);
+
+            return res.status(200).send({message: "Patient account created and email sent", email: req.body.email.email});
+        }
+
+        return res.status(500).send({message: "There was an Error creating a new account. 'Unable to save new account'", success: false})
+
+    } catch (err) {
+        return res.status(500).send({message: "There was an Error signing up the patient.", err: err})
+    }
 }
