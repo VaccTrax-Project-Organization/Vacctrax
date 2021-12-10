@@ -17,7 +17,7 @@
 
     <ng-container matColumnDef="patientName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Patient Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.patient?.account | patientfullname}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element?.patient | patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="appointmentDateTime">
@@ -27,7 +27,7 @@
 
     <ng-container matColumnDef="practitionerName">
       <mat-header-cell mat-sort-header *matHeaderCellDef>Practitioner Name</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.healthPractitioner?.account | patientfullname}}</mat-cell>
+      <mat-cell *matCellDef="let element">{{element?.healthPractitioner| patientfullname}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">

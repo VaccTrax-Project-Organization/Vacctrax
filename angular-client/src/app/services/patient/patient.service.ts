@@ -5,6 +5,7 @@ import {HttpClient} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {Service} from '../service.class';
 import {PatientList} from '../../shared/Models/patientList';
+import {Address} from '../../models/address.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class PatientService extends Service {
     account: null,
     appointments: [],
     healthCardNo: '123456-7890',
+    accountId: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: new Address(),
+  phone: '',
+  password: '',
   }
 
   constructor(private http: HttpClient) {
