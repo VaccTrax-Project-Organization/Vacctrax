@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Role} from '../../../models/enums/role.enum';
-import {getUserDetails} from "../../Functions/getUserDetails";
-import {Session} from "protractor";
-import {Router} from "@angular/router";
+import {getUserDetails} from '../../Functions/getUserDetails';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation-bar',
