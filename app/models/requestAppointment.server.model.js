@@ -45,12 +45,12 @@ const AppointmentSchema = new Schema({
     },
     patient: {
         type: Schema.Types.ObjectId,
-        ref: 'Patient',
+        ref: 'Account',
         required: "patient is required"
     },
     healthPractitioner: {
         type: Schema.Types.ObjectId,
-        ref: 'HealthPractitioner',
+        ref: 'Account',
         required: "healthPractitioner is required"
     },
     originalAppointment: {
@@ -65,4 +65,4 @@ AppointmentSchema.set("toJSON", {
     virtuals: true,
 });
 
-mongoose.model('RequestedAppointment', AppointmentSchema);
+mongoose.model('RequestedAppointment', AppointmentSchema, "requestedAppointments");

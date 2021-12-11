@@ -45,23 +45,24 @@ export class MedicalAdminDashboardComponent implements OnInit,OnDestroy {
   getTableData(){
     this.showLoading = true;
 
-    this.subSink.add(this.appointmentService.getAppointmentsByClinic().pipe(
-      finalize(() => this.showLoading = false),
-    ).subscribe(res => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-    },error => {
-      console.log(error);
-    }));
-
-    this.subSink.add(this.appointmentService.getAppointmentsByClinic().subscribe(res => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-      this.showLoading = false;
-    },error => {
-      console.log(error);
-      this.showLoading = false;
-    }));
+    if (getUserDetails()?.clinicId) {
+      this.subSink.add(this.appointmentService.getAppointmentsByClinic(getUserDetails()?.clinicId).subscribe(res => {
+        console.log(res);
+        this.dataSource = new MatTableDataSource<Appointment>(res);
+        this.showLoading = false;
+      },error => {
+        console.log(error);
+        this.showLoading = false;
+      }));
+    }
+    // this.subSink.add(this.appointmentService.getAppointmentsByClinic().pipe(
+    //   finalize(() => this.showLoading = false),
+    // ).subscribe(res => {
+    //   console.log(res);
+    //   this.dataSource = new MatTableDataSource<Appointment>(res);
+    // },error => {
+    //   console.log(error);
+    // }));
   }
   /**
    * openModifyAppointmentDialog will open dialog for modify appt

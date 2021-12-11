@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const VaccineSchema = new Schema({
     name: String,
-  
     manufacturer: String,
     shelfLife: Number,
     approvedProvinces: {
@@ -18,4 +17,4 @@ VaccineSchema.set("toJSON", {
 });
 
 // Create the 'Student' model out of the 'StudentSchema'
-mongoose.model("Vaccine", VaccineSchema);
+mongoose.model("Vaccine", VaccineSchema, "vaccines");

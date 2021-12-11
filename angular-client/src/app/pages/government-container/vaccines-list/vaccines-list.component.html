@@ -42,7 +42,7 @@
                     <mat-icon>edit</mat-icon>
                   </button>
 
-                  <button *ngIf="showAction" mat-icon-button>
+                  <button *ngIf="showAction" mat-icon-button (click)="this.openViewVaccineDetailsDialog(element)">
                     <mat-icon>remove_red_eye</mat-icon>
                   </button>
                   <button *ngIf="showAction" mat-icon-button>

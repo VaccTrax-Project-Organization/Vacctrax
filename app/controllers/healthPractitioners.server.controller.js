@@ -74,35 +74,35 @@ exports.createHealthPractitionerTest = (req, res, next) => {
 
 exports.getHealthPractitionersByClinicId = (req, res, next) => {
     const clinic = res.locals.clinic;
-    HealthPractitioner.find({clinic: clinic?._id}, (err, healthPractitioners) => {
+    Account.find({clinic: clinic?._id, type: "HEALTH_PRACTITIONER"}, (err, healthPractitioners) => {
         if (err) {
             return res.status(500).send({message: "There was an Error In Getting the Health Practitioners."}).end();
         }
 
         return res.status(200).send(healthPractitioners).end();
-    }).populate([{path: "account", populate: "address"}]);
+    }).select("-password");
 };
 
 
 exports.getHealthPractitionerDetails = (req,res,next) => {
     const practitioner = res.locals.practitioner;
-    HealthPractitioner.find({id: practitioner?._id},(err, practitioner) =>{
+    Account.findOne({id: practitioner?._id, type: "HEALTH_PRACTITIONER"},(err, practitioner) =>{
         if (err) {
             return res.status(500).send({message: "There was an Error In Finding The Health Practioner."}).end();
         }
         return res.status(200).send(healthPractitioners).end();
-    }).populate([{path: "account", populate: "address"}]);
+    }).select("-password");
 }
 
 exports.updateHealthPractitionerDetails = (req,res,next) => {
     console.log("req.body", req.body);
-    HealthPractitioner.findByIdAndUpdate(res.locals.practitioner._id, {$set: req.body}, {new: true}, (err, practitioner) => {
+    HealthPractitioner.findOneAndUpdate({_id: res.locals.practitioner._id, type: "HEALTH_PRACTITIONER"}, req.body, {new: true}, (err, practitioner) => {
         if (err) {
             return res.status(500).send(err).end();
         } else {
             return res.status(200).send(practitioner).end();
         }
-    });
+    }).select("-password");
 
 }
 

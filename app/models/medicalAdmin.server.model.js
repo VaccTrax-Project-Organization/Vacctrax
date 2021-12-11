@@ -19,4 +19,4 @@ MedicalAdminSchema.set("toJSON", {
 });
 
 // Create the 'Student' model out of the 'StudentSchema'
-mongoose.model("MedicalAdmin", MedicalAdminSchema);
+mongoose.model("MedicalAdmin", MedicalAdminSchema, "medicalAdmins");

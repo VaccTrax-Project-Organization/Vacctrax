@@ -32,12 +32,41 @@ const AccountSchema = new Schema({
         trim: true,
     },
     address: {
-        type: Schema.Types.ObjectId,
-        ref: 'Address'
+        streetLine1: {
+            type: String,
+            required: "Street line one is required",
+            trim: true
+        },
+        streetLine2: {
+            type: String,
+            trim: true
+        },
+        postalCode: {
+            type: String,
+            required: "Postal code is required",
+            trim: true
+        },
+        province: {
+            type: String,
+            enum: ['NL', 'PE', 'NS', 'NB','QC','ON','MB','SK','AB','BC','YT','NT']
+        },
+        city: {
+            type: String,
+            required: "City is required",
+            trim: true
+        }
     },
     type: {
         type: String,
         enum: ['PATIENT', 'MEDICAL_ADMIN', 'HEALTH_PRACTITIONER', 'GOVERNMENT']
+    },
+    clinic: {
+        type: Schema.Types.ObjectId,
+        ref: 'Clinic'
+    },
+    healthCardNo: {
+        type: String,
+        trim: true
     }
 });
 
@@ -47,4 +76,4 @@ AccountSchema.set("toJSON", {
     virtuals: true,
 });
 
-mongoose.model('Account', AccountSchema);
+mongoose.model('Account', AccountSchema, "accounts");

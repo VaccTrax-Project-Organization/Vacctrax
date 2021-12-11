@@ -17,6 +17,7 @@ import {SigninComponent} from './pages/signin/signin.component';
 import { CheckInComponent } from './pages/check-in/check-in.component';
 import { SetPasswordComponent } from './pages/set-password/set-password.component';
 import { CheckEmailComponent } from './pages/check-email/check-email.component';
+import { InventoryStatisticsComponent } from './pages/medical-admin-container/inventory-statistics/inventory-statistics.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CheckEmailComponent } from './pages/check-email/check-email.component';
     CheckInComponent,
     SetPasswordComponent,
     CheckEmailComponent,
+    InventoryStatisticsComponent,
   ],
   imports: [
     HttpClientModule,
@@ -39,7 +41,7 @@ import { CheckEmailComponent } from './pages/check-email/check-email.component';
     MaterialAngularModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   exports: [],

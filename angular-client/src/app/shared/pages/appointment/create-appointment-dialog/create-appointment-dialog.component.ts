@@ -18,6 +18,7 @@ import { ClinicService } from 'src/app/services/clinic/clinic.service';
 import { Clinic } from 'src/app/models/clinic.model';
 import * as moment from 'moment';
 import { AppointmentType } from 'src/app/models/enums/appointment.enum';
+import {getUserDetails} from "../../../Functions/getUserDetails";
 
 // tslint:disable: max-line-length
 @Component({
@@ -84,7 +85,9 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
     this.patients$ = this.patientService.getAllPatients();
 
     const tempClinicId = '6060e1549107f28980861695';
-    this.healthPractitioners$ = this.healthPractitionerService.getHealthPractitionersByClinicId(tempClinicId);
+    if (getUserDetails()?.clinicId) {
+      this.healthPractitioners$ = this.healthPractitionerService.getHealthPractitionersByClinicId(getUserDetails()?.clinicId);
+    }
   }
 
   ngOnDestroy(): void {
@@ -170,6 +173,9 @@ export class CreateAppointmentDialogComponent implements OnInit, OnDestroy {
       {
         const startTime = new Date(appointmentDate.toLocaleDateString() + ' ' + appointmentTime);
         appointmentPayload = {...new BookAppointmentDTO(), vaccineDose, startTime, vaccineId: vaccine, healthPractitionerId: healthPractitioner, patientId: patient, clinicId: '6060e1549107f28980861695', reason};
+        if (getUserDetails().clinicId) {
+          appointmentPayload.clinicId = getUserDetails().clinicId;
+        }
 
         console.log(appointmentPayload);
         if (appointmentPayload){

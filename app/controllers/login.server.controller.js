@@ -45,7 +45,7 @@ exports.signIn = async (req, res) => {
         // finding if the account exists by the provided email
         Account.findOne({email: email}, (err, account) => {
             if (err) {
-                res.status(500).send({message: 'There was an error fetching this account.', err: err, success: false}).end();
+                return res.status(500).send({message: 'There was an error fetching this account.', err: err, success: false});
             } else {
                 if (account) {
                     if (account.password) {
@@ -58,36 +58,24 @@ exports.signIn = async (req, res) => {
                                     expiresIn: config.emailJwtLifespan
                                 });
                             // checking th account type of the user trying to sign in and get the user details to sent the patientId, healthpractitionerId or MedicalAdminId
-                            switch (account.type) {
-                                case 'PATIENT':
-                                    sendUserDetails({type: account.type, user: Patient, account, token}, req, res);
-                                    break;
-                                case 'MEDICAL_ADMIN':
-                                    sendUserDetails({type: account.type, user: MedicalAdmin, account, token}, req, res);
-                                    break;
-                                case 'HEALTH_PRACTITIONER':
-                                    sendUserDetails({type: account.type, user: HealthPractitioner, account, token}, req, res);
-                                    break;
-                                default:
-                                    res.status(200).send({message: 'Sign In Successfully', success: true, id : account._id, token: token, email: account.email, type: account.type, userId: '-1'});
-                                    break;
-                            }
+                            return res.status(200).send({message: 'Sign In Successfully', success: true, id : account._id, token: token, email: account.email, type: account.type, userId: account._id, firstName: account.firstName, lastName: account.lastName, clinicId: account.clinic});
                         }  else {
-                            res.status(401).send({message: 'Invalid Username or password.', success: false}).end();
+                            return res.status(401).send({message: 'Invalid Username or password.', success: false});
                         }
                     } else {
-                        res.status(401).send({message: 'Invalid Username or password.', success: false}).end();
+                        return res.status(401).send({message: 'Invalid Username or password.', success: false});
                     }
                 } else {
-                    res.status(401).send({message: 'Invalid Username or password.', success: false}).end();
+                    return res.status(401).send({message: 'Invalid Username or password.', success: false});
                 }
             }
-        })
+        });
     } else {
         res.status(400).send({message: 'Email/Password not provided.', success: false}).end();
     }
 }
 
+// deprecated
 /** Receiving the type of user and fetch the user Id and send the api result to the frontend if successful sign in message */
 sendUserDetails = (details, req, res) => {
     details.user.findOne({account: details.account}, (err, schema) => {
@@ -101,4 +89,47 @@ sendUserDetails = (details, req, res) => {
             }
         }
     });
+}
+
+exports.validateUserToken = async (req, res, next) => {
+    let token = (req.headers['x-access-token'] || req.headers['authorization']);
+
+    try {
+        if (token) {
+            if (/^Bearer /.test(token)) {
+                token = token.slice(7, token.length);
+            }
+
+            jwt.verify(token, config.jwtSecretKey, async (err, decoded) => {
+                if (err) {
+                    return res.status(401).send({
+                        message: `Token is invalid! \n Error:${err.message}`
+                    });
+                } else {
+                    if (decoded?.id) {
+                        const account = await Account.findById(decoded?.id)
+                        if (!account) {
+                            return res.status(401).json({
+                                message: 'Account not found'
+                            });
+                        } else {
+                            res.locals.account = account;
+                            res.locals.userType = account.type;
+                            next();
+                        }
+                    } else {
+                        return res.status(401).json({
+                            message: 'Jwt Token has not Id'
+                        });
+                    }
+                }
+            });
+        } else {
+            return res.status(401).json({
+                message: 'Auth token is not provided'
+            });
+        }
+    } catch (error) {
+        return res.status(500).send(`There was an error validating your token. ${error}`);
+    }
 }
