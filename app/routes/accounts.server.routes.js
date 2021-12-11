@@ -11,4 +11,6 @@ module.exports = (app) => {
     app.post("/api/signIn", loginController.signIn);
 
     app.get("/api/getAllAccounts", accountsController.getAllUserAccounts);
+
+    app.put("/api/updateAccount/:id", accountsController.updateAccount);
 };

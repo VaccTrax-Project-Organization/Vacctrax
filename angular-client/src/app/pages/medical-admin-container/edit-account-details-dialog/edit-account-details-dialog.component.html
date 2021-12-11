@@ -1,1 +1,48 @@
-<p>edit-account-details-dialog works!</p>
+<div class="row">
+  <div class="col text-center"><h3>Modify Appointment Details</h3></div>
+</div>
+
+<div class="row content-description">
+  <div class="col">
+    <form [formGroup]="this.modifyAccountForm" (ngSubmit)="this.submitUpdateAccount()">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName"/>
+            <mat-error>First Name is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName"/>
+            <mat-error>Last Name is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" disabled="disabled"/>
+            <mat-error>Email is <strong>Required</strong></mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 text-center">
+          <button mat-raised-button type="submit" class="mr-5">Save</button>
+
+          <button mat-raised-button type="button" class="ml-5"
+                  [mat-dialog-close]="false">Cancel</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

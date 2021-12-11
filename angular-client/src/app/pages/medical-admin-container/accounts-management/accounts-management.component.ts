@@ -8,6 +8,8 @@ import {Appointment} from "../../../models/appointment.model";
 import {ViewAppointmentDialogComponent} from "../../../shared/pages/appointment/view-appointment-dialog/view-appointment-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ViewAccountDetailsDialogComponent} from "../view-account-details-dialog/view-account-details-dialog.component";
+import {EditAccountDetailsDialogComponent} from "../edit-account-details-dialog/edit-account-details-dialog.component";
+import {getUserDetails} from "../../../shared/Functions/getUserDetails";
 
 @Component({
   selector: 'app-accounts-management',
@@ -44,7 +46,7 @@ export class AccountsManagementComponent implements OnInit, OnDestroy {
     }));
   }
 
-  public openViewAccountDialog(element: Appointment) {
+  public openViewAccountDialog(element: any) {
     console.log(element);
     this.dialog.open(ViewAccountDetailsDialogComponent, {
       panelClass: 'dialog-panel-class',
@@ -54,6 +56,22 @@ export class AccountsManagementComponent implements OnInit, OnDestroy {
       width: '600px',
       data: element,
     });
+  }
+
+  public openEditAccountDialog(element: any) {
+    console.log(element);
+    const dialogRef = this.dialog.open(EditAccountDetailsDialogComponent, {
+      panelClass: 'dialog-panel-class',
+      disableClose: false,
+      autoFocus: false,
+      data: element,
+    });
+
+    this.subSink.add(dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.getAccounts();
+      }
+    }))
   }
 
 }
