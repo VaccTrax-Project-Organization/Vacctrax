@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Role} from '../../../models/enums/role.enum';
@@ -18,6 +18,8 @@ import {
   CreateAppointmentDialogComponent,
   CreateAppointmentDialogModel
 } from './create-appointment-dialog/create-appointment-dialog.component';
+import { concatMap, filter, map } from 'rxjs/operators';
+import { getUserDetails } from '../../Functions/getUserDetails';
 
 @Component({
   selector: 'app-appointment',
@@ -41,7 +43,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
-  constructor(private router: Router, public dialog: MatDialog, private appointmentService: AppointmentService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private appointmentService: AppointmentService) {
     this.subSink = new SubSink();
     this.displayedColumns = ['patientName', 'appointmentDateTime', 'practitionerName', 'status', 'vaccine', 'comments', 'actions'];
     this.dataSource = new MatTableDataSource<Appointment>();
@@ -49,6 +51,11 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public ngOnInit() {
     this.showActionDelete = this.roleInput === Role.PATIENT || this.roleInput === Role.MEDICAL_ADMIN || this.roleInput === Role.HEALTH_PRACTITIONER;
+
+    const appointment = this.router.getCurrentNavigation()?.extras?.state?.appointment;
+    if (appointment) {
+      this.openViewAppointmentDialog(appointment);
+    }
   }
 
   /*
@@ -57,6 +64,19 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   */
   public ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    const patientId = getUserDetails().id;
+
+    this.activatedRoute.paramMap.pipe(
+      map(() => window.history.state),
+      concatMap(res => this.appointmentService.getAppointmentsById(res.appointment.payload.id)),
+    )
+    .subscribe(appt=>{
+      if (appt) {
+        if (appt) {
+          this.openViewAppointmentDialog(appt);
+        }
+      }
+    })
   }
 
   /*
