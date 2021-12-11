@@ -14,21 +14,26 @@ export class InventoryService extends Service {
   }
 
   getInventoryList(): Observable<Inventory[]> {
-    return this.httpClient.get(`${this.url}/inventory`, { headers: this.httpHeader })
-      .pipe(map(list => this.mapGetInventoryResponse(list)));
+    return this.httpClient.get(`${this.url}/inventory`, { headers: this.httpHeader }).pipe(
+      map(list => this.mapGetInventoryResponse(list)),
+    );
   }
 
   addInventoryItem(body: { vaccines: [{ numberOfVaccines: number, vaccineType: string }] }): Observable<any> { 
     return this.httpClient.post<any>(`${this.url}/addInventory`, body, { headers: this.httpHeader });
   }
 
+  updateInventoryItemQuantity(id: string, numberOfVaccines: number): Observable<any> { 
+    return this.httpClient.put<any>(`${this.url}/updateInventory/${id}`, { numberOfVaccines }, { headers: this.httpHeader });
+  }
+
   private mapGetInventoryResponse(list): Inventory[] {
     return list.map((item) => ({
       id: item._id,
-      quantity: item.vaccines[0].numberOfVaccines,
-      name: item.vaccines[0].vaccineType.manufacturer,
-      shelfLife: item.vaccines[0].vaccineType.shelfLife,
+      quantity: item?.numberOfVaccines,
+      name: item.vaccineType?.manufacturer,
+      shelfLife: item.vaccineType?.shelfLife,
       actions: () => {} // refactor this to implement appropriate modal logic in the future
-    }));
+    })).filter(item => !!item.name);
   }
 }
