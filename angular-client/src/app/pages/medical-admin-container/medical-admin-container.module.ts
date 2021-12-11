@@ -11,9 +11,18 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeclineRequestedAppointmentDialogComponent } from './decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient-details.component';
+import { InventoryStatisticsGraphComponent } from './inventory-statistics-graph/inventory-statistics-graph.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
-  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent],
+  declarations: [
+    MedicalAdminContainerComponent, 
+    MedicalAdminDashboardComponent, 
+    ModifyAppointmentDetailsComponent, 
+    DeclineRequestedAppointmentDialogComponent, 
+    EditPatientDetailsComponent,
+    InventoryStatisticsGraphComponent
+  ],
   imports: [
     MedicalAdminContainerRoutingModule,
     CommonModule,
@@ -21,7 +30,8 @@ import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient
     RouterModule,
     MaterialAngularModule,
     NgxMaterialTimepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule,
   ]
 })
 export class MedicalAdminContainerModule { }

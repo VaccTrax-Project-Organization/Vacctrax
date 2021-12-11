@@ -96,6 +96,90 @@
         }
       }
     },
+    "/getRequestAppointmentsByPatient/{patientId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Requested Appointments for a specific patient by patient Id.",
+        "operationId": "getRequestedAppointment",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getConfirmedAppointmentsByPatient/{patientId}": {
+      "get": {
+        "tags": [
+          "Appointment"
+        ],
+        "summary": "Get the Confirmed Appointments for a specific patient by patient Id.",
+        "operationId": "getBookedAppointment",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json",
+            "content": {
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/getAllAppointmentsByClinicId/{clinicId}": {
       "get": {
         "tags": [
@@ -212,7 +296,6 @@
         }
       }
     },
-
     "/getConfirmedAppointmentsByClinicId/{clinicId}": {
       "get": {
         "tags": [
@@ -255,7 +338,6 @@
         }
       }
     },
-
     "/appointments/{appointmentId}": {
       "put": {
         "tags": [
@@ -296,7 +378,6 @@
         }
       }
     },
-
     "/addVaccine": {
       "post": {
         "tags": [
@@ -508,7 +589,6 @@
         }
       }
     },
-
     "/getAllHealthPractitioners/{clinicId}": {
       "get": {
         "tags": [
@@ -574,7 +654,6 @@
             "description": "Operation Successful",
             "content": {
               "application/json": {
-
               }
             }
           },
@@ -807,30 +886,14 @@
         "tags": [
           "Medical Admin"
         ],
-        "summary": "Creates a inventory item.",
-        "operationId": "addInventory",
+        "summary": "Create a new inventory record.",
+        "operationId": "createInventory",
         "requestBody": {
-          "description": "Creates a inventory item.",
+          "description": "Create a new inventory record.",
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "vaccines": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "numberOfVaccines": {
-                          "type": "number"
-                        },
-                        "vaccineType": {
-                          "type": "string"
-                        }
-                      }
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/InventoryDto"
               }
             }
           },
@@ -842,45 +905,96 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "_id": {
-                      "type": "string"
-                    },
-                    "vaccines": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string"
-                          },
-                          "numberOfVaccines": {
-                            "type": "number"
-                          },
-                          "vaccineType": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    },
-                    "id": {
-                      "type": "string"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Inventory"
                   }
                 }
               }
             }
           },
           "400": {
-            "description": "Invalid Json",
+            "description": "Invalid Json"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/updateInventory": {
+      "put": {
+        "tags": [
+          "Medical Admin"
+        ],
+        "summary": "Update inventory item.",
+        "operationId": "updateInventory",
+        "parameters": [
+          {
+            "name": "inventory.id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
             "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Inventory"
+                  }
+                }
+              }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
+          "400": {
+            "description": "Invalid Json"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/deleteInventory": {
+      "delete": {
+        "tags": [
+          "Medical Admin"
+        ],
+        "parameters": [
+          {
+            "name": "inventory.id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
+          }
+        ],
+        "summary": "Delete inventory item.",
+        "operationId": "deleteInventory",
+        "responses": {
+          "200": {
+            "description": "Operation Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Inventory"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Json"
           },
           "500": {
             "description": "Internal Server Error"
@@ -1318,7 +1432,10 @@
           "province": {
             "type": "string",
             "enum": [
-              "NL", "PE", "NS", "NB",
+              "NL",
+              "PE",
+              "NS",
+              "NB",
               "QC",
               "ON",
               "MB",
@@ -1401,6 +1518,17 @@
                 }
               }
             }
+          }
+        }
+      },
+      "InventoryDto": {
+        "type": "object",
+        "properties": {
+          "numberOfVaccines": {
+            "type": "number"
+          },
+          "vaccineType": {
+            "type": "string"
           }
         }
       },

@@ -44,7 +44,7 @@ import { InventoryService } from '../services/inventory/inventory.service';
     CommonModule,
     MaterialAngularModule,
     ReactiveFormsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
   ]
 })
 
