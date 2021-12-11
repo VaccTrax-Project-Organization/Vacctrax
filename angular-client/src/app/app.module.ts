@@ -41,7 +41,7 @@ import { InventoryStatisticsComponent } from './pages/medical-admin-container/in
     MaterialAngularModule,
     SharedModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   exports: [],
