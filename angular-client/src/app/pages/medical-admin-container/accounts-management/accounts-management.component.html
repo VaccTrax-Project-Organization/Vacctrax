@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col text-center"><h3>Account Management </h3></div>
+</div>
+<br>
+<div class="row justify-content-center">
+  <form [formGroup]="this.searchForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Search Accounts</mat-label>
+      <input matInput placeholder="Search Accounts" formControlName="searchVal" (input)="onSearchValueChange($event)">
+    </mat-form-field>
+  </form>
+</div>
+<br>
+<div class="row justify-content-center">
+  <mat-table matSort [dataSource]="dataSource" class="w-75 mat-elevation-z1">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element | patientfullname}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element?.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>Type</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.type }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" stickyEnd>
+      <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index">
+        <button mat-icon-button (click)="openViewAccountDialog(element)">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+        <button mat-icon-button (click)="openEditAccountDialog(element)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+  </mat-table>
+</div>

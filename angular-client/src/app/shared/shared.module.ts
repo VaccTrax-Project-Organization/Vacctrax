@@ -14,6 +14,7 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { CreateAppointmentDialogComponent } from './pages/appointment/create-appointment-dialog/create-appointment-dialog.component';
 import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dialog/add-update-vaccine-dialog.component';
 import { PasswordPipe } from './pipes/password/password.pipe';
+import { ViewVaccineDetailsDialogComponent } from './pages/view-vaccine-details-dialog/view-vaccine-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PasswordPipe } from './pipes/password/password.pipe';
     CreateAppointmentDialogComponent,
     AddUpdateVaccineDialogComponent,
     PasswordPipe,
+    ViewVaccineDetailsDialogComponent,
   ],
 
   exports: [

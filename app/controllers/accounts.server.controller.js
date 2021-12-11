@@ -48,3 +48,27 @@ exports.setPassword = (req, res) => {
         res.status(500).send({message: "Provided passwords does not match."}).end();
     }
 }
+
+exports.getAllUserAccounts = async (req, res) => {
+    try {
+        const accounts = await Account.find({$or: [{type: "PATIENT"}, {type: "HEALTH_PRACTITIONER"}]}).select("-password");
+        return res.status(200).send(accounts);
+    } catch (err) {
+        return res.status(500).send(`There was an error getting accounts ${err}`)
+    }
+}
+
+exports.updateAccount = async (req, res) => {
+    const userId = req.params.id;
+    try {
+        if (userId) {
+            const updated = await Account.findByIdAndUpdate(userId, {firstName: req.body.firstName, lastName: req.body.lastName}).select("-password");
+            return res.status(200).send(updated);
+        } else {
+            return res.status(400).send(`No User Id provided`)
+        }
+
+    } catch (err) {
+        return res.status(500).send(`There was an error getting accounts ${err}`)
+    }
+}

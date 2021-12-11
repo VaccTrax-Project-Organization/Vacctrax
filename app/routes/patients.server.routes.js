@@ -6,8 +6,7 @@ module.exports = (app) => {
     // if any route contains the patient Id param this middle ware is called first
     app.param("patientId", patientController.getPatientById);
 
-    app.route("/api/patient/:patientId")
-    .put(patientController.updatePatientDetails)
+    app.put("/api/patient/:patientId", patientController.updatePatientDetails);
 
     app.get("/api/patients", patientController.getAllPatients);
 

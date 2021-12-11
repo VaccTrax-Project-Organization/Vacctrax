@@ -45,13 +45,18 @@ const AppointmentSchema = new Schema({
     },
     patient: {
         type: Schema.Types.ObjectId,
-        ref: 'Patient',
+        ref: 'Account',
         required: "patient is required"
     },
     healthPractitioner: {
         type: Schema.Types.ObjectId,
-        ref: 'HealthPractitioner',
+        ref: 'Account',
         // required: "healthPractitioner is required"
+    },
+    status: {
+        type: String,
+        enum : ['PENDING','CHECKED_IN', 'VACCINATED'],
+        default: 'PENDING'
     }
 });
 

@@ -9,4 +9,8 @@ module.exports = (app) => {
     app.post("/api/setPassword", loginController.verifyToken, accountsController.setPassword);
 
     app.post("/api/signIn", loginController.signIn);
+
+    app.get("/api/getAllAccounts", accountsController.getAllUserAccounts);
+
+    app.put("/api/updateAccount/:id", accountsController.updateAccount);
 };
