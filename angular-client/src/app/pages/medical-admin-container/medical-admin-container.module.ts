@@ -12,9 +12,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DeclineRequestedAppointmentDialogComponent } from './decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient-details.component';
 import { AccountsManagementComponent } from './accounts-management/accounts-management.component';
+import { ViewAccountDetailsDialogComponent } from './view-account-details-dialog/view-account-details-dialog.component';
+import { EditAccountDetailsDialogComponent } from './edit-account-details-dialog/edit-account-details-dialog.component';
 
 @NgModule({
-  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent, AccountsManagementComponent],
+  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent, AccountsManagementComponent, ViewAccountDetailsDialogComponent, EditAccountDetailsDialogComponent],
   imports: [
     MedicalAdminContainerRoutingModule,
     CommonModule,

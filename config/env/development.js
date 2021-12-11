@@ -3,7 +3,7 @@ module.exports = {
   //To sign the session identifier, use a secret string
   sessionSecret: "developmentSessionSecret",
   frontendDomain: "http://localhost:4200",
-  db: "mongodb+srv://vacctrax-admin:ZG910hbIrR2zqUWe@vacctrax.84jrm.mongodb.net/vacctrax-db?retryWrites=true&w=majority",
+  db: "mongodb+srv://vacctrax-admin:ZG910hbIrR2zqUWe@vacctrax.84jrm.mongodb.net/vacctrax-seed-db?retryWrites=true&w=majority",
   // local database
   // db: "mongodb://localhost/vacctrax-local",
   sendgridApiKey: "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",

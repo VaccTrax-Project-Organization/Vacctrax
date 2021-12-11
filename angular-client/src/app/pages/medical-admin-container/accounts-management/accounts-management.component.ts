@@ -4,6 +4,10 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Inventory} from '../../../models/interfaces/inventory.interface';
 import {SubSink} from 'subsink';
 import {AppointmentService} from '../../../services/appointment/appointment.service';
+import {Appointment} from "../../../models/appointment.model";
+import {ViewAppointmentDialogComponent} from "../../../shared/pages/appointment/view-appointment-dialog/view-appointment-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ViewAccountDetailsDialogComponent} from "../view-account-details-dialog/view-account-details-dialog.component";
 
 @Component({
   selector: 'app-accounts-management',
@@ -16,7 +20,7 @@ export class AccountsManagementComponent implements OnInit, OnDestroy {
   public dataSource: MatTableDataSource<any>;
   private subSink: SubSink;
 
-  constructor(private appointmentService: AppointmentService) {
+  constructor(private appointmentService: AppointmentService, private dialog: MatDialog) {
     this.subSink = new SubSink();
   }
   public role = Role;
@@ -38,6 +42,18 @@ export class AccountsManagementComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
     }));
+  }
+
+  public openViewAccountDialog(element: Appointment) {
+    console.log(element);
+    this.dialog.open(ViewAccountDetailsDialogComponent, {
+      panelClass: 'dialog-panel-class',
+      disableClose: false,
+      autoFocus: false,
+      height: '300px',
+      width: '600px',
+      data: element,
+    });
   }
 
 }
