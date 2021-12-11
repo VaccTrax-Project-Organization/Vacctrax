@@ -1,0 +1,35 @@
+<div class="content-container">
+  <div class="content">
+      <div class="row">
+          <div class="col">
+              <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Quantity</mat-label>
+                  <input matInput
+                    [(ngModel)]="quantity"
+                    required
+                    type="number"
+                    min="0"
+                    (ngModelChange)="preventNegativeValue()"/>
+                  <mat-error>Quantity is <strong>Required</strong></mat-error>
+              </mat-form-field>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col text-center">
+            <button mat-raised-button 
+              type="button"
+              class="mr-5"
+              [mat-dialog-close]="quantity">
+              Save
+            </button>
+            <button mat-raised-button 
+              type="button"
+              class="ml-5"
+              [mat-dialog-close]="false">
+              Cancel
+            </button>
+          </div>
+      </div>
+  </div>
+</div>

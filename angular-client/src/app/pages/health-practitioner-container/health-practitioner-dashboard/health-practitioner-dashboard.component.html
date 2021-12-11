@@ -12,7 +12,8 @@
           <h3>{{"List of Confirmed Appointments"}}</h3>
           <app-appointment
             [roleInput]="this.role"
-            [tableDataSource]="dataSource">
+            [tableDataSource]="dataSource"
+            (modified)="ngOnInit()">
           </app-appointment>
         </mat-card-content>
       </mat-card>

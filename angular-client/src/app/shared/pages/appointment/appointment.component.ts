@@ -72,9 +72,7 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   */
   emitModify(dialogRef: MatDialogRef<any>) {
     this.subSink.add(dialogRef.afterClosed().subscribe(res => {
-      if (res) {
         this.modified.emit(true);
-      }
     }));
   }
 
@@ -178,12 +176,14 @@ export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   */
   public openViewAppointmentDialog(element: Appointment) {
     console.log(element);
-    this.dialog.open(ViewAppointmentDialogComponent, {
+    const dialogRef = this.dialog.open(ViewAppointmentDialogComponent, {
       panelClass: 'dialog-panel-class',
       disableClose: true,
       autoFocus: false,
       data: element,
     });
+
+    this.emitModify(dialogRef);
   }
 
   /*

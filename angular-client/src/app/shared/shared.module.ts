@@ -15,6 +15,7 @@ import { CreateAppointmentDialogComponent } from './pages/appointment/create-app
 import { AddUpdateVaccineDialogComponent } from './pages/add-update-vaccine-dialog/add-update-vaccine-dialog.component';
 import { PasswordPipe } from './pipes/password/password.pipe';
 import { ViewVaccineDetailsDialogComponent } from './pages/view-vaccine-details-dialog/view-vaccine-details-dialog.component';
+import { InventoryService } from '../services/inventory/inventory.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,9 @@ import { ViewVaccineDetailsDialogComponent } from './pages/view-vaccine-details-
     PasswordPipe,
     ViewVaccineDetailsDialogComponent,
   ],
-
+  providers: [
+    InventoryService,
+  ],
   exports: [
     NavigationBarComponent,
     AppointmentComponent,
@@ -39,7 +42,6 @@ import { ViewVaccineDetailsDialogComponent } from './pages/view-vaccine-details-
     PatientFullNamePipe,
     PasswordPipe,
   ],
-
   imports: [
     CommonModule,
     MaterialAngularModule,
