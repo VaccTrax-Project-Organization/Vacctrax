@@ -158,7 +158,7 @@ exports.bookAppointment = (req, res) => {
 exports.updateAppointment = (req, res, next) => {
     console.log("req.body", req.body);
     console.log("res.locals", res.locals);
-    Appointment.findByIdAndUpdate(res.locals.appointment._id, {$set: req.body}, {new: true}, (err, appointment) => {
+    Appointment.findByIdAndUpdate(res.locals.appointment._id, req.body, {new: true}, (err, appointment) => {
         if (err) {
             return res.status(500).send(err).end();
         } else {
@@ -235,7 +235,7 @@ exports.getAppointmentById = (req, res, next, id) => {
 /** checking if a patient already exists with that patient Id */
 function findIfPatientExistsByPatientId(patientId, res) {
     return new Promise(resolve => {
-        Patient.findById(patientId, (err, patient) => {
+        Account.findById(patientId, (err, patient) => {
             if (err) {
                 res.status(500).send(err).end();
             } else {
@@ -252,7 +252,7 @@ function findIfPatientExistsByPatientId(patientId, res) {
 /** checking if an health practitioner already exists with that health practitioner Id */
 function findIfHealthPractitionerExistsByPractitionerId(healthPractitionerId, res) {
     return new Promise(resolve => {
-        HealthPractitioner.findById(healthPractitionerId, (err, practitioner) => {
+        Account.findById(healthPractitionerId, (err, practitioner) => {
             if (err) {
                 res.status(500).send(err).end();
             } else {

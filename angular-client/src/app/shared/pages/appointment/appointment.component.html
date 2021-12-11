@@ -45,6 +45,11 @@
       <mat-cell *matCellDef="let element"> {{element.reason}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="InClinic_Status">
+      <mat-header-cell mat-sort-header *matHeaderCellDef>InClinic Status</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element?.status}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="actions" stickyEnd>
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let element; let i = index">

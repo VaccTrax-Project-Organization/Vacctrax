@@ -58,7 +58,7 @@ exports.signIn = async (req, res) => {
                                     expiresIn: config.emailJwtLifespan
                                 });
                             // checking th account type of the user trying to sign in and get the user details to sent the patientId, healthpractitionerId or MedicalAdminId
-                            return res.status(200).send({message: 'Sign In Successfully', success: true, id : account._id, token: token, email: account.email, type: account.type, userId: account._id, firstName: account.firstName, lastName: account.lastName});
+                            return res.status(200).send({message: 'Sign In Successfully', success: true, id : account._id, token: token, email: account.email, type: account.type, userId: account._id, firstName: account.firstName, lastName: account.lastName, clinicId: account.clinic});
                         }  else {
                             return res.status(401).send({message: 'Invalid Username or password.', success: false});
                         }
