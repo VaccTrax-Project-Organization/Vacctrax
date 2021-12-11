@@ -44,7 +44,7 @@ import { ViewVaccineDetailsDialogComponent } from './pages/view-vaccine-details-
     CommonModule,
     MaterialAngularModule,
     ReactiveFormsModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
   ]
 })
 

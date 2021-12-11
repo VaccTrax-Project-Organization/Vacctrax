@@ -11,12 +11,14 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DeclineRequestedAppointmentDialogComponent } from './decline-requested-appointment-dialog/decline-requested-appointment-dialog.component';
 import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient-details.component';
+import { InventoryStatisticsGraphComponent } from './inventory-statistics-graph/inventory-statistics-graph.component';
+import { ChartsModule } from 'ng2-charts';
 import { AccountsManagementComponent } from './accounts-management/accounts-management.component';
 import { ViewAccountDetailsDialogComponent } from './view-account-details-dialog/view-account-details-dialog.component';
 import { EditAccountDetailsDialogComponent } from './edit-account-details-dialog/edit-account-details-dialog.component';
 
 @NgModule({
-  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent, AccountsManagementComponent, ViewAccountDetailsDialogComponent, EditAccountDetailsDialogComponent],
+  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent, AccountsManagementComponent, ViewAccountDetailsDialogComponent, EditAccountDetailsDialogComponent, InventoryStatisticsGraphComponent],
   imports: [
     MedicalAdminContainerRoutingModule,
     CommonModule,
@@ -24,7 +26,8 @@ import { EditAccountDetailsDialogComponent } from './edit-account-details-dialog
     RouterModule,
     MaterialAngularModule,
     NgxMaterialTimepickerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule,
   ]
 })
 export class MedicalAdminContainerModule { }
