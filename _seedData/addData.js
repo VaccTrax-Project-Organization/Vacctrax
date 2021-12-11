@@ -26,7 +26,7 @@ const addedGovernmentUsers = [];
 const addedAppointments = [];
 
 db.connect(
-    "mongodb+srv://vacctrax-admin:ZG910hbIrR2zqUWe@vacctrax.84jrm.mongodb.net/vacctrax-seed-db?retryWrites=true&w=majority",
+    "mongodb+srv://vacctrax-admin:ZG910hbIrR2zqUWe@vacctrax.84jrm.mongodb.net/vacctrax-db?retryWrites=true&w=majority",
     {
         useUnifiedTopology: true,
         useNewUrlParser: true,
