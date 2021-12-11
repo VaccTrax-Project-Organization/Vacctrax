@@ -25,6 +25,10 @@ export class AppointmentService extends Service {
         }));
   }
 
+  getAppointmentsById(apptId: number): Observable<Appointment>{
+    return this.http.get<Appointment>(`${this.url}/appointment/${apptId}`, {headers: this.httpHeader});
+  }
+
   public getAppointmentsByClinic(clinicId = '6060e1549107f28980861695'): Observable<Appointment[]>{
     return this.http.get<Appointment[]>(`${this.url}/getAllAppointmentsByClinicId/${clinicId}`, {headers: this.httpHeader})
       .pipe(

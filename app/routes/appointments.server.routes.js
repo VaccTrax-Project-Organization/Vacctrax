@@ -7,6 +7,8 @@ module.exports = (app) => {
     // Mount the 'appointments' controller's 'requestAppointment' method
     app.post("/api/requestAppointment", appointmentController.requestAppointment);
 
+    app.get("/api/appointment/:appointmentId", appointmentController.getAppointmentByIdDetails);
+    
     app.get("/api/getAllAppointmentsByPatientId/:patientId", appointmentController.getPatientAppointments);
     app.get("/api/getConfirmedAppointmentsByClinicId/:clinicId", appointmentController.getAllConfirmedAppointmentsForClinic);
     app.get("/api/getConfirmedAppointmentsByPatient/:patientId",appointmentController.getBookedAppointment);
