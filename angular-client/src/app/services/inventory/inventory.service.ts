@@ -33,7 +33,6 @@ export class InventoryService extends Service {
       quantity: item?.numberOfVaccines,
       name: item.vaccineType?.manufacturer,
       shelfLife: item.vaccineType?.shelfLife,
-      actions: () => {} // refactor this to implement appropriate modal logic in the future
     })).filter(item => !!item.name);
   }
 }
