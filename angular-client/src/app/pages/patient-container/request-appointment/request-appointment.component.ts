@@ -12,7 +12,7 @@ import {VaccinesService} from '../../../services/vaccines/vaccines.service';
 import {Vaccine} from '../../../models/vaccine.model';
 import * as moment from 'moment';
 import { HealthPractitioner } from 'src/app/models/healthPractitioner.model';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import {getUserDetails} from '../../../shared/Functions/getUserDetails';
 
 @Component({
@@ -101,7 +101,13 @@ export class RequestAppointmentComponent implements OnInit, OnDestroy {
     this.subSink.add(this.appointmentService.requestAppointment(appointmentRequest).subscribe(res => {
       console.log(res);
 
-      this.router.navigateByUrl('/patient/dashboard');
+      // this.router.navigateByUrl('/patient/dashboard', { state: { appointment: res } });
+      const navigationExtras: NavigationExtras = {
+        state: {
+          appointment: res
+        }
+      };
+      this.router.navigate(['/patient/dashboard'], navigationExtras);
     }));
   }
 }
