@@ -48,3 +48,12 @@ exports.setPassword = (req, res) => {
         res.status(500).send({message: "Provided passwords does not match."}).end();
     }
 }
+
+exports.getAllUserAccounts = async (req, res) => {
+    try {
+        const accounts = await Account.find({$or: [{type: "PATIENT"}, {type: "HEALTH_PRACTITIONER"}]}).select("-password");
+        return res.status(200).send(accounts);
+    } catch (err) {
+        return res.status(500).send(`There was an error getting accounts ${err}`)
+    }
+}
