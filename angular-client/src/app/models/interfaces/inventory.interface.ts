@@ -1,6 +1,7 @@
 export interface Inventory {
-  Name: string;
-  Quantity: number;
-  Type: string;
-  Actions(): void;
+  name: string;
+  quantity: number;
+  type: string;
+  id: number;
+  shelfLife: number;
 }
