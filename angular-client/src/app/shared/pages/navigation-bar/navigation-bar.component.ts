@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Role} from '../../../models/enums/role.enum';
+import {getUserDetails} from "../../Functions/getUserDetails";
+import {Session} from "protractor";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -9,12 +12,24 @@ import {Role} from '../../../models/enums/role.enum';
 export class NavigationBarComponent implements OnInit {
   @Input() public roleInput: Role;
   public role = Role;
-  constructor() {
-
+  public isLoggedIn = false;
+  constructor(private router: Router) {
+    if (getUserDetails()) {
+      this.isLoggedIn = true;
+    }
   }
 
   ngOnInit() {
     console.log(this.roleInput);
+  }
+
+  logout() {
+    sessionStorage.clear();
+    if (this.router.url === '/') {
+      this.isLoggedIn = false;
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
 }
