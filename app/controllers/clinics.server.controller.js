@@ -43,7 +43,7 @@ exports.getAllClinics = (req, res, next) => {
         } else {
             return res.status(200).send(clinics).end();
         }
-    }).populate('address');
+    });
 }
 
 exports.updateClinicById = function (req,res,next){
@@ -53,7 +53,7 @@ exports.updateClinicById = function (req,res,next){
             console.log(err);
             return next(err);
         }
-        res.json(clinic);
+        res.status(200).send(clinic);
     })
 }
 

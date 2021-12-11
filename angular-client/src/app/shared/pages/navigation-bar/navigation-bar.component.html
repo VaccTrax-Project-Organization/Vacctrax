@@ -18,7 +18,7 @@
           <a class="nav-link" href="#">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Vaccine History</a>
+          <a class="nav-link" href="./medicalAdmin/accountManagement">Account Management</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./inventory">Inventory Statistics</a>
@@ -52,6 +52,11 @@
           <a class="nav-link" href="./signin">Sign In</a>
         </li>
       </ng-container>
+      <li class="nav-link" *ngIf="isLoggedIn">
+        <button class="btn btn-dark" (click)="logout()">
+          Log Out
+        </button>
+      </li>
     </ul>
   </div>
 </nav>

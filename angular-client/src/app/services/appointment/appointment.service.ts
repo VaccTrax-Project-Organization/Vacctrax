@@ -91,4 +91,20 @@ export class AppointmentService extends Service {
           return throwError(err);
         }));
   }
+
+  public getAccounts(): Observable<any>{
+    return this.http.get<any>(this.url + '/getAllAccounts', {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
+
+  public updateAccount(id, payload): Observable<any>{
+    return this.http.put<any>(this.url + '/updateAccount/' + id, payload, {headers: this.httpHeader})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        }));
+  }
 }

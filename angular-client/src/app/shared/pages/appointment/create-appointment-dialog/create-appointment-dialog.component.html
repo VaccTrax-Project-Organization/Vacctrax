@@ -21,7 +21,7 @@
             <mat-label>Patient Name</mat-label>
             <mat-select formControlName="patient">
               <mat-option *ngFor="let patient of this.patients$ | async"
-                          [value]="patient._id">{{ patient.account | patientfullname}}</mat-option>
+                          [value]="patient._id">{{ patient | patientfullname}}</mat-option>
             </mat-select>
             <mat-error>Patient is <strong>Required</strong></mat-error>
           </mat-form-field>
@@ -65,7 +65,7 @@
             <mat-label>Doctor</mat-label>
             <mat-select formControlName="healthPractitioner">
               <mat-option *ngFor="let healthPractitioner of this.healthPractitioners$ | async"
-                          [value]="healthPractitioner._id">{{ healthPractitioner.account | patientfullname}}</mat-option>
+                          [value]="healthPractitioner._id">{{ healthPractitioner | patientfullname}}</mat-option>
             </mat-select>
             <mat-error>Health Practitioner is <strong>Required</strong></mat-error>
           </mat-form-field>

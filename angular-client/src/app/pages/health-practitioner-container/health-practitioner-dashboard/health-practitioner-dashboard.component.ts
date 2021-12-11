@@ -22,8 +22,10 @@ export class HealthPractitionerDashboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.appointmentService.getConfirmedAppointmentsByClinicId().subscribe(res => {
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-    });
+    if (getUserDetails()?.clinicId) {
+      this.appointmentService.getConfirmedAppointmentsByClinicId(getUserDetails()?.clinicId).subscribe(res => {
+        this.dataSource = new MatTableDataSource<Appointment>(res);
+      });
+    }
   }
 }

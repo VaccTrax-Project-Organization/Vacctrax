@@ -27,7 +27,7 @@ import {
 
 export class AppointmentComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) public sort: MatSort;
-  @Input() public roleInput: Role; 
+  @Input() public roleInput: Role;
   @Output() modified: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input()

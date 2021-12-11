@@ -8,7 +8,7 @@
   <div class="row no-gutters">
     <div class="col-4 mb-4">
       <div class="font-weight-bold">Patient:</div>
-      <div>{{data.patient.account | patientfullname}}</div>
+      <div>{{data?.patient | patientfullname}}</div>
     </div>
 
     <div class="col-4 mb-4">
@@ -23,7 +23,7 @@
 
     <div class="col-4 mb-4">
       <div class="font-weight-bold">Contact:</div>
-      <div>{{data.patient?.account?.phone || 'n/a'}}</div>
+      <div>{{data.patient?.phone || 'n/a'}}</div>
     </div>
 
     <div class="col-4 mb-4">
@@ -43,7 +43,7 @@
 
     <div class="col-4 mb-4">
       <div class="font-weight-bold">Health Practitioner:</div>
-      <div>{{data.healthPractitioner.account | patientfullname}}</div>
+      <div>{{data.healthPractitioner | patientfullname}}</div>
     </div>
   </div>
 

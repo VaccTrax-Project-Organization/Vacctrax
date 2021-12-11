@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const VaccineSchema = new Schema({
     name: String,
-  
     manufacturer: String,
     shelfLife: Number,
     approvedProvinces: {

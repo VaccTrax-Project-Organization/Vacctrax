@@ -13,16 +13,12 @@ import { DeclineRequestedAppointmentDialogComponent } from './decline-requested-
 import { EditPatientDetailsComponent } from './edit-patient-details/edit-patient-details.component';
 import { InventoryStatisticsGraphComponent } from './inventory-statistics-graph/inventory-statistics-graph.component';
 import { ChartsModule } from 'ng2-charts';
+import { AccountsManagementComponent } from './accounts-management/accounts-management.component';
+import { ViewAccountDetailsDialogComponent } from './view-account-details-dialog/view-account-details-dialog.component';
+import { EditAccountDetailsDialogComponent } from './edit-account-details-dialog/edit-account-details-dialog.component';
 
 @NgModule({
-  declarations: [
-    MedicalAdminContainerComponent, 
-    MedicalAdminDashboardComponent, 
-    ModifyAppointmentDetailsComponent, 
-    DeclineRequestedAppointmentDialogComponent, 
-    EditPatientDetailsComponent,
-    InventoryStatisticsGraphComponent
-  ],
+  declarations: [MedicalAdminContainerComponent, MedicalAdminDashboardComponent, ModifyAppointmentDetailsComponent, DeclineRequestedAppointmentDialogComponent, EditPatientDetailsComponent, AccountsManagementComponent, ViewAccountDetailsDialogComponent, EditAccountDetailsDialogComponent, InventoryStatisticsGraphComponent],
   imports: [
     MedicalAdminContainerRoutingModule,
     CommonModule,

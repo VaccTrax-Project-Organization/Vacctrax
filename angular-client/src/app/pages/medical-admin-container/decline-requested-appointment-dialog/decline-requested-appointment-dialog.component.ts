@@ -18,21 +18,21 @@ import { AppointmentType } from 'src/app/models/enums/appointment.enum';
 export class DeclineRequestedAppointmentDialogComponent implements OnInit,OnDestroy {
 
   public role = Role.MEDICAL_ADMIN;
-  public dataSource: MatTableDataSource<Appointment>;
+  // public dataSource: MatTableDataSource<Appointment>;
   private subSink: SubSink;
 
   note = new FormControl();
 
   constructor(private appointmentService: AppointmentService, private dialog: MatDialog,  @Inject(MAT_DIALOG_DATA) private appointment: Appointment) {
     this.subSink = new SubSink();
-    this.dataSource = new MatTableDataSource<Appointment>();
+    // this.dataSource = new MatTableDataSource<Appointment>();
 
-    this.subSink.add(appointmentService.getConfirmedAppointmentsByClinicId().subscribe(res => {
-      console.log(res);
-      this.dataSource = new MatTableDataSource<Appointment>(res);
-    },error => {
-      console.log(error);
-    }));
+    // this.subSink.add(appointmentService.getConfirmedAppointmentsByClinicId().subscribe(res => {
+    //   console.log(res);
+    //   this.dataSource = new MatTableDataSource<Appointment>(res);
+    // },error => {
+    //   console.log(error);
+    // }));
   }
 
   ngOnInit(): void {
