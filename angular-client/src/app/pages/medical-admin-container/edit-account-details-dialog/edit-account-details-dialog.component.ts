@@ -37,14 +37,16 @@ export class EditAccountDetailsDialogComponent implements OnInit, OnDestroy {
   }
 
   public submitUpdateAccount() {
-    const apiData = {firstName: this.modifyAccountForm.controls.firstName.value, lastName: this.modifyAccountForm.controls.lastName.value}
-    this.subSink.add(this.appointmentService.updateAccount(this.data?._id, apiData).subscribe(res => {
-      console.log('-> response', res);
-      this.dialogRef.close(true);
-    }, err => {
-      console.log(err);
-      this.dialogRef.close(false);
-    }));
+    if (this.modifyAccountForm.valid) {
+      const apiData = {firstName: this.modifyAccountForm.controls.firstName.value, lastName: this.modifyAccountForm.controls.lastName.value}
+      this.subSink.add(this.appointmentService.updateAccount(this.data?._id, apiData).subscribe(res => {
+        console.log('-> response', res);
+        this.dialogRef.close(true);
+      }, err => {
+        console.log(err);
+        this.dialogRef.close(false);
+      }));
+    }
   }
 
 }

@@ -358,6 +358,24 @@ exports.requestAppointmentUpdate = (req,res) => {
     });
 }
 
+exports.getAppointmentByIdDetails = (req, res) => {
+    console.log("id");
+    try {
+        Appointment.findById(req.params.appointmentId, (err, appointment) => {
+            if (err) {
+                return res.status(500).send(err).end();
+            } else if (!appointment) {
+                return res.status(404).send({message: `Appointment with the id of ${id} not found`}).end();
+            } else {
+                res.locals.appointment = appointment;
+                return res.status(200).send(appointment);
+            }
+        }).populate('patient', 'firstName lastName').populate('healthPractitioner', 'firstName lastName').populate('clinic').populate('vaccine');
+    } catch (err) {
+        return res.status(500).send(`errro ${err}`);
+    }
+};
+
 const samplePayloadForRequestAppointment = {
     reason: 'Sample Reason',
     preferredDate: '2021-03-30T13:00:00',
